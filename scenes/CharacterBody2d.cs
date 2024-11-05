@@ -17,7 +17,7 @@ public partial class CharacterBody2d : CharacterBody2D
 		}
 
 		// Handle Jump.
-		if (Input.IsActionJustPressed("input_jump"))
+		if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
 		{
 			velocity.Y = JumpVelocity;
 		}
