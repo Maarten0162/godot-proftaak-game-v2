@@ -1,3 +1,122 @@
-[gd_scene format=3 uid="uid://cg37l1h63iykf"]
+[gd_scene load_steps=5 format=3 uid="uid://cg37l1h63iykf"]
+
+[ext_resource type="Texture2D" uid="uid://cm7dehuwj0sar" path="res://icon.svg" id="1_6tusj"]
+[ext_resource type="Script" path="res://scripts/Main.cs" id="1_xihgb"]
+[ext_resource type="Texture2D" uid="uid://rpmmwm31wfe5" path="res://assets/board.png" id="3_8kybi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dd3ac"]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_xihgb")
+
+[node name="players" type="Node" parent="."]
+
+[node name="player1" type="CharacterBody2D" parent="players"]
+z_index = 1
+position = Vector2(64, 159)
+scale = Vector2(0.3, 0.3)
+
+[node name="Sprite2D" type="Sprite2D" parent="players/player1"]
+texture = ExtResource("1_6tusj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="players/player1"]
+shape = SubResource("RectangleShape2D_dd3ac")
+
+[node name="player2" type="CharacterBody2D" parent="players"]
+visible = false
+z_index = 1
+position = Vector2(64, 285)
+scale = Vector2(0.3, 0.3)
+
+[node name="Sprite2D" type="Sprite2D" parent="players/player2"]
+texture = ExtResource("1_6tusj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="players/player2"]
+shape = SubResource("RectangleShape2D_dd3ac")
+
+[node name="player3" type="CharacterBody2D" parent="players"]
+visible = false
+z_index = 1
+position = Vector2(64, 285)
+scale = Vector2(0.3, 0.3)
+
+[node name="Sprite2D" type="Sprite2D" parent="players/player3"]
+texture = ExtResource("1_6tusj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="players/player3"]
+shape = SubResource("RectangleShape2D_dd3ac")
+
+[node name="player4" type="CharacterBody2D" parent="players"]
+visible = false
+z_index = 1
+position = Vector2(64, 285)
+scale = Vector2(0.3, 0.3)
+
+[node name="Sprite2D" type="Sprite2D" parent="players/player4"]
+texture = ExtResource("1_6tusj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="players/player4"]
+shape = SubResource("RectangleShape2D_dd3ac")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(320, 180)
+texture = ExtResource("3_8kybi")
+
+[node name="spaces" type="Node" parent="."]
+
+[node name="Marker2D1" type="Marker2D" parent="spaces"]
+position = Vector2(64, 160)
+
+[node name="Marker2D2" type="Marker2D" parent="spaces"]
+position = Vector2(129, 160)
+
+[node name="Marker2D3" type="Marker2D" parent="spaces"]
+position = Vector2(195, 160)
+
+[node name="Marker2D4" type="Marker2D" parent="spaces"]
+position = Vector2(250, 160)
+
+[node name="Marker2D5" type="Marker2D" parent="spaces"]
+position = Vector2(319, 160)
+
+[node name="Marker2D6" type="Marker2D" parent="spaces"]
+position = Vector2(381, 160)
+
+[node name="Marker2D7" type="Marker2D" parent="spaces"]
+position = Vector2(444, 160)
+
+[node name="Marker2D8" type="Marker2D" parent="spaces"]
+position = Vector2(513, 160)
+
+[node name="Marker2D9" type="Marker2D" parent="spaces"]
+position = Vector2(579, 157)
+
+[node name="Marker2D10" type="Marker2D" parent="spaces"]
+position = Vector2(579, 227)
+
+[node name="Marker2D11" type="Marker2D" parent="spaces"]
+position = Vector2(579, 288)
+
+[node name="Marker2D12" type="Marker2D" parent="spaces"]
+position = Vector2(516, 288)
+
+[node name="Marker2D13" type="Marker2D" parent="spaces"]
+position = Vector2(448, 288)
+
+[node name="Marker2D14" type="Marker2D" parent="spaces"]
+position = Vector2(382, 288)
+
+[node name="Marker2D15" type="Marker2D" parent="spaces"]
+position = Vector2(319, 288)
+
+[node name="Marker2D16" type="Marker2D" parent="spaces"]
+position = Vector2(259, 288)
+
+[node name="Marker2D17" type="Marker2D" parent="spaces"]
+position = Vector2(195, 288)
+
+[node name="Marker2D18" type="Marker2D" parent="spaces"]
+position = Vector2(125, 288)
+
+[node name="Marker2D19" type="Marker2D" parent="spaces"]
+position = Vector2(62, 288)
