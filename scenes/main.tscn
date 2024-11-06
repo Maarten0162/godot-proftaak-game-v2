@@ -16,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://dyk8ejepe1vww" path="res://assets/dice/default-dice/Dobbel7.png" id="14_3fmk5"]
 [ext_resource type="Texture2D" uid="uid://ccu36fjro5msm" path="res://assets/dice/default-dice/Dobbel8.png" id="15_cv46h"]
 [ext_resource type="Texture2D" uid="uid://d1pifwujewrmq" path="res://assets/dice/default-dice/Dobbel9.png" id="16_xc1rm"]
-[ext_resource type="Script" path="res://scenes/CurrencyLabel.cs" id="17_637vk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dd3ac"]
 
@@ -178,6 +177,9 @@ animations = [{
 "name": &"9",
 "speed": 5.0
 }]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xfr5n"]
+font_color = Color(1, 0, 1, 1)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_xihgb")
@@ -376,9 +378,16 @@ animation = &"9"
 position = Vector2(247, 323)
 offset = Vector2(320, 0)
 
-[node name="CurrencyLabel" type="Label" parent="."]
-offset_left = 31.0
-offset_top = 23.0
-offset_right = 107.0
-offset_bottom = 74.0
-script = ExtResource("17_637vk")
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CurrencyLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 44.0
+offset_right = 95.0
+offset_bottom = 71.0
+label_settings = SubResource("LabelSettings_xfr5n")

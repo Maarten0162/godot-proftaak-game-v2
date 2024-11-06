@@ -3,9 +3,10 @@ using System;
 
 public class Player{
 
-   public Player(int currencyinput)
+   public Player()
    {
-     currencyinput = currency;
+      currency = 10;
+      health = 100;
    }
 
    private int currency;
@@ -14,9 +15,19 @@ public class Player{
       get{
          return currency;
       }
+      set{
+         currency = value;
+      }
    }
-   public void Addcurrency(int amount)
-   {
-     currency += amount;
+   private int health;
+
+   public int Health{
+      get{
+         return health;
+      }
+      set{
+         health = value;
+      }
    }
 }
+ 

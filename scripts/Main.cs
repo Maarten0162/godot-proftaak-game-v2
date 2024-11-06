@@ -9,7 +9,7 @@ public partial class Main : Node2D
 	// Dobbelsteen dobbelUpgrade1 = new Dobbelsteen(1, 4);
 	// Dobbelsteen dobbelUpgrade2 = new Dobbelsteen(1, 7);
 	// Dobbelsteen dobbelUpgrade3 = new Dobbelsteen(-3, 10);
-
+    
 	private Node2D player1;
 	private Node2D player2;
 	private Node2D player3;
@@ -34,8 +34,8 @@ public partial class Main : Node2D
 	private bool isRolling = false;
 
 	public override void _Ready()
-	{ 
-	 
+	{	
+		
 	
 
 		
@@ -59,7 +59,7 @@ public partial class Main : Node2D
 	}
 
 	public override void _Process(double delta)
-	{
+	{   
 		if (Input.IsActionPressed("test1") && !isRolling)
 		{
 
