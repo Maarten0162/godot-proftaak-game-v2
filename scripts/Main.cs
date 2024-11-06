@@ -28,7 +28,7 @@ public partial class Main : Node2D
 	int loc_pl3 = 0;
 	int loc_pl4 = 0;
 
-	int spacesAmount = 19;
+	int spacesAmount = 42;
 
 
 	private bool isRolling = false;

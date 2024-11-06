@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cm7dehuwj0sar" path="res://icon.svg" id="1_6tusj"]
 [ext_resource type="Script" path="res://scripts/Main.cs" id="1_xihgb"]
-[ext_resource type="Texture2D" uid="uid://rpmmwm31wfe5" path="res://assets/board.png" id="3_8kybi"]
+[ext_resource type="Texture2D" uid="uid://c5wan21ie46oj" path="res://bord.png" id="3_2cra6"]
 [ext_resource type="Texture2D" uid="uid://insiyhwvq4cl" path="res://assets/dice/default-dice/Dobbel-1.png" id="4_lgpu5"]
 [ext_resource type="Texture2D" uid="uid://tuw1uchf463i" path="res://assets/dice/default-dice/Dobbel1.png" id="4_xrfbe"]
 [ext_resource type="Texture2D" uid="uid://c0ktibn6olxwb" path="res://assets/dice/default-dice/Dobbel-2.png" id="5_4w8of"]
@@ -185,7 +185,7 @@ script = ExtResource("1_xihgb")
 
 [node name="player1" type="CharacterBody2D" parent="players"]
 z_index = 1
-position = Vector2(64, 159)
+position = Vector2(192, 87)
 scale = Vector2(0.3, 0.3)
 
 [node name="Sprite2D" type="Sprite2D" parent="players/player1"]
@@ -231,77 +231,146 @@ texture = ExtResource("1_6tusj")
 shape = SubResource("RectangleShape2D_dd3ac")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(320, 180)
-texture = ExtResource("3_8kybi")
+position = Vector2(564, 315)
+scale = Vector2(0.821898, 0.608569)
+texture = ExtResource("3_2cra6")
 
 [node name="spaces" type="Node" parent="."]
 
 [node name="Marker2D1" type="Marker2D" parent="spaces"]
-position = Vector2(64, 160)
+position = Vector2(187, 86)
+
+[node name="Marker2D20" type="Marker2D" parent="spaces"]
+position = Vector2(221, 454)
+
+[node name="Marker2D21" type="Marker2D" parent="spaces"]
+position = Vector2(138, 490)
+
+[node name="Marker2D22" type="Marker2D" parent="spaces"]
+position = Vector2(182, 541)
+
+[node name="Marker2D23" type="Marker2D" parent="spaces"]
+position = Vector2(268, 543)
+
+[node name="Marker2D24" type="Marker2D" parent="spaces"]
+position = Vector2(340, 544)
+
+[node name="Marker2D25" type="Marker2D" parent="spaces"]
+position = Vector2(420, 549)
+
+[node name="Marker2D26" type="Marker2D" parent="spaces"]
+position = Vector2(513, 537)
+
+[node name="Marker2D27" type="Marker2D" parent="spaces"]
+position = Vector2(587, 544)
+
+[node name="Marker2D28" type="Marker2D" parent="spaces"]
+position = Vector2(672, 548)
+
+[node name="Marker2D29" type="Marker2D" parent="spaces"]
+position = Vector2(743, 547)
+
+[node name="Marker2D30" type="Marker2D" parent="spaces"]
+position = Vector2(829, 551)
+
+[node name="Marker2D31" type="Marker2D" parent="spaces"]
+position = Vector2(915, 541)
+
+[node name="Marker2D32" type="Marker2D" parent="spaces"]
+position = Vector2(960, 497)
+
+[node name="Marker2D33" type="Marker2D" parent="spaces"]
+position = Vector2(888, 479)
+
+[node name="Marker2D34" type="Marker2D" parent="spaces"]
+position = Vector2(809, 446)
+
+[node name="Marker2D35" type="Marker2D" parent="spaces"]
+position = Vector2(734, 412)
+
+[node name="Marker2D36" type="Marker2D" parent="spaces"]
+position = Vector2(662, 372)
+
+[node name="Marker2D37" type="Marker2D" parent="spaces"]
+position = Vector2(531, 315)
+
+[node name="Marker2D38" type="Marker2D" parent="spaces"]
+position = Vector2(445, 272)
+
+[node name="Marker2D39" type="Marker2D" parent="spaces"]
+position = Vector2(368, 246)
+
+[node name="Marker2D40" type="Marker2D" parent="spaces"]
+position = Vector2(294, 208)
+
+[node name="Marker2D41" type="Marker2D" parent="spaces"]
+position = Vector2(217, 187)
+
+[node name="Marker2D42" type="Marker2D" parent="spaces"]
+position = Vector2(151, 144)
 
 [node name="Marker2D2" type="Marker2D" parent="spaces"]
-position = Vector2(129, 160)
+position = Vector2(277, 85)
 
 [node name="Marker2D3" type="Marker2D" parent="spaces"]
-position = Vector2(195, 160)
+position = Vector2(353, 87)
 
 [node name="Marker2D4" type="Marker2D" parent="spaces"]
-position = Vector2(250, 160)
+position = Vector2(444, 88)
 
 [node name="Marker2D5" type="Marker2D" parent="spaces"]
-position = Vector2(319, 160)
+position = Vector2(515, 82)
 
 [node name="Marker2D6" type="Marker2D" parent="spaces"]
-position = Vector2(381, 160)
+position = Vector2(600, 86)
 
 [node name="Marker2D7" type="Marker2D" parent="spaces"]
-position = Vector2(444, 160)
+position = Vector2(677, 91)
 
 [node name="Marker2D8" type="Marker2D" parent="spaces"]
-position = Vector2(513, 160)
+position = Vector2(760, 85)
 
 [node name="Marker2D9" type="Marker2D" parent="spaces"]
-position = Vector2(579, 157)
+position = Vector2(829, 92)
 
 [node name="Marker2D10" type="Marker2D" parent="spaces"]
-position = Vector2(579, 227)
+position = Vector2(924, 90)
 
 [node name="Marker2D11" type="Marker2D" parent="spaces"]
-position = Vector2(579, 288)
+position = Vector2(961, 149)
 
 [node name="Marker2D12" type="Marker2D" parent="spaces"]
-position = Vector2(516, 288)
+position = Vector2(872, 184)
 
 [node name="Marker2D13" type="Marker2D" parent="spaces"]
-position = Vector2(448, 288)
+position = Vector2(812, 209)
 
 [node name="Marker2D14" type="Marker2D" parent="spaces"]
-position = Vector2(382, 288)
+position = Vector2(730, 232)
 
 [node name="Marker2D15" type="Marker2D" parent="spaces"]
-position = Vector2(319, 288)
+position = Vector2(662, 273)
 
 [node name="Marker2D16" type="Marker2D" parent="spaces"]
-position = Vector2(259, 288)
+position = Vector2(550, 303)
 
 [node name="Marker2D17" type="Marker2D" parent="spaces"]
-position = Vector2(195, 288)
+position = Vector2(446, 364)
 
 [node name="Marker2D18" type="Marker2D" parent="spaces"]
-position = Vector2(125, 288)
+position = Vector2(361, 399)
 
 [node name="Marker2D19" type="Marker2D" parent="spaces"]
-position = Vector2(62, 288)
+position = Vector2(295, 428)
 
 [node name="dobbelSprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(322, 57)
-scale = Vector2(0.25, 0.25)
+position = Vector2(535, 188)
+scale = Vector2(0.576429, 0.54454)
 sprite_frames = SubResource("SpriteFrames_3cd7b")
 animation = &"9"
 
 [node name="Node" type="Node" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, 181)
+position = Vector2(247, 323)
 offset = Vector2(320, 0)
-zoom = Vector2(1.8, 1.8)
