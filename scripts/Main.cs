@@ -34,7 +34,9 @@ public partial class Main : Node2D
 	private bool isRolling = false;
 
 	public override void _Ready()
-	{
+	{ 
+	 
+	
 
 		
 		

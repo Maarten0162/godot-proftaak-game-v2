@@ -2,11 +2,21 @@ using Godot;
 using System;
 
 public class Player{
-   private int currency = 10;
 
-   public int Currency
+   public Player(int currencyinput)
    {
-   get{return currency;
+     currencyinput = currency;
    }
+
+   private int currency;
+
+   public int Currency{
+      get{
+         return currency;
+      }
+   }
+   public void Addcurrency(int amount)
+   {
+     currency += amount;
    }
 }
