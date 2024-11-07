@@ -244,7 +244,7 @@ texture = ExtResource("3_2cra6")
 position = Vector2(187, 86)
 
 [node name="Marker2D2" type="Marker2D" parent="spaces"]
-position = Vector2(277, 85)
+position = Vector2(273, 86)
 
 [node name="Marker2D3" type="Marker2D" parent="spaces"]
 position = Vector2(353, 87)
