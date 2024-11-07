@@ -243,6 +243,60 @@ texture = ExtResource("3_2cra6")
 [node name="Marker2D1" type="Marker2D" parent="spaces"]
 position = Vector2(187, 86)
 
+[node name="Marker2D2" type="Marker2D" parent="spaces"]
+position = Vector2(277, 85)
+
+[node name="Marker2D3" type="Marker2D" parent="spaces"]
+position = Vector2(353, 87)
+
+[node name="Marker2D4" type="Marker2D" parent="spaces"]
+position = Vector2(444, 88)
+
+[node name="Marker2D5" type="Marker2D" parent="spaces"]
+position = Vector2(515, 82)
+
+[node name="Marker2D6" type="Marker2D" parent="spaces"]
+position = Vector2(600, 86)
+
+[node name="Marker2D7" type="Marker2D" parent="spaces"]
+position = Vector2(677, 91)
+
+[node name="Marker2D8" type="Marker2D" parent="spaces"]
+position = Vector2(760, 85)
+
+[node name="Marker2D9" type="Marker2D" parent="spaces"]
+position = Vector2(829, 92)
+
+[node name="Marker2D10" type="Marker2D" parent="spaces"]
+position = Vector2(924, 90)
+
+[node name="Marker2D11" type="Marker2D" parent="spaces"]
+position = Vector2(961, 149)
+
+[node name="Marker2D12" type="Marker2D" parent="spaces"]
+position = Vector2(872, 184)
+
+[node name="Marker2D13" type="Marker2D" parent="spaces"]
+position = Vector2(812, 209)
+
+[node name="Marker2D14" type="Marker2D" parent="spaces"]
+position = Vector2(730, 232)
+
+[node name="Marker2D15" type="Marker2D" parent="spaces"]
+position = Vector2(662, 273)
+
+[node name="Marker2D16" type="Marker2D" parent="spaces"]
+position = Vector2(550, 303)
+
+[node name="Marker2D17" type="Marker2D" parent="spaces"]
+position = Vector2(446, 364)
+
+[node name="Marker2D18" type="Marker2D" parent="spaces"]
+position = Vector2(361, 399)
+
+[node name="Marker2D19" type="Marker2D" parent="spaces"]
+position = Vector2(295, 428)
+
 [node name="Marker2D20" type="Marker2D" parent="spaces"]
 position = Vector2(221, 454)
 
@@ -311,60 +365,6 @@ position = Vector2(217, 187)
 
 [node name="Marker2D42" type="Marker2D" parent="spaces"]
 position = Vector2(151, 144)
-
-[node name="Marker2D2" type="Marker2D" parent="spaces"]
-position = Vector2(277, 85)
-
-[node name="Marker2D3" type="Marker2D" parent="spaces"]
-position = Vector2(353, 87)
-
-[node name="Marker2D4" type="Marker2D" parent="spaces"]
-position = Vector2(444, 88)
-
-[node name="Marker2D5" type="Marker2D" parent="spaces"]
-position = Vector2(515, 82)
-
-[node name="Marker2D6" type="Marker2D" parent="spaces"]
-position = Vector2(600, 86)
-
-[node name="Marker2D7" type="Marker2D" parent="spaces"]
-position = Vector2(677, 91)
-
-[node name="Marker2D8" type="Marker2D" parent="spaces"]
-position = Vector2(760, 85)
-
-[node name="Marker2D9" type="Marker2D" parent="spaces"]
-position = Vector2(829, 92)
-
-[node name="Marker2D10" type="Marker2D" parent="spaces"]
-position = Vector2(924, 90)
-
-[node name="Marker2D11" type="Marker2D" parent="spaces"]
-position = Vector2(961, 149)
-
-[node name="Marker2D12" type="Marker2D" parent="spaces"]
-position = Vector2(872, 184)
-
-[node name="Marker2D13" type="Marker2D" parent="spaces"]
-position = Vector2(812, 209)
-
-[node name="Marker2D14" type="Marker2D" parent="spaces"]
-position = Vector2(730, 232)
-
-[node name="Marker2D15" type="Marker2D" parent="spaces"]
-position = Vector2(662, 273)
-
-[node name="Marker2D16" type="Marker2D" parent="spaces"]
-position = Vector2(550, 303)
-
-[node name="Marker2D17" type="Marker2D" parent="spaces"]
-position = Vector2(446, 364)
-
-[node name="Marker2D18" type="Marker2D" parent="spaces"]
-position = Vector2(361, 399)
-
-[node name="Marker2D19" type="Marker2D" parent="spaces"]
-position = Vector2(295, 428)
 
 [node name="dobbelSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(535, 188)
