@@ -346,7 +346,7 @@ label_settings = SubResource("LabelSettings_xfr5n")
 
 [node name="player1" type="CharacterBody2D" parent="."]
 z_index = 1
-position = Vector2(192, 87)
+position = Vector2(747, 338)
 scale = Vector2(0.3, 0.3)
 script = ExtResource("2_etkhv")
 
@@ -357,10 +357,10 @@ texture = ExtResource("1_6tusj")
 shape = SubResource("RectangleShape2D_dd3ac")
 
 [node name="player2" type="CharacterBody2D" parent="."]
-visible = false
 z_index = 1
 position = Vector2(64, 285)
 scale = Vector2(0.3, 0.3)
+script = ExtResource("2_etkhv")
 
 [node name="Sprite2D" type="Sprite2D" parent="player2"]
 texture = ExtResource("1_6tusj")
@@ -369,10 +369,10 @@ texture = ExtResource("1_6tusj")
 shape = SubResource("RectangleShape2D_dd3ac")
 
 [node name="player3" type="CharacterBody2D" parent="."]
-visible = false
 z_index = 1
 position = Vector2(64, 285)
 scale = Vector2(0.3, 0.3)
+script = ExtResource("2_etkhv")
 
 [node name="Sprite2D" type="Sprite2D" parent="player3"]
 texture = ExtResource("1_6tusj")
@@ -381,10 +381,10 @@ texture = ExtResource("1_6tusj")
 shape = SubResource("RectangleShape2D_dd3ac")
 
 [node name="player4" type="CharacterBody2D" parent="."]
-visible = false
 z_index = 1
 position = Vector2(64, 285)
 scale = Vector2(0.3, 0.3)
+script = ExtResource("2_etkhv")
 
 [node name="Sprite2D" type="Sprite2D" parent="player4"]
 texture = ExtResource("1_6tusj")

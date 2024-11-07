@@ -7,8 +7,7 @@ public partial class Player : CharacterBody2D
 	public Player()
 	{
 		currency = 10;
-		health = 100;
-		playerPosition = new Vector2(0, 0);
+		health = 100;		
 	}
 
 	private int currency;
@@ -37,24 +36,17 @@ public partial class Player : CharacterBody2D
 			health = value;
 		}
 	}
-	private Vector2 playerPosition;
-	public Vector2 PlayerPosition
-	{
-		get
-		{
-			return playerPosition;
-		}
-		set
-		{
-			playerPosition = value;
-			// Update the actual node's position to reflect the new position
-			this.Position = playerPosition;  // This updates the Position of the CharacterBody2D
-		}
 
-	}
-	public void Move(Vector2 newPosition)
+	private Vector2 positionPlayer;
+
+	public Vector2 PositionPlayer
 	{
-		Position = newPosition;  // Update both the stored position and the node's position
+		get{
+			return positionPlayer;
+		}
+		set{	
+			positionPlayer = value;
+		}
 	}
 }
 
