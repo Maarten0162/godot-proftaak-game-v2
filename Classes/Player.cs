@@ -1,10 +1,11 @@
 using Godot;
 using System;
 //hello
-public class Player{
+public partial class Player : CharacterBody2D 
+{
 
    public Player()
-   {
+   {  
 	  currency = 10;
 	  health = 100;
    }
@@ -29,5 +30,6 @@ public class Player{
 		 health = value;
 	  }
    }
+   
 }
  
