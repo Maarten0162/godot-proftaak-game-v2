@@ -9,7 +9,7 @@ public partial class Main : Node2D
 	// Dobbelsteen dobbelUpgrade1 = new Dobbelsteen(1, 4);
 	// Dobbelsteen dobbelUpgrade2 = new Dobbelsteen(1, 7);
 	// Dobbelsteen dobbelUpgrade3 = new Dobbelsteen(-3, 10);
-    
+	
 	private Node2D player1;
 	private Node2D player2;
 	private Node2D player3;
@@ -28,7 +28,7 @@ public partial class Main : Node2D
 	int loc_pl3 = 0;
 	int loc_pl4 = 0;
 
-	int spacesAmount = 0;
+	int spacesAmount = 42;
 
 
 	private bool isRolling = false;
@@ -37,7 +37,6 @@ public partial class Main : Node2D
 	{	
 		
 	
-		spacesAmount = spaces.Count;
 
 		
 		
