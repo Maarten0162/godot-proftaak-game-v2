@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 //hello
 
+
 public partial class Main : Node2D
 {  private Player player;
 
@@ -22,7 +23,7 @@ public partial class Main : Node2D
 
 	private List<Node2D> spaces = new List<Node2D>(); 
 
-	private int player1CurrentSpace = 0; 
+	private int player1CurrentSpace; 
 
 	int loc_pl1 = 0;
 	int loc_pl2 = 0;
@@ -37,7 +38,11 @@ public partial class Main : Node2D
 
 
 	private bool isRolling = false;
-  	Dice dobbel1 = new Dice(0,4);
+  	Dice basicdice = new Dice(0,4);
+	Dice betterdice = new Dice(3,7);
+	Dice riskydice = new Dice(0,7);
+	Dice turbodice = new Dice(-3,10);
+	int diceRoll;
 	public override void _Ready()
 	{	
 		
@@ -67,101 +72,63 @@ public partial class Main : Node2D
 	{   
 		if (Input.IsActionPressed("test1") && !isRolling)
 		{
+			
+			isRolling = true;
+			diceRoll = basicdice.diceroll();
+            GD.Print("Dice roll is = " + diceRoll);
+		Move();
+		
+		}
+		if (Input.IsActionPressed("test2") && !isRolling)
+		{
 
 			isRolling = true;
-			int diceRoll = dobbel1.diceroll();
+			diceRoll = betterdice.diceroll();
             GD.Print("Dice roll is = " + diceRoll);
-				for(int i = -3; i <= 9; i ++){
-			// if(i == diceRoll){
-			// 	dobbelSprite.Play($"{diceRoll}");
+				
+		}
+		if (Input.IsActionPressed("test3") && !isRolling)
+		{
+
+			isRolling = true;
+			diceRoll = riskydice.diceroll();
+            GD.Print("Dice roll is = " + diceRoll);
+				
+			
+		}
+		if (Input.IsActionPressed("test4") && !isRolling)
+		{
+
+			isRolling = true;
+			diceRoll = turbodice.diceroll();
+            GD.Print("Dice roll is = " + diceRoll);
+				
+			
+		}
+
+
+			// player1CurrentSpace = player1CurrentSpace + diceRoll;
+
+			
+			
+			// if (player1CurrentSpace >= spaces.Count) {
+			// 	player1CurrentSpace = player1CurrentSpace - spaces.Count;
 			// }
-		}
-
-
-			player1CurrentSpace = player1CurrentSpace + diceRoll;
-
-			if (player1CurrentSpace < 0)
-			{
-				player1CurrentSpace = player1CurrentSpace = 0;
-			}
-			
-			if (player1CurrentSpace >= spaces.Count) {
-				player1CurrentSpace = player1CurrentSpace - spaces.Count;
-			}
+			// if (player1CurrentSpace < 0) 
+			// {
+    		// player1CurrentSpace = (player1CurrentSpace + spaces.Count) % spaces.Count;
+			// } 
+			// else if (player1CurrentSpace >= spaces.Count) 
+			// {
+    		// player1CurrentSpace %= spaces.Count;
+			// }
 			// Move player to the next space
-			Node2D nextSpace = spaces[player1CurrentSpace];
-			 player1.Position= nextSpace.Position;
-		}
+			// Node2D nextSpace = spaces[player1CurrentSpace];
+			//  player1.Position= nextSpace.Position;
 		
-		// if (Input.IsActionPressed("test2") && !isRolling)
-		// {
-
-		// 	isRolling = true;
 		
-			
-
-
-
-		// 	player1CurrentSpace = player1CurrentSpace + diceRoll;
-
-		// 	if (player1CurrentSpace < 0)
-		// 	{
-		// 		player1CurrentSpace = player1CurrentSpace = 0;
-		// 	}
-			
-		// 	if (player1CurrentSpace >= spaces.Count) {
-		// 		player1CurrentSpace = player1CurrentSpace - spaces.Count;
-		// 	}
-		// 	// Move player to the next space
-		// 	Node2D nextSpace = spaces[player1CurrentSpace];
-		// 	player1.Position = nextSpace.Position;
-		// }
-
-		// if (Input.IsActionPressed("test3") && !isRolling)
-		// {
-
-		// 	isRolling = true;
-		// 	int diceRoll = level3Dice();
-
-
-
-		// 	player1CurrentSpace = player1CurrentSpace + diceRoll;
-
-		// 	if (player1CurrentSpace < 0)
-		// 	{
-		// 		player1CurrentSpace = player1CurrentSpace = 0;
-		// 	}
-			
-		// 	if (player1CurrentSpace >= spaces.Count) {
-		// 		player1CurrentSpace = player1CurrentSpace - spaces.Count;
-		// 	}
-		// 	// Move player to the next space
-		// 	Node2D nextSpace = spaces[player1CurrentSpace];
-		// 	player1.Position = nextSpace.Position;
-		// }
-
-		// if (Input.IsActionPressed("test4") && !isRolling)
-		// {
-
-		// 	isRolling = true;
-		// 	int diceRoll = level4Dice();
-
-
-
-		// 	player1CurrentSpace = player1CurrentSpace + diceRoll;
-
-		// 	if (player1CurrentSpace < 0)
-		// 	{
-		// 		player1CurrentSpace = player1CurrentSpace = 0;
-		// 	}
-			
-		// 	if (player1CurrentSpace >= spaces.Count) {
-		// 		player1CurrentSpace = player1CurrentSpace - spaces.Count;
-		// 	}
-		// 	// Move player to the next space
-		// 	Node2D nextSpace = spaces[player1CurrentSpace];
-		// 	player1.Position = nextSpace.Position;
-		// }
+		
+		
 
 		if (Input.IsActionJustReleased("test1"))
 		{
@@ -183,6 +150,32 @@ public partial class Main : Node2D
 			isRolling = false;
 		}
 	}
- 
+//  for(int i = -3; i <= 9; i ++){
+// 			if(i == diceRoll){
+// 				dobbelSprite.Play($"{diceRoll}");
+// 			}
+	void Move()
+	{
+    int newposition = player1CurrentSpace + diceRoll;
+	 if (player1CurrentSpace >= spaces.Count) {
+				player1CurrentSpace = player1CurrentSpace - spaces.Count;
+			}
+			if (player1CurrentSpace < 0) 
+			{
+    		player1CurrentSpace = (player1CurrentSpace + spaces.Count) % spaces.Count;
+			} 
+			else if (player1CurrentSpace >= spaces.Count) 
+			{
+    		player1CurrentSpace %= spaces.Count;
+			}
+			GD.Print("ik ben in move" + newposition);
+	for(int i = player1CurrentSpace; i != newposition; i++ )
+	{   
+		Node2D nextSpace = spaces[i];
+		player.Move(nextSpace.Position);
+	}
+			
+	}
 	
 }
+
