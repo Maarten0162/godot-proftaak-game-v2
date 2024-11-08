@@ -2,29 +2,23 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Xml;
 
 
 
 public partial class Main : Node2D
 {
-	
-
-
 
 	private AnimatedSprite2D dobbelSprite;
-
-
-
-	private List<Node2D> spaces = new List<Node2D>();
-
 
 	int spacesAmount = 42;
 	Player player1;
 	Player player2;
 	Player player3;
 	Player player4;
-
+	
+	Random rnd = new Random();
 
 	private bool isRolling = false;
 	Dice basicdice = new Dice(0, 4);
@@ -36,7 +30,6 @@ public partial class Main : Node2D
 	Vector2[] Positions = new Vector2[42];
 	private (Node2D Position, string Name)[] spacesInfo;
 
-
 	public override void _Ready()
 	{	spacesInfo = new (Node2D, string)[spacesAmount];
 		for (int i = 1; i <= spacesAmount; i++)
@@ -46,7 +39,7 @@ public partial class Main : Node2D
 			var sprite = markerNode.GetChild<Sprite2D>(0);			
 			spacesInfo[i -1] = ( markerNode, sprite.Name);
 			GD.Print("plek " + i + " is gevuld en de kleur is" + sprite.Name);
-			// spaces.Add(GetNode<Node2D>($"spaces/Marker2D{i}"));
+		
 		}
 		for (int i = 0; i < spacesAmount; i++)
 		{
@@ -82,10 +75,10 @@ public partial class Main : Node2D
 
 	}
 
-	public override void _Process(double delta)
+	public override async void _Process(double delta)
 	{
 		if (Input.IsActionPressed("test1") && !isRolling)
-		{
+		{	player1.Currency -= 100;
 			isRolling = true;
 			diceRoll = negdice.diceroll();
 		}
@@ -114,21 +107,25 @@ public partial class Main : Node2D
 					
 			updateDobbelSprite(diceRoll);
 			GD.Print("Dice roll is = " + diceRoll);
-			if(diceRoll >= 0)
-			{
-				Movement(player1, diceRoll);
-			}
-			else
-			{
-				NegMovement(player1, diceRoll);
-			}
+			await StartMovement(player1, diceRoll);
 			isRolling = false;	
+			GD.Print("player 1 currency is " + player1.Currency);
 		}
 
 
 
 	}
-
+ 	async Task StartMovement(Player player, int diceRoll)
+	{
+			if(diceRoll >= 0)
+			{
+				await Movement(player1, diceRoll);
+			}
+			else
+			{
+				await NegMovement(player1, diceRoll);
+			}
+	}
 	void updateDobbelSprite(int inputDiceRoll)
 	{
 		for (int i = -3; i <= 9; i++)
@@ -140,7 +137,7 @@ public partial class Main : Node2D
 
 		}
 	}
-	async void Movement(Player player, int diceRoll)
+	async Task Movement(Player player, int diceRoll)
 	{
 
 		for(int i = 0; i < diceRoll; i++)
@@ -153,9 +150,9 @@ public partial class Main : Node2D
 
 		
 		GD.Print(player.PositionSpace +  spacesInfo[player.PositionSpace].Item2 + " na movement");
-		
+		Placedetection(spacesInfo[player.PositionSpace].Item2, player);
 	}
-	async void NegMovement(Player player, int diceRoll)
+	async Task NegMovement(Player player, int diceRoll)
 		{
    			for(int i = 0; i > diceRoll; i--)
 		{ 
@@ -163,10 +160,61 @@ public partial class Main : Node2D
 		 player.Position = Positions[player.PositionSpace];
 		 await ToSignal(GetTree().CreateTimer(0.4), "timeout");	
 		 GD.Print(player.PositionSpace);		
-		}
-
-		
+		}		
 		GD.Print(player.PositionSpace +  spacesInfo[player.PositionSpace].Item2 + " na movement");
+		Placedetection(spacesInfo[player.PositionSpace].Item2, player);
 	}
+	void Placedetection(string typeOfSpace, Player player)
+	{
+		if(typeOfSpace == "blueSpace")
+		{
+			BlueSpace(player);
+		}
+		else if(typeOfSpace == "redSpace")
+		{
+			RedSpace(player);
+		}	
+	}
+	
+	void BlueSpace(Player player)
+	{
+		player.Currency += 3;
+	}
+	void RedSpace(Player player)
+	{
+		player.Currency -= 3;
+	}
+	void Robbery(Player player)
+	{	
+		int lostcurrency = rnd.Next(8,31);
+		player.Currency -= lostcurrency;
+		player.Health -= 10;
+	}
+	void RobSomeone(Player player)
+	{	
+		int gainedCurrency = rnd.Next(5, 21);
+		player.Currency += gainedCurrency;
+	}
+
+	void SkipNextTurn(Player player)
+	{
+		player.SkipTurn = true;
+	}
+
+	void Leftshortcut(Player player)
+	{
+		player.Position = Positions[21];
+	}
+		void Rightshortcut(Player player)
+	{
+		player.Position = Positions[30];
+	}
+	
+
+	
+	
+
+
+
 }
 

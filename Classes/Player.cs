@@ -6,7 +6,7 @@ public partial class Player : CharacterBody2D
 
 	public Player()
 	{
-		currency = 10;
+		currency = 2;
 		health = 100;
 	}
 
@@ -21,6 +21,10 @@ public partial class Player : CharacterBody2D
 		set
 		{
 			currency = value;
+			if(currency < 0)
+			{
+				currency = 0;
+			}
 		}
 	}
 	private int health;
@@ -47,7 +51,20 @@ public partial class Player : CharacterBody2D
 		}
 		set
 		{
-			positionSpace = value;
+			positionSpace = value;			
+		}
+	}
+	private bool skipTurn;
+
+	public bool SkipTurn
+	{
+		get
+		{
+			return skipTurn;
+		}
+		set
+		{
+			skipTurn = value;
 		}
 	}
 }
