@@ -16,9 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://dyk8ejepe1vww" path="res://assets/dice/default-dice/Dobbel7.png" id="14_3fmk5"]
 [ext_resource type="Texture2D" uid="uid://ccu36fjro5msm" path="res://assets/dice/default-dice/Dobbel8.png" id="15_cv46h"]
 [ext_resource type="Texture2D" uid="uid://dol6hnh1qws33" path="res://assets/Spaces/bluespace.png" id="16_a006q"]
+[ext_resource type="Texture2D" uid="uid://bh0oghc7f3r32" path="res://assets/Spaces/greenpipe.png" id="16_v2g8y"]
 [ext_resource type="Texture2D" uid="uid://d1pifwujewrmq" path="res://assets/dice/default-dice/Dobbel9.png" id="16_xc1rm"]
-[ext_resource type="Texture2D" uid="uid://th5esly73wm0" path="res://assets/Spaces/redspace.png" id="17_bhix0"]
-[ext_resource type="Texture2D" uid="uid://th5esly73wm0" path="res://assets/Spaces/redSpace.png" id="17_vh1sw"]
+[ext_resource type="Texture2D" uid="uid://th5esly73wm0" path="res://assets/Spaces/redspace.png" id="17_vh1sw"]
 [ext_resource type="Texture2D" uid="uid://dpcp018yag0ko" path="res://assets/Player_icons/Player1.png" id="19_bwuok"]
 [ext_resource type="Texture2D" uid="uid://meqcks5t4j1q" path="res://assets/Player_icons/Player2.png" id="20_epi1k"]
 [ext_resource type="Texture2D" uid="uid://c0ysmcgfrk0hq" path="res://assets/Player_icons/Player3.png" id="21_56lhf"]
@@ -201,13 +201,12 @@ offset_bottom = 40.0
 
 [node name="HorseraceNomoney" type="RichTextLabel" parent="Control"]
 modulate = Color(0, 0, 0, 1)
-top_level = true
 z_index = 100
 layout_mode = 0
-offset_left = 665.0
-offset_top = 26.0
-offset_right = 808.0
-offset_bottom = 151.0
+offset_left = 471.0
+offset_top = 251.0
+offset_right = 614.0
+offset_bottom = 376.0
 text = "Sorry makker, te weinig geld. volgende keer meer geluk!"
 
 [node name="dobbelSprite" type="AnimatedSprite2D" parent="."]
@@ -221,16 +220,16 @@ animation = &"4"
 [node name="Marker2D1" type="Marker2D" parent="spaces"]
 position = Vector2(187, 86)
 
-[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D1"]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("16_a006q")
+[node name="topLeftsc" type="Sprite2D" parent="spaces/Marker2D1"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("16_v2g8y")
 
 [node name="Marker2D2" type="Marker2D" parent="spaces"]
 position = Vector2(273, 86)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D2"]
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("17_bhix0")
+texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D3" type="Marker2D" parent="spaces"]
 position = Vector2(353, 87)
@@ -284,9 +283,9 @@ texture = ExtResource("16_a006q")
 [node name="Marker2D10" type="Marker2D" parent="spaces"]
 position = Vector2(924, 90)
 
-[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D10"]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("17_vh1sw")
+[node name="topRightsc" type="Sprite2D" parent="spaces/Marker2D10"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("16_v2g8y")
 
 [node name="Marker2D11" type="Marker2D" parent="spaces"]
 position = Vector2(961, 149)
@@ -368,9 +367,9 @@ texture = ExtResource("16_a006q")
 [node name="Marker2D22" type="Marker2D" parent="spaces"]
 position = Vector2(182, 541)
 
-[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D22"]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("17_vh1sw")
+[node name="botLeftsc" type="Sprite2D" parent="spaces/Marker2D22"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("16_v2g8y")
 
 [node name="Marker2D23" type="Marker2D" parent="spaces"]
 position = Vector2(268, 543)
@@ -431,9 +430,9 @@ texture = ExtResource("17_vh1sw")
 [node name="Marker2D31" type="Marker2D" parent="spaces"]
 position = Vector2(915, 541)
 
-[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D31"]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("16_a006q")
+[node name="botRightsc" type="Sprite2D" parent="spaces/Marker2D31"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("16_v2g8y")
 
 [node name="Marker2D32" type="Marker2D" parent="spaces"]
 position = Vector2(960, 497)

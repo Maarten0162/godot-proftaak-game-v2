@@ -26,6 +26,7 @@ public partial class Main : Node2D
 	Dice riskydice = new Dice(0, 7);
 	Dice turbodice = new Dice(-3, 10);
 	Dice negdice = new Dice (-5,0);
+	Dice onedice = new Dice(1,2);
 	int diceRoll;
 	Vector2[] SpaceCoords = new Vector2[42];
 	private (Node2D Position, string Name)[] spacesInfo;
@@ -97,12 +98,18 @@ public partial class Main : Node2D
 			isRolling = true;
 			diceRoll = turbodice.diceroll();
 		}
+			if (Input.IsActionPressed("1") && !isRolling)
+		{
+			isRolling = true;
+			diceRoll = onedice.diceroll();
+		}
 
 
 		if (Input.IsActionJustReleased("test1") ||
 			Input.IsActionJustReleased("test2") ||
 			Input.IsActionJustReleased("test3") ||
-			Input.IsActionJustReleased("test4"))
+			Input.IsActionJustReleased("test4") ||
+			Input.IsActionJustReleased("1"))
 		{
 					
 			updateDobbelSprite(diceRoll);
@@ -174,6 +181,26 @@ public partial class Main : Node2D
 		{
 			RedSpace(player);
 		}	
+		else if(typeOfSpace.Contains("sc"))
+		{
+			if(typeOfSpace.Contains("top"))
+			{
+				if(typeOfSpace.Contains("Left"))
+				{
+					TopLeftshortcut(player);
+				}
+				else TopRightshortcut(player);				
+			}
+			else
+			{
+				if(typeOfSpace.Contains("Left"))
+				{
+					BottomLeftShortcut(player);
+				}
+				else BottomRightShortcut(player);	
+			}
+		}
+		 
 	}
 	
 	void BlueSpace(Player player)
@@ -204,25 +231,31 @@ public partial class Main : Node2D
 	void TopLeftshortcut(Player player)
 	{
 		player.Position = SpaceCoords[21];
+		player.PositionSpace = 21;
 	}
-		void TopRightshortcut(Player player)
+	void TopRightshortcut(Player player)
 	{
 		player.Position = SpaceCoords[30];
+		player.PositionSpace = 30;
 	}
 	void BottomLeftShortcut(Player player) 
 	{
 		player.Position = SpaceCoords[0];
+		player.PositionSpace = 0;
 	}
 	void BottomRightShortcut(Player player) 
 	{
 		player.Position = SpaceCoords[9];
+		player.PositionSpace = 9;
 	}
 
-    void HorseRace(Player player)
+	void HorseRace(Player player)
 	{
 		if(player.Currency <= 5)
 		{
 			// Pop up text that says, sorry you dont have enough, better luck next time!!!
+			GetNode<Label>("Control/HorseraceNomoney").Hide();
+			
 		}
 	}
 	
