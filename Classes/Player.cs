@@ -37,9 +37,9 @@ public partial class Player : CharacterBody2D
 		}
 	}
 
-	private Vector2 positionSpace;
+	private int positionSpace;
 
-	public Vector2 PositionSpace
+	public int PositionSpace
 	{
 		get
 		{
