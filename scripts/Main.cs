@@ -243,8 +243,7 @@ public partial class Main : Node2D
 	{	
 		int gainedCurrency = rnd.Next(5, 21);
 		player.Currency += gainedCurrency;
-		return gainedCurrency;
-	
+		return gainedCurrency;	
 	}
 
 	void SkipNextTurn(Player player)
@@ -285,11 +284,10 @@ public partial class Main : Node2D
 	
 	
 
-	///test test
+
 	
 
 
 
 }
 
-//test
