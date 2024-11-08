@@ -1,13 +1,13 @@
 using Godot;
 using System;
-//hello
+
 public partial class Player : CharacterBody2D
 {
 
 	public Player()
 	{
 		currency = 10;
-		health = 100;		
+		health = 100;
 	}
 
 	private int currency;
@@ -37,15 +37,17 @@ public partial class Player : CharacterBody2D
 		}
 	}
 
-	private Vector2 positionPlayer;
+	private Vector2 positionSpace;
 
-	public Vector2 PositionPlayer
+	public Vector2 PositionSpace
 	{
-		get{
-			return positionPlayer;
+		get
+		{
+			return positionSpace;
 		}
-		set{	
-			positionPlayer = value;
+		set
+		{
+			positionSpace = value;
 		}
 	}
 }

@@ -7,16 +7,13 @@ using System.Xml;
 
 public partial class Main : Node2D
 {
-	private Player player;
-	private int currentStopIndex = 0;  // Keep track of the current stop
-	private float moveSpeed = 0.1f;  // Speed of movement between stops
-	private bool isMoving = false;
+
 
 
 
 	private AnimatedSprite2D dobbelSprite;
 
-	private Random rnd = new Random();
+
 
 	private List<Node2D> spaces = new List<Node2D>();
 
@@ -36,23 +33,23 @@ public partial class Main : Node2D
 	int diceRoll;
 	Vector2[] Positions = new Vector2[42];
 	public override void _Ready()
-	{ 	
+	{
 		for (int i = 1; i <= spacesAmount; i++)
 		{
 			spaces.Add(GetNode<Node2D>($"spaces/Marker2D{i}"));
-			
+
 		}
 		for (int i = 0; i < spacesAmount; i++)
 		{
 			Positions[i] = spaces[i].Position;
-			
+
 		}
-		
+
 		Vector2 topLeft = Positions[0];
 		Vector2 topRight = Positions[9];
 		Vector2 botLeft = Positions[21];
 		Vector2 botRight = Positions[30];
-		
+
 		player1 = GetNode<Player>("player1");
 		player1.Position = topLeft;
 		player2 = GetNode<Player>("player2");
@@ -62,13 +59,8 @@ public partial class Main : Node2D
 		player4 = GetNode<Player>("player4");
 		player4.Position = botRight;
 
-	
-		
 
 		dobbelSprite = GetNode<AnimatedSprite2D>("dobbelSprite");
-
-
-
 
 		dobbelSprite.Play("0");
 
