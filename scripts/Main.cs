@@ -116,7 +116,7 @@ public partial class Main : Node2D
 			GD.Print("Dice roll is = " + diceRoll);
 			await StartMovement(player1, diceRoll);
 			isRolling = false;	
-			GD.Print("player 1 currency is " + player1.Currency);
+			
 		}
 
 
@@ -151,13 +151,12 @@ public partial class Main : Node2D
 		{ 
 		 player.PositionSpace = (player.PositionSpace + 1) % spacesInfo.Length;
 		 player.Position = SpaceCoords[player.PositionSpace];
-		 await ToSignal(GetTree().CreateTimer(0.4), "timeout");	
-		 GD.Print(player.PositionSpace);		
-		}
-
-		
-		GD.Print(player.PositionSpace +  spacesInfo[player.PositionSpace].Item2 + " na movement");
+		 await ToSignal(GetTree().CreateTimer(0.4), "timeout");					
+		}	
 		Placedetection(spacesInfo[player.PositionSpace].Item2, player);
+		GD.Print(player.PositionSpace +  spacesInfo[player.PositionSpace].Item2 + " na movement");
+		GD.Print(player.Name + " currency is now: " + player.Currency);
+		
 	}
 	async Task NegMovement(Player player, int diceRoll)
 		{
@@ -165,11 +164,12 @@ public partial class Main : Node2D
 		{ 
 		 player.PositionSpace = (player.PositionSpace - 1 + spacesInfo.Length) % spacesInfo.Length; //dit zorgt voor de wrap around, dat hij door kan als hij bij het aan het einde aankomt.
 		 player.Position = SpaceCoords[player.PositionSpace];
-		 await ToSignal(GetTree().CreateTimer(0.4), "timeout");	
-		 GD.Print(player.PositionSpace);		
-		}		
-		GD.Print(player.PositionSpace +  spacesInfo[player.PositionSpace].Item2 + " na movement");
+		 await ToSignal(GetTree().CreateTimer(0.4), "timeout");			 		
+		}				
 		Placedetection(spacesInfo[player.PositionSpace].Item2, player);
+		GD.Print(player.PositionSpace +  spacesInfo[player.PositionSpace].Item2 + " na movement");
+		GD.Print(player + " currency is now: " + player.Currency);
+				
 	}
 	void Placedetection(string typeOfSpace, Player player)
 	{
@@ -182,7 +182,7 @@ public partial class Main : Node2D
 			RedSpace(player);
 		}	
 		else if(typeOfSpace.Contains("sc"))
-		{
+		{	GD.Print("You found a shortcut!");
 			if(typeOfSpace.Contains("top"))
 			{
 				if(typeOfSpace.Contains("Left"))
@@ -200,6 +200,27 @@ public partial class Main : Node2D
 				else BottomRightShortcut(player);	
 			}
 		}
+		else if(typeOfSpace == "robSpace")
+		{
+			int robbedAmount = Robbery(player);
+			if(robbedAmount > player.Currency)
+			{
+				GD.Print("They took every penny you had!");
+			}
+			else	
+			GD.Print("You just got robbed! You lost " + robbedAmount + " pounds!!");		
+		}
+		else if(typeOfSpace == "knockoutSpace")
+		{
+			SkipNextTurn(player);
+			GD.Print("You just got knocked out! you have to skip a turn");
+		}
+		else if(typeOfSpace == "getRobbedSpace")
+		{
+			int robbedAmount = RobSomeone(player);
+			GD.Print("You just robbed someone! you gained " + robbedAmount + " Pounds!");
+		}
+		
 		 
 	}
 	
@@ -211,16 +232,19 @@ public partial class Main : Node2D
 	{
 		player.Currency -= 3;
 	}
-	void Robbery(Player player)
+	int Robbery(Player player)
 	{	
 		int lostcurrency = rnd.Next(8,31);
 		player.Currency -= lostcurrency;
 		player.Health -= 10;
+		return lostcurrency;
 	}
-	void RobSomeone(Player player)
+	int RobSomeone(Player player)
 	{	
 		int gainedCurrency = rnd.Next(5, 21);
 		player.Currency += gainedCurrency;
+		return gainedCurrency;
+	
 	}
 
 	void SkipNextTurn(Player player)
