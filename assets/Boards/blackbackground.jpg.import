@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://th5esly73wm0"
-path="res://.godot/imported/redSpace.png-8629bcd17a6e4ab693f1a9231009912d.ctex"
+uid="uid://cfbk370xp52hb"
+path="res://.godot/imported/blackbackground.jpg-0e0f612054d8ae906ffe7c95e305a45e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/redSpace.png"
-dest_files=["res://.godot/imported/redSpace.png-8629bcd17a6e4ab693f1a9231009912d.ctex"]
+source_file="res://assets/Boards/blackbackground.jpg"
+dest_files=["res://.godot/imported/blackbackground.jpg-0e0f612054d8ae906ffe7c95e305a45e.ctex"]
 
 [params]
 

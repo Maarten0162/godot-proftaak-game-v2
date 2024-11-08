@@ -78,7 +78,7 @@ public partial class Main : Node2D
 	public override async void _Process(double delta)
 	{
 		if (Input.IsActionPressed("test1") && !isRolling)
-		{	player1.Currency -= 100;
+		{
 			isRolling = true;
 			diceRoll = negdice.diceroll();
 		}
@@ -211,7 +211,19 @@ public partial class Main : Node2D
 	}
 	void BottomLeftShortcut(Player player) 
 	{
-		player.Position = Position;
+		player.Position = SpaceCoords[0];
+	}
+	void BottomRightShortcut(Player player) 
+	{
+		player.Position = SpaceCoords[9];
+	}
+
+    void HorseRace(Player player)
+	{
+		if(player.Currency <= 5)
+		{
+			// Pop up text that says, sorry you dont have enough, better luck next time!!!
+		}
 	}
 	
 	

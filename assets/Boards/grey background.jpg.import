@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5wan21ie46oj"
-path="res://.godot/imported/bord.png-33623581bfa88b3d01c6280541986ee5.ctex"
+uid="uid://cflvfjskvrjdx"
+path="res://.godot/imported/grey background.jpg-857540330eb8627e9c01e70af344a2be.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bord.png"
-dest_files=["res://.godot/imported/bord.png-33623581bfa88b3d01c6280541986ee5.ctex"]
+source_file="res://assets/Boards/grey background.jpg"
+dest_files=["res://.godot/imported/grey background.jpg-857540330eb8627e9c01e70af344a2be.ctex"]
 
 [params]
 
