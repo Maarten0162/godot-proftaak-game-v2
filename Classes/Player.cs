@@ -1,0 +1,54 @@
+using Godot;
+using System;
+
+public partial class Player : CharacterBody2D
+{
+
+	public Player()
+	{
+		currency = 10;
+		health = 100;
+	}
+
+	private int currency;
+
+	public int Currency
+	{
+		get
+		{
+			return currency;
+		}
+		set
+		{
+			currency = value;
+		}
+	}
+	private int health;
+
+	public int Health
+	{
+		get
+		{
+			return health;
+		}
+		set
+		{
+			health = value;
+		}
+	}
+
+	private Vector2 positionSpace;
+
+	public Vector2 PositionSpace
+	{
+		get
+		{
+			return positionSpace;
+		}
+		set
+		{
+			positionSpace = value;
+		}
+	}
+}
+
