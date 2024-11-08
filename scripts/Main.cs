@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
-//hello
+
 
 
 public partial class Main : Node2D
@@ -34,18 +34,26 @@ public partial class Main : Node2D
 	Dice negdice = new Dice (-5,0);
 	int diceRoll;
 	Vector2[] Positions = new Vector2[42];
-	public override void _Ready()
-	{
-		for (int i = 1; i <= spacesAmount; i++)
-		{
-			spaces.Add(GetNode<Node2D>($"spaces/Marker2D{i}"));
+	private (Node2D Position, string Name)[] spacesInfo;
 
+
+	public override void _Ready()
+	{	spacesInfo = new (Node2D, string)[spacesAmount];
+		for (int i = 1; i <= spacesAmount; i++)
+		{	
+			Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{i}");
+
+			var sprite = markerNode.GetChild<Sprite2D>(0);			
+			spacesInfo[i -1] = ( markerNode, sprite.Name);
+			GD.Print("plek " + i + " is gevuld en de kleur is" + sprite.Name);
+			// spaces.Add(GetNode<Node2D>($"spaces/Marker2D{i}"));
 		}
 		for (int i = 0; i < spacesAmount; i++)
 		{
-			Positions[i] = spaces[i].Position;
-
+			Positions[i] = spacesInfo[i].Item1.Position;
 		}
+
+   
 
 		Vector2 topLeft = Positions[0];
 		Vector2 topRight = Positions[9];
@@ -77,7 +85,7 @@ public partial class Main : Node2D
 	public override void _Process(double delta)
 	{
 		if (Input.IsActionPressed("test1") && !isRolling)
-		{	
+		{
 			isRolling = true;
 			diceRoll = negdice.diceroll();
 		}
@@ -103,7 +111,7 @@ public partial class Main : Node2D
 			Input.IsActionJustReleased("test3") ||
 			Input.IsActionJustReleased("test4"))
 		{
-			isRolling = false;			
+					
 			updateDobbelSprite(diceRoll);
 			GD.Print("Dice roll is = " + diceRoll);
 			if(diceRoll >= 0)
@@ -114,7 +122,7 @@ public partial class Main : Node2D
 			{
 				NegMovement(player1, diceRoll);
 			}
-			
+			isRolling = false;	
 		}
 
 
@@ -137,28 +145,28 @@ public partial class Main : Node2D
 
 		for(int i = 0; i < diceRoll; i++)
 		{ 
-		 player.PositionSpace = (player.PositionSpace + 1) % spaces.Count;
+		 player.PositionSpace = (player.PositionSpace + 1) % spacesInfo.Length;
 		 player.Position = Positions[player.PositionSpace];
 		 await ToSignal(GetTree().CreateTimer(0.4), "timeout");	
 		 GD.Print(player.PositionSpace);		
 		}
 
 		
-		GD.Print(player.PositionSpace + " na movement");
+		GD.Print(player.PositionSpace +  spacesInfo[player.PositionSpace].Item2 + " na movement");
 		
 	}
 	async void NegMovement(Player player, int diceRoll)
 		{
    			for(int i = 0; i > diceRoll; i--)
 		{ 
-		 player.PositionSpace = (player.PositionSpace - 1 + spaces.Count) % spaces.Count; //dit zorgt voor de wrap around, dat hij door kan als hij bij het aan het einde aankomt.
+		 player.PositionSpace = (player.PositionSpace - 1 + spacesInfo.Length) % spacesInfo.Length; //dit zorgt voor de wrap around, dat hij door kan als hij bij het aan het einde aankomt.
 		 player.Position = Positions[player.PositionSpace];
 		 await ToSignal(GetTree().CreateTimer(0.4), "timeout");	
 		 GD.Print(player.PositionSpace);		
 		}
 
 		
-		GD.Print(player.PositionSpace + " na movement");
+		GD.Print(player.PositionSpace +  spacesInfo[player.PositionSpace].Item2 + " na movement");
 	}
 }
 

@@ -1,10 +1,12 @@
-[gd_scene load_steps=37 format=3 uid="uid://cg37l1h63iykf"]
+[gd_scene load_steps=39 format=3 uid="uid://cg37l1h63iykf"]
 
 [ext_resource type="Script" path="res://scripts/Main.cs" id="1_xihgb"]
 [ext_resource type="Script" path="res://Classes/Player.cs" id="2_etkhv"]
 [ext_resource type="Texture2D" uid="uid://c5wan21ie46oj" path="res://bord.png" id="3_2cra6"]
+[ext_resource type="Texture2D" uid="uid://dol6hnh1qws33" path="res://assets/bluespace.png" id="3_re76a"]
 [ext_resource type="Texture2D" uid="uid://insiyhwvq4cl" path="res://assets/dice/default-dice/Dobbel-1.png" id="4_lgpu5"]
 [ext_resource type="Texture2D" uid="uid://tuw1uchf463i" path="res://assets/dice/default-dice/Dobbel1.png" id="4_xrfbe"]
+[ext_resource type="Texture2D" uid="uid://th5esly73wm0" path="res://assets/redSpace.png" id="4_yh0mp"]
 [ext_resource type="Texture2D" uid="uid://c0ktibn6olxwb" path="res://assets/dice/default-dice/Dobbel-2.png" id="5_4w8of"]
 [ext_resource type="Texture2D" uid="uid://dhju6lhh0hqq6" path="res://assets/dice/default-dice/Dobbel0.png" id="5_8626o"]
 [ext_resource type="Texture2D" uid="uid://btar07wdj6v2c" path="res://assets/dice/default-dice/Dobbel2.png" id="5_uooir"]
@@ -198,128 +200,296 @@ texture = ExtResource("3_2cra6")
 [node name="Marker2D1" type="Marker2D" parent="spaces"]
 position = Vector2(187, 86)
 
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D1"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_re76a")
+
 [node name="Marker2D2" type="Marker2D" parent="spaces"]
 position = Vector2(273, 86)
+
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D2"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_yh0mp")
 
 [node name="Marker2D3" type="Marker2D" parent="spaces"]
 position = Vector2(353, 87)
 
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D3"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_re76a")
+
 [node name="Marker2D4" type="Marker2D" parent="spaces"]
 position = Vector2(444, 88)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D4"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_re76a")
 
 [node name="Marker2D5" type="Marker2D" parent="spaces"]
 position = Vector2(515, 82)
 
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D5"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_yh0mp")
+
 [node name="Marker2D6" type="Marker2D" parent="spaces"]
 position = Vector2(600, 86)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D6"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_re76a")
 
 [node name="Marker2D7" type="Marker2D" parent="spaces"]
 position = Vector2(677, 91)
 
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D7"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_re76a")
+
 [node name="Marker2D8" type="Marker2D" parent="spaces"]
 position = Vector2(760, 85)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D8"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_re76a")
 
 [node name="Marker2D9" type="Marker2D" parent="spaces"]
 position = Vector2(829, 92)
 
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D9"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_re76a")
+
 [node name="Marker2D10" type="Marker2D" parent="spaces"]
 position = Vector2(924, 90)
+
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D10"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_yh0mp")
 
 [node name="Marker2D11" type="Marker2D" parent="spaces"]
 position = Vector2(961, 149)
 
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D11"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_re76a")
+
 [node name="Marker2D12" type="Marker2D" parent="spaces"]
 position = Vector2(872, 184)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D12"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_re76a")
 
 [node name="Marker2D13" type="Marker2D" parent="spaces"]
 position = Vector2(812, 209)
 
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D13"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_re76a")
+
 [node name="Marker2D14" type="Marker2D" parent="spaces"]
 position = Vector2(730, 232)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D14"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_re76a")
 
 [node name="Marker2D15" type="Marker2D" parent="spaces"]
 position = Vector2(662, 273)
 
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D15"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_re76a")
+
 [node name="Marker2D16" type="Marker2D" parent="spaces"]
 position = Vector2(550, 303)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D16"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_re76a")
 
 [node name="Marker2D17" type="Marker2D" parent="spaces"]
 position = Vector2(446, 364)
 
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D17"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_re76a")
+
 [node name="Marker2D18" type="Marker2D" parent="spaces"]
 position = Vector2(361, 399)
+
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D18"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_yh0mp")
 
 [node name="Marker2D19" type="Marker2D" parent="spaces"]
 position = Vector2(295, 428)
 
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D19"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_yh0mp")
+
 [node name="Marker2D20" type="Marker2D" parent="spaces"]
 position = Vector2(221, 454)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D20"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_re76a")
 
 [node name="Marker2D21" type="Marker2D" parent="spaces"]
 position = Vector2(138, 490)
 
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D21"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_re76a")
+
 [node name="Marker2D22" type="Marker2D" parent="spaces"]
 position = Vector2(182, 541)
+
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D22"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_yh0mp")
 
 [node name="Marker2D23" type="Marker2D" parent="spaces"]
 position = Vector2(268, 543)
 
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D23"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_re76a")
+
 [node name="Marker2D24" type="Marker2D" parent="spaces"]
 position = Vector2(340, 544)
+
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D24"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_yh0mp")
 
 [node name="Marker2D25" type="Marker2D" parent="spaces"]
 position = Vector2(420, 549)
 
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D25"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_yh0mp")
+
 [node name="Marker2D26" type="Marker2D" parent="spaces"]
 position = Vector2(513, 537)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D26"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_re76a")
 
 [node name="Marker2D27" type="Marker2D" parent="spaces"]
 position = Vector2(587, 544)
 
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D27"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_re76a")
+
 [node name="Marker2D28" type="Marker2D" parent="spaces"]
 position = Vector2(672, 548)
+
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D28"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_yh0mp")
 
 [node name="Marker2D29" type="Marker2D" parent="spaces"]
 position = Vector2(743, 547)
 
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D29"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_yh0mp")
+
 [node name="Marker2D30" type="Marker2D" parent="spaces"]
 position = Vector2(829, 551)
+
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D30"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_yh0mp")
 
 [node name="Marker2D31" type="Marker2D" parent="spaces"]
 position = Vector2(915, 541)
 
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D31"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_re76a")
+
 [node name="Marker2D32" type="Marker2D" parent="spaces"]
 position = Vector2(960, 497)
+
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D32"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_yh0mp")
 
 [node name="Marker2D33" type="Marker2D" parent="spaces"]
 position = Vector2(888, 479)
 
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D33"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_re76a")
+
 [node name="Marker2D34" type="Marker2D" parent="spaces"]
 position = Vector2(809, 446)
+
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D34"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_yh0mp")
 
 [node name="Marker2D35" type="Marker2D" parent="spaces"]
 position = Vector2(734, 412)
 
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D35"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_re76a")
+
 [node name="Marker2D36" type="Marker2D" parent="spaces"]
 position = Vector2(662, 372)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D36"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_re76a")
 
 [node name="Marker2D37" type="Marker2D" parent="spaces"]
 position = Vector2(531, 315)
 
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D37"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_yh0mp")
+
 [node name="Marker2D38" type="Marker2D" parent="spaces"]
 position = Vector2(445, 272)
+
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D38"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_yh0mp")
 
 [node name="Marker2D39" type="Marker2D" parent="spaces"]
 position = Vector2(368, 246)
 
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D39"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_re76a")
+
 [node name="Marker2D40" type="Marker2D" parent="spaces"]
 position = Vector2(294, 208)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D40"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_re76a")
 
 [node name="Marker2D41" type="Marker2D" parent="spaces"]
 position = Vector2(217, 187)
 
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D41"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_re76a")
+
 [node name="Marker2D42" type="Marker2D" parent="spaces"]
 position = Vector2(151, 144)
+
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D42"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_yh0mp")
 
 [node name="dobbelSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(535, 188)
