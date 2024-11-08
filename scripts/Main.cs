@@ -27,7 +27,7 @@ public partial class Main : Node2D
 	Dice turbodice = new Dice(-3, 10);
 	Dice negdice = new Dice (-5,0);
 	int diceRoll;
-	Vector2[] Positions = new Vector2[42];
+	Vector2[] SpaceCoords = new Vector2[42];
 	private (Node2D Position, string Name)[] spacesInfo;
 
 	public override void _Ready()
@@ -43,15 +43,15 @@ public partial class Main : Node2D
 		}
 		for (int i = 0; i < spacesAmount; i++)
 		{
-			Positions[i] = spacesInfo[i].Item1.Position;
+			SpaceCoords[i] = spacesInfo[i].Item1.Position;
 		}
 
    
 
-		Vector2 topLeft = Positions[0];
-		Vector2 topRight = Positions[9];
-		Vector2 botLeft = Positions[21];
-		Vector2 botRight = Positions[30];
+		Vector2 topLeft = SpaceCoords[0];
+		Vector2 topRight = SpaceCoords[9];
+		Vector2 botLeft = SpaceCoords[21];
+		Vector2 botRight = SpaceCoords[30];
 
 		player1 = GetNode<Player>("player1");
 		player1.Position = topLeft;
@@ -143,7 +143,7 @@ public partial class Main : Node2D
 		for(int i = 0; i < diceRoll; i++)
 		{ 
 		 player.PositionSpace = (player.PositionSpace + 1) % spacesInfo.Length;
-		 player.Position = Positions[player.PositionSpace];
+		 player.Position = SpaceCoords[player.PositionSpace];
 		 await ToSignal(GetTree().CreateTimer(0.4), "timeout");	
 		 GD.Print(player.PositionSpace);		
 		}
@@ -157,7 +157,7 @@ public partial class Main : Node2D
    			for(int i = 0; i > diceRoll; i--)
 		{ 
 		 player.PositionSpace = (player.PositionSpace - 1 + spacesInfo.Length) % spacesInfo.Length; //dit zorgt voor de wrap around, dat hij door kan als hij bij het aan het einde aankomt.
-		 player.Position = Positions[player.PositionSpace];
+		 player.Position = SpaceCoords[player.PositionSpace];
 		 await ToSignal(GetTree().CreateTimer(0.4), "timeout");	
 		 GD.Print(player.PositionSpace);		
 		}		
@@ -203,13 +203,16 @@ public partial class Main : Node2D
 
 	void TopLeftshortcut(Player player)
 	{
-		player.Position = Positions[21];
+		player.Position = SpaceCoords[21];
 	}
 		void TopRightshortcut(Player player)
 	{
-		player.Position = Positions[30];
+		player.Position = SpaceCoords[30];
 	}
-	void BottomLeftShortcut
+	void BottomLeftShortcut(Player player) 
+	{
+		player.Position = Position;
+	}
 	
 	
 
