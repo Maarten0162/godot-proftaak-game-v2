@@ -201,14 +201,16 @@ public partial class Main : Node2D
 		player.SkipTurn = true;
 	}
 
-	void Leftshortcut(Player player)
+	void TopLeftshortcut(Player player)
 	{
 		player.Position = Positions[21];
 	}
-		void Rightshortcut(Player player)
+		void TopRightshortcut(Player player)
 	{
 		player.Position = Positions[30];
 	}
+	void BottomLeftShortcut
+	
 	
 
 	
