@@ -1,9 +1,8 @@
-[gd_scene load_steps=34 format=3 uid="uid://cg37l1h63iykf"]
+[gd_scene load_steps=40 format=3 uid="uid://cg37l1h63iykf"]
 
-[ext_resource type="Texture2D" uid="uid://cm7dehuwj0sar" path="res://icon.svg" id="1_6tusj"]
 [ext_resource type="Script" path="res://scripts/Main.cs" id="1_xihgb"]
+[ext_resource type="Texture2D" uid="uid://dd6rspqonw3vu" path="res://assets/Boards/white_background.png" id="2_0neam"]
 [ext_resource type="Script" path="res://Classes/Player.cs" id="2_etkhv"]
-[ext_resource type="Texture2D" uid="uid://c5wan21ie46oj" path="res://bord.png" id="3_2cra6"]
 [ext_resource type="Texture2D" uid="uid://insiyhwvq4cl" path="res://assets/dice/default-dice/Dobbel-1.png" id="4_lgpu5"]
 [ext_resource type="Texture2D" uid="uid://tuw1uchf463i" path="res://assets/dice/default-dice/Dobbel1.png" id="4_xrfbe"]
 [ext_resource type="Texture2D" uid="uid://c0ktibn6olxwb" path="res://assets/dice/default-dice/Dobbel-2.png" id="5_4w8of"]
@@ -16,7 +15,15 @@
 [ext_resource type="Texture2D" uid="uid://ntnjriij4xb7" path="res://assets/dice/default-dice/Dobbel6.png" id="10_l64x0"]
 [ext_resource type="Texture2D" uid="uid://dyk8ejepe1vww" path="res://assets/dice/default-dice/Dobbel7.png" id="14_3fmk5"]
 [ext_resource type="Texture2D" uid="uid://ccu36fjro5msm" path="res://assets/dice/default-dice/Dobbel8.png" id="15_cv46h"]
+[ext_resource type="Texture2D" uid="uid://dol6hnh1qws33" path="res://assets/Spaces/bluespace.png" id="16_a006q"]
+[ext_resource type="Texture2D" uid="uid://bh0oghc7f3r32" path="res://assets/Spaces/greenpipe.png" id="16_v2g8y"]
 [ext_resource type="Texture2D" uid="uid://d1pifwujewrmq" path="res://assets/dice/default-dice/Dobbel9.png" id="16_xc1rm"]
+[ext_resource type="Texture2D" uid="uid://th5esly73wm0" path="res://assets/Spaces/redspace.png" id="17_vh1sw"]
+[ext_resource type="Texture2D" uid="uid://dpcp018yag0ko" path="res://assets/Player_icons/Player1.png" id="19_bwuok"]
+[ext_resource type="Texture2D" uid="uid://breb301qf7jth" path="res://assets/Spaces/Event_Space.png" id="19_srds4"]
+[ext_resource type="Texture2D" uid="uid://meqcks5t4j1q" path="res://assets/Player_icons/Player2.png" id="20_epi1k"]
+[ext_resource type="Texture2D" uid="uid://c0ysmcgfrk0hq" path="res://assets/Player_icons/Player3.png" id="21_56lhf"]
+[ext_resource type="Texture2D" uid="uid://cha53i6v5dxbx" path="res://assets/Player_icons/player4.png" id="22_mmax3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7y5x1"]
 atlas = ExtResource("4_lgpu5")
@@ -177,158 +184,15 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="LabelSettings" id="LabelSettings_xfr5n"]
-font_color = Color(1, 0, 1, 1)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dd3ac"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_xihgb")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D2" type="Sprite2D" parent="."]
 position = Vector2(564, 315)
-scale = Vector2(0.821898, 0.608569)
-texture = ExtResource("3_2cra6")
-
-[node name="spaces" type="Node" parent="."]
-
-[node name="Marker2D1" type="Marker2D" parent="spaces"]
-position = Vector2(187, 86)
-
-[node name="Marker2D2" type="Marker2D" parent="spaces"]
-position = Vector2(273, 86)
-
-[node name="Marker2D3" type="Marker2D" parent="spaces"]
-position = Vector2(353, 87)
-
-[node name="Marker2D4" type="Marker2D" parent="spaces"]
-position = Vector2(444, 88)
-
-[node name="Marker2D5" type="Marker2D" parent="spaces"]
-position = Vector2(515, 82)
-
-[node name="Marker2D6" type="Marker2D" parent="spaces"]
-position = Vector2(600, 86)
-
-[node name="Marker2D7" type="Marker2D" parent="spaces"]
-position = Vector2(677, 91)
-
-[node name="Marker2D8" type="Marker2D" parent="spaces"]
-position = Vector2(760, 85)
-
-[node name="Marker2D9" type="Marker2D" parent="spaces"]
-position = Vector2(829, 92)
-
-[node name="Marker2D10" type="Marker2D" parent="spaces"]
-position = Vector2(924, 90)
-
-[node name="Marker2D11" type="Marker2D" parent="spaces"]
-position = Vector2(961, 149)
-
-[node name="Marker2D12" type="Marker2D" parent="spaces"]
-position = Vector2(872, 184)
-
-[node name="Marker2D13" type="Marker2D" parent="spaces"]
-position = Vector2(812, 209)
-
-[node name="Marker2D14" type="Marker2D" parent="spaces"]
-position = Vector2(730, 232)
-
-[node name="Marker2D15" type="Marker2D" parent="spaces"]
-position = Vector2(662, 273)
-
-[node name="Marker2D16" type="Marker2D" parent="spaces"]
-position = Vector2(550, 303)
-
-[node name="Marker2D17" type="Marker2D" parent="spaces"]
-position = Vector2(446, 364)
-
-[node name="Marker2D18" type="Marker2D" parent="spaces"]
-position = Vector2(361, 399)
-
-[node name="Marker2D19" type="Marker2D" parent="spaces"]
-position = Vector2(295, 428)
-
-[node name="Marker2D20" type="Marker2D" parent="spaces"]
-position = Vector2(221, 454)
-
-[node name="Marker2D21" type="Marker2D" parent="spaces"]
-position = Vector2(138, 490)
-
-[node name="Marker2D22" type="Marker2D" parent="spaces"]
-position = Vector2(182, 541)
-
-[node name="Marker2D23" type="Marker2D" parent="spaces"]
-position = Vector2(268, 543)
-
-[node name="Marker2D24" type="Marker2D" parent="spaces"]
-position = Vector2(340, 544)
-
-[node name="Marker2D25" type="Marker2D" parent="spaces"]
-position = Vector2(420, 549)
-
-[node name="Marker2D26" type="Marker2D" parent="spaces"]
-position = Vector2(513, 537)
-
-[node name="Marker2D27" type="Marker2D" parent="spaces"]
-position = Vector2(587, 544)
-
-[node name="Marker2D28" type="Marker2D" parent="spaces"]
-position = Vector2(672, 548)
-
-[node name="Marker2D29" type="Marker2D" parent="spaces"]
-position = Vector2(743, 547)
-
-[node name="Marker2D30" type="Marker2D" parent="spaces"]
-position = Vector2(829, 551)
-
-[node name="Marker2D31" type="Marker2D" parent="spaces"]
-position = Vector2(915, 541)
-
-[node name="Marker2D32" type="Marker2D" parent="spaces"]
-position = Vector2(960, 497)
-
-[node name="Marker2D33" type="Marker2D" parent="spaces"]
-position = Vector2(888, 479)
-
-[node name="Marker2D34" type="Marker2D" parent="spaces"]
-position = Vector2(809, 446)
-
-[node name="Marker2D35" type="Marker2D" parent="spaces"]
-position = Vector2(734, 412)
-
-[node name="Marker2D36" type="Marker2D" parent="spaces"]
-position = Vector2(662, 372)
-
-[node name="Marker2D37" type="Marker2D" parent="spaces"]
-position = Vector2(531, 315)
-
-[node name="Marker2D38" type="Marker2D" parent="spaces"]
-position = Vector2(445, 272)
-
-[node name="Marker2D39" type="Marker2D" parent="spaces"]
-position = Vector2(368, 246)
-
-[node name="Marker2D40" type="Marker2D" parent="spaces"]
-position = Vector2(294, 208)
-
-[node name="Marker2D41" type="Marker2D" parent="spaces"]
-position = Vector2(217, 187)
-
-[node name="Marker2D42" type="Marker2D" parent="spaces"]
-position = Vector2(151, 144)
-
-[node name="dobbelSprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(535, 188)
-scale = Vector2(0.576429, 0.54454)
-sprite_frames = SubResource("SpriteFrames_3cd7b")
-animation = &"4"
-
-[node name="Node" type="Node" parent="."]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(247, 323)
-offset = Vector2(320, 0)
+scale = Vector2(1.46213, 0.857031)
+texture = ExtResource("2_0neam")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -336,58 +200,369 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="CurrencyLabel" type="Label" parent="Control"]
+[node name="HorseraceNomoney" type="RichTextLabel" parent="Control"]
+modulate = Color(0, 0, 0, 1)
+z_index = 100
 layout_mode = 0
-offset_left = 49.0
-offset_top = 44.0
-offset_right = 95.0
-offset_bottom = 71.0
-label_settings = SubResource("LabelSettings_xfr5n")
+offset_left = 471.0
+offset_top = 251.0
+offset_right = 614.0
+offset_bottom = 376.0
+text = "Sorry makker, te weinig geld. volgende keer meer geluk!"
+
+[node name="dobbelSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(535, 188)
+scale = Vector2(0.576429, 0.54454)
+sprite_frames = SubResource("SpriteFrames_3cd7b")
+animation = &"4"
+
+[node name="spaces" type="Node" parent="."]
+
+[node name="Marker2D1" type="Marker2D" parent="spaces"]
+position = Vector2(187, 86)
+
+[node name="topLeftsc" type="Sprite2D" parent="spaces/Marker2D1"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("16_v2g8y")
+
+[node name="Marker2D2" type="Marker2D" parent="spaces"]
+position = Vector2(273, 86)
+
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D2"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("17_vh1sw")
+
+[node name="Marker2D3" type="Marker2D" parent="spaces"]
+position = Vector2(353, 87)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D3"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("16_a006q")
+
+[node name="Marker2D4" type="Marker2D" parent="spaces"]
+position = Vector2(444, 88)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D4"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("16_a006q")
+
+[node name="Marker2D5" type="Marker2D" parent="spaces"]
+position = Vector2(515, 82)
+
+[node name="robSpace" type="Sprite2D" parent="spaces/Marker2D5"]
+scale = Vector2(0.11, 0.11)
+texture = ExtResource("19_srds4")
+
+[node name="Marker2D6" type="Marker2D" parent="spaces"]
+position = Vector2(600, 86)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D6"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("16_a006q")
+
+[node name="Marker2D7" type="Marker2D" parent="spaces"]
+position = Vector2(677, 91)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D7"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("16_a006q")
+
+[node name="Marker2D8" type="Marker2D" parent="spaces"]
+position = Vector2(760, 85)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D8"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("16_a006q")
+
+[node name="Marker2D9" type="Marker2D" parent="spaces"]
+position = Vector2(829, 92)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D9"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("16_a006q")
+
+[node name="Marker2D10" type="Marker2D" parent="spaces"]
+position = Vector2(924, 90)
+
+[node name="topRightsc" type="Sprite2D" parent="spaces/Marker2D10"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("16_v2g8y")
+
+[node name="Marker2D11" type="Marker2D" parent="spaces"]
+position = Vector2(961, 149)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D11"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("16_a006q")
+
+[node name="Marker2D12" type="Marker2D" parent="spaces"]
+position = Vector2(872, 184)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D12"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("16_a006q")
+
+[node name="Marker2D13" type="Marker2D" parent="spaces"]
+position = Vector2(812, 209)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D13"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("16_a006q")
+
+[node name="Marker2D14" type="Marker2D" parent="spaces"]
+position = Vector2(730, 232)
+
+[node name="getRobbedSpace" type="Sprite2D" parent="spaces/Marker2D14"]
+scale = Vector2(0.11, 0.11)
+texture = ExtResource("19_srds4")
+
+[node name="Marker2D15" type="Marker2D" parent="spaces"]
+position = Vector2(662, 273)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D15"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("16_a006q")
+
+[node name="Marker2D16" type="Marker2D" parent="spaces"]
+position = Vector2(550, 303)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D16"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("16_a006q")
+
+[node name="Marker2D17" type="Marker2D" parent="spaces"]
+position = Vector2(446, 364)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D17"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("16_a006q")
+
+[node name="Marker2D18" type="Marker2D" parent="spaces"]
+position = Vector2(361, 399)
+
+[node name="knockoutSpace" type="Sprite2D" parent="spaces/Marker2D18"]
+scale = Vector2(0.11, 0.11)
+texture = ExtResource("19_srds4")
+
+[node name="Marker2D19" type="Marker2D" parent="spaces"]
+position = Vector2(295, 428)
+
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D19"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("17_vh1sw")
+
+[node name="Marker2D20" type="Marker2D" parent="spaces"]
+position = Vector2(221, 454)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D20"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("16_a006q")
+
+[node name="Marker2D21" type="Marker2D" parent="spaces"]
+position = Vector2(138, 490)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D21"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("16_a006q")
+
+[node name="Marker2D22" type="Marker2D" parent="spaces"]
+position = Vector2(182, 541)
+
+[node name="botLeftsc" type="Sprite2D" parent="spaces/Marker2D22"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("16_v2g8y")
+
+[node name="Marker2D23" type="Marker2D" parent="spaces"]
+position = Vector2(268, 543)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D23"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("16_a006q")
+
+[node name="Marker2D24" type="Marker2D" parent="spaces"]
+position = Vector2(340, 544)
+
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D24"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("17_vh1sw")
+
+[node name="Marker2D25" type="Marker2D" parent="spaces"]
+position = Vector2(420, 549)
+
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D25"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("17_vh1sw")
+
+[node name="Marker2D26" type="Marker2D" parent="spaces"]
+position = Vector2(513, 537)
+
+[node name="robSpace" type="Sprite2D" parent="spaces/Marker2D26"]
+scale = Vector2(0.11, 0.11)
+texture = ExtResource("19_srds4")
+
+[node name="Marker2D27" type="Marker2D" parent="spaces"]
+position = Vector2(587, 544)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D27"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("16_a006q")
+
+[node name="Marker2D28" type="Marker2D" parent="spaces"]
+position = Vector2(672, 548)
+
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D28"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("17_vh1sw")
+
+[node name="Marker2D29" type="Marker2D" parent="spaces"]
+position = Vector2(743, 547)
+
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D29"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("17_vh1sw")
+
+[node name="Marker2D30" type="Marker2D" parent="spaces"]
+position = Vector2(829, 551)
+
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D30"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("17_vh1sw")
+
+[node name="Marker2D31" type="Marker2D" parent="spaces"]
+position = Vector2(915, 541)
+
+[node name="botRightsc" type="Sprite2D" parent="spaces/Marker2D31"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("16_v2g8y")
+
+[node name="Marker2D32" type="Marker2D" parent="spaces"]
+position = Vector2(960, 497)
+
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D32"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("17_vh1sw")
+
+[node name="Marker2D33" type="Marker2D" parent="spaces"]
+position = Vector2(888, 479)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D33"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("16_a006q")
+
+[node name="Marker2D34" type="Marker2D" parent="spaces"]
+position = Vector2(809, 446)
+
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D34"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("17_vh1sw")
+
+[node name="Marker2D35" type="Marker2D" parent="spaces"]
+position = Vector2(734, 412)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D35"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("16_a006q")
+
+[node name="Marker2D36" type="Marker2D" parent="spaces"]
+position = Vector2(662, 372)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D36"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("16_a006q")
+
+[node name="Marker2D37" type="Marker2D" parent="spaces"]
+position = Vector2(531, 315)
+
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D37"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("17_vh1sw")
+
+[node name="Marker2D38" type="Marker2D" parent="spaces"]
+position = Vector2(445, 272)
+
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D38"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("17_vh1sw")
+
+[node name="Marker2D39" type="Marker2D" parent="spaces"]
+position = Vector2(368, 246)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D39"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("16_a006q")
+
+[node name="Marker2D40" type="Marker2D" parent="spaces"]
+position = Vector2(294, 208)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D40"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("16_a006q")
+
+[node name="Marker2D41" type="Marker2D" parent="spaces"]
+position = Vector2(217, 187)
+
+[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D41"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("16_a006q")
+
+[node name="Marker2D42" type="Marker2D" parent="spaces"]
+position = Vector2(151, 144)
+
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D42"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("17_vh1sw")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(247, 323)
+offset = Vector2(320, 0)
 
 [node name="player1" type="CharacterBody2D" parent="."]
 z_index = 1
 position = Vector2(747, 338)
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.1, 0.1)
 script = ExtResource("2_etkhv")
 
 [node name="Sprite2D" type="Sprite2D" parent="player1"]
-texture = ExtResource("1_6tusj")
+texture = ExtResource("19_bwuok")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player1"]
 shape = SubResource("RectangleShape2D_dd3ac")
 
 [node name="player2" type="CharacterBody2D" parent="."]
+visible = false
 z_index = 1
 position = Vector2(64, 285)
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.1, 0.1)
 script = ExtResource("2_etkhv")
 
 [node name="Sprite2D" type="Sprite2D" parent="player2"]
-texture = ExtResource("1_6tusj")
+texture = ExtResource("20_epi1k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player2"]
 shape = SubResource("RectangleShape2D_dd3ac")
 
 [node name="player3" type="CharacterBody2D" parent="."]
+visible = false
 z_index = 1
 position = Vector2(64, 285)
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.1, 0.1)
 script = ExtResource("2_etkhv")
 
 [node name="Sprite2D" type="Sprite2D" parent="player3"]
-texture = ExtResource("1_6tusj")
+texture = ExtResource("21_56lhf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player3"]
 shape = SubResource("RectangleShape2D_dd3ac")
 
 [node name="player4" type="CharacterBody2D" parent="."]
+visible = false
 z_index = 1
 position = Vector2(64, 285)
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.1, 0.1)
 script = ExtResource("2_etkhv")
 
 [node name="Sprite2D" type="Sprite2D" parent="player4"]
-texture = ExtResource("1_6tusj")
+texture = ExtResource("22_mmax3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player4"]
 shape = SubResource("RectangleShape2D_dd3ac")

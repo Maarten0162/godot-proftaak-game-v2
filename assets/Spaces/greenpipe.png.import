@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5wan21ie46oj"
-path="res://.godot/imported/bord.png-33623581bfa88b3d01c6280541986ee5.ctex"
+uid="uid://bh0oghc7f3r32"
+path="res://.godot/imported/greenpipe.png-e0938db5f053113325bb1b0fed570cde.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bord.png"
-dest_files=["res://.godot/imported/bord.png-33623581bfa88b3d01c6280541986ee5.ctex"]
+source_file="res://assets/Spaces/greenpipe.png"
+dest_files=["res://.godot/imported/greenpipe.png-e0938db5f053113325bb1b0fed570cde.ctex"]
 
 [params]
 
