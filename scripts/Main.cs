@@ -75,7 +75,7 @@ public partial class Main : Node2D
 		dobbelSprite = GetNode<AnimatedSprite2D>("dobbelSprite");
 
 		dobbelSprite.Play("0");
-	
+
 		TurnLoop();
 	}
 
@@ -322,12 +322,12 @@ public partial class Main : Node2D
 		GD.Print("GEEN BUTTON GEPRESSED, ERROR ERROR ERROR");
 		return 0;
 	}
-	private  async void TurnLoop()
+	private async void TurnLoop()
 	{
-		
+
 		while (true)
 		{
-			
+
 			await Turn();
 
 			GD.Print("All players have completed their turns. Starting a new round...");
@@ -335,13 +335,6 @@ public partial class Main : Node2D
 
 		}
 	}
-	
-
-
-
-
-
-
 
 }
 
