@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://cg37l1h63iykf"]
+[gd_scene load_steps=42 format=3 uid="uid://cg37l1h63iykf"]
 
 [ext_resource type="Script" path="res://scripts/Main.cs" id="1_xihgb"]
 [ext_resource type="Texture2D" uid="uid://dd6rspqonw3vu" path="res://assets/Boards/white_background.png" id="2_0neam"]
@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://meqcks5t4j1q" path="res://assets/Player_icons/Player2.png" id="20_epi1k"]
 [ext_resource type="Texture2D" uid="uid://c0ysmcgfrk0hq" path="res://assets/Player_icons/Player3.png" id="21_56lhf"]
 [ext_resource type="Texture2D" uid="uid://cha53i6v5dxbx" path="res://assets/Player_icons/player4.png" id="22_mmax3"]
+[ext_resource type="PackedScene" uid="uid://c2dkuem4bxt8d" path="res://scenes/HorseRace.tscn" id="25_kb01l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7y5x1"]
 atlas = ExtResource("4_lgpu5")
@@ -185,6 +186,8 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dd3ac"]
+
+[sub_resource type="Curve2D" id="Curve2D_nfkiq"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_xihgb")
@@ -566,3 +569,9 @@ texture = ExtResource("22_mmax3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player4"]
 shape = SubResource("RectangleShape2D_dd3ac")
+
+[node name="HorseRace" parent="." instance=ExtResource("25_kb01l")]
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(247, 323)
+curve = SubResource("Curve2D_nfkiq")
