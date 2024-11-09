@@ -13,11 +13,16 @@ public partial class Main : Node2D
 	private AnimatedSprite2D dobbelSprite;
 
 	int spacesAmount = 42;
-	Player player1;
-	Player player2;
-	Player player3;
-	Player player4;
-
+	public Player player1;
+	public Player player2;
+	public Player player3;
+	public Player player4;
+	
+	[Signal]
+	public delegate void PlayersReadyEventHandler(Player player);
+	
+	
+	
 	Random rnd = new Random();
 
 
@@ -69,7 +74,9 @@ public partial class Main : Node2D
 		player4 = GetNode<Player>("player4");
 		player4.Position = botRight;
 		player4.PositionSpace = 30;
-
+		
+		
+		
 
 
 		dobbelSprite = GetNode<AnimatedSprite2D>("dobbelSprite");
@@ -239,7 +246,7 @@ public partial class Main : Node2D
 		if (player.Currency <= 5)
 		{
 			// Pop up text that says, sorry you dont have enough, better luck next time!!!
-			GetNode<Label>("Control/HorseraceNomoney").Hide();
+			GetNode<Label>("Control/HorseraceNomoney").Show();
 
 		}
 	}
@@ -261,6 +268,7 @@ public partial class Main : Node2D
 			waitingforbuttonpress = true;
 			diceRoll = await AwaitButtonPress(); // ik kies nu betterdice maar dit moet dus eigenlijk gedaan worden via buttons in het menu? idk wrs kunenn we gwn doen A is dice 1, B is dice 2, X is dice 3 met kleine animatie.
 			await StartMovement(player, diceRoll);
+			EmitSignal("PlayersReady", player);
 		}
 
 		else
@@ -335,6 +343,7 @@ public partial class Main : Node2D
 
 		}
 	}
+
 
 }
 
