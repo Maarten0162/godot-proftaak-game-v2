@@ -20,6 +20,7 @@ public partial class Main : Node2D
 	
 	[Signal]
 	public delegate void PlayersReadyEventHandler(Player player);
+
 	
 	
 	

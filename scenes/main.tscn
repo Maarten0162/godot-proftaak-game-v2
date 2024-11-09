@@ -189,6 +189,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dd3ac"]
 
 [sub_resource type="Curve2D" id="Curve2D_nfkiq"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -61, -239, 0, 0, 0, 0, 25, -237, 0, 0, 0, 0, 106, -235, 0, 0, 0, 0, 197, -237, 0, 0, 0, 0, 268, -241, 0, 0, 0, 0, 353, -237, 0, 0, 0, 0, 430, -233, 0, 0, 0, 0, 514, -239, 0, 0, 0, 0, 581, -230, 0, 0, 0, 0, 676, -231, 0, 0, 0, 0, 714, -174, 0, 0, 0, 0, 626, -141, 0, 0, 0, 0, 564, -115, 0, 0, 0, 0, 482, -92, 0, 0, 0, 0, 415, -51, 0, 0, 0, 0, 303, -20, 0, 0, 0, 0, 198, 40, 0, 0, 0, 0, 113, 76, 0, 0, 0, 0, 47, 107, 0, 0, 0, 0, -26, 128, 0, 0, 0, 0, -110, 166, 0, 0, 0, 0, -68, 219, 0, 0, 0, 0, 20, 220, 0, 0, 0, 0, 91, 222, 0, 0, 0, 0, 172, 226, 0, 0, 0, 0, 269, 214, 0, 0, 0, 0, 340, 220, 0, 0, 0, 0, 424, 229, 0, 0, 0, 0, 498, 223, 0, 0, 0, 0, 583, 231, 0, 0, 0, 0, 666, 217, 0, 0, 0, 0, 716, 176, 0, 0, 0, 0, 640, 157, 0, 0, 0, 0, 563, 125, 0, 0, 0, 0, 486, 88, 0, 0, 0, 0, 413, 50, 0, 0, 0, 0, 284, -8, 0, 0, 0, 0, 197, -52, 0, 0, 0, 0, 121, -78, 0, 0, 0, 0, 47, -115, 0, 0, 0, 0, -32, -137, 0, 0, 0, 0, -95, -180, 0, 0, 0, 0, -61, -239)
+}
+point_count = 43
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_xihgb")
@@ -557,6 +561,10 @@ shape = SubResource("RectangleShape2D_dd3ac")
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(247, 323)
 curve = SubResource("Curve2D_nfkiq")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(-61, -239)
+rotation = 0.0232516
 
 [node name="player1 UI" type="Control" parent="."]
 modulate = Color(0, 0, 0, 1)
