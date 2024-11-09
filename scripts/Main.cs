@@ -20,7 +20,7 @@ public partial class Main : Node2D
 
 	Random rnd = new Random();
 
-	private bool isRolling = false;
+
 	Dice basicdice = new Dice(0, 4);
 	Dice betterdice = new Dice(3, 7);
 	Dice riskydice = new Dice(0, 7);
@@ -30,6 +30,8 @@ public partial class Main : Node2D
 	int diceRoll;
 	Vector2[] SpaceCoords = new Vector2[42];
 	private (Node2D Position, string Name)[] spacesInfo;
+
+	bool waitingforbuttonpress = true;
 
 	public override void _Ready()
 	{
@@ -74,56 +76,23 @@ public partial class Main : Node2D
 
 		dobbelSprite.Play("0");
 
-
+		StartTurnLoopAsync();
 	}
 
-	public override async void _Process(double delta)
-	{	if(Input.IsActionJustPressed("test1"))
+	public override void _Process(double delta)
 	{
-		diceRoll = negdice.diceroll();
-		updateDobbelSprite(diceRoll);
-			GD.Print("Dice roll is = " + diceRoll);
-			await StartMovement(player1, diceRoll);
-	}
-	if(Input.IsActionJustPressed("test2"))
-	{
-		diceRoll = betterdice.diceroll();
-		updateDobbelSprite(diceRoll);
-			GD.Print("Dice roll is = " + diceRoll);
-			await StartMovement(player1, diceRoll);
-	}
-	if(Input.IsActionJustPressed("test3"))
-	{
-		diceRoll = riskydice.diceroll();
-		updateDobbelSprite(diceRoll);
-			GD.Print("Dice roll is = " + diceRoll);
-			await StartMovement(player1, diceRoll);
-	}
-	if(Input.IsActionJustPressed("test4"))
-	{
-		diceRoll = turbodice.diceroll();
-		updateDobbelSprite(diceRoll);
-			GD.Print("Dice roll is = " + diceRoll);
-			await StartMovement(player1, diceRoll);
-	}
-	if(Input.IsActionJustPressed("1"))
-	{
-		diceRoll = onedice.diceroll();
-		updateDobbelSprite(diceRoll);
-			GD.Print("Dice roll is = " + diceRoll);
-			await StartMovement(player1, diceRoll);
-	}
+
 
 	}
 	async Task StartMovement(Player player, int diceRoll)
 	{
 		if (diceRoll >= 0)
 		{
-			await Movement(player1, diceRoll);
+			await Movement(player, diceRoll);
 		}
 		else
 		{
-			await NegMovement(player1, diceRoll);
+			await NegMovement(player, diceRoll);
 		}
 	}
 	void updateDobbelSprite(int inputDiceRoll)
@@ -154,7 +123,7 @@ public partial class Main : Node2D
 	async Task NegMovement(Player player, int diceRoll)
 	{
 		for (int i = 0; i > diceRoll; i--)
-		{	
+		{
 			player.PositionSpace = (player.PositionSpace - 1 + spacesInfo.Length) % spacesInfo.Length; //dit zorgt voor de wrap around, dat hij door kan als hij bij het aan het einde aankomt.
 			player.Position = SpaceCoords[player.PositionSpace];
 			await ToSignal(GetTree().CreateTimer(0.4), "timeout");
@@ -274,22 +243,102 @@ public partial class Main : Node2D
 
 		}
 	}
-	void Turn_order_Test()
+	async Task Turn_order_Test()
 	{
-		Turn_Test(player1);
-		Turn_Test(player2);
-		Turn_Test(player3);
-		Turn_Test(player4);
+
+		await Turn_Test(player1);
+		await Turn_Test(player2);
+		await Turn_Test(player3);
+		await Turn_Test(player4);
+
 	}
-	async void Turn_Test(Player player)
+	async Task Turn_Test(Player player)
 	{
-		if(player.SkipTurn != true) // dit checkt of de speler zen beurt moet overslaan
+		GD.Print(player.Name + " Its your turn!");
+		if (player.SkipTurn != true) // dit checkt of de speler zen beurt moet overslaan
 		{
 			//choose wich dice, hiervoor hebben we de shop mechanic + een shop menu nodig
-			diceRoll = betterdice.diceroll(); // ik kies nu betterdice maar dit moet dus eigenlijk gedaan worden via buttons in het menu? idk wrs kunenn we gwn doen A is dice 1, B is dice 2, X is dice 3 met kleine animatie.
-			await StartMovement(player, diceRoll); // 
+			waitingforbuttonpress = true;
+			diceRoll = await AwaitButtonPress(); // ik kies nu betterdice maar dit moet dus eigenlijk gedaan worden via buttons in het menu? idk wrs kunenn we gwn doen A is dice 1, B is dice 2, X is dice 3 met kleine animatie.
+			await StartMovement(player, diceRoll);
 		}
-		else player.SkipTurn = false; // dit zorgt ervoor dat next turn deze speler wel dingen mag doen
+
+		else
+		{
+			player.SkipTurn = false;// dit zorgt ervoor dat next turn deze speler wel dingen mag doen
+			GD.Print(player.Name + " Had to skip his turn!");
+		}
+	}
+	async Task<int> AwaitButtonPress()
+	{
+		while (waitingforbuttonpress)
+		{
+
+			if (Input.IsActionJustPressed("test1"))
+			{
+				diceRoll = negdice.diceroll();
+				updateDobbelSprite(diceRoll);
+				GD.Print("Dice roll is = " + diceRoll);
+				waitingforbuttonpress = false;
+				return diceRoll;
+			}
+			else if (Input.IsActionJustPressed("test2"))
+			{
+				diceRoll = betterdice.diceroll();
+				updateDobbelSprite(diceRoll);
+				GD.Print("Dice roll is = " + diceRoll);
+				waitingforbuttonpress = false;
+				return diceRoll;
+
+			}
+			else if (Input.IsActionJustPressed("test3"))
+			{
+				diceRoll = riskydice.diceroll();
+				updateDobbelSprite(diceRoll);
+				GD.Print("Dice roll is = " + diceRoll);
+				waitingforbuttonpress = false;
+				return diceRoll;
+
+			}
+			else if (Input.IsActionJustPressed("test4"))
+			{
+				diceRoll = turbodice.diceroll();
+				updateDobbelSprite(diceRoll);
+				GD.Print("Dice roll is = " + diceRoll);
+				waitingforbuttonpress = false;
+				return diceRoll;
+
+			}
+			else if (Input.IsActionJustPressed("1"))
+			{
+				diceRoll = onedice.diceroll();
+				updateDobbelSprite(diceRoll);
+				GD.Print("Dice roll is = " + diceRoll);
+				waitingforbuttonpress = false;
+				return diceRoll;
+			}
+			await ToSignal(GetTree().CreateTimer(0), "timeout");
+		}
+		GD.Print("GEEN BUTTON GEPRESSED, ERROR ERROR ERROR");
+		return 0;
+	}
+	private async Task StartTurnLoop()
+	{
+		// This will loop forever until you manually stop it or set a condition to end the game
+		while (true)
+		{
+			// Start a round of turns for all players
+			await Turn_order_Test();
+
+			GD.Print("All players have completed their turns. Starting a new round...");
+
+
+		}
+	}
+	private async void StartTurnLoopAsync()
+	{
+		// Call the method that contains the turn order logic
+		await StartTurnLoop();
 	}
 
 
