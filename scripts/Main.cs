@@ -78,49 +78,41 @@ public partial class Main : Node2D
 	}
 
 	public override async void _Process(double delta)
+	{	if(Input.IsActionJustPressed("test1"))
 	{
-		if (Input.IsActionPressed("test1") && !isRolling)
-		{
-			isRolling = true;
-			diceRoll = negdice.diceroll();
-		}
-		if (Input.IsActionPressed("test2") && !isRolling)
-		{
-			isRolling = true;
-			diceRoll = betterdice.diceroll();
-		}
-		if (Input.IsActionPressed("test3") && !isRolling)
-		{
-			isRolling = true;
-			diceRoll = riskydice.diceroll();
-		}
-		if (Input.IsActionPressed("test4") && !isRolling)
-		{
-			isRolling = true;
-			diceRoll = turbodice.diceroll();
-		}
-		if (Input.IsActionPressed("1") && !isRolling)
-		{
-			isRolling = true;
-			diceRoll = onedice.diceroll();
-		}
-
-
-		if (Input.IsActionJustReleased("test1") ||
-			Input.IsActionJustReleased("test2") ||
-			Input.IsActionJustReleased("test3") ||
-			Input.IsActionJustReleased("test4") ||
-			Input.IsActionJustReleased("1"))
-		{
-
-			updateDobbelSprite(diceRoll);
+		diceRoll = negdice.diceroll();
+		updateDobbelSprite(diceRoll);
 			GD.Print("Dice roll is = " + diceRoll);
 			await StartMovement(player1, diceRoll);
-			isRolling = false;
-
-		}
-
-
+	}
+	if(Input.IsActionJustPressed("test2"))
+	{
+		diceRoll = betterdice.diceroll();
+		updateDobbelSprite(diceRoll);
+			GD.Print("Dice roll is = " + diceRoll);
+			await StartMovement(player1, diceRoll);
+	}
+	if(Input.IsActionJustPressed("test3"))
+	{
+		diceRoll = riskydice.diceroll();
+		updateDobbelSprite(diceRoll);
+			GD.Print("Dice roll is = " + diceRoll);
+			await StartMovement(player1, diceRoll);
+	}
+	if(Input.IsActionJustPressed("test4"))
+	{
+		diceRoll = turbodice.diceroll();
+		updateDobbelSprite(diceRoll);
+			GD.Print("Dice roll is = " + diceRoll);
+			await StartMovement(player1, diceRoll);
+	}
+	if(Input.IsActionJustPressed("1"))
+	{
+		diceRoll = onedice.diceroll();
+		updateDobbelSprite(diceRoll);
+			GD.Print("Dice roll is = " + diceRoll);
+			await StartMovement(player1, diceRoll);
+	}
 
 	}
 	async Task StartMovement(Player player, int diceRoll)
@@ -169,7 +161,7 @@ public partial class Main : Node2D
 		}
 		Placedetection(spacesInfo[player.PositionSpace].Item2, player);
 		GD.Print(player.PositionSpace + spacesInfo[player.PositionSpace].Item2 + " na movement");
-		GD.Print(player + " currency is now: " + player.Currency);
+		GD.Print(player.Name + " currency is now: " + player.Currency);
 
 	}
 	void Placedetection(string typeOfSpace, Player player)
@@ -281,6 +273,23 @@ public partial class Main : Node2D
 			GetNode<Label>("Control/HorseraceNomoney").Hide();
 
 		}
+	}
+	void Turn_order_Test()
+	{
+		Turn_Test(player1);
+		Turn_Test(player2);
+		Turn_Test(player3);
+		Turn_Test(player4);
+	}
+	async void Turn_Test(Player player)
+	{
+		if(player.SkipTurn != true) // dit checkt of de speler zen beurt moet overslaan
+		{
+			//choose wich dice, hiervoor hebben we de shop mechanic + een shop menu nodig
+			diceRoll = betterdice.diceroll(); // ik kies nu betterdice maar dit moet dus eigenlijk gedaan worden via buttons in het menu? idk wrs kunenn we gwn doen A is dice 1, B is dice 2, X is dice 3 met kleine animatie.
+			await StartMovement(player, diceRoll); // 
+		}
+		else player.SkipTurn = false; // dit zorgt ervoor dat next turn deze speler wel dingen mag doen
 	}
 
 

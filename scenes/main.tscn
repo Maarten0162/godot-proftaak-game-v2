@@ -197,22 +197,6 @@ position = Vector2(564, 315)
 scale = Vector2(1.46213, 0.857031)
 texture = ExtResource("2_0neam")
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="HorseraceNomoney" type="RichTextLabel" parent="Control"]
-modulate = Color(0, 0, 0, 1)
-z_index = 100
-layout_mode = 0
-offset_left = 471.0
-offset_top = 251.0
-offset_right = 614.0
-offset_bottom = 376.0
-text = "Sorry makker, te weinig geld. volgende keer meer geluk!"
-
 [node name="dobbelSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(535, 188)
 scale = Vector2(0.576429, 0.54454)
@@ -521,7 +505,7 @@ offset = Vector2(320, 0)
 
 [node name="player1" type="CharacterBody2D" parent="."]
 z_index = 1
-position = Vector2(747, 338)
+position = Vector2(34.0001, 32)
 scale = Vector2(0.1, 0.1)
 script = ExtResource("2_etkhv")
 
@@ -532,9 +516,8 @@ texture = ExtResource("19_bwuok")
 shape = SubResource("RectangleShape2D_dd3ac")
 
 [node name="player2" type="CharacterBody2D" parent="."]
-visible = false
 z_index = 1
-position = Vector2(64, 285)
+position = Vector2(34, 90)
 scale = Vector2(0.1, 0.1)
 script = ExtResource("2_etkhv")
 
@@ -545,9 +528,8 @@ texture = ExtResource("20_epi1k")
 shape = SubResource("RectangleShape2D_dd3ac")
 
 [node name="player3" type="CharacterBody2D" parent="."]
-visible = false
 z_index = 1
-position = Vector2(64, 285)
+position = Vector2(32, 150)
 scale = Vector2(0.1, 0.1)
 script = ExtResource("2_etkhv")
 
@@ -558,9 +540,8 @@ texture = ExtResource("21_56lhf")
 shape = SubResource("RectangleShape2D_dd3ac")
 
 [node name="player4" type="CharacterBody2D" parent="."]
-visible = false
 z_index = 1
-position = Vector2(64, 285)
+position = Vector2(32, 209)
 scale = Vector2(0.1, 0.1)
 script = ExtResource("2_etkhv")
 
