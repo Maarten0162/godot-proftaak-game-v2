@@ -75,8 +75,8 @@ public partial class Main : Node2D
 		dobbelSprite = GetNode<AnimatedSprite2D>("dobbelSprite");
 
 		dobbelSprite.Play("0");
-
-		StartTurnLoopAsync();
+	
+		TurnLoop();
 	}
 
 	public override void _Process(double delta)
@@ -243,7 +243,7 @@ public partial class Main : Node2D
 
 		}
 	}
-	async Task Turn_order_Test()
+	async Task Turn()
 	{
 
 		await Turn_Test(player1);
@@ -322,25 +322,20 @@ public partial class Main : Node2D
 		GD.Print("GEEN BUTTON GEPRESSED, ERROR ERROR ERROR");
 		return 0;
 	}
-	private async Task StartTurnLoop()
+	private  async void TurnLoop()
 	{
-		// This will loop forever until you manually stop it or set a condition to end the game
+		
 		while (true)
 		{
-			// Start a round of turns for all players
-			await Turn_order_Test();
+			
+			await Turn();
 
 			GD.Print("All players have completed their turns. Starting a new round...");
 
 
 		}
 	}
-	private async void StartTurnLoopAsync()
-	{
-		// Call the method that contains the turn order logic
-		await StartTurnLoop();
-	}
-
+	
 
 
 
