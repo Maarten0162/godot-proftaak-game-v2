@@ -113,9 +113,7 @@ public partial class Main : Node2D
 			player.Position = SpaceCoords[player.PositionSpace];
 			await ToSignal(GetTree().CreateTimer(0.4), "timeout");
 		}
-		Placedetection(spacesInfo[player.PositionSpace].Item2, player);
-		GD.Print(player.PositionSpace + spacesInfo[player.PositionSpace].Item2 + " na movement");
-		GD.Print(player.Name + " currency is now: " + player.Currency);
+
 
 	}
 	async Task NegMovement(Player player, int diceRoll)
@@ -126,9 +124,7 @@ public partial class Main : Node2D
 			player.Position = SpaceCoords[player.PositionSpace];
 			await ToSignal(GetTree().CreateTimer(0.4), "timeout");
 		}
-		Placedetection(spacesInfo[player.PositionSpace].Item2, player);
-		GD.Print(player.PositionSpace + spacesInfo[player.PositionSpace].Item2 + " na movement");
-		GD.Print(player.Name + " currency is now: " + player.Currency);
+
 
 	}
 	void Placedetection(string typeOfSpace, Player player)
@@ -160,7 +156,7 @@ public partial class Main : Node2D
 			}
 			else BottomRightShortcut(player);
 		}
-		else if (typeOfSpace == "robSpace")
+		else if (typeOfSpace == "getRobbedSpace")
 		{
 			int robbedAmount = Robbery(player);
 			if (robbedAmount > player.Currency)
@@ -175,7 +171,7 @@ public partial class Main : Node2D
 			SkipNextTurn(player);
 			GD.Print("You just got knocked out! you have to skip a turn");
 		}
-		else if (typeOfSpace == "getRobbedSpace")
+		else if (typeOfSpace == "robSpace")
 		{
 			int robbedAmount = RobSomeone(player);
 			GD.Print("You just robbed someone! you gained " + robbedAmount + " Pounds!");
@@ -203,7 +199,13 @@ public partial class Main : Node2D
 			waitingforbuttonpress = true;
 			diceRoll = await AwaitButtonPress(); // ik kies nu betterdice maar dit moet dus eigenlijk gedaan worden via buttons in het menu? idk wrs kunenn we gwn doen A is dice 1, B is dice 2, X is dice 3 met kleine animatie.
 			await StartMovement(player, diceRoll);
+			if(diceRoll != 0)
+		{		// zorgt ervoor dat als iemand 0  gooit de space niet nog een keer geactivate word, dat willen we niet.
+			Placedetection(spacesInfo[player.PositionSpace].Item2, player);
+		}
 			EmitSignal("PlayersReady", player);
+					GD.Print(player.PositionSpace + spacesInfo[player.PositionSpace].Item2 + " na movement");
+					GD.Print(player.Name + " currency is now: " + player.Currency);
 		}
 
 		else
