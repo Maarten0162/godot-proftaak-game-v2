@@ -106,11 +106,12 @@ public partial class Main : Node2D
 
 		for (int i = 0; i < diceRoll && ContinueLoop; i++)
 		{
-			if(player.HasCap) //checkt of current speler de cap heeft
+			
+						if(player.HasCap) //checkt of current speler de cap heeft
 			{ GD.Print("in playerhascap check");
 				for(int x = 0; x < Playerlist.Length; x++) // cycled door elke speler heen
 				{
-					if(player.PositionSpace + 2 == Playerlist[x].PositionSpace && Playerlist[x] != player) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler
+					if(player.PositionSpace + 2 == Playerlist[x].PositionSpace && Playerlist[x] != player) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
 					{						
 						RazorCapAttack(player, Playerlist[x]);
 
@@ -121,6 +122,7 @@ public partial class Main : Node2D
 			player.PositionSpace = (player.PositionSpace + 1) % spacesInfo.Length;
 			
 			player.Position = spacesInfo[player.PositionSpace].Space.Position;
+
 			await ToSignal(GetTree().CreateTimer(0.4), "timeout");
 		}
 
@@ -399,10 +401,11 @@ public partial class Main : Node2D
 	}
 
 	void RazorCapAttack(Player attacker, Player victim)
-	{	GD.Print("in razorcapattack");
+	{	
 		int attackdamage = rnd.Next(40, 61);
 		victim.Health -= attackdamage;
 		attacker.HasCap = false;
+		GD.Print(attacker.Name + " hit " + victim.Name + " for " + attackdamage + ". " + victim.Name + " has " + victim.Health + " health remaining");
 	}
 	void SpawnRazorCap()
 	{
