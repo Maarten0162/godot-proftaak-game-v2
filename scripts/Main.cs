@@ -16,8 +16,10 @@ public partial class Main : Node2D
 	public Player player1;
 	public Player player2;
 	public Player player3;
-	public Player player4;
-
+	public Player player4;	
+	Player [] Playerlist;
+	
+	
 	[Signal]
 	public delegate void PlayersReadyEventHandler(Player player);
 
@@ -37,6 +39,8 @@ public partial class Main : Node2D
 	private (Node2D Space, string Name, string OriginalName)[] spacesInfo;
 
 	bool waitingforbuttonpress = true;
+	bool ContinueLoop = true;
+	
 
 	public override void _Ready()
 	{
@@ -69,7 +73,7 @@ public partial class Main : Node2D
 		player4.Position = botRight;
 		player4.PositionSpace = 30;
 
-
+			Playerlist = new Player[4] {player1, player2, player3, player4};
 
 
 
@@ -87,7 +91,7 @@ public partial class Main : Node2D
 	}
 	//movement
 	async Task StartMovement(Player player, int diceRoll)
-	{
+	{	
 		if (diceRoll >= 0)
 		{
 			await Movement(player, diceRoll);
@@ -98,16 +102,29 @@ public partial class Main : Node2D
 		}
 	}
 	async Task Movement(Player player, int diceRoll)
-	{
+	{	
 
-		for (int i = 0; i < diceRoll; i++)
+		for (int i = 0; i < diceRoll && ContinueLoop; i++)
 		{
+			if(player.HasCap) //checkt of current speler de cap heeft
+			{ GD.Print("in playerhascap check");
+				for(int x = 0; x < Playerlist.Length; x++) // cycled door elke speler heen
+				{
+					if(player.PositionSpace + 2 == Playerlist[x].PositionSpace && Playerlist[x] != player) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler
+					{						
+						RazorCapAttack(player, Playerlist[x]);
+
+						ContinueLoop = false;
+					}
+				}
+			}
 			player.PositionSpace = (player.PositionSpace + 1) % spacesInfo.Length;
+			
 			player.Position = spacesInfo[player.PositionSpace].Space.Position;
 			await ToSignal(GetTree().CreateTimer(0.4), "timeout");
 		}
 
-
+	ContinueLoop = true;
 	}
 	async Task NegMovement(Player player, int diceRoll)
 	{
@@ -210,7 +227,7 @@ public partial class Main : Node2D
 				await Placedetection(spacesInfo[player.PositionSpace].Name, player);
 			}
 			EmitSignal("PlayersReady", player);
-			GD.Print(player.PositionSpace + " staat op " +  spacesInfo[player.PositionSpace].Name + " na " + diceRoll + " te hebben gegooid.");
+			GD.Print(player.Name + " staat op " +  spacesInfo[player.PositionSpace].Name + " na " + diceRoll + " te hebben gegooid.");
 
 		}
 
@@ -381,8 +398,8 @@ public partial class Main : Node2D
 		}
 	}
 
-	void CapAttack(Player attacker, Player victim)
-	{
+	void RazorCapAttack(Player attacker, Player victim)
+	{	GD.Print("in razorcapattack");
 		int attackdamage = rnd.Next(40, 61);
 		victim.Health -= attackdamage;
 		attacker.HasCap = false;
@@ -391,11 +408,11 @@ public partial class Main : Node2D
 	{
 
 		int rndRazorCapSpace = rnd.Next(0, 42);
-		Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{rndRazorCapSpace + 1}"); // het is + 1 omdat de markers 1 voorop lopen met de spaces tellen dan we in de index hebben staan
+		Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{2 + 1}"); // het is + 1 omdat de markers 1 voorop lopen met de spaces tellen dan we in de index hebben staan
 
 		var sprite = markerNode.GetChild<Sprite2D>(0);
 		sprite.Texture = GD.Load<Texture2D>("res://assets/Spaces/RazorCap_Space.png");
-		spacesInfo[rndRazorCapSpace].Name = "Razorcap_Space";
+		spacesInfo[2].Name = "Razorcap_Space";
 		GD.Print("razorcap ligt op vak " + rndRazorCapSpace);
 
 	}
