@@ -29,8 +29,8 @@ public partial class UI : Control
 
 	void UpdateCoinCount(Player player)
 	{	
-		GD.Print("probeer player 1 currency te printen");
-				 coincount = GetNode<Label>($"CoinCount{player.Name}");
+
+		coincount = GetNode<Label>($"CoinCount{player.Name}");
 		coincount.Text = player.Currency.ToString();
 	}
 	

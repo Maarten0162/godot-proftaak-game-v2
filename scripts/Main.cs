@@ -9,7 +9,7 @@ using System.Xml;
 
 public partial class Main : Node2D
 {
-
+	private int TurnCount;
 	private AnimatedSprite2D dobbelSprite;
 
 	int spacesAmount = 42;
@@ -35,19 +35,19 @@ public partial class Main : Node2D
 	Dice onedice = new Dice(1, 2);
 	int diceRoll;
 	Vector2[] SpaceCoords = new Vector2[42];
-	private (Node2D Position, string Name)[] spacesInfo;
+	private (Node2D Position, string Name, string OriginalName)[] spacesInfo;
 
 	bool waitingforbuttonpress = true;
 
 	public override void _Ready()
 	{
-		spacesInfo = new (Node2D, string)[spacesAmount];
+		spacesInfo = new (Node2D, string, string)[spacesAmount];
 		for (int i = 1; i <= spacesAmount; i++)
 		{
 			Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{i}");
 
 			var sprite = markerNode.GetChild<Sprite2D>(0);
-			spacesInfo[i - 1] = (markerNode, sprite.Name);
+			spacesInfo[i - 1] = (markerNode, sprite.Name, sprite.Name);
 			GD.Print("plek " + i + " is gevuld en de kleur is" + sprite.Name);
 
 		}
@@ -176,7 +176,14 @@ public partial class Main : Node2D
 			int robbedAmount = RobSomeone(player);
 			GD.Print("You just robbed someone! you gained " + robbedAmount + " Pounds!");
 		}
-
+		else if (typeOfSpace == "RazorcapSpace")
+		{
+			if (player.Currency >= 50)
+			{
+				RazorcapPurchase(player);
+			}
+			else GD.Print("sorry " + player.Name + " you don't have enough pounds.");
+		}
 
 	}
 
@@ -188,6 +195,12 @@ public partial class Main : Node2D
 		await Turn_Test(player2);
 		await Turn_Test(player3);
 		await Turn_Test(player4);
+		TurnCount++;
+		if (TurnCount % 5 == 0 || TurnCount == 1)
+		{
+			SpawnRazorCap();
+		}
+		GD.Print("einde van turn " + TurnCount + ". " + (TurnCount + 1) + " begint nu!");
 
 	}
 	async Task Turn_Test(Player player)
@@ -196,16 +209,16 @@ public partial class Main : Node2D
 		if (player.SkipTurn != true) // dit checkt of de speler zen beurt moet overslaan
 		{
 			//choose wich dice, hiervoor hebben we de shop mechanic + een shop menu nodig
-			waitingforbuttonpress = true;
+
 			diceRoll = await AwaitButtonPress(); // ik kies nu betterdice maar dit moet dus eigenlijk gedaan worden via buttons in het menu? idk wrs kunenn we gwn doen A is dice 1, B is dice 2, X is dice 3 met kleine animatie.
 			await StartMovement(player, diceRoll);
-			if(diceRoll != 0)
-		{		// zorgt ervoor dat als iemand 0  gooit de space niet nog een keer geactivate word, dat willen we niet.
-			Placedetection(spacesInfo[player.PositionSpace].Item2, player);
-		}
+			if (diceRoll != 0)
+			{       // zorgt ervoor dat als iemand 0  gooit de space niet nog een keer geactivate word, dat willen we niet.
+				Placedetection(spacesInfo[player.PositionSpace].Name, player);
+			}
 			EmitSignal("PlayersReady", player);
-					GD.Print(player.PositionSpace + spacesInfo[player.PositionSpace].Item2 + " na movement");
-					GD.Print(player.Name + " currency is now: " + player.Currency);
+			GD.Print(player.PositionSpace + spacesInfo[player.PositionSpace].Name + " na movement");
+			GD.Print(player.Name + " currency is now: " + player.Currency);
 		}
 
 		else
@@ -216,6 +229,7 @@ public partial class Main : Node2D
 	}
 	async Task<int> AwaitButtonPress()
 	{
+		waitingforbuttonpress = true;
 		while (waitingforbuttonpress)
 		{
 
@@ -275,9 +289,6 @@ public partial class Main : Node2D
 
 			await Turn();
 
-			GD.Print("All players have completed their turns. Starting a new round...");
-
-
 		}
 	}
 
@@ -330,6 +341,28 @@ public partial class Main : Node2D
 		player.PositionSpace = 9;
 	}
 
+	async void RazorcapPurchase(Player player)
+	{
+		bool waitingforbuttonpressRazorcap = true;
+		while (waitingforbuttonpressRazorcap)
+		{
+			if (Input.IsActionJustPressed("y"))
+			{
+				player.Currency -= 50;
+				player.HasCap = true;
+				waitingforbuttonpressRazorcap = false;
+				spacesInfo[player.PositionSpace].Name = spacesInfo[player.PositionSpace].OriginalName;
+			}
+			else if (Input.IsActionJustPressed("n"))
+			{
+				GD.Print("you don't want it? fuck off then");
+				waitingforbuttonpressRazorcap = false;
+			}
+			await ToSignal(GetTree().CreateTimer(0), "timeout");
+		}
+
+
+	}
 	//misc
 	void updateDobbelSprite(int inputDiceRoll)
 	{
@@ -353,11 +386,19 @@ public partial class Main : Node2D
 		}
 	}
 
-void CapAttack(Player attacker, Player victim)
-{	int attackdamage = rnd.Next(40,61);
-	victim.Health -= attackdamage;
-	attacker.HasCap = false;
-}
+	void CapAttack(Player attacker, Player victim)
+	{
+		int attackdamage = rnd.Next(40, 61);
+		victim.Health -= attackdamage;
+		attacker.HasCap = false;
+	}
+	void SpawnRazorCap()
+	{
 
+		int rndRazorCapSpace = rnd.Next(0, 42);
+		spacesInfo[rndRazorCapSpace].Name = "RazorcapSpace";
+		GD.Print("razorcap ligt op vak " + rndRazorCapSpace);
+
+	}
 }
 
