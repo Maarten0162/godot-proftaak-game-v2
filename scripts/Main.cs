@@ -120,7 +120,7 @@ public partial class Main : Node2D
 
 
 	}
-	void Placedetection(string typeOfSpace, Player player)
+	async Task Placedetection(string typeOfSpace, Player player)
 	{
 		if (typeOfSpace == "blueSpace")
 		{
@@ -169,11 +169,11 @@ public partial class Main : Node2D
 			int robbedAmount = RobSomeone(player);
 			GD.Print("You just robbed someone! you gained " + robbedAmount + " Pounds!");
 		}
-		else if (typeOfSpace == "RazorcapSpace")
+		else if (typeOfSpace == "Razorcap_Space")
 		{
 			if (player.Currency >= 50)
 			{
-				RazorcapPurchase(player);
+				await RazorcapPurchase(player);
 			}
 			else GD.Print("sorry " + player.Name + " you don't have enough pounds.");
 		}
@@ -207,11 +207,11 @@ public partial class Main : Node2D
 			await StartMovement(player, diceRoll);
 			if (diceRoll != 0)
 			{       // zorgt ervoor dat als iemand 0  gooit de space niet nog een keer geactivate word, dat willen we niet.
-				Placedetection(spacesInfo[player.PositionSpace].Name, player);
+				await Placedetection(spacesInfo[player.PositionSpace].Name, player);
 			}
 			EmitSignal("PlayersReady", player);
-			GD.Print(player.PositionSpace + spacesInfo[player.PositionSpace].Name + " na movement");
-			GD.Print(player.Name + " currency is now: " + player.Currency);
+			GD.Print(player.PositionSpace + " staat op " +  spacesInfo[player.PositionSpace].Name + " na " + diceRoll + " te hebben gegooid.");
+
 		}
 
 		else
@@ -230,7 +230,7 @@ public partial class Main : Node2D
 			{
 				diceRoll = negdice.diceroll();
 				updateDobbelSprite(diceRoll);
-				GD.Print("Dice roll is = " + diceRoll);
+
 				waitingforbuttonpress = false;
 				return diceRoll;
 			}
@@ -238,7 +238,6 @@ public partial class Main : Node2D
 			{
 				diceRoll = betterdice.diceroll();
 				updateDobbelSprite(diceRoll);
-				GD.Print("Dice roll is = " + diceRoll);
 				waitingforbuttonpress = false;
 				return diceRoll;
 
@@ -247,7 +246,6 @@ public partial class Main : Node2D
 			{
 				diceRoll = riskydice.diceroll();
 				updateDobbelSprite(diceRoll);
-				GD.Print("Dice roll is = " + diceRoll);
 				waitingforbuttonpress = false;
 				return diceRoll;
 
@@ -256,7 +254,6 @@ public partial class Main : Node2D
 			{
 				diceRoll = turbodice.diceroll();
 				updateDobbelSprite(diceRoll);
-				GD.Print("Dice roll is = " + diceRoll);
 				waitingforbuttonpress = false;
 				return diceRoll;
 
@@ -265,7 +262,6 @@ public partial class Main : Node2D
 			{
 				diceRoll = onedice.diceroll();
 				updateDobbelSprite(diceRoll);
-				GD.Print("Dice roll is = " + diceRoll);
 				waitingforbuttonpress = false;
 				return diceRoll;
 			}
@@ -334,7 +330,7 @@ public partial class Main : Node2D
 		player.PositionSpace = 9;
 	}
 
-	async void RazorcapPurchase(Player player)
+	async Task RazorcapPurchase(Player player)
 	{
 		bool waitingforbuttonpressRazorcap = true;
 		while (waitingforbuttonpressRazorcap)
@@ -345,6 +341,11 @@ public partial class Main : Node2D
 				player.HasCap = true;
 				waitingforbuttonpressRazorcap = false;
 				spacesInfo[player.PositionSpace].Name = spacesInfo[player.PositionSpace].OriginalName;
+				Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{player.PositionSpace + 1}");
+				var sprite = markerNode.GetChild<Sprite2D>(0);
+				sprite.Texture = GD.Load<Texture2D>($"res://assets/Spaces/{spacesInfo[player.PositionSpace].OriginalName}.png");
+				GD.Print(player.Name + " just bought the razor cap");
+
 			}
 			else if (Input.IsActionJustPressed("n"))
 			{
@@ -352,6 +353,7 @@ public partial class Main : Node2D
 				waitingforbuttonpressRazorcap = false;
 			}
 			await ToSignal(GetTree().CreateTimer(0), "timeout");
+
 		}
 
 
@@ -389,7 +391,11 @@ public partial class Main : Node2D
 	{
 
 		int rndRazorCapSpace = rnd.Next(0, 42);
-		spacesInfo[rndRazorCapSpace].Name = "RazorcapSpace";
+		Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{2 + 1}"); // het is + 1 omdat de markers 1 voorop lopen met de spaces tellen dan we in de index hebben staan
+
+		var sprite = markerNode.GetChild<Sprite2D>(0);
+		sprite.Texture = GD.Load<Texture2D>("res://assets/Spaces/RazorCap_Space.png");
+		spacesInfo[2].Name = "Razorcap_Space";
 		GD.Print("razorcap ligt op vak " + rndRazorCapSpace);
 
 	}

@@ -6,7 +6,7 @@ public partial class Player : CharacterBody2D
 
 	public Player()
 	{
-		currency = 10;
+		currency = 100;
 		health = 100;
 	}
 
