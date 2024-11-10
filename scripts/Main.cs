@@ -17,13 +17,13 @@ public partial class Main : Node2D
 	public Player player2;
 	public Player player3;
 	public Player player4;
-	
+
 	[Signal]
 	public delegate void PlayersReadyEventHandler(Player player);
 
-	
-	
-	
+
+
+
 	Random rnd = new Random();
 
 
@@ -75,9 +75,9 @@ public partial class Main : Node2D
 		player4 = GetNode<Player>("player4");
 		player4.Position = botRight;
 		player4.PositionSpace = 30;
-		
-		
-		
+
+
+
 
 
 		dobbelSprite = GetNode<AnimatedSprite2D>("dobbelSprite");
@@ -92,6 +92,7 @@ public partial class Main : Node2D
 
 
 	}
+	//movement
 	async Task StartMovement(Player player, int diceRoll)
 	{
 		if (diceRoll >= 0)
@@ -101,17 +102,6 @@ public partial class Main : Node2D
 		else
 		{
 			await NegMovement(player, diceRoll);
-		}
-	}
-	void updateDobbelSprite(int inputDiceRoll)
-	{
-		for (int i = -3; i <= 9; i++)
-		{
-			if (i == inputDiceRoll)
-			{
-				dobbelSprite.Play($"{inputDiceRoll}");
-			}
-
 		}
 	}
 	async Task Movement(Player player, int diceRoll)
@@ -194,63 +184,7 @@ public partial class Main : Node2D
 
 	}
 
-	void BlueSpace(Player player)
-	{
-		player.Currency += 3;
-	}
-	void RedSpace(Player player)
-	{
-		player.Currency -= 3;
-	}
-	int Robbery(Player player)
-	{
-		int lostcurrency = rnd.Next(8, 31);
-		player.Currency -= lostcurrency;
-		player.Health -= 10;
-		return lostcurrency;
-	}
-	int RobSomeone(Player player)
-	{
-		int gainedCurrency = rnd.Next(5, 21);
-		player.Currency += gainedCurrency;
-		return gainedCurrency;
-	}
-
-	void SkipNextTurn(Player player)
-	{
-		player.SkipTurn = true;
-	}
-
-	void TopLeftshortcut(Player player)
-	{
-		player.Position = SpaceCoords[21];
-		player.PositionSpace = 21;
-	}
-	void TopRightshortcut(Player player)
-	{
-		player.Position = SpaceCoords[30];
-		player.PositionSpace = 30;
-	}
-	void BottomLeftShortcut(Player player)
-	{
-		player.Position = SpaceCoords[0];
-		player.PositionSpace = 0;
-	}
-	void BottomRightShortcut(Player player)
-	{
-		player.Position = SpaceCoords[9];
-		player.PositionSpace = 9;
-	}
-
-	void HorseRace(Player player)
-	{
-		if (player.Currency <= 5)
-		{
-			// Pop up text that says, sorry you dont have enough, better luck next time!!!
-			GetNode<Label>("Control/HorseraceNomoney").Show();
-
-		}
-	}
+	//TURNS
 	async Task Turn()
 	{
 
@@ -345,6 +279,83 @@ public partial class Main : Node2D
 		}
 	}
 
+	//EVENTSPACES
+	void BlueSpace(Player player)
+	{
+		player.Currency += 3;
+	}
+	void RedSpace(Player player)
+	{
+		player.Currency -= 3;
+	}
+	int Robbery(Player player)
+	{
+		int lostcurrency = rnd.Next(8, 31);
+		player.Currency -= lostcurrency;
+		player.Health -= 10;
+		return lostcurrency;
+	}
+	int RobSomeone(Player player)
+	{
+		int gainedCurrency = rnd.Next(5, 21);
+		player.Currency += gainedCurrency;
+		return gainedCurrency;
+	}
+
+	void SkipNextTurn(Player player)
+	{
+		player.SkipTurn = true;
+	}
+
+	void TopLeftshortcut(Player player)
+	{
+		player.Position = SpaceCoords[21];
+		player.PositionSpace = 21;
+	}
+	void TopRightshortcut(Player player)
+	{
+		player.Position = SpaceCoords[30];
+		player.PositionSpace = 30;
+	}
+	void BottomLeftShortcut(Player player)
+	{
+		player.Position = SpaceCoords[0];
+		player.PositionSpace = 0;
+	}
+	void BottomRightShortcut(Player player)
+	{
+		player.Position = SpaceCoords[9];
+		player.PositionSpace = 9;
+	}
+
+	//misc
+	void updateDobbelSprite(int inputDiceRoll)
+	{
+		for (int i = -3; i <= 9; i++)
+		{
+			if (i == inputDiceRoll)
+			{
+				dobbelSprite.Play($"{inputDiceRoll}");
+			}
+
+		}
+	}
+
+	void HorseRace(Player player)
+	{
+		if (player.Currency <= 5)
+		{
+			// Pop up text that says, sorry you dont have enough, better luck next time!!!
+			GetNode<Label>("Control/HorseraceNomoney").Show();
+
+		}
+	}
+
+void CapAttack(Player attacker, Player victim)
+{	int attackdamage = rnd.Next(40,61);
+	victim.Health -= attackdamage;
+	attacker.HasCap = false;
+}
 
 }
 

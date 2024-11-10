@@ -67,5 +67,18 @@ public partial class Player : CharacterBody2D
 			skipTurn = value;
 		}
 	}
+		private bool hasCap;
+
+	public bool HasCap
+	{
+		get
+		{
+			return hasCap;
+		}
+		set
+		{
+			hasCap = value;
+		}
+	}
 }
 
