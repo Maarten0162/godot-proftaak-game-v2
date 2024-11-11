@@ -109,9 +109,10 @@ public partial class Main : Node2D
 			
 						if(player.HasCap) //checkt of current speler de cap heeft
 			{ GD.Print("in playerhascap check");
-				for(int x = 0; x < Playerlist.Length; x++) // cycled door elke speler heen
-				{
-					if(player.PositionSpace + 2 == Playerlist[x].PositionSpace && Playerlist[x] != player) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
+				for(int x = 0; x < Playerlist.Length && i !< diceRoll; x++) // cycled door elke speler heen zolang de speler nog dicerolls heeft
+				{	int spaceinfront = (player.PositionSpace + 2) % spacesInfo.Length;
+				
+					if(spaceinfront == Playerlist[x].PositionSpace && Playerlist[x] != player) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
 					{						
 						RazorCapAttack(player, Playerlist[x]);
 
@@ -130,10 +131,21 @@ public partial class Main : Node2D
 	}
 	async Task NegMovement(Player player, int diceRoll)
 	{
-		for (int i = 0; i > diceRoll; i--)
+		for (int i = 0; i > diceRoll && ContinueLoop; i--)
 		{
+
 			player.PositionSpace = (player.PositionSpace - 1 + spacesInfo.Length) % spacesInfo.Length; //dit zorgt voor de wrap around, dat hij door kan als hij bij het aan het einde aankomt.
 			player.Position = spacesInfo[player.PositionSpace].Space.Position;
+					for(int x = 0; x < Playerlist.Length && i == diceRoll; x++) // cycled door elke speler heenzolang de speler nog dicerolls heeft
+				{ 		
+					int spaceBehind = (player.PositionSpace - 1 + spacesInfo.Length) % spacesInfo.Length;
+					if(spaceBehind == Playerlist[x].PositionSpace && Playerlist[x] != player && Playerlist[x].HasCap) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, en de andere speler heeft een cap hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
+					{						
+						RazorCapAttack(player, Playerlist[x]);
+
+						ContinueLoop = false;
+					}
+				}
 			await ToSignal(GetTree().CreateTimer(0.4), "timeout");
 		}
 
@@ -208,8 +220,12 @@ public partial class Main : Node2D
 		await Turn_Test(player3);
 		await Turn_Test(player4);
 		TurnCount++;
+		if(CheckWinCondition()) //functie checkt of alle spelers op 1 na dood zijn, of dat er 15 turns voorbij zijn gegaan.
+		{
+			EndGame();
+		}
 		
-		if (TurnCount == 1)
+		if (TurnCount == 1) //dit zorgt ervoor dat de cap gaat spawnen
 		{ 	bool RunLoop = true;
 			while(RunLoop){
 			for(int i = 0; i < Playerlist.Length; i ++)
@@ -239,7 +255,7 @@ public partial class Main : Node2D
 	async Task Turn_Test(Player player)
 	{		WhatPlayer ++;
 		GD.Print(player.Name + " Its your turn!");
-		if (player.SkipTurn != true) // dit checkt of de speler zen beurt moet overslaan
+		if (player.SkipTurn == false) // dit checkt of de speler zen beurt moet overslaan
 		{	
 			//choose wich dice, hiervoor hebben we de shop mechanic + een shop menu nodig
 
@@ -434,13 +450,33 @@ public partial class Main : Node2D
 	{
 
 		int rndRazorCapSpace = rnd.Next(0, 42);
-		Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{rndRazorCapSpace + 1}"); // het is + 1 omdat de markers 1 voorop lopen met de spaces tellen dan we in de index hebben staan
+		Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{2 + 1}"); // het is + 1 omdat de markers 1 voorop lopen met de spaces tellen dan we in de index hebben staan
 
 		var sprite = markerNode.GetChild<Sprite2D>(0);
 		sprite.Texture = GD.Load<Texture2D>("res://assets/Spaces/RazorCap_Space.png");
-		spacesInfo[rndRazorCapSpace].Name = "Razorcap_Space";
+		spacesInfo[2].Name = "Razorcap_Space";
 		GD.Print("razorcap ligt op vak " + rndRazorCapSpace);
 
+	}
+	
+	bool CheckWinCondition()
+	{	int deadplayer = 0;
+		for(int i = 0; i < Playerlist.Length; i++)
+		{
+			if(Playerlist[i].Health == 0)
+			{
+				deadplayer +=1;
+			}			
+		}
+		if(deadplayer == Playerlist.Length -1 || TurnCount == 15)
+		{
+			return true;
+		}
+		else return false;
+	}
+	void EndGame()
+	{
+		
 	}
 }
 
