@@ -16,12 +16,12 @@ public partial class Main : Node2D
 	public Player player1;
 	public Player player2;
 	public Player player3;
-	public Player player4;	
-	Player [] Playerlist;
-	
-	
+	public Player player4;
+	Player[] Playerlist;
+
+
 	[Signal]
-	public delegate void PlayersReadyEventHandler(Player player);
+	public delegate void updateplayeruiEventHandler(Player player);
 
 
 
@@ -73,7 +73,7 @@ public partial class Main : Node2D
 		player4.Position = botRight;
 		player4.PositionSpace = 30;
 
-			Playerlist = new Player[4] {player1, player2, player3, player4};
+		Playerlist = new Player[4] { player1, player2, player3, player4 };
 
 
 
@@ -91,7 +91,7 @@ public partial class Main : Node2D
 	}
 	//movement
 	async Task StartMovement(Player player, int diceRoll)
-	{	
+	{
 		if (diceRoll >= 0)
 		{
 			await Movement(player, diceRoll);
@@ -102,18 +102,20 @@ public partial class Main : Node2D
 		}
 	}
 	async Task Movement(Player player, int diceRoll)
-	{	
+	{
 
 		for (int i = 0; i < diceRoll && ContinueLoop; i++)
 		{
-			
-						if(player.HasCap) //checkt of current speler de cap heeft
-			{ GD.Print("in playerhascap check");
-				for(int x = 0; x < Playerlist.Length && i !< diceRoll; x++) // cycled door elke speler heen zolang de speler nog dicerolls heeft
-				{	int spaceinfront = (player.PositionSpace + 2) % spacesInfo.Length;
-				
-					if(spaceinfront == Playerlist[x].PositionSpace && Playerlist[x] != player) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
-					{						
+
+			if (player.HasCap) //checkt of current speler de cap heeft
+			{
+				GD.Print("in playerhascap check");
+				for (int x = 0; x < Playerlist.Length && i != diceRoll; x++) // cycled door elke speler heen zolang de speler nog dicerolls heeft
+				{
+					int spaceinfront = (player.PositionSpace + 2) % spacesInfo.Length;
+
+					if (spaceinfront == Playerlist[x].PositionSpace && Playerlist[x] != player) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
+					{	GD.Print("naar razorattack");
 						RazorCapAttack(player, Playerlist[x]);
 
 						ContinueLoop = false;
@@ -121,13 +123,13 @@ public partial class Main : Node2D
 				}
 			}
 			player.PositionSpace = (player.PositionSpace + 1) % spacesInfo.Length;
-			
+
 			player.Position = spacesInfo[player.PositionSpace].Space.Position;
 
 			await ToSignal(GetTree().CreateTimer(0.4), "timeout");
 		}
 
-	ContinueLoop = true;
+		ContinueLoop = true;
 	}
 	async Task NegMovement(Player player, int diceRoll)
 	{
@@ -136,16 +138,16 @@ public partial class Main : Node2D
 
 			player.PositionSpace = (player.PositionSpace - 1 + spacesInfo.Length) % spacesInfo.Length; //dit zorgt voor de wrap around, dat hij door kan als hij bij het aan het einde aankomt.
 			player.Position = spacesInfo[player.PositionSpace].Space.Position;
-					for(int x = 0; x < Playerlist.Length && i == diceRoll; x++) // cycled door elke speler heenzolang de speler nog dicerolls heeft
-				{ 		
-					int spaceBehind = (player.PositionSpace - 1 + spacesInfo.Length) % spacesInfo.Length;
-					if(spaceBehind == Playerlist[x].PositionSpace && Playerlist[x] != player && Playerlist[x].HasCap) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, en de andere speler heeft een cap hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
-					{						
-						RazorCapAttack(player, Playerlist[x]);
+			for (int x = 0; x < Playerlist.Length && i != diceRoll; x++) // cycled door elke speler heenzolang de speler nog dicerolls heeft
+			{
+				int spaceBehind = (player.PositionSpace - 1 + spacesInfo.Length) % spacesInfo.Length;
+				if (spaceBehind == Playerlist[x].PositionSpace && Playerlist[x] != player && Playerlist[x].HasCap) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, en de andere speler heeft een cap hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
+				{
+					RazorCapAttack(player, Playerlist[x]);
 
-						ContinueLoop = false;
-					}
+					ContinueLoop = false;
 				}
+			}
 			await ToSignal(GetTree().CreateTimer(0.4), "timeout");
 		}
 
@@ -214,49 +216,64 @@ public partial class Main : Node2D
 	//TURNS
 	async Task Turn()
 	{
-
-		await Turn_Test(player1);
-		await Turn_Test(player2);
-		await Turn_Test(player3);
-		await Turn_Test(player4);
+		if (player1.Health != 0)
+		{
+			await Turn_Test(player1);
+		}
+		if (player2.Health != 0)
+		{
+			await Turn_Test(player2);
+		}
+		if (player3.Health != 0)
+		{
+			await Turn_Test(player3);
+		}
+		if (player4.Health != 0)
+		{
+			await Turn_Test(player4);
+		}
 		TurnCount++;
-		if(CheckWinCondition()) //functie checkt of alle spelers op 1 na dood zijn, of dat er 15 turns voorbij zijn gegaan.
+		if (CheckWinCondition()) //functie checkt of alle spelers op 1 na dood zijn, of dat er 15 turns voorbij zijn gegaan.
 		{
 			EndGame();
 		}
-		
+
 		if (TurnCount == 1) //dit zorgt ervoor dat de cap gaat spawnen
-		{ 	bool RunLoop = true;
-			while(RunLoop){
-			for(int i = 0; i < Playerlist.Length; i ++)
 		{
-			if(Playerlist[i].HasCap)
+			bool RunLoop = true;
+			while (RunLoop)
 			{
-				RunLoop = false; //checkt of iemand de cap heeft, zoja spawnt de cap niet
+				for (int i = 0; i < Playerlist.Length; i++)
+				{
+					if (Playerlist[i].HasCap)
+					{
+						RunLoop = false; //checkt of iemand de cap heeft, zoja spawnt de cap niet
+					}
+				}
+				for (int i = 0; i < spacesInfo.Length; i++)
+				{
+					if (spacesInfo[i].Name == "Razorcap_Space")
+					{
+						RunLoop = false; //checkt of de map nog te kopen is op de map, zoja spawnt de cap niet
+					}
+				}
+				if (RunLoop)
+				{
+					SpawnRazorCap();
+					RunLoop = false;
+				}
+
 			}
 		}
-		for(int i = 0; i < spacesInfo.Length; i++ )
-		{
-			if(spacesInfo[i].Name == "Razorcap_Space")
-			{
-				RunLoop = false; //checkt of de map nog te kopen is op de map, zoja spawnt de cap niet
-			}
-		}
-		if(RunLoop)
-		{
-			SpawnRazorCap();
-			RunLoop = false;
-		}
-			
-		}}
 		GD.Print("einde van turn " + TurnCount + ". " + (TurnCount + 1) + " begint nu!");
 		WhatPlayer = 0;
 	}
 	async Task Turn_Test(Player player)
-	{		WhatPlayer ++;
+	{
+		WhatPlayer++;
 		GD.Print(player.Name + " Its your turn!");
 		if (player.SkipTurn == false) // dit checkt of de speler zen beurt moet overslaan
-		{	
+		{
 			//choose wich dice, hiervoor hebben we de shop mechanic + een shop menu nodig
 
 			diceRoll = await AwaitButtonPress(WhatPlayer); // ik kies nu betterdice maar dit moet dus eigenlijk gedaan worden via buttons in het menu? idk wrs kunenn we gwn doen A is dice 1, B is dice 2, X is dice 3 met kleine animatie.
@@ -265,9 +282,12 @@ public partial class Main : Node2D
 			{       // zorgt ervoor dat als iemand 0  gooit de space niet nog een keer geactivate word, dat willen we niet.
 				await Placedetection(spacesInfo[player.PositionSpace].Name, player);
 			}
-			EmitSignal("PlayersReady", player);
-			GD.Print(player.Name + " staat op " +  spacesInfo[player.PositionSpace].Name + " na " + diceRoll + " te hebben gegooid.");
-
+			EmitSignal("updateplayerui", player);
+			if (player.Health > 0)
+			{
+				GD.Print(player.Name + " staat op " + spacesInfo[player.PositionSpace].Name + " na " + diceRoll + " te hebben gegooid.");
+			}
+			
 		}
 
 
@@ -281,35 +301,39 @@ public partial class Main : Node2D
 	{
 		waitingforbuttonpress = true;
 		while (waitingforbuttonpress)
-		{		
- 
-			if (Input.IsActionJustPressed($"A_{PlayerNumber}") ||Input.IsActionJustPressed("2"))
+		{
+
+			if (Input.IsActionJustPressed($"A_{PlayerNumber}") || Input.IsActionJustPressed("2"))
 			{
-				diceRoll = negdice.diceroll();
+				// diceRoll = negdice.diceroll(); 
+				diceRoll = 2;
 				updateDobbelSprite(diceRoll);
 
 				waitingforbuttonpress = false;
 				return diceRoll;
 			}
-			else if (Input.IsActionJustPressed($"B_{PlayerNumber}") ||Input.IsActionJustPressed("3"))
+			else if (Input.IsActionJustPressed($"B_{PlayerNumber}") || Input.IsActionJustPressed("3"))
 			{
-				diceRoll = betterdice.diceroll();
+				// diceRoll = betterdice.diceroll();
+				diceRoll = 3;
 				updateDobbelSprite(diceRoll);
 				waitingforbuttonpress = false;
 				return diceRoll;
 
 			}
-			else if (Input.IsActionJustPressed($"X_{PlayerNumber}") ||Input.IsActionJustPressed("4"))
+			else if (Input.IsActionJustPressed($"X_{PlayerNumber}") || Input.IsActionJustPressed("4"))
 			{
-				diceRoll = riskydice.diceroll();
+				// diceRoll = riskydice.diceroll();
+				diceRoll = -1;
 				updateDobbelSprite(diceRoll);
 				waitingforbuttonpress = false;
 				return diceRoll;
 
 			}
-			else if (Input.IsActionJustPressed($"Y_{PlayerNumber}") ||Input.IsActionJustPressed("5"))
+			else if (Input.IsActionJustPressed($"Y_{PlayerNumber}") || Input.IsActionJustPressed("5"))
 			{
-				diceRoll = turbodice.diceroll();
+				// diceRoll = turbodice.diceroll();
+				diceRoll = -2;
 				updateDobbelSprite(diceRoll);
 				waitingforbuttonpress = false;
 				return diceRoll;
@@ -388,7 +412,7 @@ public partial class Main : Node2D
 	}
 
 	async Task RazorcapPurchase(Player player, int PlayerNumber)
-	{	
+	{
 		bool waitingforbuttonpressRazorcap = true;
 		GD.Print("Do you want to buy the razorcap for 50 pounds? Press left bumper for yes, right bumper for no");
 		while (waitingforbuttonpressRazorcap)
@@ -440,11 +464,13 @@ public partial class Main : Node2D
 	}
 
 	void RazorCapAttack(Player attacker, Player victim)
-	{	
-		int attackdamage = rnd.Next(40, 61);
+	{
+		int attackdamage = 100;
 		victim.Health -= attackdamage;
 		attacker.HasCap = false;
 		GD.Print(attacker.Name + " hit " + victim.Name + " for " + attackdamage + ". " + victim.Name + " has " + victim.Health + " health remaining");
+		EmitSignal("updateplayerui", attacker);
+		EmitSignal("updateplayerui", victim);
 	}
 	void SpawnRazorCap()
 	{
@@ -458,17 +484,18 @@ public partial class Main : Node2D
 		GD.Print("razorcap ligt op vak " + rndRazorCapSpace);
 
 	}
-	
+
 	bool CheckWinCondition()
-	{	int deadplayer = 0;
-		for(int i = 0; i < Playerlist.Length; i++)
+	{
+		int deadplayer = 0;
+		for (int i = 0; i < Playerlist.Length; i++)
 		{
-			if(Playerlist[i].Health == 0)
+			if (Playerlist[i].Health == 0)
 			{
-				deadplayer +=1;
-			}			
+				deadplayer += 1;
+			}
 		}
-		if(deadplayer == Playerlist.Length -1 || TurnCount == 15)
+		if (deadplayer == Playerlist.Length - 1 || TurnCount == 15)
 		{
 			return true;
 		}
@@ -476,7 +503,7 @@ public partial class Main : Node2D
 	}
 	void EndGame()
 	{
-		
+
 	}
 }
 

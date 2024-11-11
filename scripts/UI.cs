@@ -24,7 +24,7 @@ public partial class UI : Control
 	   	GD.Print("coincount niet gevonden");
 	   }
 	   else GD.Print("coincount wel gevonden");
-	   main.PlayersReady += UpdateUI;	
+	   main.updateplayerui += UpdateUI;	
 	   
 	   
 	}
@@ -34,7 +34,9 @@ public partial class UI : Control
 		coincount = GetNode<Label>($"CoinCount{player.Name}");
 		Health = GetNode<Label>($"Health{player.Name}");
 		coincount.Text = player.Currency.ToString();
-		Health.Text = player.Health.ToString();
+			Health.Text = player.Health.ToString();
+		
+		 //hier komt een death UI icon;
 	}
 	
 }

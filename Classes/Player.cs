@@ -38,6 +38,10 @@ public partial class Player : CharacterBody2D
 		set
 		{
 			health = value;
+			if(health < 0)
+			{
+				health = 0;
+			}
 		}
 	}
 
