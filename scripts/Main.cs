@@ -37,11 +37,11 @@ public partial class Main : Node2D
 	int diceRoll;
 
 	private (Node2D Space, string Name, string OriginalName)[] spacesInfo;
-
+	private (string Name, int Price)[] Iteminfo; // hier gaan de namen van alle items in
 	bool waitingforbuttonpress = true;
 	bool ContinueLoop = true;
 	int WhatPlayer;
-public override void _Ready()
+	public override void _Ready()
 	{
 		dobbelgeluid = GetNode<AudioStreamPlayer>("Dobbelgeluid");
 
@@ -133,6 +133,7 @@ public override void _Ready()
 					}
 				}
 			}
+			
 			player.PositionSpace = (player.PositionSpace + 1) % spacesInfo.Length;
 
 			player.Position = spacesInfo[player.PositionSpace].Space.Position;
@@ -242,7 +243,8 @@ public override void _Ready()
 		if (player4.Health != 0)
 		{
 			await Turn_Test(player4);
-		}
+		}		
+		GetTree().ChangeSceneToFile("res://scenes/Menu.tscn");
 		TurnCount++;
 		if (CheckWinCondition()) //functie checkt of alle spelers op 1 na dood zijn, of dat er 15 turns voorbij zijn gegaan.
 		{
@@ -516,4 +518,57 @@ public override void _Ready()
 	{
 
 	}
+	
+	async void ShopAsk(Player player)
+	{ bool RunLoop = true;
+		if(player.Currency > 0)
+		{
+			GD.Print("do you want to shop for items here? Left bumper for YES, right bumper for NO");
+			while(RunLoop)
+			{
+				if(Input.IsActionJustPressed("yes")) //yes i want to shop
+				{
+					GD.Print("Okay, come on in");
+					await GenerateShopInv(player);
+					RunLoop = false;
+				}
+				else if(Input.IsActionJustPressed("no")) //no i dont want to shop
+				{
+					GD.Print("Okay, fuck off then");
+					RunLoop = false;
+				}
+				await ToSignal(GetTree().CreateTimer(0), "timeout");
+			}
+			
+			
+		}
+	}
+	async Task GenerateShopInv(Player player)
+	{ 
+	List<int> randomList = new List<int>();
+	List<String> ShopInv = new List<string>();
+		int rnditem = rnd.Next(0,5);
+		if(!randomList.Contains(rnditem))
+		{
+			randomList.Add(rnditem); 
+		}
+		if(randomList.Count() == 3)
+		{
+		
+		for(int i = 0; i < 3; i++)
+		{
+			ShopInv.Add(Iteminfo[randomList[i]].Name); //pakt 3 random getallen en kiest 3 items.
+		}
+			await Shop(ShopInv);
+		}
+		
+	}
+	async Task Shop(List<string> Shopinv) 
+	{
+		GD.Print("Welcome to the shop, these are my wares: "+ Shopinv[0] + ", " + Shopinv[1] + " ," + Shopinv[2]);
+		
+		
+		
+	}
+
 }
