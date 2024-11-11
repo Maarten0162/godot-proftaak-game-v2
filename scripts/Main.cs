@@ -192,7 +192,7 @@ public partial class Main : Node2D
 		{
 			if (player.Currency >= 50)
 			{
-				await RazorcapPurchase(player);
+				await RazorcapPurchase(player, WhatPlayer);
 			}
 			else GD.Print("sorry " + player.Name + " you don't have enough pounds.");
 		}
@@ -231,6 +231,10 @@ public partial class Main : Node2D
 			EmitSignal("PlayersReady", player);
 			GD.Print(player.Name + " staat op " +  spacesInfo[player.PositionSpace].Name + " na " + diceRoll + " te hebben gegooid.");
 
+		}
+		if(WhatPlayer == 4)
+		{
+			WhatPlayer = 0;
 		}
 
 		else
@@ -349,12 +353,12 @@ public partial class Main : Node2D
 		player.PositionSpace = 9;
 	}
 
-	async Task RazorcapPurchase(Player player)
+	async Task RazorcapPurchase(Player player, int PlayerNumber)
 	{
 		bool waitingforbuttonpressRazorcap = true;
 		while (waitingforbuttonpressRazorcap)
 		{
-			if (Input.IsActionJustPressed("y"))
+			if (Input.IsActionJustPressed($"yes_{PlayerNumber}"))
 			{
 				player.Currency -= 50;
 				player.HasCap = true;
@@ -366,7 +370,7 @@ public partial class Main : Node2D
 				GD.Print(player.Name + " just bought the razor cap");
 
 			}
-			else if (Input.IsActionJustPressed("n"))
+			else if (Input.IsActionJustPressed($"no_{PlayerNumber}"))
 			{
 				GD.Print("you don't want it? fuck off then");
 				waitingforbuttonpressRazorcap = false;
