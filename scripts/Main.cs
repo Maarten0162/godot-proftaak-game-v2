@@ -209,14 +209,21 @@ public partial class Main : Node2D
 		await Turn_Test(player4);
 		TurnCount++;
 		
-		if (TurnCount % 5 == 0 || TurnCount == 1)
+		if (TurnCount == 1)
 		{ 	bool RunLoop = true;
 			while(RunLoop){
 			for(int i = 0; i < Playerlist.Length; i ++)
 		{
 			if(Playerlist[i].HasCap)
 			{
-				RunLoop = false;
+				RunLoop = false; //checkt of iemand de cap heeft, zoja spawnt de cap niet
+			}
+		}
+		for(int i = 0; i < spacesInfo.Length; i++ )
+		{
+			if(spacesInfo[i].Name == "Razorcap_Space")
+			{
+				RunLoop = false; //checkt of de map nog te kopen is op de map, zoja spawnt de cap niet
 			}
 		}
 		if(RunLoop)
