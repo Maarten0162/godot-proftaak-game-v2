@@ -24,37 +24,45 @@ public partial class Main : Node2D
 	public delegate void updateplayeruiEventHandler(Player player);
 
 
-
-
 	Random rnd = new Random();
+	
+	private AudioStreamPlayer dobbelgeluid;
 
-
-	Dice basicdice = new Dice(0, 4);
-	Dice betterdice = new Dice(3, 7);
-	Dice riskydice = new Dice(0, 7);
-	Dice turbodice = new Dice(-3, 10);
-	Dice negdice = new Dice(-5, 0);
-	Dice onedice = new Dice(1, 2);
+	Dice basicdice;
+	Dice betterdice;
+	Dice riskydice;
+	Dice turbodice;
+	Dice negdice;
+	Dice onedice;
 	int diceRoll;
+
 	private (Node2D Space, string Name, string OriginalName)[] spacesInfo;
 
 	bool waitingforbuttonpress = true;
 	bool ContinueLoop = true;
 	int WhatPlayer;
-
-	public override void _Ready()
+public override void _Ready()
 	{
+		dobbelgeluid = GetNode<AudioStreamPlayer>("Dobbelgeluid");
+
+		// Initialiseer de dobbelstenen met het dobbelgeluid
+		basicdice = new Dice(0, 4, dobbelgeluid);
+		betterdice = new Dice(3, 7, dobbelgeluid);
+		riskydice = new Dice(0, 7, dobbelgeluid);
+		turbodice = new Dice(-3, 10, dobbelgeluid);
+		negdice = new Dice(-5, 0, dobbelgeluid);
+		onedice = new Dice(1, 2, dobbelgeluid);
+
 		spacesInfo = new (Node2D, string, string)[spacesAmount];
 		for (int i = 1; i <= spacesAmount; i++)
 		{
 			Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{i}");
-
 			var sprite = markerNode.GetChild<Sprite2D>(0);
 			spacesInfo[i - 1] = (markerNode, sprite.Name, sprite.Name);
 			GD.Print("plek " + i + " is gevuld en de kleur is" + sprite.Name);
-
 		}
 
+		// Initieer de posities van de spelers
 		Vector2 topLeft = spacesInfo[0].Space.Position;
 		Vector2 topRight = spacesInfo[9].Space.Position;
 		Vector2 botLeft = spacesInfo[21].Space.Position;
@@ -63,12 +71,15 @@ public partial class Main : Node2D
 		player1 = GetNode<Player>("player1");
 		player1.Position = topLeft;
 		player1.PositionSpace = 0;
+
 		player2 = GetNode<Player>("player2");
 		player2.Position = topRight;
 		player2.PositionSpace = 9;
+
 		player3 = GetNode<Player>("player3");
 		player3.Position = botLeft;
 		player3.PositionSpace = 21;
+
 		player4 = GetNode<Player>("player4");
 		player4.Position = botRight;
 		player4.PositionSpace = 30;
@@ -78,11 +89,11 @@ public partial class Main : Node2D
 
 
 		dobbelSprite = GetNode<AnimatedSprite2D>("dobbelSprite");
-
 		dobbelSprite.Play("0");
 
 		TurnLoop();
 	}
+
 
 	public override void _Process(double delta)
 	{
@@ -506,4 +517,3 @@ public partial class Main : Node2D
 
 	}
 }
-
