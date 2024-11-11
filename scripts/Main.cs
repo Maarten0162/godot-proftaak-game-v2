@@ -40,7 +40,7 @@ public partial class Main : Node2D
 
 	bool waitingforbuttonpress = true;
 	bool ContinueLoop = true;
-	
+	int WhatPlayer;
 
 	public override void _Ready()
 	{
@@ -216,13 +216,13 @@ public partial class Main : Node2D
 
 	}
 	async Task Turn_Test(Player player)
-	{
+	{		WhatPlayer ++;
 		GD.Print(player.Name + " Its your turn!");
 		if (player.SkipTurn != true) // dit checkt of de speler zen beurt moet overslaan
-		{
+		{	
 			//choose wich dice, hiervoor hebben we de shop mechanic + een shop menu nodig
 
-			diceRoll = await AwaitButtonPress(); // ik kies nu betterdice maar dit moet dus eigenlijk gedaan worden via buttons in het menu? idk wrs kunenn we gwn doen A is dice 1, B is dice 2, X is dice 3 met kleine animatie.
+			diceRoll = await AwaitButtonPress(WhatPlayer); // ik kies nu betterdice maar dit moet dus eigenlijk gedaan worden via buttons in het menu? idk wrs kunenn we gwn doen A is dice 1, B is dice 2, X is dice 3 met kleine animatie.
 			await StartMovement(player, diceRoll);
 			if (diceRoll != 0)
 			{       // zorgt ervoor dat als iemand 0  gooit de space niet nog een keer geactivate word, dat willen we niet.
@@ -239,13 +239,13 @@ public partial class Main : Node2D
 			GD.Print(player.Name + " Had to skip his turn!");
 		}
 	}
-	async Task<int> AwaitButtonPress()
+	async Task<int> AwaitButtonPress(int PlayerNumber)
 	{
 		waitingforbuttonpress = true;
 		while (waitingforbuttonpress)
-		{
-
-			if (Input.IsActionJustPressed("test1"))
+		{		
+ 
+			if (Input.IsActionJustPressed($"A_{PlayerNumber}"))
 			{
 				diceRoll = negdice.diceroll();
 				updateDobbelSprite(diceRoll);
@@ -253,7 +253,7 @@ public partial class Main : Node2D
 				waitingforbuttonpress = false;
 				return diceRoll;
 			}
-			else if (Input.IsActionJustPressed("test2"))
+			else if (Input.IsActionJustPressed($"B_{PlayerNumber}"))
 			{
 				diceRoll = betterdice.diceroll();
 				updateDobbelSprite(diceRoll);
@@ -261,7 +261,7 @@ public partial class Main : Node2D
 				return diceRoll;
 
 			}
-			else if (Input.IsActionJustPressed("test3"))
+			else if (Input.IsActionJustPressed($"X_{PlayerNumber}"))
 			{
 				diceRoll = riskydice.diceroll();
 				updateDobbelSprite(diceRoll);
@@ -269,7 +269,7 @@ public partial class Main : Node2D
 				return diceRoll;
 
 			}
-			else if (Input.IsActionJustPressed("test4"))
+			else if (Input.IsActionJustPressed($"Y_{PlayerNumber}"))
 			{
 				diceRoll = turbodice.diceroll();
 				updateDobbelSprite(diceRoll);
