@@ -1,10 +1,12 @@
 using Godot;
 using System;
+using System.Diagnostics.SymbolStore;
 
 public partial class UI : Control
 {
 	
 	private Label coincount;
+	private Label Health;
 	private Main main;
 	
 	  public override void _Ready()
@@ -22,16 +24,17 @@ public partial class UI : Control
 	   	GD.Print("coincount niet gevonden");
 	   }
 	   else GD.Print("coincount wel gevonden");
-	   main.PlayersReady += UpdateCoinCount;	
+	   main.PlayersReady += UpdateUI;	
 	   
 	   
 	}
 
-	void UpdateCoinCount(Player player)
+	void UpdateUI(Player player)
 	{	
-
 		coincount = GetNode<Label>($"CoinCount{player.Name}");
+		Health = GetNode<Label>($"Health{player.Name}");
 		coincount.Text = player.Currency.ToString();
+		Health.Text = player.Health.ToString();
 	}
 	
 }

@@ -15,15 +15,15 @@
 [ext_resource type="Texture2D" uid="uid://ntnjriij4xb7" path="res://assets/dice/default-dice/Dobbel6.png" id="10_l64x0"]
 [ext_resource type="Texture2D" uid="uid://dyk8ejepe1vww" path="res://assets/dice/default-dice/Dobbel7.png" id="14_3fmk5"]
 [ext_resource type="Texture2D" uid="uid://ccu36fjro5msm" path="res://assets/dice/default-dice/Dobbel8.png" id="15_cv46h"]
-[ext_resource type="Texture2D" uid="uid://dol6hnh1qws33" path="res://assets/Spaces/bluespace.png" id="16_a006q"]
+[ext_resource type="Texture2D" uid="uid://dol6hnh1qws33" path="res://assets/Spaces/blueSpace.png" id="16_a006q"]
 [ext_resource type="Texture2D" uid="uid://bh0oghc7f3r32" path="res://assets/Spaces/greenpipe.png" id="16_v2g8y"]
 [ext_resource type="Texture2D" uid="uid://d1pifwujewrmq" path="res://assets/dice/default-dice/Dobbel9.png" id="16_xc1rm"]
-[ext_resource type="Texture2D" uid="uid://th5esly73wm0" path="res://assets/Spaces/redspace.png" id="17_vh1sw"]
-[ext_resource type="Texture2D" uid="uid://dpcp018yag0ko" path="res://assets/Player_icons/Player1.png" id="19_bwuok"]
+[ext_resource type="Texture2D" uid="uid://th5esly73wm0" path="res://assets/Spaces/redSpace.png" id="17_vh1sw"]
+[ext_resource type="Texture2D" uid="uid://dpcp018yag0ko" path="res://assets/Player1.png" id="19_bwuok"]
 [ext_resource type="Texture2D" uid="uid://breb301qf7jth" path="res://assets/Spaces/Event_Space.png" id="19_srds4"]
-[ext_resource type="Texture2D" uid="uid://meqcks5t4j1q" path="res://assets/Player_icons/Player2.png" id="20_epi1k"]
-[ext_resource type="Texture2D" uid="uid://c0ysmcgfrk0hq" path="res://assets/Player_icons/Player3.png" id="21_56lhf"]
-[ext_resource type="Texture2D" uid="uid://cha53i6v5dxbx" path="res://assets/Player_icons/player4.png" id="22_mmax3"]
+[ext_resource type="Texture2D" uid="uid://meqcks5t4j1q" path="res://assets/Player2.png" id="20_epi1k"]
+[ext_resource type="Texture2D" uid="uid://c0ysmcgfrk0hq" path="res://assets/Player3.png" id="21_56lhf"]
+[ext_resource type="Texture2D" uid="uid://cha53i6v5dxbx" path="res://assets/player4.png" id="22_mmax3"]
 [ext_resource type="PackedScene" path="res://scenes/HorseRace.tscn" id="25_kb01l"]
 [ext_resource type="Script" path="res://scripts/UI.cs" id="26_3o2pn"]
 
@@ -614,3 +614,35 @@ offset_top = 551.0
 offset_right = 1088.0
 offset_bottom = 574.0
 text = "Player 4"
+
+[node name="Healthplayer1" type="Label" parent="player1 UI"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 13.0
+offset_top = 29.0
+offset_right = 53.0
+offset_bottom = 52.0
+
+[node name="Healthplayer2" type="Label" parent="player1 UI"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 1032.0
+offset_top = 25.0
+offset_right = 1072.0
+offset_bottom = 48.0
+
+[node name="Healthplayer3" type="Label" parent="player1 UI"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = -12.0
+offset_top = 588.0
+offset_right = 28.0
+offset_bottom = 611.0
+
+[node name="Healthplayer4" type="Label" parent="player1 UI"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 1032.0
+offset_top = 582.0
+offset_right = 1072.0
+offset_bottom = 605.0

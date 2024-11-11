@@ -208,12 +208,26 @@ public partial class Main : Node2D
 		await Turn_Test(player3);
 		await Turn_Test(player4);
 		TurnCount++;
+		
 		if (TurnCount % 5 == 0 || TurnCount == 1)
+		{ 	bool RunLoop = true;
+			while(RunLoop){
+			for(int i = 0; i < Playerlist.Length; i ++)
+		{
+			if(Playerlist[i].HasCap)
+			{
+				RunLoop = false;
+			}
+		}
+		if(RunLoop)
 		{
 			SpawnRazorCap();
+			RunLoop = false;
 		}
+			
+		}}
 		GD.Print("einde van turn " + TurnCount + ". " + (TurnCount + 1) + " begint nu!");
-
+		WhatPlayer = 0;
 	}
 	async Task Turn_Test(Player player)
 	{		WhatPlayer ++;
@@ -232,14 +246,11 @@ public partial class Main : Node2D
 			GD.Print(player.Name + " staat op " +  spacesInfo[player.PositionSpace].Name + " na " + diceRoll + " te hebben gegooid.");
 
 		}
-		if(WhatPlayer == 4)
-		{
-			WhatPlayer = 0;
-		}
+
 
 		else
 		{
-			player.SkipTurn = false;// dit zorgt ervoor dat next turn deze speler wel dingen mag doen
+			player.SkipTurn = true;// dit zorgt ervoor dat next turn deze speler wel dingen mag doen
 			GD.Print(player.Name + " Had to skip his turn!");
 		}
 	}
@@ -249,7 +260,7 @@ public partial class Main : Node2D
 		while (waitingforbuttonpress)
 		{		
  
-			if (Input.IsActionJustPressed($"A_{PlayerNumber}"))
+			if (Input.IsActionJustPressed($"A_{PlayerNumber}") ||Input.IsActionJustPressed("2"))
 			{
 				diceRoll = negdice.diceroll();
 				updateDobbelSprite(diceRoll);
@@ -257,7 +268,7 @@ public partial class Main : Node2D
 				waitingforbuttonpress = false;
 				return diceRoll;
 			}
-			else if (Input.IsActionJustPressed($"B_{PlayerNumber}"))
+			else if (Input.IsActionJustPressed($"B_{PlayerNumber}") ||Input.IsActionJustPressed("3"))
 			{
 				diceRoll = betterdice.diceroll();
 				updateDobbelSprite(diceRoll);
@@ -265,7 +276,7 @@ public partial class Main : Node2D
 				return diceRoll;
 
 			}
-			else if (Input.IsActionJustPressed($"X_{PlayerNumber}"))
+			else if (Input.IsActionJustPressed($"X_{PlayerNumber}") ||Input.IsActionJustPressed("4"))
 			{
 				diceRoll = riskydice.diceroll();
 				updateDobbelSprite(diceRoll);
@@ -273,7 +284,7 @@ public partial class Main : Node2D
 				return diceRoll;
 
 			}
-			else if (Input.IsActionJustPressed($"Y_{PlayerNumber}"))
+			else if (Input.IsActionJustPressed($"Y_{PlayerNumber}") ||Input.IsActionJustPressed("5"))
 			{
 				diceRoll = turbodice.diceroll();
 				updateDobbelSprite(diceRoll);
@@ -354,8 +365,9 @@ public partial class Main : Node2D
 	}
 
 	async Task RazorcapPurchase(Player player, int PlayerNumber)
-	{
+	{	
 		bool waitingforbuttonpressRazorcap = true;
+		GD.Print("Do you want to buy the razorcap for 50 pounds? Press left bumper for yes, right bumper for no");
 		while (waitingforbuttonpressRazorcap)
 		{
 			if (Input.IsActionJustPressed($"yes_{PlayerNumber}"))
