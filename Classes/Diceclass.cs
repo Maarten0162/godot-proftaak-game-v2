@@ -10,7 +10,7 @@ public class Dice
 	int min;
 	Random rnd = new Random();
 
-private AudioStreamPlayer Dobbelgeluid;
+	private AudioStreamPlayer Dobbelgeluid;
    public Dice(int min, int max, AudioStreamPlayer Dobbelgeluid)
    {
 	this.min = min;
