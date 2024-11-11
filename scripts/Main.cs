@@ -244,7 +244,7 @@ public partial class Main : Node2D
 		{
 			await Turn_Test(player4);
 		}		
-		GetTree().ChangeSceneToFile("res://scenes/Menu.tscn");
+		
 		TurnCount++;
 		if (CheckWinCondition()) //functie checkt of alle spelers op 1 na dood zijn, of dat er 15 turns voorbij zijn gegaan.
 		{
