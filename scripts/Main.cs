@@ -81,7 +81,7 @@ public partial class Main : Node2D
 		player1 = GetNode<Player>("player1");
 		player1.Position = topLeft;
 		player1.PositionSpace = 0;
-
+		
 		player2 = GetNode<Player>("player2");
 		player2.Position = topRight;
 		player2.PositionSpace = 9;
@@ -176,8 +176,8 @@ public partial class Main : Node2D
 
 				}
 			}
-			if (spaceinfront == 3 && hasattacked == false || spaceinfront == 28 && hasattacked == false)
-			{
+			if ((spaceinfront == 6 || spaceinfront == 24) && hasattacked == false)
+			{	GD.Print("Entering ShopAsk check with spaceBehind = ", spaceinfront);
 				bool hasitemspace = false;
 				for (int x = 0; x < 3; x++)
 				{
@@ -200,6 +200,14 @@ public partial class Main : Node2D
 
 				player.Position = spacesInfo[player.PositionSpace].Space.Position;
 			}
+			if(spacesInfo[player.PositionSpace].Name == "Razorcap_Space" && i != diceRoll)
+			{
+				if (player.Currency >= 50)
+			{
+				await RazorcapPurchase(player, WhatPlayer);
+			}
+			else GD.Print("sorry " + player.Name + " you don't have enough pounds.");
+			}
 			await ToSignal(GetTree().CreateTimer(0.4), "timeout");
 		}
 
@@ -209,9 +217,9 @@ public partial class Main : Node2D
 	{
 		bool hasattacked = false;
 		ContinueLoop = true;
-		int spaceBehind = (player.PositionSpace - 1 + spacesInfo.Length) % spacesInfo.Length;
+		
 		for (int i = 0; i > diceRoll && ContinueLoop; i--)
-		{
+		{	int spaceBehind = (player.PositionSpace - 1 + spacesInfo.Length) % spacesInfo.Length;
 
 			for (int x = 0; x < Playerlist.Length; x++) // cycled door elke speler heenzolang de speler nog dicerolls heeft
 			{
@@ -242,9 +250,23 @@ public partial class Main : Node2D
 				}
 			}
 
-			if (spaceBehind == 2 && hasattacked == false || spaceBehind == 27 && hasattacked)
-			{
-				await ShopAsk(player, PlayerNumber);
+			if ((spaceBehind == 5 || spaceBehind == 23) && !hasattacked)
+			{	GD.Print("Entering ShopAsk check with spaceBehind = ", spaceBehind);
+				bool hasitemspace = false;
+				for (int x = 0; x < 3; x++)
+				{
+					switch (player.Inventory[x])
+					{
+						case "0":
+							hasitemspace = true;
+							break;
+
+					}
+				}
+				if (hasitemspace)
+				{
+					await ShopAsk(player, PlayerNumber);
+				}
 			}
 			if (ContinueLoop)
 			{
@@ -252,13 +274,21 @@ public partial class Main : Node2D
 
 				player.Position = spacesInfo[player.PositionSpace].Space.Position;
 			}
+			if(spacesInfo[player.PositionSpace].Name == "Razorcap_Space" && i != diceRoll)
+			{
+				if (player.Currency >= 50)
+			{
+				await RazorcapPurchase(player, WhatPlayer);
+			}
+			else GD.Print("sorry " + player.Name + " you don't have enough pounds.");
+			}
 
 			await ToSignal(GetTree().CreateTimer(0.4), "timeout");
 		}
 
 
 	}
-	async Task Placedetection(string typeOfSpace, Player player)
+	 async Task Placedetection(string typeOfSpace, Player player)
 	{
 		if (typeOfSpace == "blueSpace")
 		{
@@ -307,14 +337,7 @@ public partial class Main : Node2D
 			int robbedAmount = RobSomeone(player);
 			GD.Print("You just robbed someone! you gained " + robbedAmount + " Pounds!");
 		}
-		else if (typeOfSpace == "Razorcap_Space")
-		{
-			if (player.Currency >= 50)
-			{
-				await RazorcapPurchase(player, WhatPlayer);
-			}
-			else GD.Print("sorry " + player.Name + " you don't have enough pounds.");
-		}
+
 
 	}
 
@@ -401,7 +424,7 @@ public partial class Main : Node2D
 
 			if (player.Health > 0)
 			{
-				GD.Print(player.Name + " staat op " + spacesInfo[player.PositionSpace].Name + " na " + diceRoll + " te hebben gegooid.");
+				GD.Print(player.Name + " staat op " + spacesInfo[player.PositionSpace].Name +player.PositionSpace + " na " + diceRoll + " te hebben gegooid.");
 			}
 
 		}
@@ -629,11 +652,11 @@ public partial class Main : Node2D
 				rndRazorCapSpace += 1;
 			}
 		}
-		Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{2 + 1}"); // het is + 1 omdat de markers 1 voorop lopen met de spaces tellen dan we in de index hebben staan
+		Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{6 + 1}"); // het is + 1 omdat de markers 1 voorop lopen met de spaces tellen dan we in de index hebben staan
 
 		var sprite = markerNode.GetChild<Sprite2D>(0);
 		sprite.Texture = GD.Load<Texture2D>("res://assets/Spaces/RazorCap_Space.png");
-		spacesInfo[2].Name = "Razorcap_Space";
+		spacesInfo[6].Name = "Razorcap_Space";
 		GD.Print("razorcap ligt op vak " + rndRazorCapSpace);
 
 	}
