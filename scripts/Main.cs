@@ -36,11 +36,13 @@ public partial class Main : Node2D
 	Dice negdice;
 	Dice onedice;
 	Dice twentydice;
+	Dice tendice;
 	int diceRoll;
 
 	private (Node2D Space, string Name, string OriginalName)[] spacesInfo;
 	private (string Name, int Price)[] Iteminfo; // hier gaan de namen van alle items in.
 	private (string Name, int Price)[] ShopInv;
+	private int[] MiniGames;
 	bool waitingforbuttonpress;
 	bool ContinueLoop;
 	bool useItem;
@@ -58,6 +60,7 @@ public partial class Main : Node2D
 		turbodice = new Dice(-3, 10, dobbelgeluid, 7);
 		negdice = new Dice(-5, 0, dobbelgeluid, 0);
 		onedice = new Dice(1, 2, dobbelgeluid, 0);
+		tendice = new Dice(0, 11, dobbelgeluid, 0);
 		twentydice = new Dice(-20, 21, dobbelgeluid, 0);
 
 		spacesInfo = new (Node2D, string, string)[spacesAmount];
@@ -96,6 +99,13 @@ public partial class Main : Node2D
 
 		Iteminfo = new (string Name, int Price)[15] { ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10) };
 		ShopInv = new (string Name, int Price)[3] { ("test", 10), ("test", 10), ("test", 10) };
+
+		MiniGames = new int[10];
+		for (int i = 0; i < 9; i++)
+		{
+			MiniGames[i] = i;
+		}
+
 		dobbelSprite = GetNode<AnimatedSprite2D>("dobbelSprite");
 		dobbelSprite.Play("0");
 
@@ -329,10 +339,12 @@ public partial class Main : Node2D
 		}
 
 		TurnCount++;
+
 		if (CheckWinCondition()) //functie checkt of alle spelers op 1 na dood zijn, of dat er 15 turns voorbij zijn gegaan.
 		{
 			EndGame();
 		}
+		ChooseMiniGame();
 
 		if (TurnCount >= 0) //dit zorgt ervoor dat de cap gaat spawnen
 		{
@@ -372,11 +384,13 @@ public partial class Main : Node2D
 		{
 			//choose wich dice, hiervoor hebben we de shop mechanic + een shop menu nodig
 
-			// await ChooseUseItem(player, WhatPlayer);
+			string useditem = await ChooseUseItem(player, WhatPlayer);
+			if (useditem != "dice")
+			{
+				diceRoll = await AwaitButtonPress(player, WhatPlayer); // ik kies nu betterdice maar dit moet dus eigenlijk gedaan worden via buttons in het menu? idk wrs kunenn we gwn doen A is dice 1, B is dice 2, X is dice 3 met kleine animatie.
 
-			diceRoll = await AwaitButtonPress(player, WhatPlayer); // ik kies nu betterdice maar dit moet dus eigenlijk gedaan worden via buttons in het menu? idk wrs kunenn we gwn doen A is dice 1, B is dice 2, X is dice 3 met kleine animatie.
-
-			await StartMovement(player, diceRoll, WhatPlayer);
+				await StartMovement(player, diceRoll, WhatPlayer);
+			}
 
 			if (diceRoll != 0)
 			{       // zorgt ervoor dat als iemand 0  gooit de space niet nog een keer geactivate word, dat willen we niet.
@@ -405,7 +419,7 @@ public partial class Main : Node2D
 		while (waitingforbuttonpress)
 		{
 
-			if (Input.IsActionJustPressed($"A_{PlayerNumber}") || Input.IsActionJustPressed("2"))
+			if (Input.IsActionJustPressed($"A_{PlayerNumber}"))
 			{
 				diceRoll = basicdice.diceroll();
 				player.Currency -= basicdice.Price;
@@ -413,7 +427,7 @@ public partial class Main : Node2D
 				waitingforbuttonpress = false;
 				return diceRoll;
 			}
-			else if (Input.IsActionJustPressed($"B_{PlayerNumber}") || Input.IsActionJustPressed("3"))
+			else if (Input.IsActionJustPressed($"B_{PlayerNumber}"))
 			{
 				diceRoll = betterdice.diceroll();
 				player.Currency -= betterdice.Price;
@@ -422,7 +436,7 @@ public partial class Main : Node2D
 				return diceRoll;
 
 			}
-			else if (Input.IsActionJustPressed($"X_{PlayerNumber}") || Input.IsActionJustPressed("4"))
+			else if (Input.IsActionJustPressed($"X_{PlayerNumber}"))
 			{
 				diceRoll = riskydice.diceroll();
 				player.Currency -= riskydice.Price;
@@ -431,7 +445,7 @@ public partial class Main : Node2D
 				return diceRoll;
 
 			}
-			else if (Input.IsActionJustPressed($"Y_{PlayerNumber}") || Input.IsActionJustPressed("5"))
+			else if (Input.IsActionJustPressed($"Y_{PlayerNumber}"))
 			{
 				diceRoll = turbodice.diceroll();
 				player.Currency -= turbodice.Price;
@@ -442,8 +456,40 @@ public partial class Main : Node2D
 			}
 			else if (Input.IsActionJustPressed("1"))
 			{
-				diceRoll = onedice.diceroll();
-				player.Currency -= onedice.Price;
+				diceRoll = 1;
+
+				updateDobbelSprite(diceRoll);
+				waitingforbuttonpress = false;
+				return diceRoll;
+			}
+			else if (Input.IsActionJustPressed("2"))
+			{
+				diceRoll = 2;
+
+				updateDobbelSprite(diceRoll);
+				waitingforbuttonpress = false;
+				return diceRoll;
+			}
+			else if (Input.IsActionJustPressed("3"))
+			{
+				diceRoll = 3;
+
+				updateDobbelSprite(diceRoll);
+				waitingforbuttonpress = false;
+				return diceRoll;
+			}
+			else if (Input.IsActionJustPressed("4"))
+			{
+				diceRoll = -1;
+
+				updateDobbelSprite(diceRoll);
+				waitingforbuttonpress = false;
+				return diceRoll;
+			}
+			else if (Input.IsActionJustPressed("5"))
+			{
+				diceRoll = -2;
+
 				updateDobbelSprite(diceRoll);
 				waitingforbuttonpress = false;
 				return diceRoll;
@@ -555,16 +601,6 @@ public partial class Main : Node2D
 		}
 	}
 
-	void HorseRace(Player player)
-	{
-		if (player.Currency <= 5)
-		{
-			// Pop up text that says, sorry you dont have enough, better luck next time!!!
-			GetNode<Label>("Control/HorseraceNomoney").Show();
-
-		}
-	}
-
 	void RazorCapAttack(Player attacker, Player victim)
 	{
 		int attackdamage = 100;
@@ -572,6 +608,10 @@ public partial class Main : Node2D
 		attacker.HasCap = false;
 		GD.Print(attacker.Name + " hit " + victim.Name + " for " + attackdamage + ". " + victim.Name + " has " + victim.Health + " health remaining");
 		EmitSignal("updateplayerui", attacker);
+		if (victim.Health == 0)
+		{
+			victim.Hide();
+		}
 		EmitSignal("updateplayerui", victim);
 	}
 	void SpawnRazorCap()
@@ -589,11 +629,11 @@ public partial class Main : Node2D
 				rndRazorCapSpace += 1;
 			}
 		}
-		Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{rndRazorCapSpace + 1}"); // het is + 1 omdat de markers 1 voorop lopen met de spaces tellen dan we in de index hebben staan
+		Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{2 + 1}"); // het is + 1 omdat de markers 1 voorop lopen met de spaces tellen dan we in de index hebben staan
 
 		var sprite = markerNode.GetChild<Sprite2D>(0);
 		sprite.Texture = GD.Load<Texture2D>("res://assets/Spaces/RazorCap_Space.png");
-		spacesInfo[rndRazorCapSpace].Name = "Razorcap_Space";
+		spacesInfo[2].Name = "Razorcap_Space";
 		GD.Print("razorcap ligt op vak " + rndRazorCapSpace);
 
 	}
@@ -747,8 +787,9 @@ public partial class Main : Node2D
 
 
 
-	async Task ChooseUseItem(Player player, int PlayerNumber)
+	async Task<string> ChooseUseItem(Player player, int PlayerNumber)
 	{
+		string useditem;
 		bool RunLoop = true;
 		GD.Print("in choose use item");
 		while (RunLoop)
@@ -756,19 +797,22 @@ public partial class Main : Node2D
 			if (Input.IsActionJustPressed($"yes_{PlayerNumber}"))
 			{
 				GD.Print("said yes");
-				await ChooseItem(player, PlayerNumber);
-				RunLoop = false;
+				useditem = await ChooseItem(player, PlayerNumber);
+				
+				return useditem;
 			}
 			else if (Input.IsActionJustPressed($"no_{PlayerNumber}"))
 			{
 				GD.Print("said no");
-				RunLoop = false;
+				
+				return "nouseditem";
 			}
 			await ToSignal(GetTree().CreateTimer(0), "timeout");
 		}
+		return "nouseditem";
 	}
-	async Task ChooseItem(Player player, int PlayerNumber)
-	{
+	async Task<string> ChooseItem(Player player, int PlayerNumber)
+	{		string useditem = "";
 		GD.Print("in Choose item");
 		useItem = true;
 		while (useItem)
@@ -785,8 +829,9 @@ public partial class Main : Node2D
 					case "DoubleDice":
 						await DoubleDice(player);
 						GD.Print("Used item a Double Dice, it has vanished from their inventory.");
-
-						break;
+						useditem = "dice";
+							player.Inventory[0] = "0";
+						return useditem;
 					case "2":
 						// Example effect for item 2
 						GD.Print("test");
@@ -794,8 +839,7 @@ public partial class Main : Node2D
 						break;
 
 				}
-				player.Inventory[0] = "0";
-
+								
 			}
 			if (Input.IsActionJustPressed($"D-Pad-up_{PlayerNumber}"))
 			{
@@ -807,18 +851,18 @@ public partial class Main : Node2D
 
 						break;
 					case "DoubleDice":
-						await DoubleDice(player);
 						GD.Print("Used item a Double Dice, it has vanished from their inventory.");
-
-						break;
+						await DoubleDice(player);						
+						useditem = "dice";
+						player.Inventory[1] = "0";
+						return useditem;
 					case "2":
 						// Example effect for item 2
 						GD.Print("test");
 
 						break;
 				}
-				player.Inventory[1] = "0";
-
+				
 			}
 			if (Input.IsActionJustPressed($"D-Pad-right_{PlayerNumber}"))
 			{
@@ -832,24 +876,25 @@ public partial class Main : Node2D
 					case "DoubleDice":
 						await DoubleDice(player);
 						GD.Print("Used item a Double Dice, it has vanished from their inventory.");
-
-						break;
+						useditem = "dice";
+						player.Inventory[2] = "0";
+						return useditem;
 					case "2":
 						// Example effect for item 2
 						GD.Print("test");
 
 						break;
 				}
-				player.Inventory[2] = "0";
-
+				
 			}
 			if (Input.IsActionJustPressed($"D-Pad-down_{PlayerNumber}"))
 			{
-				useItem = false;
+				useItem = false;			
 
 			}
 			await ToSignal(GetTree().CreateTimer(0), "timeout");
 		}
+		return useditem;
 	}
 	void Whiskey(Player player)
 	{
@@ -862,13 +907,25 @@ public partial class Main : Node2D
 	{
 		int eyecount1 = rnd.Next(1, 7);
 		int eyecount2 = rnd.Next(1, 7);
-		int eyecountTotal = eyecount1 + eyecount1;
-		await StartMovement(player, eyecountTotal, WhatPlayer);
+		int diceRoll = eyecount1 + eyecount2;
+		await StartMovement(player, diceRoll, WhatPlayer);
+
 	}
-	int TwentyDice()
+	async Task TwentyDice(Player player)
 	{
 		diceRoll = twentydice.diceroll();
-		return diceRoll;
+		await StartMovement(player, diceRoll, WhatPlayer);
+
+	}
+	async Task TenDice(Player player)
+	{
+		diceRoll = tendice.diceroll();
+		await StartMovement(player, diceRoll, WhatPlayer);
+	}
+	void ChooseMiniGame()
+	{
+		int Whatminigame = rnd.Next(1, MiniGames.Length);
+		GetTree().ChangeSceneToFile($"pathtoscene{Whatminigame}");//hier pakt hij 1 van de minigames die net random is gekozen.
 	}
 
 }
