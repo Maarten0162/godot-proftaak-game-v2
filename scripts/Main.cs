@@ -958,14 +958,14 @@ public partial class Main : Node2D
 		return useditem;
 	}
 	//items en item spaces
-	void Whiskey(Player player) //ITEM SPACE player verliest currency EN moet een turn overslaan
+	void Whiskey(Player player) //!ITEM SPACE player verliest currency EN moet een turn overslaan
 	{
 		GD.Print("you found a bottle of whiskey and drank it all");
 		player.SkipTurn = true;
 		player.Currency -= player.Currency / 3;
 		GD.Print("You got too drunk and went on a spending spree! also you have to skip your next turn because of your hangover");
 	}
-	void GoldenPipe(Player player) //KAN ALLEEN AANGEVRAAGD WORDEN ALS DE razorcapspace op het bord zit!
+	void GoldenPipe(Player player) //**KAN ALLEEN AANGEVRAAGD WORDEN ALS DE razorcapspace op het bord zit!
 	{
 		for (int i = 0; i < spacesAmount; i++)
 		{
@@ -1051,7 +1051,7 @@ public partial class Main : Node2D
 		}
 	}
 
-	void StealPlayerCap(Player player) // jat de cap van de speler die hem heeft, moet een check zijn of iemand de cap heeft En of je het zelf niet bent. De victim neemt ook 10 damage TENZIJ hij daarvan dood zou gaan, dan niet.
+	void StealPlayerCap(Player player) //** jat de cap van de speler die hem heeft, moet een check zijn of iemand de cap heeft En of je het zelf niet bent. De victim neemt ook 10 damage TENZIJ hij daarvan dood zou gaan, dan niet.
 	{
 		string victim = "";
 		bool runloop = true;
@@ -1073,7 +1073,7 @@ public partial class Main : Node2D
 		}
 		GD.Print(player.Name + "used his goons to steal te cap from: " + victim);
 	}
-	void PoisonMushroom(Player player)
+	void PoisonMushroom(Player player)//geeft een random player een roll debuff next turn
 	{
 		bool runloop = true;
 		while (runloop)
@@ -1104,7 +1104,7 @@ public partial class Main : Node2D
 	{
 		player.HasKnuckles = true;
 	}
-	void StealItem(Player player) // steal een random item van een random player, MOET WEL EEN CHECK ZIJN OF ER EEN SPELER IS MET EEN ITEM!!!
+	void StealItem(Player player) // **steal een random item van een random player, MOET WEL EEN CHECK ZIJN OF ER EEN SPELER IS MET EEN ITEM!!!
 	{
 		bool runloop1 = true;
 		int howmanyitems = 0;
@@ -1137,7 +1137,7 @@ public partial class Main : Node2D
 		}
 
 	}
-	void GangRaid(Player player)// ITEM SPACE, mensen die hier op landen moeten een deel van hun coins afstaan aan de eigenaar van dit vak of in de pot
+	void GangRaid(Player player)// !ITEM SPACE, mensen die hier op landen moeten een deel van hun coins afstaan aan de eigenaar van dit vak of in de pot
 	{
 		
 	} 
