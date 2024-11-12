@@ -11,11 +11,12 @@ public class Dice
 	Random rnd = new Random();
 
 	private AudioStreamPlayer Dobbelgeluid;
-   public Dice(int min, int max, AudioStreamPlayer Dobbelgeluid)
+   public Dice(int min, int max, AudioStreamPlayer Dobbelgeluid, int price)
    {
 	this.min = min;
 	this.max = max;
 	this.Dobbelgeluid = Dobbelgeluid;
+	this.price = price;
    }
 
 	public int diceroll()
@@ -33,6 +34,18 @@ public class Dice
 		
 		return eyeCount;
 
+	}
+	private int price;
+	public int Price
+	{
+		get
+		{
+			return price;
+		}
+		set
+		{
+			price = value;
+		}
 	}
 
 }

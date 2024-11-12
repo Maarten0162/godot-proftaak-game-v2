@@ -35,6 +35,7 @@ public partial class Main : Node2D
 	Dice turbodice;
 	Dice negdice;
 	Dice onedice;
+	Dice twentydice;
 	int diceRoll;
 
 	private (Node2D Space, string Name, string OriginalName)[] spacesInfo;
@@ -51,12 +52,13 @@ public partial class Main : Node2D
 		dobbelgeluid = GetNode<AudioStreamPlayer>("Dobbelgeluid");
 
 		// Initialiseer de dobbelstenen met het dobbelgeluid.
-		basicdice = new Dice(0, 4, dobbelgeluid);
-		betterdice = new Dice(3, 7, dobbelgeluid);
-		riskydice = new Dice(0, 7, dobbelgeluid);
-		turbodice = new Dice(-3, 10, dobbelgeluid);
-		negdice = new Dice(-5, 0, dobbelgeluid);
-		onedice = new Dice(1, 2, dobbelgeluid);
+		basicdice = new Dice(0, 4, dobbelgeluid, 0);
+		betterdice = new Dice(3, 7, dobbelgeluid, 7);
+		riskydice = new Dice(0, 7, dobbelgeluid, 5);
+		turbodice = new Dice(-3, 10, dobbelgeluid, 7);
+		negdice = new Dice(-5, 0, dobbelgeluid, 0);
+		onedice = new Dice(1, 2, dobbelgeluid, 0);
+		twentydice = new Dice(-20, 21, dobbelgeluid, 0);
 
 		spacesInfo = new (Node2D, string, string)[spacesAmount];
 		for (int i = 1; i <= spacesAmount; i++)
@@ -93,7 +95,7 @@ public partial class Main : Node2D
 		Playerlist = new Player[4] { player1, player2, player3, player4 };
 
 		Iteminfo = new (string Name, int Price)[15] { ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10) };
-		ShopInv = new(string Name, int Price)[3] { ("test", 10), ("test", 10), ("test", 10)};
+		ShopInv = new (string Name, int Price)[3] { ("test", 10), ("test", 10), ("test", 10) };
 		dobbelSprite = GetNode<AnimatedSprite2D>("dobbelSprite");
 		dobbelSprite.Play("0");
 
@@ -142,7 +144,7 @@ public partial class Main : Node2D
 							Otherspace = 36;
 						}
 						else Otherspace = 15;
-						if (Otherspace == Playerlist[x].PositionSpace && i != diceRoll) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
+						if (Otherspace == Playerlist[x].PositionSpace && i != diceRoll && player != Playerlist[x]) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
 						{
 							GD.Print("naar razorattack");
 
@@ -152,7 +154,7 @@ public partial class Main : Node2D
 							ContinueLoop = false;
 						}
 					}
-					if (spaceinfront == Playerlist[x].PositionSpace && i != diceRoll) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
+					if (spaceinfront == Playerlist[x].PositionSpace && i != diceRoll && player != Playerlist[x]) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
 					{
 						GD.Print("naar razorattack");
 
@@ -165,18 +167,21 @@ public partial class Main : Node2D
 				}
 			}
 			if (spaceinfront == 3 && hasattacked == false || spaceinfront == 28 && hasattacked == false)
-			{ 	bool hasitemspace = false;
-				for(int x = 0; x < 3; x++){
-				switch(player.Inventory[x])
+			{
+				bool hasitemspace = false;
+				for (int x = 0; x < 3; x++)
 				{
-					case "0": 	
-						hasitemspace = true;
-						break;
-					
-				}}
-				if(hasitemspace)
+					switch (player.Inventory[x])
+					{
+						case "0":
+							hasitemspace = true;
+							break;
+
+					}
+				}
+				if (hasitemspace)
 				{
-					 await ShopAsk(player, PlayerNumber);
+					await ShopAsk(player, PlayerNumber);
 				}
 			}
 			if (ContinueLoop)
@@ -209,7 +214,7 @@ public partial class Main : Node2D
 						Otherspace = 36;
 					}
 					else Otherspace = 15;
-					if (Otherspace == Playerlist[x].PositionSpace && Playerlist[x].HasCap && i != diceRoll) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
+					if (Otherspace == Playerlist[x].PositionSpace && Playerlist[x].HasCap && i != diceRoll && player != Playerlist[x]) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
 					{
 						GD.Print("naar razorattack");
 
@@ -219,7 +224,7 @@ public partial class Main : Node2D
 					}
 				}
 
-				if (spaceBehind == Playerlist[x].PositionSpace && Playerlist[x].HasCap && i != diceRoll) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, en de andere speler heeft een cap hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
+				if (spaceBehind == Playerlist[x].PositionSpace && Playerlist[x].HasCap && i != diceRoll && player != Playerlist[x]) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, en de andere speler heeft een cap hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
 				{
 					RazorCapAttack(Playerlist[x], player);
 					hasattacked = true;
@@ -361,25 +366,25 @@ public partial class Main : Node2D
 	}
 	async Task Turn_Player(Player player)
 	{
-		WhatPlayer++;		
+		WhatPlayer++;
 		GD.Print(player.Name + " Its your turn!");
 		if (player.SkipTurn == false) // dit checkt of de speler zen beurt moet overslaan
 		{
 			//choose wich dice, hiervoor hebben we de shop mechanic + een shop menu nodig
-			
+
 			// await ChooseUseItem(player, WhatPlayer);
-			
-			diceRoll = await AwaitButtonPress(WhatPlayer); // ik kies nu betterdice maar dit moet dus eigenlijk gedaan worden via buttons in het menu? idk wrs kunenn we gwn doen A is dice 1, B is dice 2, X is dice 3 met kleine animatie.
-			
+
+			diceRoll = await AwaitButtonPress(player, WhatPlayer); // ik kies nu betterdice maar dit moet dus eigenlijk gedaan worden via buttons in het menu? idk wrs kunenn we gwn doen A is dice 1, B is dice 2, X is dice 3 met kleine animatie.
+
 			await StartMovement(player, diceRoll, WhatPlayer);
-			
+
 			if (diceRoll != 0)
 			{       // zorgt ervoor dat als iemand 0  gooit de space niet nog een keer geactivate word, dat willen we niet.
 				await Placedetection(spacesInfo[player.PositionSpace].Name, player);
 			}
-			
+
 			EmitSignal("updateplayerui", player);
-			
+
 			if (player.Health > 0)
 			{
 				GD.Print(player.Name + " staat op " + spacesInfo[player.PositionSpace].Name + " na " + diceRoll + " te hebben gegooid.");
@@ -394,7 +399,7 @@ public partial class Main : Node2D
 			GD.Print(player.Name + " Had to skip his turn!");
 		}
 	}
-	async Task<int> AwaitButtonPress(int PlayerNumber)
+	async Task<int> AwaitButtonPress(Player player, int PlayerNumber)
 	{
 		waitingforbuttonpress = true;
 		while (waitingforbuttonpress)
@@ -402,17 +407,16 @@ public partial class Main : Node2D
 
 			if (Input.IsActionJustPressed($"A_{PlayerNumber}") || Input.IsActionJustPressed("2"))
 			{
-				// diceRoll = negdice.diceroll(); 
-				diceRoll = 2;
+				diceRoll = basicdice.diceroll();
+				player.Currency -= basicdice.Price;
 				updateDobbelSprite(diceRoll);
-
 				waitingforbuttonpress = false;
 				return diceRoll;
 			}
 			else if (Input.IsActionJustPressed($"B_{PlayerNumber}") || Input.IsActionJustPressed("3"))
 			{
-				// diceRoll = betterdice.diceroll();
-				diceRoll = 3;
+				diceRoll = betterdice.diceroll();
+				player.Currency -= betterdice.Price;
 				updateDobbelSprite(diceRoll);
 				waitingforbuttonpress = false;
 				return diceRoll;
@@ -420,8 +424,8 @@ public partial class Main : Node2D
 			}
 			else if (Input.IsActionJustPressed($"X_{PlayerNumber}") || Input.IsActionJustPressed("4"))
 			{
-				// diceRoll = riskydice.diceroll();
-				diceRoll = -1;
+				diceRoll = riskydice.diceroll();
+				player.Currency -= riskydice.Price;
 				updateDobbelSprite(diceRoll);
 				waitingforbuttonpress = false;
 				return diceRoll;
@@ -429,8 +433,8 @@ public partial class Main : Node2D
 			}
 			else if (Input.IsActionJustPressed($"Y_{PlayerNumber}") || Input.IsActionJustPressed("5"))
 			{
-				// diceRoll = turbodice.diceroll();
-				diceRoll = -2;
+				diceRoll = turbodice.diceroll();
+				player.Currency -= turbodice.Price;
 				updateDobbelSprite(diceRoll);
 				waitingforbuttonpress = false;
 				return diceRoll;
@@ -439,6 +443,7 @@ public partial class Main : Node2D
 			else if (Input.IsActionJustPressed("1"))
 			{
 				diceRoll = onedice.diceroll();
+				player.Currency -= onedice.Price;
 				updateDobbelSprite(diceRoll);
 				waitingforbuttonpress = false;
 				return diceRoll;
@@ -643,7 +648,7 @@ public partial class Main : Node2D
 	{
 		GD.Print("Shop inv generated");
 		List<int> randomList = new List<int>();
-		
+
 		bool runloop = true;
 
 		while (runloop)
@@ -654,7 +659,8 @@ public partial class Main : Node2D
 				randomList.Add(rnditem);
 			}
 			if (randomList.Count() == 3)
-			{	GD.Print(randomList[0] + " " + randomList[1] +" " + randomList[2] );
+			{
+				GD.Print(randomList[0] + " " + randomList[1] + " " + randomList[2]);
 
 				for (int i = 0; i < 3; i++)
 				{
@@ -738,13 +744,8 @@ public partial class Main : Node2D
 
 
 	}
-	async Task DoubleDice(Player player)
-	{
-		int eyecount1 = rnd.Next(1, 7);
-		int eyecount2 = rnd.Next(1, 7);
-		int eyecountTotal = eyecount1 + eyecount1;
-		await StartMovement(player, eyecountTotal, WhatPlayer);
-	}
+
+
 
 	async Task ChooseUseItem(Player player, int PlayerNumber)
 	{
@@ -857,6 +858,18 @@ public partial class Main : Node2D
 		player.Currency -= player.Currency / 3;
 		GD.Print("You got too drunk and went on a spending spree! also you have to skip your next turn because of your hangover");
 	}
-	
+	async Task DoubleDice(Player player)
+	{
+		int eyecount1 = rnd.Next(1, 7);
+		int eyecount2 = rnd.Next(1, 7);
+		int eyecountTotal = eyecount1 + eyecount1;
+		await StartMovement(player, eyecountTotal, WhatPlayer);
+	}
+	int TwentyDice()
+	{
+		diceRoll = twentydice.diceroll();
+		return diceRoll;
+	}
+
 }
 
