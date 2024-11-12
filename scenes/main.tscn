@@ -554,9 +554,14 @@ shape = SubResource("RectangleShape2D_dd3ac")
 
 [node name="HorseRace" parent="." instance=ExtResource("25_kb01l")]
 
+[node name="Dobbelgeluid" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("27_agmsy")
+volume_db = 1.955
+
 [node name="player1 UI" type="Control" parent="."]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
+top_level = true
 layout_mode = 3
 anchors_preset = 0
 offset_left = 45.0
@@ -568,73 +573,63 @@ script = ExtResource("26_3o2pn")
 [node name="CoinCountplayer1" type="Label" parent="player1 UI"]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = -45.0
+offset_top = -25.0
+offset_right = 17.0
+offset_bottom = -2.0
 text = "Player 1"
 
 [node name="CoinCountplayer2" type="Label" parent="player1 UI"]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = 1025.0
-offset_top = -12.0
-offset_right = 1087.0
-offset_bottom = 11.0
+offset_left = 908.0
+offset_top = -26.0
+offset_right = 970.0
+offset_bottom = -3.0
 text = "Player 2"
 
 [node name="CoinCountplayer3" type="Label" parent="player1 UI"]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = -20.0
-offset_top = 559.0
-offset_right = 42.0
-offset_bottom = 582.0
+offset_left = -65.0
+offset_top = 534.0
+offset_right = -3.0
+offset_bottom = 557.0
 text = "Player 3"
 
 [node name="CoinCountplayer4" type="Label" parent="player1 UI"]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = 1026.0
-offset_top = 551.0
-offset_right = 1088.0
-offset_bottom = 574.0
+offset_left = 888.0
+offset_top = 523.0
+offset_right = 950.0
+offset_bottom = 546.0
 text = "Player 4"
 
 [node name="Healthplayer1" type="Label" parent="player1 UI"]
 self_modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = 13.0
-offset_top = 29.0
-offset_right = 53.0
-offset_bottom = 52.0
+offset_left = -32.0
+offset_top = 4.0
+offset_right = 8.0
+offset_bottom = 27.0
 
 [node name="Healthplayer2" type="Label" parent="player1 UI"]
 self_modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = 1032.0
-offset_top = 25.0
-offset_right = 1072.0
-offset_bottom = 48.0
+offset_left = 951.0
+offset_top = -1.0
+offset_right = 991.0
+offset_bottom = 22.0
 
 [node name="Healthplayer3" type="Label" parent="player1 UI"]
 self_modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = -12.0
-offset_top = 588.0
-offset_right = 28.0
-offset_bottom = 611.0
+offset_left = -57.0
+offset_top = 563.0
+offset_right = -17.0
+offset_bottom = 586.0
 
 [node name="Healthplayer4" type="Label" parent="player1 UI"]
 self_modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = 1032.0
-offset_top = 582.0
-offset_right = 1072.0
-offset_bottom = 605.0
-
-[node name="Dobbelgeluid" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("27_agmsy")
-volume_db = 1.955
+offset_left = 923.0
+offset_top = 553.0
+offset_right = 963.0
+offset_bottom = 576.0

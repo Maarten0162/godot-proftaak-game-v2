@@ -96,6 +96,10 @@ public partial class Main : Node2D
 		player4.PositionSpace = 30;
 
 		Playerlist = new Player[4] { player1, player2, player3, player4 };
+		for(int i = 0; i < Playerlist.Length; i++)
+		{
+			EmitSignal("updateplayerui", Playerlist[i]);
+		}
 
 		Iteminfo = new (string Name, int Price)[15] { ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10) };
 		ShopInv = new (string Name, int Price)[3] { ("test", 10), ("test", 10), ("test", 10) };
@@ -337,7 +341,7 @@ public partial class Main : Node2D
 			int robbedAmount = RobSomeone(player);
 			GD.Print("You just robbed someone! you gained " + robbedAmount + " Pounds!");
 		}
-
+			await Task.CompletedTask;
 
 	}
 

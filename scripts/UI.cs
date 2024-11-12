@@ -33,8 +33,8 @@ public partial class UI : Control
 	{	
 		coincount = GetNode<Label>($"CoinCount{player.Name}");
 		Health = GetNode<Label>($"Health{player.Name}");
-		coincount.Text = player.Currency.ToString();
-			Health.Text = player.Health.ToString();
+		coincount.Text = $"Coins: {player.Currency}";		
+			Health.Text = $"Health: {player.Health}";
 		
 		 //hier komt een death UI icon;
 	}
