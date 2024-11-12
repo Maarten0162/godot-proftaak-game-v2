@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Dynamic;
 
 public partial class Player : CharacterBody2D
 {
@@ -9,6 +10,7 @@ public partial class Player : CharacterBody2D
 		currency = 100;
 		health = 100;
 		inventory = new string[3] {"0", "DoubleDice", "0"};
+		rollAdjustment = 0;
 	}
 
 	private int currency;
@@ -98,5 +100,32 @@ public partial class Player : CharacterBody2D
 			inventory = value;
 		}
 	}
+	private int rollAdjustment;
+	public int RollAdjustment
+	{
+		get
+		{
+			return rollAdjustment;
+		}
+		set
+		{
+			rollAdjustment = value;
+		}
+	}
+			private bool hasknuckles;
+
+	public bool HasKnuckles
+	{
+		get
+		{
+			return hasknuckles;
+		}
+		set
+		{
+			hasknuckles = value;
+		}
+	}
+	
+		
 }
 

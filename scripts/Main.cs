@@ -142,7 +142,7 @@ public partial class Main : Node2D
 		{
 			int spaceinfront = (player.PositionSpace + 1) % spacesInfo.Length;
 
-			if (player.HasCap) //checkt of current speler de cap heeft
+			if (player.HasCap || player.HasKnuckles) //checkt of current speler de cap heeft
 			{
 
 				GD.Print("in playerhascap check");
@@ -160,8 +160,11 @@ public partial class Main : Node2D
 						else Otherspace = 15;
 						if (Otherspace == Playerlist[x].PositionSpace && i != diceRoll && player != Playerlist[x]) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
 						{
-							GD.Print("naar razorattack");
 
+							if (player.HasKnuckles)
+							{
+								KnucklesAttack(player, Playerlist[x]);
+							}
 							RazorCapAttack(player, Playerlist[x]);
 							hasattacked = true;
 
@@ -170,7 +173,11 @@ public partial class Main : Node2D
 					}
 					if (spaceinfront == Playerlist[x].PositionSpace && i != diceRoll && player != Playerlist[x]) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
 					{
-						GD.Print("naar razorattack");
+
+						if (player.HasKnuckles)
+						{
+							KnucklesAttack(player, Playerlist[x]);
+						}
 
 						RazorCapAttack(player, Playerlist[x]);
 						hasattacked = true;
@@ -182,7 +189,7 @@ public partial class Main : Node2D
 			}
 			if ((spaceinfront == 6 || spaceinfront == 24) && hasattacked == false)
 			{
-				GD.Print("Entering ShopAsk check with spaceBehind = ", spaceinfront);
+
 				bool hasitemspace = false;
 				for (int x = 0; x < 3; x++)
 				{
@@ -238,18 +245,24 @@ public partial class Main : Node2D
 						Otherspace = 36;
 					}
 					else Otherspace = 15;
-					if (Otherspace == Playerlist[x].PositionSpace && Playerlist[x].HasCap && i != diceRoll && player != Playerlist[x]) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
+					if (Otherspace == Playerlist[x].PositionSpace && i != diceRoll && player != Playerlist[x] && (Playerlist[x].HasCap || Playerlist[x].HasKnuckles)) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
 					{
-						GD.Print("naar razorattack");
-
+						if (player.HasKnuckles)
+						{
+							KnucklesAttack(player, Playerlist[x]);
+						}
 						RazorCapAttack(Playerlist[x], player);
 						hasattacked = true;
 						ContinueLoop = false;
 					}
 				}
 
-				if (spaceBehind == Playerlist[x].PositionSpace && Playerlist[x].HasCap && i != diceRoll && player != Playerlist[x]) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, en de andere speler heeft een cap hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
+				if (spaceBehind == Playerlist[x].PositionSpace && Playerlist[x].HasCap && i != diceRoll && player != Playerlist[x] && (Playerlist[x].HasCap || Playerlist[x].HasKnuckles)) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, en de andere speler heeft een cap hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
 				{
+					if (player.HasKnuckles)
+					{
+						KnucklesAttack(player, Playerlist[x]);
+					}
 					RazorCapAttack(Playerlist[x], player);
 					hasattacked = true;
 					ContinueLoop = false;
@@ -258,7 +271,7 @@ public partial class Main : Node2D
 
 			if ((spaceBehind == 5 || spaceBehind == 23) && !hasattacked)
 			{
-				GD.Print("Entering ShopAsk check with spaceBehind = ", spaceBehind);
+
 				bool hasitemspace = false;
 				for (int x = 0; x < 3; x++)
 				{
@@ -415,6 +428,7 @@ public partial class Main : Node2D
 			//choose wich dice, hiervoor hebben we de shop mechanic + een shop menu nodig
 
 			string useditem = await ChooseUseItem(player);
+			diceRoll += player.RollAdjustment;
 			if (useditem != "dice")
 			{
 				diceRoll = await AwaitButtonPress(player); // ik kies nu betterdice maar dit moet dus eigenlijk gedaan worden via buttons in het menu? idk wrs kunenn we gwn doen A is dice 1, B is dice 2, X is dice 3 met kleine animatie.
@@ -433,15 +447,18 @@ public partial class Main : Node2D
 			{
 				GD.Print(player.Name + " staat op " + spacesInfo[player.PositionSpace].Name + player.PositionSpace + " na " + diceRoll + " te hebben gegooid.");
 			}
-
+			else
+			{
+				player.Hide();
+			}
 		}
 
 
-		else
-		{
-			player.SkipTurn = false;// dit zorgt ervoor dat next turn deze speler wel dingen mag doen
-			GD.Print(player.Name + " Had to skip his turn!");
-		}
+		player.RollAdjustment = 0; //dit zorgt ervoor dat volgende turn deze geen roll buff of debuff heeft.
+		player.SkipTurn = false;// dit zorgt ervoor dat next turn deze speler wel dingen mag doen
+		GD.Print(player.Name + " Had to skip his turn!");
+
+
 	}
 	async Task<int> AwaitButtonPress(Player player)
 	{
@@ -630,10 +647,23 @@ public partial class Main : Node2D
 
 		}
 	}
+	void KnucklesAttack(Player attacker, Player victim)
+	{
+		int attackdamage = 15;
+		victim.Health -= attackdamage;
+		attacker.HasKnuckles = false;
+		GD.Print(attacker.Name + " hit " + victim.Name + " for " + attackdamage + ". " + victim.Name + " has " + victim.Health + " health remaining");
+		EmitSignal("updateplayerui", attacker);
+		if (victim.Health == 0)
+		{
+			victim.Hide();
+		}
+		EmitSignal("updateplayerui", victim);
+	}
 
 	void RazorCapAttack(Player attacker, Player victim)
 	{
-		int attackdamage = 100;
+		int attackdamage = rnd.Next(40, 61);
 		victim.Health -= attackdamage;
 		attacker.HasCap = false;
 		GD.Print(attacker.Name + " hit " + victim.Name + " for " + attackdamage + ". " + victim.Name + " has " + victim.Health + " health remaining");
@@ -896,10 +926,10 @@ public partial class Main : Node2D
 
 			}
 			if (Input.IsActionJustPressed($"D-Pad-right_{WhatPlayer}"))
-			{ 
+			{
 				itemId = player.Inventory[2];
 				switch (itemId)
-				{ 
+				{
 					case "0":
 						GD.Print("no item in this slot");
 
@@ -928,7 +958,7 @@ public partial class Main : Node2D
 		return useditem;
 	}
 	//items en item spaces
-	void Whiskey(Player player)
+	void Whiskey(Player player) //ITEM SPACE player verliest currency EN moet een turn overslaan
 	{
 		GD.Print("you found a bottle of whiskey and drank it all");
 		player.SkipTurn = true;
@@ -976,11 +1006,141 @@ public partial class Main : Node2D
 		await StartMovement(player, diceRoll);
 
 	}
-	async Task TenDice(Player player)
+	async Task TenDice(Player player) //rolt 1 dice van 0-10
 	{
 		diceRoll = tendice.diceroll();
 		await StartMovement(player, diceRoll);
 	}
+	void DashMushroom(Player player) // doet Plus X bij deze speler zijn volgende dice roll
+	{
+		player.RollAdjustment += 5;
+	}
+	void TeleportTorndPlayer(Player player) //teleport to a random player
+	{
+		bool runloop = true;
+		while (runloop)
+		{
+			int rndplayer = rnd.Next(0, Playerlist.Length);
+			if (player != Playerlist[rndplayer])
+			{
+				player.Position = Playerlist[rndplayer].Position;
+				player.PositionSpace = Playerlist[rndplayer].PositionSpace;
+				runloop = false;
+			}
+		}
+
+	}
+	void SwitchPlaces(Player player) // switch places with a random player
+	{
+		bool runloop = true;
+		while (runloop)
+		{
+			int rndplayer = rnd.Next(0, Playerlist.Length);
+			if (player != Playerlist[rndplayer])
+			{
+				Vector2 originalposition = player.Position;
+				int originalpositionspace = player.PositionSpace;
+
+				player.Position = Playerlist[rndplayer].Position;
+				player.PositionSpace = Playerlist[rndplayer].PositionSpace;
+
+				Playerlist[rndplayer].Position = originalposition;
+				Playerlist[rndplayer].PositionSpace = originalpositionspace;
+				runloop = false;
+			}
+		}
+	}
+
+	void StealPlayerCap(Player player) // jat de cap van de speler die hem heeft, moet een check zijn of iemand de cap heeft En of je het zelf niet bent. De victim neemt ook 10 damage TENZIJ hij daarvan dood zou gaan, dan niet.
+	{
+		string victim = "";
+		bool runloop = true;
+		while (runloop)
+		{
+			for (int i = 0; i < Playerlist.Length; i++)
+			{
+				if (Playerlist[i].HasCap)
+				{
+					if (Playerlist[i].Health > 10)
+					{
+						Playerlist[i].Health -= 10;
+					}
+					Playerlist[i].HasCap = false;
+					victim = Playerlist[i].Name;
+					runloop = false;
+				}
+			}
+		}
+		GD.Print(player.Name + "used his goons to steal te cap from: " + victim);
+	}
+	void PoisonMushroom(Player player)
+	{
+		bool runloop = true;
+		while (runloop)
+		{
+			int rndplayer = rnd.Next(0, Playerlist.Length);
+			if (player != Playerlist[rndplayer])
+			{
+				Playerlist[rndplayer].RollAdjustment -= 5;
+				runloop = false;
+			}
+		}
+
+	}
+	void StealCoins(Player player) // steelt currency tussen 1 en de helft van een random persoon;
+	{
+		bool runloop = true;
+		while (runloop)
+		{
+			int rndplayer = rnd.Next(0, Playerlist.Length);
+			if (player != Playerlist[rndplayer])
+			{
+				int stolenamount = rnd.Next(0, Playerlist[rndplayer].Currency / 5);
+				player.Currency += stolenamount;
+			}
+		}
+	}
+	void BrassKnuckles(Player player) //de player krijgt brass knuckles, een mini razor cap die minder damage doet maar waar je ook niet stopt nadat je aangevallen hebt, kan in combinatie met de razorcap
+	{
+		player.HasKnuckles = true;
+	}
+	void StealItem(Player player) // steal een random item van een random player, MOET WEL EEN CHECK ZIJN OF ER EEN SPELER IS MET EEN ITEM!!!
+	{
+		bool runloop1 = true;
+		int howmanyitems = 0;
+		while (runloop1)
+		{
+			int rndplayer = rnd.Next(0, Playerlist.Length);
+			if (player != Playerlist[rndplayer])
+			{
+				for (int i = 0; i < 2; i++)
+				{
+					if (Playerlist[rndplayer].Inventory[i] != "0") //gaat van de gekozen speler zen inv af, om te checken of hij wel items heeft
+					{
+						howmanyitems++;
+					}
+				}
+				if (howmanyitems != 0) // de gekozen speler heeft items
+				{	bool runloop2 = true;
+					for (int i = 0; i <= 2 && runloop2; i++)
+					{
+						if (player.Inventory[i] != "0")
+						{
+							player.Inventory[i] = Playerlist[rndplayer].Inventory[rnd.Next(0,3)];
+							runloop1 = false;
+							runloop2 = false;
+						}
+					}
+				}
+			}
+
+		}
+
+	}
+	void GangRaid(Player player)// ITEM SPACE, mensen die hier op landen moeten een deel van hun coins afstaan aan de eigenaar van dit vak of in de pot
+	{
+		
+	} 
 	void ChooseMiniGame()
 	{
 		int Whatminigame = rnd.Next(1, MiniGames.Length);
