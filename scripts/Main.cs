@@ -38,7 +38,7 @@ public partial class Main : Node2D
 	int diceRoll;
 
 	private (Node2D Space, string Name, string OriginalName)[] spacesInfo;
-	private (string Name, int Price)[] Iteminfo; // hier gaan de namen van alle items in
+	private (string Name, int Price)[] Iteminfo; // hier gaan de namen van alle items in.
 	private (string Name, int Price)[] ShopInv;
 	bool waitingforbuttonpress;
 	bool ContinueLoop;
