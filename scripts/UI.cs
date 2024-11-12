@@ -24,7 +24,7 @@ public partial class UI : Control
 	   	GD.Print("coincount niet gevonden");
 	   }
 	   else GD.Print("coincount wel gevonden");
-	   main.updateplayerui += UpdateUI;	
+	   main.updateplayerui += UpdateUI;	  
 	   
 	   
 	}
