@@ -50,7 +50,7 @@ public partial class Main : Node2D
 	{
 		dobbelgeluid = GetNode<AudioStreamPlayer>("Dobbelgeluid");
 
-		// Initialiseer de dobbelstenen met het dobbelgeluid
+		// Initialiseer de dobbelstenen met het dobbelgeluid.
 		basicdice = new Dice(0, 4, dobbelgeluid);
 		betterdice = new Dice(3, 7, dobbelgeluid);
 		riskydice = new Dice(0, 7, dobbelgeluid);
