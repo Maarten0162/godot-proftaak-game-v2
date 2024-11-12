@@ -81,7 +81,7 @@ public partial class Main : Node2D
 		player1 = GetNode<Player>("player1");
 		player1.Position = topLeft;
 		player1.PositionSpace = 0;
-		
+
 		player2 = GetNode<Player>("player2");
 		player2.Position = topRight;
 		player2.PositionSpace = 9;
@@ -96,7 +96,7 @@ public partial class Main : Node2D
 		player4.PositionSpace = 30;
 
 		Playerlist = new Player[4] { player1, player2, player3, player4 };
-		for(int i = 0; i < Playerlist.Length; i++)
+		for (int i = 0; i < Playerlist.Length; i++)
 		{
 			EmitSignal("updateplayerui", Playerlist[i]);
 		}
@@ -123,18 +123,18 @@ public partial class Main : Node2D
 
 	}
 	//movement
-	async Task StartMovement(Player player, int diceRoll, int PlayerNumber)
+	async Task StartMovement(Player player, int diceRoll)
 	{
 		if (diceRoll >= 0)
 		{
-			await Movement(player, diceRoll, PlayerNumber);
+			await Movement(player, diceRoll);
 		}
 		else
 		{
-			await NegMovement(player, diceRoll, WhatPlayer);
+			await NegMovement(player, diceRoll);
 		}
 	}
-	async Task Movement(Player player, int diceRoll, int PlayerNumber)
+	async Task Movement(Player player, int diceRoll)
 	{
 		bool hasattacked = false;
 		ContinueLoop = true;
@@ -181,7 +181,8 @@ public partial class Main : Node2D
 				}
 			}
 			if ((spaceinfront == 6 || spaceinfront == 24) && hasattacked == false)
-			{	GD.Print("Entering ShopAsk check with spaceBehind = ", spaceinfront);
+			{
+				GD.Print("Entering ShopAsk check with spaceBehind = ", spaceinfront);
 				bool hasitemspace = false;
 				for (int x = 0; x < 3; x++)
 				{
@@ -195,7 +196,7 @@ public partial class Main : Node2D
 				}
 				if (hasitemspace)
 				{
-					await ShopAsk(player, PlayerNumber);
+					await ShopAsk(player);
 				}
 			}
 			if (ContinueLoop)
@@ -204,26 +205,27 @@ public partial class Main : Node2D
 
 				player.Position = spacesInfo[player.PositionSpace].Space.Position;
 			}
-			if(spacesInfo[player.PositionSpace].Name == "Razorcap_Space" && i != diceRoll)
+			if (spacesInfo[player.PositionSpace].Name == "Razorcap_Space" && i != diceRoll)
 			{
 				if (player.Currency >= 50)
-			{
-				await RazorcapPurchase(player, WhatPlayer);
-			}
-			else GD.Print("sorry " + player.Name + " you don't have enough pounds.");
+				{
+					await RazorcapPurchase(player);
+				}
+				else GD.Print("sorry " + player.Name + " you don't have enough pounds.");
 			}
 			await ToSignal(GetTree().CreateTimer(0.4), "timeout");
 		}
 
 
 	}
-	async Task NegMovement(Player player, int diceRoll, int PlayerNumber)
+	async Task NegMovement(Player player, int diceRoll)
 	{
 		bool hasattacked = false;
 		ContinueLoop = true;
-		
+
 		for (int i = 0; i > diceRoll && ContinueLoop; i--)
-		{	int spaceBehind = (player.PositionSpace - 1 + spacesInfo.Length) % spacesInfo.Length;
+		{
+			int spaceBehind = (player.PositionSpace - 1 + spacesInfo.Length) % spacesInfo.Length;
 
 			for (int x = 0; x < Playerlist.Length; x++) // cycled door elke speler heenzolang de speler nog dicerolls heeft
 			{
@@ -255,7 +257,8 @@ public partial class Main : Node2D
 			}
 
 			if ((spaceBehind == 5 || spaceBehind == 23) && !hasattacked)
-			{	GD.Print("Entering ShopAsk check with spaceBehind = ", spaceBehind);
+			{
+				GD.Print("Entering ShopAsk check with spaceBehind = ", spaceBehind);
 				bool hasitemspace = false;
 				for (int x = 0; x < 3; x++)
 				{
@@ -269,7 +272,7 @@ public partial class Main : Node2D
 				}
 				if (hasitemspace)
 				{
-					await ShopAsk(player, PlayerNumber);
+					await ShopAsk(player);
 				}
 			}
 			if (ContinueLoop)
@@ -278,13 +281,13 @@ public partial class Main : Node2D
 
 				player.Position = spacesInfo[player.PositionSpace].Space.Position;
 			}
-			if(spacesInfo[player.PositionSpace].Name == "Razorcap_Space" && i != diceRoll)
+			if (spacesInfo[player.PositionSpace].Name == "Razorcap_Space" && i != diceRoll)
 			{
 				if (player.Currency >= 50)
-			{
-				await RazorcapPurchase(player, WhatPlayer);
-			}
-			else GD.Print("sorry " + player.Name + " you don't have enough pounds.");
+				{
+					await RazorcapPurchase(player);
+				}
+				else GD.Print("sorry " + player.Name + " you don't have enough pounds.");
 			}
 
 			await ToSignal(GetTree().CreateTimer(0.4), "timeout");
@@ -292,7 +295,7 @@ public partial class Main : Node2D
 
 
 	}
-	 async Task Placedetection(string typeOfSpace, Player player)
+	async Task Placedetection(string typeOfSpace, Player player)
 	{
 		if (typeOfSpace == "blueSpace")
 		{
@@ -341,7 +344,7 @@ public partial class Main : Node2D
 			int robbedAmount = RobSomeone(player);
 			GD.Print("You just robbed someone! you gained " + robbedAmount + " Pounds!");
 		}
-			await Task.CompletedTask;
+		await Task.CompletedTask;
 
 	}
 
@@ -411,12 +414,12 @@ public partial class Main : Node2D
 		{
 			//choose wich dice, hiervoor hebben we de shop mechanic + een shop menu nodig
 
-			string useditem = await ChooseUseItem(player, WhatPlayer);
+			string useditem = await ChooseUseItem(player);
 			if (useditem != "dice")
 			{
-				diceRoll = await AwaitButtonPress(player, WhatPlayer); // ik kies nu betterdice maar dit moet dus eigenlijk gedaan worden via buttons in het menu? idk wrs kunenn we gwn doen A is dice 1, B is dice 2, X is dice 3 met kleine animatie.
+				diceRoll = await AwaitButtonPress(player); // ik kies nu betterdice maar dit moet dus eigenlijk gedaan worden via buttons in het menu? idk wrs kunenn we gwn doen A is dice 1, B is dice 2, X is dice 3 met kleine animatie.
 
-				await StartMovement(player, diceRoll, WhatPlayer);
+				await StartMovement(player, diceRoll);
 			}
 
 			if (diceRoll != 0)
@@ -428,7 +431,7 @@ public partial class Main : Node2D
 
 			if (player.Health > 0)
 			{
-				GD.Print(player.Name + " staat op " + spacesInfo[player.PositionSpace].Name +player.PositionSpace + " na " + diceRoll + " te hebben gegooid.");
+				GD.Print(player.Name + " staat op " + spacesInfo[player.PositionSpace].Name + player.PositionSpace + " na " + diceRoll + " te hebben gegooid.");
 			}
 
 		}
@@ -440,13 +443,13 @@ public partial class Main : Node2D
 			GD.Print(player.Name + " Had to skip his turn!");
 		}
 	}
-	async Task<int> AwaitButtonPress(Player player, int PlayerNumber)
+	async Task<int> AwaitButtonPress(Player player)
 	{
 		waitingforbuttonpress = true;
 		while (waitingforbuttonpress)
 		{
 
-			if (Input.IsActionJustPressed($"A_{PlayerNumber}"))
+			if (Input.IsActionJustPressed($"A_{WhatPlayer}"))
 			{
 				diceRoll = basicdice.diceroll();
 				player.Currency -= basicdice.Price;
@@ -454,7 +457,7 @@ public partial class Main : Node2D
 				waitingforbuttonpress = false;
 				return diceRoll;
 			}
-			else if (Input.IsActionJustPressed($"B_{PlayerNumber}"))
+			else if (Input.IsActionJustPressed($"B_{WhatPlayer}"))
 			{
 				diceRoll = betterdice.diceroll();
 				player.Currency -= betterdice.Price;
@@ -463,7 +466,7 @@ public partial class Main : Node2D
 				return diceRoll;
 
 			}
-			else if (Input.IsActionJustPressed($"X_{PlayerNumber}"))
+			else if (Input.IsActionJustPressed($"X_{WhatPlayer}"))
 			{
 				diceRoll = riskydice.diceroll();
 				player.Currency -= riskydice.Price;
@@ -472,7 +475,7 @@ public partial class Main : Node2D
 				return diceRoll;
 
 			}
-			else if (Input.IsActionJustPressed($"Y_{PlayerNumber}"))
+			else if (Input.IsActionJustPressed($"Y_{WhatPlayer}"))
 			{
 				diceRoll = turbodice.diceroll();
 				player.Currency -= turbodice.Price;
@@ -586,13 +589,13 @@ public partial class Main : Node2D
 		player.PositionSpace = 9;
 	}
 
-	async Task RazorcapPurchase(Player player, int PlayerNumber)
+	async Task RazorcapPurchase(Player player)
 	{
 		bool waitingforbuttonpressRazorcap = true;
 		GD.Print("Do you want to buy the razorcap for 50 pounds? Press left bumper for yes, right bumper for no");
 		while (waitingforbuttonpressRazorcap)
 		{
-			if (Input.IsActionJustPressed($"yes_{PlayerNumber}"))
+			if (Input.IsActionJustPressed($"yes_{WhatPlayer}"))
 			{
 				player.Currency -= 50;
 				player.HasCap = true;
@@ -604,7 +607,7 @@ public partial class Main : Node2D
 				waitingforbuttonpressRazorcap = false;
 
 			}
-			else if (Input.IsActionJustPressed($"no_{PlayerNumber}"))
+			else if (Input.IsActionJustPressed($"no_{WhatPlayer}"))
 			{
 				GD.Print("you don't want it? fuck off then");
 				waitingforbuttonpressRazorcap = false;
@@ -686,7 +689,7 @@ public partial class Main : Node2D
 
 	}
 
-	async Task ShopAsk(Player player, int PlayerNumber)
+	async Task ShopAsk(Player player)
 	{
 		bool RunLoop = true;
 		if (player.Currency > 0)
@@ -694,13 +697,13 @@ public partial class Main : Node2D
 			GD.Print("do you want to shop for items here? Left bumper for YES, right bumper for NO");
 			while (RunLoop)
 			{
-				if (Input.IsActionJustPressed($"yes_{PlayerNumber}")) //yes i want to shop
+				if (Input.IsActionJustPressed($"yes_{WhatPlayer}")) //yes i want to shop
 				{
 					GD.Print("Okay, come on in");
-					await GenerateShopInv(player, PlayerNumber);
+					await GenerateShopInv(player);
 					RunLoop = false;
 				}
-				else if (Input.IsActionJustPressed($"no_{PlayerNumber}")) //no i dont want to shop
+				else if (Input.IsActionJustPressed($"no_{WhatPlayer}")) //no i dont want to shop
 				{
 					GD.Print("Okay, fuck off then");
 					RunLoop = false;
@@ -711,7 +714,7 @@ public partial class Main : Node2D
 
 		}
 	}
-	async Task GenerateShopInv(Player player, int PlayerNumber)
+	async Task GenerateShopInv(Player player)
 	{
 		GD.Print("Shop inv generated");
 		List<int> randomList = new List<int>();
@@ -735,13 +738,13 @@ public partial class Main : Node2D
 					runloop = false;
 				}
 
-				await Shop(ShopInv, player, PlayerNumber);
+				await Shop(ShopInv, player);
 
 			}
 		}
 
 	}
-	async Task Shop((string Name, int Price)[] Shopinv, Player player, int PlayerNumber)
+	async Task Shop((string Name, int Price)[] Shopinv, Player player)
 	{
 		GD.Print("Welcome to the shop, these are my wares: " + Shopinv[0] + ", " + Shopinv[1] + " ," + Shopinv[2]);
 		bool runloop = true;
@@ -752,21 +755,21 @@ public partial class Main : Node2D
 			string ChosenItem = "0";
 			while (runLoop2)
 			{
-				if (Input.IsActionJustPressed($"D-Pad-left_{PlayerNumber}"))
+				if (Input.IsActionJustPressed($"D-Pad-left_{WhatPlayer}"))
 				{
 					if (player.Currency >= Shopinv[0].Price)
 						ChosenItem = Shopinv[0].Name;
 					GD.Print("chose item: " + ChosenItem);
 					runLoop2 = false;
 				}
-				if (Input.IsActionJustPressed($"D-Pad-up_{PlayerNumber}"))
+				if (Input.IsActionJustPressed($"D-Pad-up_{WhatPlayer}"))
 				{
 					if (player.Currency >= Shopinv[1].Price)
 						ChosenItem = Shopinv[1].Name;
 					GD.Print("chose item: " + ChosenItem);
 					runLoop2 = false;
 				}
-				if (Input.IsActionJustPressed($"D-Pad-right_{PlayerNumber}"))
+				if (Input.IsActionJustPressed($"D-Pad-right_{WhatPlayer}"))
 				{
 					if (player.Currency >= Shopinv[2].Price)
 						ChosenItem = Shopinv[2].Name;
@@ -780,7 +783,7 @@ public partial class Main : Node2D
 
 			while (runLoop3)
 			{
-				if (Input.IsActionJustPressed($"B_{PlayerNumber}") || Input.IsActionJustPressed($"yes_{PlayerNumber}"))
+				if (Input.IsActionJustPressed($"B_{WhatPlayer}") || Input.IsActionJustPressed($"yes_{WhatPlayer}"))
 				{
 					runloop = false;
 					runLoop3 = false;
@@ -788,7 +791,7 @@ public partial class Main : Node2D
 					GD.Print(player.Name + "has chose item " + ItemConfirm);
 
 				}
-				if (Input.IsActionJustPressed($"A_{PlayerNumber}") || Input.IsActionJustPressed($"no_{PlayerNumber}"))
+				if (Input.IsActionJustPressed($"A_{WhatPlayer}") || Input.IsActionJustPressed($"no_{WhatPlayer}"))
 				{
 					runLoop3 = false;
 					GD.Print("choose another item");
@@ -814,37 +817,38 @@ public partial class Main : Node2D
 
 
 
-	async Task<string> ChooseUseItem(Player player, int PlayerNumber)
+	async Task<string> ChooseUseItem(Player player)
 	{
 		string useditem;
 		bool RunLoop = true;
 		GD.Print("in choose use item");
 		while (RunLoop)
 		{
-			if (Input.IsActionJustPressed($"yes_{PlayerNumber}"))
+			if (Input.IsActionJustPressed($"yes_{WhatPlayer}"))
 			{
 				GD.Print("said yes");
-				useditem = await ChooseItem(player, PlayerNumber);
-				
+				useditem = await ChooseItem(player);
+
 				return useditem;
 			}
-			else if (Input.IsActionJustPressed($"no_{PlayerNumber}"))
+			else if (Input.IsActionJustPressed($"no_{WhatPlayer}"))
 			{
 				GD.Print("said no");
-				
+
 				return "nouseditem";
 			}
 			await ToSignal(GetTree().CreateTimer(0), "timeout");
 		}
 		return "nouseditem";
 	}
-	async Task<string> ChooseItem(Player player, int PlayerNumber)
-	{		string useditem = "";
+	async Task<string> ChooseItem(Player player)
+	{
+		string useditem = "";
 		GD.Print("in Choose item");
 		useItem = true;
 		while (useItem)
 		{
-			if (Input.IsActionJustPressed($"D-Pad-left_{PlayerNumber}"))
+			if (Input.IsActionJustPressed($"D-Pad-left_{WhatPlayer}"))
 			{
 				itemId = player.Inventory[0];
 				switch (itemId)
@@ -857,7 +861,7 @@ public partial class Main : Node2D
 						await DoubleDice(player);
 						GD.Print("Used item a Double Dice, it has vanished from their inventory.");
 						useditem = "dice";
-							player.Inventory[0] = "0";
+						player.Inventory[0] = "0";
 						return useditem;
 					case "2":
 						// Example effect for item 2
@@ -866,9 +870,9 @@ public partial class Main : Node2D
 						break;
 
 				}
-								
+
 			}
-			if (Input.IsActionJustPressed($"D-Pad-up_{PlayerNumber}"))
+			if (Input.IsActionJustPressed($"D-Pad-up_{WhatPlayer}"))
 			{
 				itemId = player.Inventory[1];
 				switch (itemId)
@@ -879,7 +883,7 @@ public partial class Main : Node2D
 						break;
 					case "DoubleDice":
 						GD.Print("Used item a Double Dice, it has vanished from their inventory.");
-						await DoubleDice(player);						
+						await DoubleDice(player);
 						useditem = "dice";
 						player.Inventory[1] = "0";
 						return useditem;
@@ -889,13 +893,13 @@ public partial class Main : Node2D
 
 						break;
 				}
-				
+
 			}
-			if (Input.IsActionJustPressed($"D-Pad-right_{PlayerNumber}"))
-			{
+			if (Input.IsActionJustPressed($"D-Pad-right_{WhatPlayer}"))
+			{ 
 				itemId = player.Inventory[2];
 				switch (itemId)
-				{
+				{ 
 					case "0":
 						GD.Print("no item in this slot");
 
@@ -912,17 +916,18 @@ public partial class Main : Node2D
 
 						break;
 				}
-				
+
 			}
-			if (Input.IsActionJustPressed($"D-Pad-down_{PlayerNumber}"))
+			if (Input.IsActionJustPressed($"D-Pad-down_{WhatPlayer}"))
 			{
-				useItem = false;			
+				useItem = false;
 
 			}
 			await ToSignal(GetTree().CreateTimer(0), "timeout");
 		}
 		return useditem;
 	}
+	//items en item spaces
 	void Whiskey(Player player)
 	{
 		GD.Print("you found a bottle of whiskey and drank it all");
@@ -930,24 +935,51 @@ public partial class Main : Node2D
 		player.Currency -= player.Currency / 3;
 		GD.Print("You got too drunk and went on a spending spree! also you have to skip your next turn because of your hangover");
 	}
-	async Task DoubleDice(Player player)
+	void GoldenPipe(Player player) //KAN ALLEEN AANGEVRAAGD WORDEN ALS DE razorcapspace op het bord zit!
+	{
+		for (int i = 0; i < spacesAmount; i++)
+		{
+			if (spacesInfo[i].Name == "Razorcap_Space")
+			{
+				if (i == 0)
+				{
+					player.Position = spacesInfo[41].Space.Position;
+					player.PositionSpace = 41;
+				}
+				else
+				{
+					player.Position = spacesInfo[i - 1].Space.Position;
+					player.PositionSpace = i - 1;
+				}
+			}
+		}
+	}
+	async Task DoubleDice(Player player) //2X 1-6 dice
 	{
 		int eyecount1 = rnd.Next(1, 7);
 		int eyecount2 = rnd.Next(1, 7);
-		int diceRoll = eyecount1 + eyecount2;
-		await StartMovement(player, diceRoll, WhatPlayer);
+		diceRoll = eyecount1 + eyecount2;
+		await StartMovement(player, diceRoll);
 
 	}
-	async Task TwentyDice(Player player)
+	async Task TripleDice(Player player) // 3x 1-6 dice
+	{
+		int eyecount1 = riskydice.diceroll();
+		int eyecount2 = riskydice.diceroll();
+		int eyecount3 = riskydice.diceroll();
+		diceRoll = eyecount1 + eyecount2 + eyecount3;
+		await StartMovement(player, diceRoll);
+	}
+	async Task TwentyDice(Player player) //dice van -20 tot +20
 	{
 		diceRoll = twentydice.diceroll();
-		await StartMovement(player, diceRoll, WhatPlayer);
+		await StartMovement(player, diceRoll);
 
 	}
 	async Task TenDice(Player player)
 	{
 		diceRoll = tendice.diceroll();
-		await StartMovement(player, diceRoll, WhatPlayer);
+		await StartMovement(player, diceRoll);
 	}
 	void ChooseMiniGame()
 	{
