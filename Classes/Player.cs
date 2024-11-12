@@ -8,6 +8,7 @@ public partial class Player : CharacterBody2D
 	{
 		currency = 100;
 		health = 100;
+		inventory = new string[3] {"0", "0", "0"};
 	}
 
 	private int currency;
@@ -82,6 +83,19 @@ public partial class Player : CharacterBody2D
 		set
 		{
 			hasCap = value;
+		}
+	}
+	private string[] inventory;
+	
+	public string[] Inventory
+	{
+		get
+		{
+			return inventory;
+		}
+		set
+		{
+			inventory = value;
 		}
 	}
 }

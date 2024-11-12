@@ -38,8 +38,10 @@ public partial class Main : Node2D
 
 	private (Node2D Space, string Name, string OriginalName)[] spacesInfo;
 	private (string Name, int Price)[] Iteminfo; // hier gaan de namen van alle items in
-	bool waitingforbuttonpress = true;
-	bool ContinueLoop = true;
+	bool waitingforbuttonpress;
+	bool ContinueLoop;
+	bool useItem;
+	string itemId;
 	int WhatPlayer;
 	public override void _Ready()
 	{
@@ -75,6 +77,7 @@ public partial class Main : Node2D
 		player2 = GetNode<Player>("player2");
 		player2.Position = topRight;
 		player2.PositionSpace = 9;
+
 
 		player3 = GetNode<Player>("player3");
 		player3.Position = botLeft;
@@ -114,7 +117,7 @@ public partial class Main : Node2D
 	}
 	async Task Movement(Player player, int diceRoll)
 	{
-
+		ContinueLoop = true;
 		for (int i = 0; i < diceRoll && ContinueLoop; i++)
 		{
 
@@ -124,7 +127,24 @@ public partial class Main : Node2D
 				for (int x = 0; x < Playerlist.Length; x++) // cycled door elke speler heen zolang de speler nog dicerolls heeft
 				{
 					int spaceinfront = (player.PositionSpace + 1) % spacesInfo.Length;
+					//15 en 36 zijn hetzelfde vak
+					if (spaceinfront == 15 || spaceinfront == 36)
+					{
+						int Otherspace;
+						if (spaceinfront == 15)
+						{
+							Otherspace = 36;
+						}
+						else Otherspace = 15;
+						if (Otherspace == Playerlist[x].PositionSpace && i != diceRoll) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
+						{
+							GD.Print("naar razorattack");
 
+							RazorCapAttack(player, Playerlist[x]);
+
+							ContinueLoop = false;
+						}
+					}
 					if (spaceinfront == Playerlist[x].PositionSpace && i != diceRoll) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
 					{
 						GD.Print("naar razorattack");
@@ -144,16 +164,35 @@ public partial class Main : Node2D
 			await ToSignal(GetTree().CreateTimer(0.4), "timeout");
 		}
 
-		ContinueLoop = true;
+
 	}
 	async Task NegMovement(Player player, int diceRoll)
 	{
+		ContinueLoop = true;
+
 		for (int i = 0; i > diceRoll && ContinueLoop; i--)
 		{
 
 			for (int x = 0; x < Playerlist.Length; x++) // cycled door elke speler heenzolang de speler nog dicerolls heeft
 			{
 				int spaceBehind = (player.PositionSpace - 1 + spacesInfo.Length) % spacesInfo.Length;
+				if (spaceBehind == 15 || spaceBehind == 36)
+				{
+					int Otherspace;
+					if (spaceBehind == 15)
+					{
+						Otherspace = 36;
+					}
+					else Otherspace = 15;
+					if (Otherspace == Playerlist[x].PositionSpace && Playerlist[x].HasCap && i != diceRoll) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
+					{
+						GD.Print("naar razorattack");
+
+						RazorCapAttack(Playerlist[x], player);
+
+						ContinueLoop = false;
+					}
+				}
 
 				if (spaceBehind == Playerlist[x].PositionSpace && Playerlist[x].HasCap && i != diceRoll) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, en de andere speler heeft een cap hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
 				{
@@ -297,7 +336,7 @@ public partial class Main : Node2D
 		if (player.SkipTurn == false) // dit checkt of de speler zen beurt moet overslaan
 		{
 			//choose wich dice, hiervoor hebben we de shop mechanic + een shop menu nodig
-
+			await ChooseUseItem(player, WhatPlayer);
 			diceRoll = await AwaitButtonPress(WhatPlayer); // ik kies nu betterdice maar dit moet dus eigenlijk gedaan worden via buttons in het menu? idk wrs kunenn we gwn doen A is dice 1, B is dice 2, X is dice 3 met kleine animatie.
 			await StartMovement(player, diceRoll);
 			if (diceRoll != 0)
@@ -498,11 +537,22 @@ public partial class Main : Node2D
 	{
 
 		int rndRazorCapSpace = rnd.Next(0, 42);
-		Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{2 + 1}"); // het is + 1 omdat de markers 1 voorop lopen met de spaces tellen dan we in de index hebben staan
+		if (rndRazorCapSpace == 15 || rndRazorCapSpace == 36) //voor het middelste vak, waar de cap niet mag komen.
+		{
+			rndRazorCapSpace += 1;
+		}
+		for (int i = 0; i < Playerlist.Length; i++)
+		{
+			if (rndRazorCapSpace == Playerlist[i].PositionSpace)
+			{
+				rndRazorCapSpace += 1;
+			}
+		}
+		Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{rndRazorCapSpace + 1}"); // het is + 1 omdat de markers 1 voorop lopen met de spaces tellen dan we in de index hebben staan
 
 		var sprite = markerNode.GetChild<Sprite2D>(0);
 		sprite.Texture = GD.Load<Texture2D>("res://assets/Spaces/RazorCap_Space.png");
-		spacesInfo[2].Name = "Razorcap_Space";
+		spacesInfo[41].Name = "Razorcap_Space";
 		GD.Print("razorcap ligt op vak " + rndRazorCapSpace);
 
 	}
@@ -580,5 +630,117 @@ public partial class Main : Node2D
 
 
 	}
+	async Task DoubleDice(Player player)
+	{
+		int eyecount1 = rnd.Next(1, 7);
+		int eyecount2 = rnd.Next(1, 7);
+		int eyecountTotal = eyecount1 + eyecount1;
+		await StartMovement(player, eyecountTotal);
+	}
 
+	async Task ChooseUseItem(Player player, int PlayerNumber)
+	{
+		bool RunLoop1 = true;
+		GD.Print("in choose use item");
+		while (RunLoop1)
+		{
+			if (Input.IsActionJustPressed($"yes_{PlayerNumber}"))
+			{
+				GD.Print("said yes");
+				await ChooseItem(player, PlayerNumber);
+				RunLoop1 = false;
+			}
+			else if (Input.IsActionJustPressed($"no_{PlayerNumber}"))
+			{
+				GD.Print("said no");
+				RunLoop1 = false;
+			}
+			await ToSignal(GetTree().CreateTimer(0), "timeout");
+		}
+	}
+	async Task ChooseItem(Player player, int PlayerNumber)
+	{
+		GD.Print("in Choose item");
+		useItem = true;
+		while (useItem)
+		{
+			if (Input.IsActionJustPressed($"D-Pad-left_{PlayerNumber}"))
+			{
+				itemId = player.Inventory[0];
+				switch (itemId)
+				{
+					case "0":
+						GD.Print("no item in this slot");
+						
+						break;
+					case "1":
+						await DoubleDice(player);
+						GD.Print("Used item a Double Dice, it has vanished from their inventory.");
+						
+						break;
+					case "2":
+						// Example effect for item 2
+						GD.Print("test");
+						
+						break;
+						
+				}
+				player.Inventory[0] = "0";
+
+			}
+			if (Input.IsActionJustPressed($"D-Pad-up_{PlayerNumber}"))
+			{
+				itemId = player.Inventory[1];
+				switch (itemId)
+				{
+					case "0":
+						GD.Print("no item in this slot");
+						
+						break;
+					case "1":
+						await DoubleDice(player);
+						GD.Print("Used item a Double Dice, it has vanished from their inventory.");
+						
+						break;
+					case "2":
+						// Example effect for item 2
+						GD.Print("test");
+						
+						break;
+				}
+				player.Inventory[1] = "0";
+
+			}
+			if (Input.IsActionJustPressed($"D-Pad-right_{PlayerNumber}"))
+			{
+				itemId = player.Inventory[2];
+				switch (itemId)
+				{
+					case "0":
+						GD.Print("no item in this slot");
+						
+						break;
+					case "1":
+						await DoubleDice(player);
+						GD.Print("Used item a Double Dice, it has vanished from their inventory.");
+						
+						break;
+					case "2":
+						// Example effect for item 2
+						GD.Print("test");
+						
+						break;
+				}
+				player.Inventory[2] = "0";
+
+			}
+			if (Input.IsActionJustPressed($"D-Pad-down_{PlayerNumber}"))
+			{
+				useItem = false;
+
+			}
+			await ToSignal(GetTree().CreateTimer(0), "timeout");
+		}
+	}
 }
+
