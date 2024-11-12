@@ -25,7 +25,7 @@ public partial class Main : Node2D
 
 
 	Random rnd = new Random();
-	
+
 	private AudioStreamPlayer dobbelgeluid;
 
 	Dice basicdice;
@@ -121,25 +121,26 @@ public partial class Main : Node2D
 			if (player.HasCap) //checkt of current speler de cap heeft
 			{
 				GD.Print("in playerhascap check");
-				for (int x = 0; x < Playerlist.Length && i != diceRoll; x++) // cycled door elke speler heen zolang de speler nog dicerolls heeft
+				for (int x = 0; x < Playerlist.Length; x++) // cycled door elke speler heen zolang de speler nog dicerolls heeft
 				{
-					int spaceinfront = (player.PositionSpace + 2) % spacesInfo.Length;
+					int spaceinfront = (player.PositionSpace + 1) % spacesInfo.Length;
 
-					if (spaceinfront == Playerlist[x].PositionSpace && Playerlist[x] != player) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
-					{	
+					if (spaceinfront == Playerlist[x].PositionSpace && i != diceRoll) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
+					{
 						GD.Print("naar razorattack");
-						
+
 						RazorCapAttack(player, Playerlist[x]);
 
 						ContinueLoop = false;
 					}
 				}
 			}
-			
-			player.PositionSpace = (player.PositionSpace + 1) % spacesInfo.Length;
+			if (ContinueLoop)
+			{
+				player.PositionSpace = (player.PositionSpace + 1) % spacesInfo.Length;
 
-			player.Position = spacesInfo[player.PositionSpace].Space.Position;
-
+				player.Position = spacesInfo[player.PositionSpace].Space.Position;
+			}
 			await ToSignal(GetTree().CreateTimer(0.4), "timeout");
 		}
 
@@ -150,21 +151,24 @@ public partial class Main : Node2D
 		for (int i = 0; i > diceRoll && ContinueLoop; i--)
 		{
 
-			player.PositionSpace = (player.PositionSpace - 1 + spacesInfo.Length) % spacesInfo.Length; //dit zorgt voor de wrap around, dat hij door kan als hij bij het aan het einde aankomt.
-			
-			player.Position = spacesInfo[player.PositionSpace].Space.Position;
-			
-			for (int x = 0; x < Playerlist.Length && i != diceRoll; x++) // cycled door elke speler heenzolang de speler nog dicerolls heeft
+			for (int x = 0; x < Playerlist.Length; x++) // cycled door elke speler heenzolang de speler nog dicerolls heeft
 			{
 				int spaceBehind = (player.PositionSpace - 1 + spacesInfo.Length) % spacesInfo.Length;
-				
-				if (spaceBehind == Playerlist[x].PositionSpace && Playerlist[x] != player && Playerlist[x].HasCap) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, en de andere speler heeft een cap hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
+
+				if (spaceBehind == Playerlist[x].PositionSpace && Playerlist[x].HasCap && i != diceRoll) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, en de andere speler heeft een cap hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
 				{
-					RazorCapAttack(player, Playerlist[x]);
+					RazorCapAttack(Playerlist[x], player);
 
 					ContinueLoop = false;
 				}
 			}
+			if (ContinueLoop)
+			{
+				player.PositionSpace = (player.PositionSpace - 1 + spacesInfo.Length) % spacesInfo.Length; //dit zorgt voor de wrap around, dat hij door kan als hij bij het aan het einde aankomt.
+
+				player.Position = spacesInfo[player.PositionSpace].Space.Position;
+			}
+
 			await ToSignal(GetTree().CreateTimer(0.4), "timeout");
 		}
 
@@ -235,21 +239,21 @@ public partial class Main : Node2D
 	{
 		if (player1.Health != 0)
 		{
-			await Turn_Test(player1);
+			await Turn_Player(player1);
 		}
 		if (player2.Health != 0)
 		{
-			await Turn_Test(player2);
+			await Turn_Player(player2);
 		}
 		if (player3.Health != 0)
 		{
-			await Turn_Test(player3);
+			await Turn_Player(player3);
 		}
 		if (player4.Health != 0)
 		{
-			await Turn_Test(player4);
-		}		
-		
+			await Turn_Player(player4);
+		}
+
 		TurnCount++;
 		if (CheckWinCondition()) //functie checkt of alle spelers op 1 na dood zijn, of dat er 15 turns voorbij zijn gegaan.
 		{
@@ -286,7 +290,7 @@ public partial class Main : Node2D
 		GD.Print("einde van turn " + TurnCount + ". " + (TurnCount + 1) + " begint nu!");
 		WhatPlayer = 0;
 	}
-	async Task Turn_Test(Player player)
+	async Task Turn_Player(Player player)
 	{
 		WhatPlayer++;
 		GD.Print(player.Name + " Its your turn!");
@@ -305,13 +309,13 @@ public partial class Main : Node2D
 			{
 				GD.Print(player.Name + " staat op " + spacesInfo[player.PositionSpace].Name + " na " + diceRoll + " te hebben gegooid.");
 			}
-			
+
 		}
 
 
 		else
 		{
-			player.SkipTurn = true;// dit zorgt ervoor dat next turn deze speler wel dingen mag doen
+			player.SkipTurn = false;// dit zorgt ervoor dat next turn deze speler wel dingen mag doen
 			GD.Print(player.Name + " Had to skip his turn!");
 		}
 	}
@@ -439,12 +443,12 @@ public partial class Main : Node2D
 			{
 				player.Currency -= 50;
 				player.HasCap = true;
-				waitingforbuttonpressRazorcap = false;
 				spacesInfo[player.PositionSpace].Name = spacesInfo[player.PositionSpace].OriginalName;
 				Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{player.PositionSpace + 1}");
 				var sprite = markerNode.GetChild<Sprite2D>(0);
 				sprite.Texture = GD.Load<Texture2D>($"res://assets/Spaces/{spacesInfo[player.PositionSpace].OriginalName}.png");
 				GD.Print(player.Name + " just bought the razor cap");
+				waitingforbuttonpressRazorcap = false;
 
 			}
 			else if (Input.IsActionJustPressed($"no_{PlayerNumber}"))
@@ -523,57 +527,58 @@ public partial class Main : Node2D
 	{
 
 	}
-	
+
 	async void ShopAsk(Player player)
-	{ bool RunLoop = true;
-		if(player.Currency > 0)
+	{
+		bool RunLoop = true;
+		if (player.Currency > 0)
 		{
 			GD.Print("do you want to shop for items here? Left bumper for YES, right bumper for NO");
-			while(RunLoop)
+			while (RunLoop)
 			{
-				if(Input.IsActionJustPressed("yes")) //yes i want to shop
+				if (Input.IsActionJustPressed("yes")) //yes i want to shop
 				{
 					GD.Print("Okay, come on in");
 					await GenerateShopInv(player);
 					RunLoop = false;
 				}
-				else if(Input.IsActionJustPressed("no")) //no i dont want to shop
+				else if (Input.IsActionJustPressed("no")) //no i dont want to shop
 				{
 					GD.Print("Okay, fuck off then");
 					RunLoop = false;
 				}
 				await ToSignal(GetTree().CreateTimer(0), "timeout");
 			}
-			
-			
+
+
 		}
 	}
 	async Task GenerateShopInv(Player player)
-	{ 
-	List<int> randomList = new List<int>();
-	List<String> ShopInv = new List<string>();
-		int rnditem = rnd.Next(0,5);
-		if(!randomList.Contains(rnditem))
+	{
+		List<int> randomList = new List<int>();
+		List<String> ShopInv = new List<string>();
+		int rnditem = rnd.Next(0, 5);
+		if (!randomList.Contains(rnditem))
 		{
-			randomList.Add(rnditem); 
+			randomList.Add(rnditem);
 		}
-		if(randomList.Count() == 3)
+		if (randomList.Count() == 3)
 		{
-		
-		for(int i = 0; i < 3; i++)
-		{
-			ShopInv.Add(Iteminfo[randomList[i]].Name); //pakt 3 random getallen en kiest 3 items.
-		}
+
+			for (int i = 0; i < 3; i++)
+			{
+				ShopInv.Add(Iteminfo[randomList[i]].Name); //pakt 3 random getallen en kiest 3 items.
+			}
 			await Shop(ShopInv);
 		}
-		
+
 	}
-	async Task Shop(List<string> Shopinv) 
+	async Task Shop(List<string> Shopinv)
 	{
-		GD.Print("Welcome to the shop, these are my wares: "+ Shopinv[0] + ", " + Shopinv[1] + " ," + Shopinv[2]);
-		
-		
-		
+		GD.Print("Welcome to the shop, these are my wares: " + Shopinv[0] + ", " + Shopinv[1] + " ," + Shopinv[2]);
+
+
+
 	}
 
 }
