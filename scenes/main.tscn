@@ -24,7 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://meqcks5t4j1q" path="res://assets/Player2.png" id="20_epi1k"]
 [ext_resource type="Texture2D" uid="uid://c0ysmcgfrk0hq" path="res://assets/Player3.png" id="21_56lhf"]
 [ext_resource type="Texture2D" uid="uid://cha53i6v5dxbx" path="res://assets/player4.png" id="22_mmax3"]
-[ext_resource type="PackedScene" uid="uid://c2dkuem4bxt8d" path="res://scenes/HorseRace.tscn" id="25_kb01l"]
+[ext_resource type="PackedScene" path="res://scenes/HorseRace.tscn" id="25_kb01l"]
 [ext_resource type="Script" path="res://scripts/UI.cs" id="26_3o2pn"]
 [ext_resource type="AudioStream" uid="uid://3w3hotdkdetk" path="res://assets/Muziek/diceeee-99427.mp3" id="27_agmsy"]
 
