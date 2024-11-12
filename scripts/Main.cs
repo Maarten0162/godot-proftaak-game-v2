@@ -27,6 +27,7 @@ public partial class Main : Node2D
 	Random rnd = new Random();
 
 	private AudioStreamPlayer dobbelgeluid;
+	
 
 	Dice basicdice;
 	Dice betterdice;
@@ -38,9 +39,11 @@ public partial class Main : Node2D
 
 	private (Node2D Space, string Name, string OriginalName)[] spacesInfo;
 	private (string Name, int Price)[] Iteminfo; // hier gaan de namen van alle items in
+	private (string Name, int Price)[] ShopInv;
 	bool waitingforbuttonpress;
 	bool ContinueLoop;
 	bool useItem;
+	string ChosenItem;
 	string itemId;
 	int WhatPlayer;
 	public override void _Ready()
@@ -299,7 +302,7 @@ public partial class Main : Node2D
 			EndGame();
 		}
 
-		if (TurnCount == 1) //dit zorgt ervoor dat de cap gaat spawnen
+		if (TurnCount == 0) //dit zorgt ervoor dat de cap gaat spawnen
 		{
 			bool RunLoop = true;
 			while (RunLoop)
@@ -578,7 +581,7 @@ public partial class Main : Node2D
 
 	}
 
-	async void ShopAsk(Player player)
+	async void ShopAsk(Player player, int PlayerNumber)
 	{
 		bool RunLoop = true;
 		if (player.Currency > 0)
@@ -589,7 +592,7 @@ public partial class Main : Node2D
 				if (Input.IsActionJustPressed("yes")) //yes i want to shop
 				{
 					GD.Print("Okay, come on in");
-					await GenerateShopInv(player);
+					await GenerateShopInv(player, PlayerNumber);
 					RunLoop = false;
 				}
 				else if (Input.IsActionJustPressed("no")) //no i dont want to shop
@@ -603,10 +606,9 @@ public partial class Main : Node2D
 
 		}
 	}
-	async Task GenerateShopInv(Player player)
+	async Task GenerateShopInv(Player player, int PlayerNumber)
 	{
 		List<int> randomList = new List<int>();
-		List<String> ShopInv = new List<string>();
 		int rnditem = rnd.Next(0, 5);
 		if (!randomList.Contains(rnditem))
 		{
@@ -617,15 +619,73 @@ public partial class Main : Node2D
 
 			for (int i = 0; i < 3; i++)
 			{
-				ShopInv.Add(Iteminfo[randomList[i]].Name); //pakt 3 random getallen en kiest 3 items.
+				ShopInv[i] = (Iteminfo[randomList[i]].Name, Iteminfo[randomList[i]].Price); //pakt 3 random getallen en kiest 3 items.
 			}
-			await Shop(ShopInv);
+			await Shop(ShopInv, player, PlayerNumber);
 		}
 
 	}
-	async Task Shop(List<string> Shopinv)
+	async Task Shop((string Name, int Price)[] Shopinv, Player player, int PlayerNumber)
 	{
 		GD.Print("Welcome to the shop, these are my wares: " + Shopinv[0] + ", " + Shopinv[1] + " ," + Shopinv[2]);
+		bool runloop = true;
+		string ItemConfirm = "X";
+		while (runloop)
+		{
+			bool runLoop2 = true;
+			string ChosenItem = "0";			
+			while (runLoop2)
+			{
+				if (Input.IsActionJustPressed($"D-Pad-left_{PlayerNumber}"))
+				{
+					if (player.Currency >= Shopinv[0].Price)
+						ChosenItem = Shopinv[0].Name;
+					runLoop2 = false;
+				}
+				if (Input.IsActionJustPressed($"D-Pad-up_{PlayerNumber}"))
+				{
+					if (player.Currency >= Shopinv[1].Price)
+						ChosenItem = Shopinv[1].Name;
+					runLoop2 = false;
+				}
+				if (Input.IsActionJustPressed($"D-Pad-right_{PlayerNumber}"))
+				{
+					if (player.Currency >= Shopinv[2].Price)
+						ChosenItem = Shopinv[2].Name;
+					runLoop2 = false;
+				}
+				await ToSignal(GetTree().CreateTimer(0), "timeout");
+
+			}
+			bool runLoop3 = true;
+
+			while (runLoop3)
+			{
+				if (Input.IsActionJustPressed($"B_{PlayerNumber}"))
+				{
+					runloop = false;
+					runLoop3 = false;
+					ItemConfirm = ChosenItem;
+				}
+				if (Input.IsActionJustPressed($"A_{PlayerNumber}"))
+				{
+					runLoop3 = false;
+					GD.Print("choose another item");
+
+				}
+				await ToSignal(GetTree().CreateTimer(0), "timeout");
+			}
+		}
+		bool runloop4 = true;
+		for(int i = 0; i <= 2 && runloop4; i++)
+		{
+			if(player.Inventory[i] != "0")
+			{
+				player.Inventory[i] = ItemConfirm;
+				runloop4 = false;				
+			}
+		}
+
 
 
 
@@ -640,20 +700,20 @@ public partial class Main : Node2D
 
 	async Task ChooseUseItem(Player player, int PlayerNumber)
 	{
-		bool RunLoop1 = true;
+		bool RunLoop = true;
 		GD.Print("in choose use item");
-		while (RunLoop1)
+		while (RunLoop)
 		{
 			if (Input.IsActionJustPressed($"yes_{PlayerNumber}"))
 			{
 				GD.Print("said yes");
 				await ChooseItem(player, PlayerNumber);
-				RunLoop1 = false;
+				RunLoop = false;
 			}
 			else if (Input.IsActionJustPressed($"no_{PlayerNumber}"))
 			{
 				GD.Print("said no");
-				RunLoop1 = false;
+				RunLoop = false;
 			}
 			await ToSignal(GetTree().CreateTimer(0), "timeout");
 		}
@@ -671,19 +731,19 @@ public partial class Main : Node2D
 				{
 					case "0":
 						GD.Print("no item in this slot");
-						
+
 						break;
-					case "1":
+					case "DoubleDice":
 						await DoubleDice(player);
 						GD.Print("Used item a Double Dice, it has vanished from their inventory.");
-						
+
 						break;
 					case "2":
 						// Example effect for item 2
 						GD.Print("test");
-						
+
 						break;
-						
+
 				}
 				player.Inventory[0] = "0";
 
@@ -695,17 +755,17 @@ public partial class Main : Node2D
 				{
 					case "0":
 						GD.Print("no item in this slot");
-						
+
 						break;
-					case "1":
+					case "DoubleDice":
 						await DoubleDice(player);
 						GD.Print("Used item a Double Dice, it has vanished from their inventory.");
-						
+
 						break;
 					case "2":
 						// Example effect for item 2
 						GD.Print("test");
-						
+
 						break;
 				}
 				player.Inventory[1] = "0";
@@ -718,17 +778,17 @@ public partial class Main : Node2D
 				{
 					case "0":
 						GD.Print("no item in this slot");
-						
+
 						break;
-					case "1":
+					case "DoubleDice":
 						await DoubleDice(player);
 						GD.Print("Used item a Double Dice, it has vanished from their inventory.");
-						
+
 						break;
 					case "2":
 						// Example effect for item 2
 						GD.Print("test");
-						
+
 						break;
 				}
 				player.Inventory[2] = "0";

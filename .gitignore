@@ -4,3 +4,6 @@
 README_Development.md
 
 .fake
+.vscode/launch.json
+.vscode/settings.json
+.vscode/tasks.json
