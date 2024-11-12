@@ -126,7 +126,9 @@ public partial class Main : Node2D
 					int spaceinfront = (player.PositionSpace + 2) % spacesInfo.Length;
 
 					if (spaceinfront == Playerlist[x].PositionSpace && Playerlist[x] != player) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
-					{	GD.Print("naar razorattack");
+					{	
+						GD.Print("naar razorattack");
+						
 						RazorCapAttack(player, Playerlist[x]);
 
 						ContinueLoop = false;
@@ -149,10 +151,13 @@ public partial class Main : Node2D
 		{
 
 			player.PositionSpace = (player.PositionSpace - 1 + spacesInfo.Length) % spacesInfo.Length; //dit zorgt voor de wrap around, dat hij door kan als hij bij het aan het einde aankomt.
+			
 			player.Position = spacesInfo[player.PositionSpace].Space.Position;
+			
 			for (int x = 0; x < Playerlist.Length && i != diceRoll; x++) // cycled door elke speler heenzolang de speler nog dicerolls heeft
 			{
 				int spaceBehind = (player.PositionSpace - 1 + spacesInfo.Length) % spacesInfo.Length;
+				
 				if (spaceBehind == Playerlist[x].PositionSpace && Playerlist[x] != player && Playerlist[x].HasCap) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, en de andere speler heeft een cap hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
 				{
 					RazorCapAttack(player, Playerlist[x]);
