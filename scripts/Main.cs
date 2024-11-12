@@ -361,19 +361,25 @@ public partial class Main : Node2D
 	}
 	async Task Turn_Player(Player player)
 	{
-		WhatPlayer++;
+		WhatPlayer++;		
 		GD.Print(player.Name + " Its your turn!");
 		if (player.SkipTurn == false) // dit checkt of de speler zen beurt moet overslaan
 		{
 			//choose wich dice, hiervoor hebben we de shop mechanic + een shop menu nodig
+			
 			// await ChooseUseItem(player, WhatPlayer);
+			
 			diceRoll = await AwaitButtonPress(WhatPlayer); // ik kies nu betterdice maar dit moet dus eigenlijk gedaan worden via buttons in het menu? idk wrs kunenn we gwn doen A is dice 1, B is dice 2, X is dice 3 met kleine animatie.
+			
 			await StartMovement(player, diceRoll, WhatPlayer);
+			
 			if (diceRoll != 0)
 			{       // zorgt ervoor dat als iemand 0  gooit de space niet nog een keer geactivate word, dat willen we niet.
 				await Placedetection(spacesInfo[player.PositionSpace].Name, player);
 			}
+			
 			EmitSignal("updateplayerui", player);
+			
 			if (player.Health > 0)
 			{
 				GD.Print(player.Name + " staat op " + spacesInfo[player.PositionSpace].Name + " na " + diceRoll + " te hebben gegooid.");
@@ -844,5 +850,13 @@ public partial class Main : Node2D
 			await ToSignal(GetTree().CreateTimer(0), "timeout");
 		}
 	}
+	void Whiskey(Player player)
+	{
+		GD.Print("you found a bottle of whiskey and drank it all");
+		player.SkipTurn = true;
+		player.Currency -= player.Currency / 3;
+		GD.Print("You got too drunk and went on a spending spree! also you have to skip your next turn because of your hangover");
+	}
+	
 }
 
