@@ -1,0 +1,117 @@
+[gd_scene load_steps=4 format=3 uid="uid://bccaf5slk3m13"]
+
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_dlj3i"]
+[ext_resource type="Texture2D" uid="uid://bpwafw7c3laa4" path="res://assets/mainmenu.png" id="2_y3xfu"]
+[ext_resource type="ButtonGroup" uid="uid://dbbww2gr8856k" path="res://player.buttongp.tres" id="3_blkf2"]
+
+[node name="Menu" type="Node2D"]
+position = Vector2(564, 299)
+script = ExtResource("1_dlj3i")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Control" type="Control" parent="Node2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Node2D/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.225
+anchor_right = 1.525
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Start Game:"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Node2D/Control/Label"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0543477
+anchor_top = -4.73913
+anchor_right = 0.336956
+anchor_bottom = -4.73913
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Spelers:
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="Mainmenu" type="Sprite2D" parent="Node2D/Control/Label"]
+position = Vector2(3, 25)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_y3xfu")
+metadata/_edit_lock_ = true
+
+[node name="Start_Button" type="Button" parent="Node2D/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.8
+anchor_top = -0.062
+anchor_right = -0.8
+anchor_bottom = -0.062
+offset_left = -50.0
+offset_top = -15.52
+offset_right = 50.0
+offset_bottom = 15.48
+text = "Start Game!"
+metadata/_edit_use_anchors_ = true
+
+[node name="3P" type="Button" parent="Node2D/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.037
+anchor_top = -2.562
+anchor_right = -1.037
+anchor_bottom = -2.562
+offset_left = -17.52
+offset_top = -15.52
+offset_right = 17.48
+offset_bottom = 15.48
+toggle_mode = true
+button_group = ExtResource("3_blkf2")
+text = "3"
+metadata/_edit_use_anchors_ = true
+
+[node name="2P" type="Button" parent="Node2D/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -2.225
+anchor_top = -2.562
+anchor_right = -2.225
+anchor_bottom = -2.562
+offset_left = -15.0
+offset_top = -15.52
+offset_right = 15.0
+offset_bottom = 15.48
+toggle_mode = true
+button_group = ExtResource("3_blkf2")
+text = "2"
+metadata/_edit_use_anchors_ = true
+
+[node name="4P" type="Button" parent="Node2D/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.275
+anchor_top = -2.562
+anchor_right = 0.275
+anchor_bottom = -2.562
+offset_left = -19.0
+offset_top = -15.52
+offset_right = 19.0
+offset_bottom = 15.48
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("3_blkf2")
+text = "4"
+metadata/_edit_use_anchors_ = true
+
+[node name="Camera2D" type="Camera2D" parent="Node2D"]
+position = Vector2(12, 25)
+scale = Vector2(0.6, 0.6)
+metadata/_edit_lock_ = true
+
+[connection signal="pressed" from="Node2D/Control/Start_Button" to="." method="_on_start_button_pressed"]

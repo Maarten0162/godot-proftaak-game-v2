@@ -1,13 +1,16 @@
 using Godot;
 using System;
+using System.Dynamic;
 
 public partial class Player : CharacterBody2D
 {
 
 	public Player()
 	{
-		currency = 10;
+		currency = 100;
 		health = 100;
+		inventory = new string[3] {"0", "DoubleDice", "0"};
+		rollAdjustment = 0;
 	}
 
 	private int currency;
@@ -38,6 +41,10 @@ public partial class Player : CharacterBody2D
 		set
 		{
 			health = value;
+			if(health < 0)
+			{
+				health = 0;
+			}
 		}
 	}
 
@@ -67,5 +74,70 @@ public partial class Player : CharacterBody2D
 			skipTurn = value;
 		}
 	}
+		private bool hasCap;
+
+	public bool HasCap
+	{
+		get
+		{
+			return hasCap;
+		}
+		set
+		{
+			hasCap = value;
+		}
+	}
+	private string[] inventory;
+	
+	public string[] Inventory
+	{
+		get
+		{
+			return inventory;
+		}
+		set
+		{
+			inventory = value;
+		}
+	}
+	private int rollAdjustment;
+	public int RollAdjustment
+	{
+		get
+		{
+			return rollAdjustment;
+		}
+		set
+		{
+			rollAdjustment = value;
+		}
+	}
+			private bool hasknuckles;
+
+	public bool HasKnuckles
+	{
+		get
+		{
+			return hasknuckles;
+		}
+		set
+		{
+			hasknuckles = value;
+		}
+	}
+				private bool hasgoldenknuckles;
+
+	public bool HasGoldenKnuckles
+	{
+		get
+		{
+			return hasgoldenknuckles;
+		}
+		set
+		{
+			hasgoldenknuckles = value;
+		}
+	}
+		
 }
 

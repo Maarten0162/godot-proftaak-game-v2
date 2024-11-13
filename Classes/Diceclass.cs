@@ -10,17 +10,42 @@ public class Dice
 	int min;
 	Random rnd = new Random();
 
-   public Dice(int min, int max)
+	private AudioStreamPlayer Dobbelgeluid;
+   public Dice(int min, int max, AudioStreamPlayer Dobbelgeluid, int price)
    {
-    this.min = min;
+	this.min = min;
 	this.max = max;
+	this.Dobbelgeluid = Dobbelgeluid;
+	this.price = price;
    }
 
 	public int diceroll()
 	{
-        int eyeCount = rnd.Next(min,max);
+		int eyeCount = rnd.Next(min,max);
+		
+	if (Dobbelgeluid != null)
+		{
+			Dobbelgeluid.Play();
+		}
+		else
+		{
+			GD.Print("Nog geen goed geluid toegevoegd.");
+		}
+		
 		return eyeCount;
 
+	}
+	private int price;
+	public int Price
+	{
+		get
+		{
+			return price;
+		}
+		set
+		{
+			price = value;
+		}
 	}
 
 }
