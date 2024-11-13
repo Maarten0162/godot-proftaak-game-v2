@@ -71,35 +71,79 @@ public partial class Main : Node2D
 			spacesInfo[i - 1] = (markerNode, sprite.Name, sprite.Name);
 			GD.Print("plek " + i + " is gevuld en de kleur is" + sprite.Name);
 		}
+		int signaal;
 
-		// Initieer de posities van de spelers
-		Vector2 topLeft = spacesInfo[0].Space.Position;
-		Vector2 topRight = spacesInfo[9].Space.Position;
-		Vector2 botLeft = spacesInfo[21].Space.Position;
-		Vector2 botRight = spacesInfo[30].Space.Position;
-
-		player1 = GetNode<Player>("player1");
+		if(signaal == 2)
+		{				Vector2 player1start = spacesInfo[0].Space.Position;
+				player1 = GetNode<Player>("player1");
+				player1.Position = player1start;
+				player1.PositionSpace = 0;
+						Vector2 player2start = spacesInfo[30].Space.Position;
+				player2 = GetNode<Player>("player2");
+				player2.Position = player2start;
+				player2.PositionSpace = 30;				
+				
+				Playerlist = new Player[2] { player1, player2};
+		for (int i = 0; i < Playerlist.Length; i++)
+		{
+			EmitSignal("updateplayerui", Playerlist[i]);
+		}
+				
+				
+		}
+		if(signaal == 3)
+		{
+			Vector2 player1start = spacesInfo[0].Space.Position;
+				player1 = GetNode<Player>("player1");
+				player1.Position = player1start;
+				player1.PositionSpace = 0;
+						Vector2 player2start = spacesInfo[9].Space.Position;
+				player2 = GetNode<Player>("player2");
+				player2.Position = player2start;
+				player2.PositionSpace = 9;	
+								Vector2 player3start = spacesInfo[30].Space.Position;
+				player3 = GetNode<Player>("player3");
+				player3.Position = player3start;
+				player3.PositionSpace = 30;
+				Playerlist = new Player[3] { player1, player2, player3};
+		for (int i = 0; i < Playerlist.Length; i++)
+		{
+			EmitSignal("updateplayerui", Playerlist[i]);
+		}
+		}
+		if(signaal == 4)
+		{	
+		
+		
+			Vector2 topLeft = spacesInfo[0].Space.Position;
+			player1 = GetNode<Player>("player1");
 		player1.Position = topLeft;
 		player1.PositionSpace = 0;
 
+		Vector2 topRight = spacesInfo[9].Space.Position;
 		player2 = GetNode<Player>("player2");
 		player2.Position = topRight;
 		player2.PositionSpace = 9;
 
-
+		Vector2 botLeft = spacesInfo[21].Space.Position;
 		player3 = GetNode<Player>("player3");
 		player3.Position = botLeft;
 		player3.PositionSpace = 21;
 
+		Vector2 botRight = spacesInfo[30].Space.Position;
 		player4 = GetNode<Player>("player4");
 		player4.Position = botRight;
 		player4.PositionSpace = 30;
-
+		
 		Playerlist = new Player[4] { player1, player2, player3, player4 };
 		for (int i = 0; i < Playerlist.Length; i++)
 		{
 			EmitSignal("updateplayerui", Playerlist[i]);
 		}
+		}
+		
+
+		
 
 		Iteminfo = new (string Name, int Price)[15] { ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10), ("test", 10) };
 		ShopInv = new (string Name, int Price)[3] { ("test", 10), ("test", 10), ("test", 10) };
@@ -112,8 +156,8 @@ public partial class Main : Node2D
 
 		dobbelSprite = GetNode<AnimatedSprite2D>("dobbelSprite");
 		dobbelSprite.Play("0");
-
-		TurnLoop();
+		ChooseTurn();
+		
 	}
 
 
@@ -142,7 +186,7 @@ public partial class Main : Node2D
 		{
 			int spaceinfront = (player.PositionSpace + 1) % spacesInfo.Length;
 
-			if (player.HasCap || player.HasKnuckles) //checkt of current speler de cap heeft
+			if (player.HasCap || player.HasKnuckles || player.HasGoldenKnuckles) //checkt of current speler de cap heeft
 			{
 
 				GD.Print("in playerhascap check");
@@ -161,27 +205,28 @@ public partial class Main : Node2D
 						if (Otherspace == Playerlist[x].PositionSpace && i != diceRoll && player != Playerlist[x]) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
 						{
 
-							if (player.HasKnuckles)
+							if (player.HasKnuckles || player.HasGoldenKnuckles)
 							{
 								KnucklesAttack(player, Playerlist[x]);
 							}
+							else if(player.HasCap){
 							RazorCapAttack(player, Playerlist[x]);
 							hasattacked = true;
-
+							}
 							ContinueLoop = false;
 						}
 					}
 					if (spaceinfront == Playerlist[x].PositionSpace && i != diceRoll && player != Playerlist[x]) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
 					{
 
-						if (player.HasKnuckles)
+						if (player.HasKnuckles || player.HasGoldenKnuckles)
 						{
 							KnucklesAttack(player, Playerlist[x]);
 						}
-
+						else if(player.HasCap){
 						RazorCapAttack(player, Playerlist[x]);
 						hasattacked = true;
-
+						}
 						ContinueLoop = false;
 					}
 
@@ -247,12 +292,14 @@ public partial class Main : Node2D
 					else Otherspace = 15;
 					if (Otherspace == Playerlist[x].PositionSpace && i != diceRoll && player != Playerlist[x] && (Playerlist[x].HasCap || Playerlist[x].HasKnuckles)) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
 					{
-						if (player.HasKnuckles)
+						if (player.HasKnuckles|| player.HasKnuckles)
 						{
 							KnucklesAttack(player, Playerlist[x]);
 						}
+						else if(player.HasCap){
 						RazorCapAttack(Playerlist[x], player);
 						hasattacked = true;
+						}
 						ContinueLoop = false;
 					}
 				}
@@ -263,9 +310,12 @@ public partial class Main : Node2D
 					{
 						KnucklesAttack(player, Playerlist[x]);
 					}
+					else if(player.HasCap){
 					RazorCapAttack(Playerlist[x], player);
 					hasattacked = true;
+					}
 					ContinueLoop = false;
+					
 				}
 			}
 
@@ -362,7 +412,7 @@ public partial class Main : Node2D
 	}
 
 	//TURNS
-	async Task Turn()
+	async Task Turn4()
 	{
 		if (player1.Health != 0)
 		{
@@ -436,8 +486,9 @@ public partial class Main : Node2D
 				await StartMovement(player, diceRoll);
 			}
 
-			if (diceRoll != 0)
-			{       // zorgt ervoor dat als iemand 0  gooit de space niet nog een keer geactivate word, dat willen we niet.
+			if (diceRoll != 0)// zorgt ervoor dat als iemand 0  gooit de space niet nog een keer geactivate word, dat willen we niet.
+			{
+				player.RollAdjustment = 0; //dit zorgt ervoor dat volgende turn deze geen roll buff of debuff heeft.
 				await Placedetection(spacesInfo[player.PositionSpace].Name, player);
 			}
 
@@ -454,7 +505,7 @@ public partial class Main : Node2D
 		}
 
 
-		player.RollAdjustment = 0; //dit zorgt ervoor dat volgende turn deze geen roll buff of debuff heeft.
+
 		player.SkipTurn = false;// dit zorgt ervoor dat next turn deze speler wel dingen mag doen
 		GD.Print(player.Name + " Had to skip his turn!");
 
@@ -546,15 +597,29 @@ public partial class Main : Node2D
 		GD.Print("GEEN BUTTON GEPRESSED, ERROR ERROR ERROR");
 		return 0;
 	}
-	private async void TurnLoop()
+	private async void ChooseTurn()
 	{
-
+		if(Playerlist.Length == 4){
 		while (true)
 		{
 
-			await Turn();
+			await Turn4();
 
-		}
+		}}
+			if(Playerlist.Length == 3){
+		while (true)
+		{
+
+			await Turn3();
+
+		}}
+			if(Playerlist.Length == 2){
+		while (true)
+		{
+
+			await Turn2();
+
+		}}
 	}
 
 	//EVENTSPACES
@@ -689,11 +754,11 @@ public partial class Main : Node2D
 				rndRazorCapSpace += 1;
 			}
 		}
-		Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{6 + 1}"); // het is + 1 omdat de markers 1 voorop lopen met de spaces tellen dan we in de index hebben staan
+		Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{rndRazorCapSpace + 1}"); // het is + 1 omdat de markers 1 voorop lopen met de spaces tellen dan we in de index hebben staan
 
 		var sprite = markerNode.GetChild<Sprite2D>(0);
 		sprite.Texture = GD.Load<Texture2D>("res://assets/Spaces/RazorCap_Space.png");
-		spacesInfo[6].Name = "Razorcap_Space";
+		spacesInfo[rndRazorCapSpace].Name = "Razorcap_Space";
 		GD.Print("razorcap ligt op vak " + rndRazorCapSpace);
 
 	}
@@ -1121,12 +1186,13 @@ public partial class Main : Node2D
 					}
 				}
 				if (howmanyitems != 0) // de gekozen speler heeft items
-				{	bool runloop2 = true;
+				{
+					bool runloop2 = true;
 					for (int i = 0; i <= 2 && runloop2; i++)
 					{
 						if (player.Inventory[i] != "0")
 						{
-							player.Inventory[i] = Playerlist[rndplayer].Inventory[rnd.Next(0,3)];
+							player.Inventory[i] = Playerlist[rndplayer].Inventory[rnd.Next(0, 3)];
 							runloop1 = false;
 							runloop2 = false;
 						}
@@ -1136,15 +1202,125 @@ public partial class Main : Node2D
 
 		}
 
+
 	}
+	void GoldenKnuckles(Player player)
+	{
+		player.HasGoldenKnuckles = true;
+	}
+	
 	void GangRaid(Player player)// !ITEM SPACE, mensen die hier op landen moeten een deel van hun coins afstaan aan de eigenaar van dit vak of in de pot
 	{
-		
-	} 
+
+	}
 	void ChooseMiniGame()
 	{
 		int Whatminigame = rnd.Next(1, MiniGames.Length);
 		GetTree().ChangeSceneToFile($"pathtoscene{Whatminigame}");//hier pakt hij 1 van de minigames die net random is gekozen.
+	}
+	async Task Turn3()
+	{
+		if (player1.Health != 0)
+		{
+			await Turn_Player(player1);
+		}
+		if (player2.Health != 0)
+		{
+			await Turn_Player(player2);
+		}
+		if (player3.Health != 0)
+		{
+			await Turn_Player(player3);
+		}
+
+
+		TurnCount++;
+
+		if (CheckWinCondition()) //functie checkt of alle spelers op 1 na dood zijn, of dat er 15 turns voorbij zijn gegaan.
+		{
+			EndGame();
+		}
+		ChooseMiniGame();
+
+		if (TurnCount >= 0) //dit zorgt ervoor dat de cap gaat spawnen
+		{
+			bool RunLoop = true;
+			while (RunLoop)
+			{
+				for (int i = 0; i < Playerlist.Length; i++)
+				{
+					if (Playerlist[i].HasCap)
+					{
+						RunLoop = false; //checkt of iemand de cap heeft, zoja spawnt de cap niet
+					}
+				}
+				for (int i = 0; i < spacesInfo.Length; i++)
+				{
+					if (spacesInfo[i].Name == "Razorcap_Space")
+					{
+						RunLoop = false; //checkt of de map nog te kopen is op de map, zoja spawnt de cap niet
+					}
+				}
+				if (RunLoop)
+				{
+					SpawnRazorCap();
+					RunLoop = false;
+				}
+
+			}
+		}
+		GD.Print("einde van turn " + TurnCount + ". " + (TurnCount + 1) + " begint nu!");
+		WhatPlayer = 0;
+	}
+	async Task Turn2()
+	{
+		if (player1.Health != 0)
+		{
+			await Turn_Player(player1);
+		}
+		if (player2.Health != 0)
+		{
+			await Turn_Player(player2);
+		}
+
+
+		TurnCount++;
+
+		if (CheckWinCondition()) //functie checkt of alle spelers op 1 na dood zijn, of dat er 15 turns voorbij zijn gegaan.
+		{
+			EndGame();
+		}
+		ChooseMiniGame();
+
+		if (TurnCount >= 0) //dit zorgt ervoor dat de cap gaat spawnen
+		{
+			bool RunLoop = true;
+			while (RunLoop)
+			{
+				for (int i = 0; i < Playerlist.Length; i++)
+				{
+					if (Playerlist[i].HasCap)
+					{
+						RunLoop = false; //checkt of iemand de cap heeft, zoja spawnt de cap niet
+					}
+				}
+				for (int i = 0; i < spacesInfo.Length; i++)
+				{
+					if (spacesInfo[i].Name == "Razorcap_Space")
+					{
+						RunLoop = false; //checkt of de map nog te kopen is op de map, zoja spawnt de cap niet
+					}
+				}
+				if (RunLoop)
+				{
+					SpawnRazorCap();
+					RunLoop = false;
+				}
+
+			}
+		}
+		GD.Print("einde van turn " + TurnCount + ". " + (TurnCount + 1) + " begint nu!");
+		WhatPlayer = 0;
 	}
 
 }

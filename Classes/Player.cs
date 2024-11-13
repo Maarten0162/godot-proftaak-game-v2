@@ -125,7 +125,19 @@ public partial class Player : CharacterBody2D
 			hasknuckles = value;
 		}
 	}
-	
+				private bool hasgoldenknuckles;
+
+	public bool HasGoldenKnuckles
+	{
+		get
+		{
+			return hasgoldenknuckles;
+		}
+		set
+		{
+			hasgoldenknuckles = value;
+		}
+	}
 		
 }
 

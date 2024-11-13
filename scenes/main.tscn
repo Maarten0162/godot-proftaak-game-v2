@@ -193,7 +193,7 @@ animations = [{
 script = ExtResource("1_xihgb")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(564, 315)
+position = Vector2(564, 316)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_f4udn")
 
