@@ -13,6 +13,11 @@ public partial class Main : Node2D
 	private AnimatedSprite2D dobbelSprite;
 
 	int spacesAmount = 42;
+	public Button buttonmin1;
+	public Button buttonmin2;
+	public Button buttonplus1;
+	public Button buttonplus2;
+	
 	public Player player1;
 	public Player player2;
 	public Player player3;
@@ -71,7 +76,7 @@ public partial class Main : Node2D
 			spacesInfo[i - 1] = (markerNode, sprite.Name, sprite.Name);
 			GD.Print("plek " + i + " is gevuld en de kleur is" + sprite.Name);
 		}
-		int signaal;
+		int signaal = 0;
 
 		if(signaal == 2)
 		{				Vector2 player1start = spacesInfo[0].Space.Position;
@@ -91,7 +96,7 @@ public partial class Main : Node2D
 				
 				
 		}
-		if(signaal == 3)
+		else if(signaal == 3)
 		{
 			Vector2 player1start = spacesInfo[0].Space.Position;
 				player1 = GetNode<Player>("player1");
@@ -111,7 +116,7 @@ public partial class Main : Node2D
 			EmitSignal("updateplayerui", Playerlist[i]);
 		}
 		}
-		if(signaal == 4)
+		else if(signaal == 4)
 		{	
 		
 		
@@ -406,6 +411,11 @@ public partial class Main : Node2D
 		{
 			int robbedAmount = RobSomeone(player);
 			GD.Print("You just robbed someone! you gained " + robbedAmount + " Pounds!");
+		}
+		else if (typeOfSpace == "bearTrap_Space")
+		{
+			GD.Print(player.Name + " walked into a beartrap");
+			await BearTrapHit(player);
 		}
 		await Task.CompletedTask;
 
@@ -1321,6 +1331,78 @@ public partial class Main : Node2D
 		}
 		GD.Print("einde van turn " + TurnCount + ". " + (TurnCount + 1) + " begint nu!");
 		WhatPlayer = 0;
+	}
+		async Task selectTrapPositon() 
+	{
+		buttonmin1 = new Button();
+		buttonmin2 = new Button();
+		buttonplus1 = new Button();
+		buttonplus2 = new Button();
+		
+		
+   		AddChild(buttonmin1);
+		AddChild(buttonmin2);
+		AddChild(buttonplus1);
+		AddChild(buttonplus2);
+		
+		buttonmin1.ZIndex = 3;
+		buttonmin2.ZIndex = 3;
+		buttonplus1.ZIndex = 3;
+		buttonplus2.ZIndex = 3;
+		
+		buttonmin1.Text = "-1";
+		buttonmin2.Text = "-2";
+		buttonplus1.Text = "+1";
+		buttonplus2.Text = "+2";
+		
+		buttonmin1.Pressed += ()=> beartrapamount(-1);
+		buttonmin2.Pressed += ()=> beartrapamount(-2);
+		buttonplus1.Pressed += ()=> beartrapamount(-1);
+		buttonplus2.Pressed += ()=> beartrapamount(-2);
+		
+		buttonmin1.Position = new Vector2(501, 318);
+		buttonmin2.Position = new Vector2(471, 318);
+		buttonplus1.Position = new Vector2(561, 318);	
+		buttonplus2.Position = new Vector2(591, 318);
+		
+		
+		buttonmin1.Show();
+		buttonmin2.Show();
+		buttonplus1.Show();
+		buttonplus2.Show();
+	}
+	
+	
+	private void beartrapamount(int bearTrapSpaceAmount) 
+	{
+		GD.Print(bearTrapSpaceAmount);
+		int bearTrapSpace = player1.PositionSpace + bearTrapSpaceAmount;
+		Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{bearTrapSpace + 1}"); // het is + 1 omdat de markers 1 voorop lopen met de spaces tellen dan we in de index hebben staan
+
+		var sprite = markerNode.GetChild<Sprite2D>(0);
+		GD.Print("test");
+		sprite.Texture = GD.Load<Texture2D>("res://assets/Spaces/bearTrap_Space.png");
+		spacesInfo[bearTrapSpace].Name = "bearTrap_Space";
+		GD.Print(spacesInfo[bearTrapSpace].Name);
+		GD.Print("Beartrap ligt op vak " + bearTrapSpace);
+		buttonmin1.Hide();
+		buttonmin2.Hide();
+		buttonplus1.Hide();
+		buttonplus2.Hide();
+		
+		buttonmin1.ZIndex = 0;
+		buttonmin2.ZIndex = 0;
+		buttonplus1.ZIndex = 0;
+		buttonplus2.ZIndex = 0;
+		
+	}
+	
+	async Task BearTrapHit(Player player) 
+	{
+		player.Health -= 20;
+		player.SkipTurn = true;
+		
+		
 	}
 
 }
