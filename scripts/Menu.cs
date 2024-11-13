@@ -48,7 +48,7 @@ public partial class Menu : Node2D
 	{	}
 	private void StartGame(int Speler)
 	{
-		if(Speler == 0)
+		if(GlobalVariables.Instance.playeramount == 0)
 		{
 			GD.Print("Selecteer het aantal spelers");
 		}
@@ -63,7 +63,7 @@ public partial class Menu : Node2D
 		ktwee.Position = new Godot.Vector2(-80000, -70000);
 		kdrie.Position = new Godot.Vector2(-350000, -70000);
 		kvier.Position = new Godot.Vector2(100000, -70000);
-		Speler = 2;
+		GlobalVariables.Instance.playeramount = 2;
 		
 	}
 	private void drie()
@@ -71,13 +71,13 @@ public partial class Menu : Node2D
 		ktwee.Position = new Godot.Vector2(-80000, -70000);
 		kdrie.Position = new Godot.Vector2(-350000, -70000);
 		kvier.Position = new Godot.Vector2(100000, -70000);
-		Speler = 3;
+		GlobalVariables.Instance.playeramount = 3;
 	}
 	private void vier()
 	{
 		ktwee.Position = new Godot.Vector2(-80000, -70000);
 		kdrie.Position = new Godot.Vector2(-350000, -70000);
 		kvier.Position = new Godot.Vector2(100000, -70000);
-		Speler = 4;
+		GlobalVariables.Instance.playeramount = 4;
 	}
 }
