@@ -1406,7 +1406,8 @@ public partial class Main : Node2D
 	async Task BearTrapHit(Player player) 
 	{
 		player.Health -= 20;
-		player.SkipTurn = true;		
+		player.SkipTurn = true;	
+			
 		
 	}
 
