@@ -76,7 +76,7 @@ public partial class Main : Node2D
 			spacesInfo[i - 1] = (markerNode, sprite.Name, sprite.Name);
 			GD.Print("plek " + i + " is gevuld en de kleur is" + sprite.Name);
 		}
-		int signaal = 0;
+		int signaal = 4;
 
 		if(signaal == 2)
 		{				Vector2 player1start = spacesInfo[0].Space.Position;
@@ -161,6 +161,12 @@ public partial class Main : Node2D
 
 		dobbelSprite = GetNode<AnimatedSprite2D>("dobbelSprite");
 		dobbelSprite.Play("0");
+		
+		buttonmin1 = new Button();
+		buttonmin2 = new Button();
+		buttonplus1 = new Button();
+		buttonplus2 = new Button();
+		
 		ChooseTurn();
 		
 	}
@@ -237,7 +243,7 @@ public partial class Main : Node2D
 
 				}
 			}
-			if ((spaceinfront == 6 || spaceinfront == 24) && hasattacked == false)
+			if ((spaceinfront == 6 || spaceinfront == 24) && hasattacked == false) //SHOP REGISTRATIE
 			{
 
 				bool hasitemspace = false;
@@ -255,13 +261,18 @@ public partial class Main : Node2D
 				{
 					await ShopAsk(player);
 				}
-			}
+			}			
 			if (ContinueLoop)
 			{
 				player.PositionSpace = (player.PositionSpace + 1) % spacesInfo.Length;
 
 				player.Position = spacesInfo[player.PositionSpace].Space.Position;
 			}
+			if(spacesInfo[player.PositionSpace].Name == "bearTrap_Space")
+			{
+				await BearTrapHit(player);
+				ContinueLoop = false;
+			}			
 			if (spacesInfo[player.PositionSpace].Name == "Razorcap_Space" && i != diceRoll)
 			{
 				if (player.Currency >= 50)
@@ -324,7 +335,7 @@ public partial class Main : Node2D
 				}
 			}
 
-			if ((spaceBehind == 5 || spaceBehind == 23) && !hasattacked)
+			if ((spaceBehind == 5 || spaceBehind == 23) && !hasattacked) // SHOP
 			{
 
 				bool hasitemspace = false;
@@ -356,6 +367,11 @@ public partial class Main : Node2D
 					await RazorcapPurchase(player);
 				}
 				else GD.Print("sorry " + player.Name + " you don't have enough pounds.");
+			}
+			if(spacesInfo[player.PositionSpace].Name == "bearTrap_Space")
+			{
+				await BearTrapHit(player);
+				ContinueLoop = false;
 			}
 
 			await ToSignal(GetTree().CreateTimer(0.4), "timeout");
@@ -412,11 +428,6 @@ public partial class Main : Node2D
 			int robbedAmount = RobSomeone(player);
 			GD.Print("You just robbed someone! you gained " + robbedAmount + " Pounds!");
 		}
-		else if (typeOfSpace == "bearTrap_Space")
-		{
-			GD.Print(player.Name + " walked into a beartrap");
-			await BearTrapHit(player);
-		}
 		await Task.CompletedTask;
 
 	}
@@ -447,8 +458,113 @@ public partial class Main : Node2D
 		{
 			EndGame();
 		}
-		ChooseMiniGame();
+		// ChooseMiniGame();
+		await selectTrapPositon();
+		if (TurnCount >= 0) //dit zorgt ervoor dat de cap gaat spawnen
+		{
+			bool RunLoop = true;
+			while (RunLoop)
+			{
+				for (int i = 0; i < Playerlist.Length; i++)
+				{
+					if (Playerlist[i].HasCap)
+					{
+						RunLoop = false; //checkt of iemand de cap heeft, zoja spawnt de cap niet
+					}
+				}
+				for (int i = 0; i < spacesInfo.Length; i++)
+				{
+					if (spacesInfo[i].Name == "Razorcap_Space")
+					{
+						RunLoop = false; //checkt of de map nog te kopen is op de map, zoja spawnt de cap niet
+					}
+				}
+				if (RunLoop)
+				{
+					SpawnRazorCap();
+					RunLoop = false;
+				}
 
+			}
+		}
+		GD.Print("einde van turn " + TurnCount + ". " + (TurnCount + 1) + " begint nu!");
+		WhatPlayer = 0;
+	}
+		async Task Turn3()
+	{
+		if (player1.Health != 0)
+		{
+			await Turn_Player(player1);
+		}
+		if (player2.Health != 0)
+		{
+			await Turn_Player(player2);
+		}
+		if (player3.Health != 0)
+		{
+			await Turn_Player(player3);
+		}
+
+
+		TurnCount++;
+
+		if (CheckWinCondition()) //functie checkt of alle spelers op 1 na dood zijn, of dat er 15 turns voorbij zijn gegaan.
+		{
+			EndGame();
+		}
+		// ChooseMiniGame();
+		await selectTrapPositon();
+		if (TurnCount >= 0) //dit zorgt ervoor dat de cap gaat spawnen
+		{
+			bool RunLoop = true;
+			while (RunLoop)
+			{
+				for (int i = 0; i < Playerlist.Length; i++)
+				{
+					if (Playerlist[i].HasCap)
+					{
+						RunLoop = false; //checkt of iemand de cap heeft, zoja spawnt de cap niet
+					}
+				}
+				for (int i = 0; i < spacesInfo.Length; i++)
+				{
+					if (spacesInfo[i].Name == "Razorcap_Space")
+					{
+						RunLoop = false; //checkt of de map nog te kopen is op de map, zoja spawnt de cap niet
+					}
+				}
+				if (RunLoop)
+				{
+					SpawnRazorCap();
+					RunLoop = false;
+				}
+
+			}
+		}
+		GD.Print("einde van turn " + TurnCount + ". " + (TurnCount + 1) + " begint nu!");
+		WhatPlayer = 0;
+	}
+	async Task Turn2()
+	{
+		if (player1.Health != 0)
+		{
+			await Turn_Player(player1);
+		}
+		if (player2.Health != 0)
+		{
+			await Turn_Player(player2);
+		}
+
+
+		TurnCount++;
+
+		if (CheckWinCondition()) //functie checkt of alle spelers op 1 na dood zijn, of dat er 15 turns voorbij zijn gegaan.
+		{
+			EndGame();
+		}
+		// ChooseMiniGame();
+
+		await selectTrapPositon();
 		if (TurnCount >= 0) //dit zorgt ervoor dat de cap gaat spawnen
 		{
 			bool RunLoop = true;
@@ -488,7 +604,7 @@ public partial class Main : Node2D
 			//choose wich dice, hiervoor hebben we de shop mechanic + een shop menu nodig
 
 			string useditem = await ChooseUseItem(player);
-			diceRoll += player.RollAdjustment;
+			diceRoll += player.RollAdjustment;			
 			if (useditem != "dice")
 			{
 				diceRoll = await AwaitButtonPress(player); // ik kies nu betterdice maar dit moet dus eigenlijk gedaan worden via buttons in het menu? idk wrs kunenn we gwn doen A is dice 1, B is dice 2, X is dice 3 met kleine animatie.
@@ -1214,130 +1330,20 @@ public partial class Main : Node2D
 
 
 	}
-	void GoldenKnuckles(Player player)
+	void GoldenKnuckles(Player player) // oldenknuckles, knuckles die niet kapot gaan.
 	{
 		player.HasGoldenKnuckles = true;
-	}
-	
-	void GangRaid(Player player)// !ITEM SPACE, mensen die hier op landen moeten een deel van hun coins afstaan aan de eigenaar van dit vak of in de pot
-	{
+	}	
 
-	}
-	void ChooseMiniGame()
-	{
-		int Whatminigame = rnd.Next(1, MiniGames.Length);
-		GetTree().ChangeSceneToFile($"pathtoscene{Whatminigame}");//hier pakt hij 1 van de minigames die net random is gekozen.
-	}
-	async Task Turn3()
-	{
-		if (player1.Health != 0)
-		{
-			await Turn_Player(player1);
-		}
-		if (player2.Health != 0)
-		{
-			await Turn_Player(player2);
-		}
-		if (player3.Health != 0)
-		{
-			await Turn_Player(player3);
-		}
+	// void ChooseMiniGame()
+	// {
+	// 	int Whatminigame = rnd.Next(1, MiniGames.Length);
+	// 	GetTree().ChangeSceneToFile($"pathtoscene{Whatminigame}");//hier pakt hij 1 van de minigames die net random is gekozen.
+	// }
 
-
-		TurnCount++;
-
-		if (CheckWinCondition()) //functie checkt of alle spelers op 1 na dood zijn, of dat er 15 turns voorbij zijn gegaan.
-		{
-			EndGame();
-		}
-		ChooseMiniGame();
-
-		if (TurnCount >= 0) //dit zorgt ervoor dat de cap gaat spawnen
-		{
-			bool RunLoop = true;
-			while (RunLoop)
-			{
-				for (int i = 0; i < Playerlist.Length; i++)
-				{
-					if (Playerlist[i].HasCap)
-					{
-						RunLoop = false; //checkt of iemand de cap heeft, zoja spawnt de cap niet
-					}
-				}
-				for (int i = 0; i < spacesInfo.Length; i++)
-				{
-					if (spacesInfo[i].Name == "Razorcap_Space")
-					{
-						RunLoop = false; //checkt of de map nog te kopen is op de map, zoja spawnt de cap niet
-					}
-				}
-				if (RunLoop)
-				{
-					SpawnRazorCap();
-					RunLoop = false;
-				}
-
-			}
-		}
-		GD.Print("einde van turn " + TurnCount + ". " + (TurnCount + 1) + " begint nu!");
-		WhatPlayer = 0;
-	}
-	async Task Turn2()
-	{
-		if (player1.Health != 0)
-		{
-			await Turn_Player(player1);
-		}
-		if (player2.Health != 0)
-		{
-			await Turn_Player(player2);
-		}
-
-
-		TurnCount++;
-
-		if (CheckWinCondition()) //functie checkt of alle spelers op 1 na dood zijn, of dat er 15 turns voorbij zijn gegaan.
-		{
-			EndGame();
-		}
-		ChooseMiniGame();
-
-		if (TurnCount >= 0) //dit zorgt ervoor dat de cap gaat spawnen
-		{
-			bool RunLoop = true;
-			while (RunLoop)
-			{
-				for (int i = 0; i < Playerlist.Length; i++)
-				{
-					if (Playerlist[i].HasCap)
-					{
-						RunLoop = false; //checkt of iemand de cap heeft, zoja spawnt de cap niet
-					}
-				}
-				for (int i = 0; i < spacesInfo.Length; i++)
-				{
-					if (spacesInfo[i].Name == "Razorcap_Space")
-					{
-						RunLoop = false; //checkt of de map nog te kopen is op de map, zoja spawnt de cap niet
-					}
-				}
-				if (RunLoop)
-				{
-					SpawnRazorCap();
-					RunLoop = false;
-				}
-
-			}
-		}
-		GD.Print("einde van turn " + TurnCount + ". " + (TurnCount + 1) + " begint nu!");
-		WhatPlayer = 0;
-	}
 		async Task selectTrapPositon() 
-	{
-		buttonmin1 = new Button();
-		buttonmin2 = new Button();
-		buttonplus1 = new Button();
-		buttonplus2 = new Button();
+	{	GD.Print("in buttonselect");
+		
 		
 		
    		AddChild(buttonmin1);
@@ -1357,8 +1363,8 @@ public partial class Main : Node2D
 		
 		buttonmin1.Pressed += ()=> beartrapamount(-1);
 		buttonmin2.Pressed += ()=> beartrapamount(-2);
-		buttonplus1.Pressed += ()=> beartrapamount(-1);
-		buttonplus2.Pressed += ()=> beartrapamount(-2);
+		buttonplus1.Pressed += ()=> beartrapamount(1);
+		buttonplus2.Pressed += ()=> beartrapamount(2);
 		
 		buttonmin1.Position = new Vector2(501, 318);
 		buttonmin2.Position = new Vector2(471, 318);
@@ -1400,8 +1406,7 @@ public partial class Main : Node2D
 	async Task BearTrapHit(Player player) 
 	{
 		player.Health -= 20;
-		player.SkipTurn = true;
-		
+		player.SkipTurn = true;		
 		
 	}
 
