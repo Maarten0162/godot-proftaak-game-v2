@@ -22,7 +22,7 @@ public partial class Main : Node2D
 	public Player player2;
 	public Player player3;
 	public Player player4;
-	Player[] Playerlist;
+	public Player[] Playerlist;
 
 
 	[Signal]
@@ -54,6 +54,7 @@ public partial class Main : Node2D
 	string ChosenItem;
 	string itemId;
 	int WhatPlayer;
+	public int PlayerAmount;
 	public override void _Ready()
 	{
 		dobbelgeluid = GetNode<AudioStreamPlayer>("Dobbelgeluid");
@@ -76,9 +77,9 @@ public partial class Main : Node2D
 			spacesInfo[i - 1] = (markerNode, sprite.Name, sprite.Name);
 			GD.Print("plek " + i + " is gevuld en de kleur is" + sprite.Name);
 		}
-		int signaal = 4;
+		int PlayerAmount = 4; 
 
-		if(signaal == 2)
+		if(PlayerAmount == 2)
 		{				Vector2 player1start = spacesInfo[0].Space.Position;
 				player1 = GetNode<Player>("player1");
 				player1.Position = player1start;
@@ -89,14 +90,14 @@ public partial class Main : Node2D
 				player2.PositionSpace = 30;				
 				
 				Playerlist = new Player[2] { player1, player2};
-		for (int i = 0; i < Playerlist.Length; i++)
+		for (int i = 0; i < PlayerAmount; i++)
 		{
 			EmitSignal("updateplayerui", Playerlist[i]);
 		}
 				
 				
 		}
-		else if(signaal == 3)
+		else if(PlayerAmount == 3)
 		{
 			Vector2 player1start = spacesInfo[0].Space.Position;
 				player1 = GetNode<Player>("player1");
@@ -111,12 +112,12 @@ public partial class Main : Node2D
 				player3.Position = player3start;
 				player3.PositionSpace = 30;
 				Playerlist = new Player[3] { player1, player2, player3};
-		for (int i = 0; i < Playerlist.Length; i++)
+		for (int i = 0; i < PlayerAmount; i++)
 		{
 			EmitSignal("updateplayerui", Playerlist[i]);
 		}
 		}
-		else if(signaal == 4)
+		else if(PlayerAmount == 4)
 		{	
 		
 		
@@ -141,7 +142,7 @@ public partial class Main : Node2D
 		player4.PositionSpace = 30;
 		
 		Playerlist = new Player[4] { player1, player2, player3, player4 };
-		for (int i = 0; i < Playerlist.Length; i++)
+		for (int i = 0; i < PlayerAmount; i++)
 		{
 			EmitSignal("updateplayerui", Playerlist[i]);
 		}
@@ -201,7 +202,7 @@ public partial class Main : Node2D
 			{
 
 				GD.Print("in playerhascap check");
-				for (int x = 0; x < Playerlist.Length; x++) // cycled door elke speler heen zolang de speler nog dicerolls heeft 
+				for (int x = 0; x < PlayerAmount; x++) // cycled door elke speler heen zolang de speler nog dicerolls heeft 
 				{
 
 					//15 en 36 zijn hetzelfde vak
@@ -295,7 +296,7 @@ public partial class Main : Node2D
 		{
 			int spaceBehind = (player.PositionSpace - 1 + spacesInfo.Length) % spacesInfo.Length;
 
-			for (int x = 0; x < Playerlist.Length; x++) // cycled door elke speler heenzolang de speler nog dicerolls heeft
+			for (int x = 0; x < PlayerAmount; x++) // cycled door elke speler heenzolang de speler nog dicerolls heeft
 			{
 
 				if (spaceBehind == 15 || spaceBehind == 36)
@@ -465,7 +466,7 @@ public partial class Main : Node2D
 			bool RunLoop = true;
 			while (RunLoop)
 			{
-				for (int i = 0; i < Playerlist.Length; i++)
+				for (int i = 0; i < PlayerAmount; i++)
 				{
 					if (Playerlist[i].HasCap)
 					{
@@ -519,7 +520,7 @@ public partial class Main : Node2D
 			bool RunLoop = true;
 			while (RunLoop)
 			{
-				for (int i = 0; i < Playerlist.Length; i++)
+				for (int i = 0; i < PlayerAmount; i++)
 				{
 					if (Playerlist[i].HasCap)
 					{
@@ -570,7 +571,7 @@ public partial class Main : Node2D
 			bool RunLoop = true;
 			while (RunLoop)
 			{
-				for (int i = 0; i < Playerlist.Length; i++)
+				for (int i = 0; i < PlayerAmount; i++)
 				{
 					if (Playerlist[i].HasCap)
 					{
@@ -725,21 +726,21 @@ public partial class Main : Node2D
 	}
 	private async void ChooseTurn()
 	{
-		if(Playerlist.Length == 4){
+		if(PlayerAmount == 4){
 		while (true)
 		{
 
 			await Turn4();
 
 		}}
-			if(Playerlist.Length == 3){
+			if(PlayerAmount == 3){
 		while (true)
 		{
 
 			await Turn3();
 
 		}}
-			if(Playerlist.Length == 2){
+			if(PlayerAmount == 2){
 		while (true)
 		{
 
@@ -873,7 +874,7 @@ public partial class Main : Node2D
 		{
 			rndRazorCapSpace += 1;
 		}
-		for (int i = 0; i < Playerlist.Length; i++)
+		for (int i = 0; i < PlayerAmount; i++)
 		{
 			if (rndRazorCapSpace == Playerlist[i].PositionSpace)
 			{
@@ -892,14 +893,14 @@ public partial class Main : Node2D
 	bool CheckWinCondition()
 	{
 		int deadplayer = 0;
-		for (int i = 0; i < Playerlist.Length; i++)
+		for (int i = 0; i < PlayerAmount; i++)
 		{
 			if (Playerlist[i].Health == 0)
 			{
 				deadplayer += 1;
 			}
 		}
-		if (deadplayer == Playerlist.Length - 1 || TurnCount == 15)
+		if (deadplayer == PlayerAmount - 1 || TurnCount == 15)
 		{
 			return true;
 		}
@@ -1051,6 +1052,7 @@ public partial class Main : Node2D
 				useditem = await ChooseItem(player);
 
 				return useditem;
+				
 			}
 			else if (Input.IsActionJustPressed($"no_{WhatPlayer}"))
 			{
@@ -1136,6 +1138,7 @@ public partial class Main : Node2D
 						GD.Print("test");
 
 						break;
+						
 				}
 
 			}
@@ -1211,7 +1214,7 @@ public partial class Main : Node2D
 		bool runloop = true;
 		while (runloop)
 		{
-			int rndplayer = rnd.Next(0, Playerlist.Length);
+			int rndplayer = rnd.Next(0, PlayerAmount);
 			if (player != Playerlist[rndplayer])
 			{
 				player.Position = Playerlist[rndplayer].Position;
@@ -1226,7 +1229,7 @@ public partial class Main : Node2D
 		bool runloop = true;
 		while (runloop)
 		{
-			int rndplayer = rnd.Next(0, Playerlist.Length);
+			int rndplayer = rnd.Next(0, PlayerAmount);
 			if (player != Playerlist[rndplayer])
 			{
 				Vector2 originalposition = player.Position;
@@ -1248,7 +1251,7 @@ public partial class Main : Node2D
 		bool runloop = true;
 		while (runloop)
 		{
-			for (int i = 0; i < Playerlist.Length; i++)
+			for (int i = 0; i < PlayerAmount; i++)
 			{
 				if (Playerlist[i].HasCap)
 				{
@@ -1269,7 +1272,7 @@ public partial class Main : Node2D
 		bool runloop = true;
 		while (runloop)
 		{
-			int rndplayer = rnd.Next(0, Playerlist.Length);
+			int rndplayer = rnd.Next(0, PlayerAmount);
 			if (player != Playerlist[rndplayer])
 			{
 				Playerlist[rndplayer].RollAdjustment -= 5;
@@ -1283,7 +1286,7 @@ public partial class Main : Node2D
 		bool runloop = true;
 		while (runloop)
 		{
-			int rndplayer = rnd.Next(0, Playerlist.Length);
+			int rndplayer = rnd.Next(0, PlayerAmount);
 			if (player != Playerlist[rndplayer])
 			{
 				int stolenamount = rnd.Next(0, Playerlist[rndplayer].Currency / 5);
@@ -1301,7 +1304,7 @@ public partial class Main : Node2D
 		int howmanyitems = 0;
 		while (runloop1)
 		{
-			int rndplayer = rnd.Next(0, Playerlist.Length);
+			int rndplayer = rnd.Next(0, PlayerAmount);
 			if (player != Playerlist[rndplayer])
 			{
 				for (int i = 0; i < 2; i++)
@@ -1391,7 +1394,7 @@ public partial class Main : Node2D
 		spacesInfo[bearTrapSpace].Name = "bearTrap_Space";
 		GD.Print(spacesInfo[bearTrapSpace].Name);
 		GD.Print("Beartrap ligt op vak " + bearTrapSpace);
-		buttonmin1.Hide();
+		buttonmin1.Hide();			
 		buttonmin2.Hide();
 		buttonplus1.Hide();
 		buttonplus2.Hide();
@@ -1407,6 +1410,10 @@ public partial class Main : Node2D
 	{
 		player.Health -= 20;
 		player.SkipTurn = true;	
+			spacesInfo[player.PositionSpace].Name = spacesInfo[player.PositionSpace].OriginalName;
+				Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{player.PositionSpace + 1}");
+				var sprite = markerNode.GetChild<Sprite2D>(0);
+				sprite.Texture = GD.Load<Texture2D>($"res://assets/Spaces/{spacesInfo[player.PositionSpace].OriginalName}.png");
 			
 		
 	}
