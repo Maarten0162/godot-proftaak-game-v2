@@ -15,16 +15,16 @@
 [ext_resource type="Texture2D" uid="uid://ntnjriij4xb7" path="res://assets/dice/default-dice/Dobbel6.png" id="10_l64x0"]
 [ext_resource type="Texture2D" uid="uid://dyk8ejepe1vww" path="res://assets/dice/default-dice/Dobbel7.png" id="14_3fmk5"]
 [ext_resource type="Texture2D" uid="uid://ccu36fjro5msm" path="res://assets/dice/default-dice/Dobbel8.png" id="15_cv46h"]
-[ext_resource type="Texture2D" uid="uid://dol6hnh1qws33" path="res://assets/Spaces/blueSpace.png" id="16_a006q"]
+[ext_resource type="Texture2D" uid="uid://dol6hnh1qws33" path="res://assets/Spaces/bluespace.png" id="16_a006q"]
 [ext_resource type="Texture2D" uid="uid://bh0oghc7f3r32" path="res://assets/Spaces/greenpipe.png" id="16_v2g8y"]
 [ext_resource type="Texture2D" uid="uid://d1pifwujewrmq" path="res://assets/dice/default-dice/Dobbel9.png" id="16_xc1rm"]
-[ext_resource type="Texture2D" uid="uid://th5esly73wm0" path="res://assets/Spaces/redSpace.png" id="17_vh1sw"]
+[ext_resource type="Texture2D" uid="uid://th5esly73wm0" path="res://assets/Spaces/redspace.png" id="17_vh1sw"]
 [ext_resource type="Texture2D" uid="uid://dpcp018yag0ko" path="res://assets/Player1.png" id="19_bwuok"]
 [ext_resource type="Texture2D" uid="uid://breb301qf7jth" path="res://assets/Spaces/Event_Space.png" id="19_srds4"]
 [ext_resource type="Texture2D" uid="uid://meqcks5t4j1q" path="res://assets/Player2.png" id="20_epi1k"]
 [ext_resource type="Texture2D" uid="uid://c0ysmcgfrk0hq" path="res://assets/Player3.png" id="21_56lhf"]
 [ext_resource type="Texture2D" uid="uid://cha53i6v5dxbx" path="res://assets/player4.png" id="22_mmax3"]
-[ext_resource type="PackedScene" uid="uid://c2dkuem4bxt8d" path="res://scenes/HorseRace.tscn" id="25_kb01l"]
+[ext_resource type="PackedScene" path="res://scenes/HorseRace.tscn" id="25_kb01l"]
 [ext_resource type="Script" path="res://scripts/UI.cs" id="26_3o2pn"]
 [ext_resource type="AudioStream" uid="uid://3w3hotdkdetk" path="res://assets/Muziek/diceeee-99427.mp3" id="27_agmsy"]
 
@@ -573,6 +573,7 @@ script = ExtResource("26_3o2pn")
 [node name="CoinCountplayer1" type="Label" parent="player1 UI"]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
 offset_left = -45.0
 offset_top = -25.0
 offset_right = 17.0
@@ -582,6 +583,7 @@ text = "Player 1"
 [node name="CoinCountplayer2" type="Label" parent="player1 UI"]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
 offset_left = 908.0
 offset_top = -26.0
 offset_right = 970.0
@@ -591,6 +593,7 @@ text = "Player 2"
 [node name="CoinCountplayer3" type="Label" parent="player1 UI"]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
 offset_left = -65.0
 offset_top = 534.0
 offset_right = -3.0
@@ -600,6 +603,7 @@ text = "Player 3"
 [node name="CoinCountplayer4" type="Label" parent="player1 UI"]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
 offset_left = 888.0
 offset_top = 523.0
 offset_right = 950.0
@@ -608,6 +612,7 @@ text = "Player 4"
 
 [node name="Healthplayer1" type="Label" parent="player1 UI"]
 self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
 offset_left = -32.0
 offset_top = 4.0
 offset_right = 8.0
@@ -615,6 +620,7 @@ offset_bottom = 27.0
 
 [node name="Healthplayer2" type="Label" parent="player1 UI"]
 self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
 offset_left = 951.0
 offset_top = -1.0
 offset_right = 991.0
@@ -622,6 +628,7 @@ offset_bottom = 22.0
 
 [node name="Healthplayer3" type="Label" parent="player1 UI"]
 self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
 offset_left = -57.0
 offset_top = 563.0
 offset_right = -17.0
@@ -629,6 +636,7 @@ offset_bottom = 586.0
 
 [node name="Healthplayer4" type="Label" parent="player1 UI"]
 self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
 offset_left = 923.0
 offset_top = 553.0
 offset_right = 963.0

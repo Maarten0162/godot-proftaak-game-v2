@@ -1,12 +1,12 @@
 [gd_scene load_steps=4 format=3 uid="uid://bccaf5slk3m13"]
 
-[ext_resource type="Script" path="res://scripts/Menu.cs" id="1_imsmu"]
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_dlj3i"]
 [ext_resource type="Texture2D" uid="uid://bpwafw7c3laa4" path="res://assets/mainmenu.png" id="2_y3xfu"]
 [ext_resource type="ButtonGroup" uid="uid://dbbww2gr8856k" path="res://player.buttongp.tres" id="3_blkf2"]
 
 [node name="Menu" type="Node2D"]
 position = Vector2(564, 299)
-script = ExtResource("1_imsmu")
+script = ExtResource("1_dlj3i")
 
 [node name="Node2D" type="Node2D" parent="."]
 
@@ -114,4 +114,4 @@ position = Vector2(12, 25)
 scale = Vector2(0.6, 0.6)
 metadata/_edit_lock_ = true
 
-[connection signal="toggled" from="Node2D/Control/2P" to="." method="_on_p_toggled"]
+[connection signal="pressed" from="Node2D/Control/Start_Button" to="." method="_on_start_button_pressed"]
