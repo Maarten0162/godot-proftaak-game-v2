@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=3 uid="uid://jx1vcugcu5w7"]
+
+[ext_resource type="Script" path="res://scripts/Minigame1.cs" id="1_i3b7e"]
+[ext_resource type="Texture2D" uid="uid://b205jypegaywx" path="res://Minigame1/asvalt.png" id="1_ur60m"]
+[ext_resource type="Texture2D" uid="uid://dvac4bpt2rneg" path="res://Minigame1/Paard.png" id="2_10ftx"]
+
+[node name="Minigame1" type="Node2D"]
+script = ExtResource("1_i3b7e")
+
+[node name="Asvalt" type="Sprite2D" parent="."]
+position = Vector2(558, 324)
+scale = Vector2(0.600586, 0.716797)
+texture = ExtResource("1_ur60m")
+
+[node name="Horse1" type="Sprite2D" parent="."]
+position = Vector2(95, 82)
+scale = Vector2(0.289583, 0.241803)
+texture = ExtResource("2_10ftx")
+
+[node name="Horse2" type="Sprite2D" parent="."]
+position = Vector2(107, 238)
+scale = Vector2(0.289583, 0.241803)
+texture = ExtResource("2_10ftx")
+
+[node name="Horse3" type="Sprite2D" parent="."]
+position = Vector2(105, 405)
+scale = Vector2(0.289583, 0.241803)
+texture = ExtResource("2_10ftx")
+
+[node name="Horse4" type="Sprite2D" parent="."]
+position = Vector2(105, 565)
+scale = Vector2(0.289583, 0.241803)
+texture = ExtResource("2_10ftx")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="Label1" type="Label" parent="."]
+offset_left = 983.0
+offset_top = 55.0
+offset_right = 1065.0
+offset_bottom = 106.0
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 976.0
+offset_top = 211.0
+offset_right = 1102.0
+offset_bottom = 279.0
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 994.0
+offset_top = 377.0
+offset_right = 1107.0
+offset_bottom = 450.0
+
+[node name="Label4" type="Label" parent="."]
+offset_left = 978.0
+offset_top = 538.0
+offset_right = 1114.0
+offset_bottom = 605.0
+
+[node name="LabelHighscore" type="Label" parent="."]
+offset_left = 473.0
+offset_top = 7.0
+offset_right = 611.0
+offset_bottom = 49.0
