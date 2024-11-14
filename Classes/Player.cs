@@ -138,6 +138,8 @@ public partial class Player : CharacterBody2D
 			hasgoldenknuckles = value;
 		}
 	}
-		
+
+    public string[] Items { get; internal set; }
+
 }
 

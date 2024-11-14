@@ -143,6 +143,7 @@ public partial class Minigame1 : Node
 		isGameActive = false;
 		GD.Print("Tijd is om!"); // Debug bericht om te zien dat de timer is afgelopen
 		CheckWinner(GlobalVariables.Instance.playeramount);
+		GlobalVariables.Instance.SwitchToMainBoard();
 	}
 	private void CheckWinner(int playeramount){
 		int highestscore = 0;
