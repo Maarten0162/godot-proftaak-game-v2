@@ -10,11 +10,11 @@ public partial class Menu : Node2D
 	Button ktwee = new Button();
 	Button kdrie = new Button();
 	Button kvier = new Button();
-	int Speler = 0;
+	
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
-	{
+	{	GlobalVariables.Instance.playeramount = 0;
 		AddChild(start);
 		AddChild(ktwee);
 		AddChild(kdrie);
@@ -36,7 +36,7 @@ public partial class Menu : Node2D
 		kdrie.ZIndex = 3;
 		kvier.ZIndex = 3;
 
-		start.Pressed += ()=> StartGame(Speler);
+		start.Pressed += ()=> StartGame(GlobalVariables.Instance.playeramount);
 		ktwee.Pressed += ()=> twee();
 		kdrie.Pressed += ()=> drie();
 		kvier.Pressed += ()=> vier();
@@ -48,7 +48,7 @@ public partial class Menu : Node2D
 	{	}
 	private void StartGame(int Speler)
 	{
-		if(Speler == 0)
+		if(GlobalVariables.Instance.playeramount == 0)
 		{
 			GD.Print("Selecteer het aantal spelers");
 		}
@@ -63,7 +63,7 @@ public partial class Menu : Node2D
 		ktwee.Position = new Godot.Vector2(-80000, -70000);
 		kdrie.Position = new Godot.Vector2(-350000, -70000);
 		kvier.Position = new Godot.Vector2(100000, -70000);
-		Speler = 2;
+		GlobalVariables.Instance.playeramount = 2;
 		
 	}
 	private void drie()
@@ -71,13 +71,13 @@ public partial class Menu : Node2D
 		ktwee.Position = new Godot.Vector2(-80000, -70000);
 		kdrie.Position = new Godot.Vector2(-350000, -70000);
 		kvier.Position = new Godot.Vector2(100000, -70000);
-		Speler = 3;
+		GlobalVariables.Instance.playeramount = 3;
 	}
 	private void vier()
 	{
 		ktwee.Position = new Godot.Vector2(-80000, -70000);
 		kdrie.Position = new Godot.Vector2(-350000, -70000);
 		kvier.Position = new Godot.Vector2(100000, -70000);
-		Speler = 4;
+		GlobalVariables.Instance.playeramount = 4;
 	}
 }

@@ -77,7 +77,7 @@ public partial class Main : Node2D
 			spacesInfo[i - 1] = (markerNode, sprite.Name, sprite.Name);
 			GD.Print("plek " + i + " is gevuld en de kleur is" + sprite.Name);
 		}
-		int PlayerAmount = 4; 
+		int PlayerAmount = GlobalVariables.Instance.playeramount; 
 
 		if(PlayerAmount == 2)
 		{				Vector2 player1start = spacesInfo[0].Space.Position;
@@ -434,21 +434,21 @@ public partial class Main : Node2D
 	}
 
 	//TURNS
-	async Task Turn4()
-	{
-		if (player1.Health != 0)
+	async Task Turn()
+	{	
+		if (player1.Health != 0 && player1 != null)
 		{
 			await Turn_Player(player1);
 		}
-		if (player2.Health != 0)
+		if (player2.Health != 0&& player4 != null)
 		{
 			await Turn_Player(player2);
 		}
-		if (player3.Health != 0)
+		if (player3.Health != 0&& player3 != null)
 		{
 			await Turn_Player(player3);
 		}
-		if (player4.Health != 0)
+		if (player4.Health != 0&& player4 != null)
 		{
 			await Turn_Player(player4);
 		}
@@ -726,21 +726,21 @@ public partial class Main : Node2D
 	}
 	private async void ChooseTurn()
 	{
-		if(PlayerAmount == 4){
+		if(GlobalVariables.Instance.playeramount == 4){
 		while (true)
 		{
 
-			await Turn4();
+			await Turn();
 
 		}}
-			if(PlayerAmount == 3){
+			if(GlobalVariables.Instance.playeramount == 3){
 		while (true)
 		{
 
 			await Turn3();
 
 		}}
-			if(PlayerAmount == 2){
+			if(GlobalVariables.Instance.playeramount == 2){
 		while (true)
 		{
 
