@@ -53,8 +53,8 @@ public partial class Menu : Node2D
 			GD.Print("Selecteer het aantal spelers");
 		}
 		else
-		{
-			GetTree().ChangeSceneToFile("res://scenes/main.tscn");
+		{	
+			GlobalVariables.Instance.SwitchToMainBoard();
 		}
 		
 	}

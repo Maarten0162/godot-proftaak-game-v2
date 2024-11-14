@@ -8,8 +8,10 @@ using System.Xml;
 
 
 public partial class Main : Node2D
-{
-	private int TurnCount;
+{	
+
+
+	
 	private AnimatedSprite2D dobbelSprite;
 
 	int spacesAmount = 42;
@@ -55,8 +57,12 @@ public partial class Main : Node2D
 	string itemId;
 	int WhatPlayer;
 	public int PlayerAmount;
+	
+	
 	public override void _Ready()
-	{
+	{	
+		
+ 	
 		dobbelgeluid = GetNode<AudioStreamPlayer>("Dobbelgeluid");
 
 		// Initialiseer de dobbelstenen met het dobbelgeluid.
@@ -70,6 +76,7 @@ public partial class Main : Node2D
 		twentydice = new Dice(-20, 21, dobbelgeluid, 0);
 
 		spacesInfo = new (Node2D, string, string)[spacesAmount];
+		
 		for (int i = 1; i <= spacesAmount; i++)
 		{
 			Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{i}");
@@ -147,7 +154,11 @@ public partial class Main : Node2D
 			EmitSignal("updateplayerui", Playerlist[i]);
 		}
 		}
-		
+		GD.Print("TurnCount " + GlobalVariables.Instance.TurnCount + "global TurnCount is " + GlobalVariables.Instance.TurnCount);
+		if(GlobalVariables.Instance.TurnCount > 0){
+		RestoreAllStates();
+		}
+			GD.Print(player1.Currency);
 
 		
 
@@ -435,33 +446,35 @@ public partial class Main : Node2D
 
 	//TURNS
 	async Task Turn4()
-	{
+	{	
 		if (player1.Health != 0)
 		{
 			await Turn_Player(player1);
 		}
-		if (player2.Health != 0&& player4 != null)
+		if (player2.Health != 0)
 		{
 			await Turn_Player(player2);
 		}
-		if (player3.Health != 0&& player3 != null)
+		if (player3.Health != 0)
 		{
 			await Turn_Player(player3);
 		}
-		if (player4.Health != 0&& player4 != null)
+		if (player4.Health != 0)
 		{
 			await Turn_Player(player4);
 		}
 
-		TurnCount++;
+		GlobalVariables.Instance.TurnCount++;
+		SaveAllStates();
 
 		if (CheckWinCondition()) //functie checkt of alle spelers op 1 na dood zijn, of dat er 15 turns voorbij zijn gegaan.
 		{
 			EndGame();
 		}
-		// ChooseMiniGame();
-		await selectTrapPositon();
-		if (TurnCount >= 0) //dit zorgt ervoor dat de cap gaat spawnen
+		
+		
+		
+		if (GlobalVariables.Instance.TurnCount >= 0) //dit zorgt ervoor dat de cap gaat spawnen
 		{
 			bool RunLoop = true;
 			while (RunLoop)
@@ -488,11 +501,10 @@ public partial class Main : Node2D
 
 			}
 		}
-		GD.Print("einde van turn " + TurnCount + ". " + (TurnCount + 1) + " begint nu!");
-		WhatPlayer = 0;
+		ChooseMiniGame();
 	}
 		async Task Turn3()
-	{
+	{	
 		if (player1.Health != 0)
 		{
 			await Turn_Player(player1);
@@ -506,16 +518,17 @@ public partial class Main : Node2D
 			await Turn_Player(player3);
 		}
 
-
-		TurnCount++;
+		
+		GlobalVariables.Instance.TurnCount++;
 
 		if (CheckWinCondition()) //functie checkt of alle spelers op 1 na dood zijn, of dat er 15 turns voorbij zijn gegaan.
 		{
 			EndGame();
 		}
-		// ChooseMiniGame();
-		await selectTrapPositon();
-		if (TurnCount >= 0) //dit zorgt ervoor dat de cap gaat spawnen
+		
+		
+		
+		if (GlobalVariables.Instance.TurnCount >= 0) //dit zorgt ervoor dat de cap gaat spawnen
 		{
 			bool RunLoop = true;
 			while (RunLoop)
@@ -542,7 +555,9 @@ public partial class Main : Node2D
 
 			}
 		}
-		GD.Print("einde van turn " + TurnCount + ". " + (TurnCount + 1) + " begint nu!");
+		SaveAllStates();
+		ChooseMiniGame();
+		GD.Print("einde van turn " + GlobalVariables.Instance.TurnCount + ". " + (GlobalVariables.Instance.TurnCount + 1) + " begint nu!");
 		WhatPlayer = 0;
 	}
 	async Task Turn2()
@@ -557,16 +572,16 @@ public partial class Main : Node2D
 		}
 
 
-		TurnCount++;
+		GlobalVariables.Instance.TurnCount++;
 
 		if (CheckWinCondition()) //functie checkt of alle spelers op 1 na dood zijn, of dat er 15 turns voorbij zijn gegaan.
 		{
 			EndGame();
 		}
-		// ChooseMiniGame();
+	
 
-		await selectTrapPositon();
-		if (TurnCount >= 0) //dit zorgt ervoor dat de cap gaat spawnen
+		
+		if (GlobalVariables.Instance.TurnCount >= 0) //dit zorgt ervoor dat de cap gaat spawnen
 		{
 			bool RunLoop = true;
 			while (RunLoop)
@@ -593,7 +608,8 @@ public partial class Main : Node2D
 
 			}
 		}
-		GD.Print("einde van turn " + TurnCount + ". " + (TurnCount + 1) + " begint nu!");
+			ChooseMiniGame();
+		GD.Print("einde van turn " + GlobalVariables.Instance.TurnCount + ". " + (GlobalVariables.Instance.TurnCount + 1) + " begint nu!");
 		WhatPlayer = 0;
 	}
 	async Task Turn_Player(Player player)
@@ -727,12 +743,12 @@ public partial class Main : Node2D
 	private async void ChooseTurn()
 	{
 		if(GlobalVariables.Instance.playeramount == 4){
-		while (true)
-		{GD.Print("playeramount is 4");
+		
+		GD.Print("playeramount is 4");
 
 			await Turn4();
 
-		}}
+		}
 			if(GlobalVariables.Instance.playeramount == 3){
 		while (true)
 		{
@@ -900,7 +916,7 @@ public partial class Main : Node2D
 				deadplayer += 1;
 			}
 		}
-		if (deadplayer == Playerlist.Length - 1 || TurnCount == 15)
+		if (deadplayer == Playerlist.Length - 1 || GlobalVariables.Instance.TurnCount == 15)
 		{
 			return true;
 		}
@@ -1338,11 +1354,10 @@ public partial class Main : Node2D
 		player.HasGoldenKnuckles = true;
 	}	
 
-	// void ChooseMiniGame()
-	// {
-	// 	int Whatminigame = rnd.Next(1, MiniGames.Length);
-	// 	GetTree().ChangeSceneToFile($"pathtoscene{Whatminigame}");//hier pakt hij 1 van de minigames die net random is gekozen.
-	// }
+	void ChooseMiniGame()
+	{
+		GlobalVariables.Instance.SwitchToMinigame();
+	}
 
 		async Task selectTrapPositon() 
 	{	GD.Print("in buttonselect");
@@ -1379,6 +1394,7 @@ public partial class Main : Node2D
 		buttonmin2.Show();
 		buttonplus1.Show();
 		buttonplus2.Show();
+		await Task.CompletedTask;
 	}
 	
 	
@@ -1414,9 +1430,77 @@ public partial class Main : Node2D
 				Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{player.PositionSpace + 1}");
 				var sprite = markerNode.GetChild<Sprite2D>(0);
 				sprite.Texture = GD.Load<Texture2D>($"res://assets/Spaces/{spacesInfo[player.PositionSpace].OriginalName}.png");
-			
+			await Task.CompletedTask;
 		
 	}
+	public void SaveAllStates()
+    {
+        for (int playerNumber = 1; playerNumber <= Playerlist.Length; playerNumber++)
+        {
+            // Example of retrieving player-specific data, such as position
+            Player playerNode = GetNode<Player>($"player{playerNumber}");
+            Vector2 position = playerNode.Position;
+			int positionspace = playerNode.PositionSpace;
+            int health = playerNode.Health;
+            int currency = playerNode.Currency;
+			bool skipturn = playerNode.SkipTurn;
+            bool hascap = playerNode.HasCap;
+            bool hasknuckles = playerNode.HasKnuckles;
+			bool hasgoldenknuckles = playerNode.HasGoldenKnuckles;
+            string [] items = new string[3];
+			Array.Copy(playerNode.Inventory, items, playerNode.Inventory.Length);
+			int rolladjustment = playerNode.RollAdjustment;
+            
 
+            // Save the state for this player
+            GlobalVariables.Instance.SavePlayerState(playerNumber, position, positionspace, health, currency, skipturn, hascap, hasknuckles, hasgoldenknuckles, items, rolladjustment);
+        }
+	
+
+	
+    }
+
+    public void RestoreAllStates()
+    {	GD.Print("in restorefunction");
+        for (int playerNumber = 1; playerNumber <= 4; playerNumber++)
+        {
+            PlayerState playerState = GlobalVariables.Instance.GetPlayerState(playerNumber);
+            
+            // Get the player node
+            Player playerNode = GetNode<Player>($"player{playerNumber}");
+            
+            // Restore each property from the saved state
+            playerNode.Position = playerState.Position;
+			playerNode.PositionSpace = playerState.PositionSpace;
+            playerNode.Health = playerState.Health;
+            playerNode.Currency = playerState.Currency;
+			playerNode.SkipTurn = playerState.SkipTurn;
+            playerNode.HasCap = playerState.HasCap;
+            playerNode.HasKnuckles = playerState.HasKnuckles;
+            playerNode.HasGoldenKnuckles = playerState.HasGoldenKnuckles;
+			playerNode.Items = new string[playerState.Items.Length];
+        	Array.Copy(playerState.Items, playerNode.Items, playerState.Items.Length);
+
+            playerNode.RollAdjustment = playerState.RollAdjustment;
+        }	
+		
+
+    }
+	
+
+    
+
+   
 }
+
+
+
+
+
+
+
+
+
+
+
 
