@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 public partial class Minigame1 : Node
@@ -13,30 +14,31 @@ public partial class Minigame1 : Node
 	private bool isGameActive = true;
 	private string highscoreFilePath = "res://Minigame1/Highscore.txt";
 	int minigameplayeramount;
+	private Main main;
 
 
 	public override async void _Ready()
-	{
+	{	main = GetNode<Main>("/root/Node2D");
 		minigameplayeramount = 0;
-		if (Array.Exists(GlobalVariables.Instance.playersalive, element => element == 1))
+		if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player1"))
 		{
 			horseSprites[0] = GetNode<Sprite2D>("Horse1");
 			scoreLabels[0] = GetNode<Label>("Label1");
 			minigameplayeramount++;
 		}
-		if (Array.Exists(GlobalVariables.Instance.playersalive, element => element == 2))
+		if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player2"))
 		{
 			horseSprites[1] = GetNode<Sprite2D>("Horse2");
 			scoreLabels[1] = GetNode<Label>("Label2");
 			minigameplayeramount++;
 		}
-		if (Array.Exists(GlobalVariables.Instance.playersalive, element => element == 3))
+		if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player3"))
 		{
 			horseSprites[2] = GetNode<Sprite2D>("Horse3");
 			scoreLabels[2] = GetNode<Label>("Label3");
 			minigameplayeramount++;
 		}
-		if (Array.Exists(GlobalVariables.Instance.playersalive, element => element == 4))
+		if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player4"))
 		{
 			horseSprites[3] = GetNode<Sprite2D>("Horse4");
 			scoreLabels[3] = GetNode<Label>("Label4");
@@ -178,7 +180,7 @@ public partial class Minigame1 : Node
 		bool runloop = true;
 		while (runloop)
 
-		if (Array.Exists(GlobalVariables.Instance.playersalive, element => element == 1 && player1notready))
+		if (GlobalVariables.Instance.playersalive.Contains(main.player1) && player1notready)
 		{
 			if (Input.IsActionJustPressed("A_1"))
 			{
@@ -187,7 +189,7 @@ public partial class Minigame1 : Node
 			}
 		}
 
-		if (Array.Exists(GlobalVariables.Instance.playersalive, element => element == 2 && player2notready))
+		if (GlobalVariables.Instance.playersalive.Contains(main.player2) && player2notready)
 		{
 			if (Input.IsActionJustPressed("A_1"))
 			{
@@ -196,7 +198,7 @@ public partial class Minigame1 : Node
 			}
 		}
 
-		if (Array.Exists(GlobalVariables.Instance.playersalive, element => element == 3 && player3notready))
+		if (GlobalVariables.Instance.playersalive.Contains(main.player3) && player3notready)
 		{
 			if (Input.IsActionJustPressed("A_1"))
 			{
@@ -205,7 +207,7 @@ public partial class Minigame1 : Node
 			}
 		}
 
-		if (Array.Exists(GlobalVariables.Instance.playersalive, element => element == 4 && player4notready))
+		if (GlobalVariables.Instance.playersalive.Contains(main.player4) && player4notready)
 		{
 			if (Input.IsActionJustPressed("A_1"))
 			{

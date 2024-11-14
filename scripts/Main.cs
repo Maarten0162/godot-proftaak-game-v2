@@ -50,7 +50,7 @@ public partial class Main : Node2D
 	private (Node2D Space, string Name, string OriginalName)[] spacesInfo;
 	private (string Name, int Price)[] Iteminfo; // hier gaan de namen van alle items in.
 	private (string Name, int Price)[] ShopInv;
-	public int[] playersalive;
+	public List<Player> playersalive;
 	private int[] MiniGames;
 	bool waitingforbuttonpress;
 	bool ContinueLoop;
@@ -107,12 +107,13 @@ public partial class Main : Node2D
 			player1 = GetNode<Player>("player1");
 			player1.Position = player1start;
 			player1.PositionSpace = 0;
-			Vector2 player2start = spacesInfo[30].Space.Position;
+			Vector2 player2start = spacesInfo[5].Space.Position;
 			player2 = GetNode<Player>("player2");
 			player2.Position = player2start;
-			player2.PositionSpace = 30;
+			player2.PositionSpace = 5;
 
 			Playerlist = new Player[2] { player1, player2 };
+			playersalive = new List<Player> { player1, player2 };
 			for (int i = 0; i < Playerlist.Length; i++)
 			{
 				EmitSignal("updateplayerui", Playerlist[i]);
@@ -135,6 +136,7 @@ public partial class Main : Node2D
 			player3.Position = player3start;
 			player3.PositionSpace = 30;
 			Playerlist = new Player[3] { player1, player2, player3 };
+			playersalive = new List<Player> { player1, player2, player3};
 			for (int i = 0; i < Playerlist.Length; i++)
 			{
 				EmitSignal("updateplayerui", Playerlist[i]);
@@ -166,6 +168,7 @@ public partial class Main : Node2D
 			player4.PositionSpace = 30;
 
 			Playerlist = new Player[4] { player1, player2, player3, player4 };
+			playersalive = new List<Player> { player1, player2, player3, player4 };
 			for (int i = 0; i < Playerlist.Length; i++)
 			{
 				EmitSignal("updateplayerui", Playerlist[i]);
@@ -178,7 +181,7 @@ public partial class Main : Node2D
 
 
 	
-		playersalive = new int[Playerlist.Length];
+		GlobalVariables.Instance.playersalive = playersalive;
 		Iteminfo = new (string Name, int Price)[15] { ("Whiskey", 10), ("GoldenPipe", 10), ("DoubleDice", 10), ("TripleDice", 10), ("TwentyDice", 10), ("TenDice", 10), ("DashMushroom", 10), ("TeleportTorndPlayer", 10), ("SwitchPlaces", 10), ("StealPlayerCap", 10), ("PoisonMushroom", 10), ("StealCoins", 10), ("BrassKnuckles", 10), ("StealItem", 10), ("GoldenKnuckles", 10) };
 		ShopInv = new (string Name, int Price)[3] { ("test", 10), ("test", 10), ("test", 10) };
 
@@ -230,7 +233,7 @@ public partial class Main : Node2D
 			{
 
 
-				for (int x = 0; x < Playerlist.Length; x++) // cycled door elke speler heen zolang de speler nog dicerolls heeft 
+				for (int x = 0; x < playersalive.Count; x++) // cycled door elke speler heen zolang de speler nog dicerolls heeft 
 				{
 
 					//15 en 36 zijn hetzelfde vak
@@ -242,31 +245,31 @@ public partial class Main : Node2D
 							Otherspace = 36;
 						}
 						else Otherspace = 15;
-						if (Otherspace == Playerlist[x].PositionSpace && i != diceRoll && player != Playerlist[x]) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
+						if (Otherspace == playersalive[x].PositionSpace && i != diceRoll && player != playersalive[x]) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
 						{
 
 							if (player.HasKnuckles || player.HasGoldenKnuckles)
 							{
-								KnucklesAttack(player, Playerlist[x]);
+								KnucklesAttack(player, playersalive[x]);
 							}
 							else if (player.HasCap)
 							{
-								RazorCapAttack(player, Playerlist[x]);
+								RazorCapAttack(player, playersalive[x]);
 								hasattacked = true;
 							}
 							ContinueLoop = false;
 						}
 					}
-					if (spaceinfront == Playerlist[x].PositionSpace && i != diceRoll && player != Playerlist[x]) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
+					if (spaceinfront == playersalive[x].PositionSpace && i != diceRoll && player != playersalive[x]) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
 					{
 
 						if (player.HasKnuckles || player.HasGoldenKnuckles)
 						{
-							KnucklesAttack(player, Playerlist[x]);
+							KnucklesAttack(player, playersalive[x]);
 						}
 						else if (player.HasCap)
 						{
-							RazorCapAttack(player, Playerlist[x]);
+							RazorCapAttack(player, playersalive[x]);
 							hasattacked = true;
 						}
 						ContinueLoop = false;
@@ -327,7 +330,7 @@ public partial class Main : Node2D
 		{
 			int spaceBehind = (player.PositionSpace - 1 + spacesInfo.Length) % spacesInfo.Length;
 
-			for (int x = 0; x < Playerlist.Length; x++) // cycled door elke speler heenzolang de speler nog dicerolls heeft
+			for (int x = 0; x < playersalive.Count; x++) // cycled door elke speler heenzolang de speler nog dicerolls heeft
 			{
 
 				if (spaceBehind == 15 || spaceBehind == 36)
@@ -338,30 +341,30 @@ public partial class Main : Node2D
 						Otherspace = 36;
 					}
 					else Otherspace = 15;
-					if (Otherspace == Playerlist[x].PositionSpace && i != diceRoll && player != Playerlist[x] && (Playerlist[x].HasCap || Playerlist[x].HasKnuckles)) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
+					if (Otherspace == playersalive[x].PositionSpace && i != diceRoll && player != playersalive[x] && (playersalive[x].HasCap || playersalive[x].HasKnuckles)) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
 					{
 						if (player.HasKnuckles || player.HasKnuckles)
 						{
-							KnucklesAttack(player, Playerlist[x]);
+							KnucklesAttack(player, playersalive[x]);
 						}
 						else if (player.HasCap)
 						{
-							RazorCapAttack(Playerlist[x], player);
+							RazorCapAttack(playersalive[x], player);
 							hasattacked = true;
 						}
 						ContinueLoop = false;
 					}
 				}
 
-				if (spaceBehind == Playerlist[x].PositionSpace && Playerlist[x].HasCap && i != diceRoll && player != Playerlist[x] && (Playerlist[x].HasCap || Playerlist[x].HasKnuckles)) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, en de andere speler heeft een cap hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
+				if (spaceBehind == playersalive[x].PositionSpace && playersalive[x].HasCap && i != diceRoll && player != playersalive[x] && (playersalive[x].HasCap || playersalive[x].HasKnuckles)) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, en de andere speler heeft een cap hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
 				{
 					if (player.HasKnuckles)
 					{
-						KnucklesAttack(player, Playerlist[x]);
+						KnucklesAttack(player, playersalive[x]);
 					}
 					else if (player.HasCap)
 					{
-						RazorCapAttack(Playerlist[x], player);
+						RazorCapAttack(playersalive[x], player);
 						hasattacked = true;
 					}
 					ContinueLoop = false;
@@ -468,7 +471,12 @@ public partial class Main : Node2D
 
 	//TURNS
 	async Task Turn()
-	{
+	{	for(int i = 0; i < Playerlist.Length; i ++){
+		if(playersalive[i].Health == 0){
+			playersalive.Remove(Playerlist[i]);
+			i--;
+		}
+	}
 		if (player1.Health != 0)
 		{
 			await Turn_Player(player1);
@@ -491,16 +499,8 @@ public partial class Main : Node2D
 				await Turn_Player(player4);
 			}
 		}
-		for (int i = 0; i < Playerlist.Length; i++) // checkt welke spelers nog leven
-		{
-			if (Playerlist[i].Health > 0)
-			{
-				playersalive[i] = i;
-			}
-			else playersalive[i] = 0;
 
-		}
-		GlobalVariables.Instance.playersalive = playersalive;
+
 		GlobalVariables.Instance.TurnCount++;
 
 
@@ -514,9 +514,9 @@ public partial class Main : Node2D
 			bool RunLoop = true;
 			while (RunLoop)
 			{
-				for (int i = 0; i < Playerlist.Length; i++)
+				for (int i = 0; i < playersalive.Count; i++)
 				{
-					if (Playerlist[i].HasCap)
+					if (playersalive[i].HasCap)
 					{
 						RunLoop = false; //checkt of iemand de cap heeft, zoja spawnt de cap niet
 					}
@@ -810,7 +810,7 @@ public partial class Main : Node2D
 		GD.Print(attacker.Name + " hit " + victim.Name + " for " + attackdamage + ". " + victim.Name + " has " + victim.Health + " health remaining");
 		EmitSignal("updateplayerui", attacker);
 		if (victim.Health == 0)
-		{	
+		{	playersalive.Remove(victim);
 			victim.Hide();
 		}
 		EmitSignal("updateplayerui", victim);
@@ -824,7 +824,7 @@ public partial class Main : Node2D
 		GD.Print(attacker.Name + " hit " + victim.Name + " for " + attackdamage + ". " + victim.Name + " has " + victim.Health + " health remaining");
 		EmitSignal("updateplayerui", attacker);
 		if (victim.Health == 0)
-		{
+		{	playersalive.Remove(victim);
 			victim.Hide();
 		}
 		EmitSignal("updateplayerui", victim);
@@ -837,9 +837,9 @@ public partial class Main : Node2D
 		{
 			rndRazorCapSpace += 1;
 		}
-		for (int i = 0; i < Playerlist.Length; i++)
+		for (int i = 0; i < playersalive.Count; i++)
 		{
-			if (rndRazorCapSpace == Playerlist[i].PositionSpace)
+			if (rndRazorCapSpace == playersalive[i].PositionSpace)
 			{
 				rndRazorCapSpace += 1;
 			}
@@ -856,9 +856,9 @@ public partial class Main : Node2D
 	bool CheckWinCondition()
 	{
 		int deadplayer = 0;
-		for (int i = 0; i < Playerlist.Length; i++)
+		for (int i = 0; i < playersalive.Count; i++)
 		{
-			if (Playerlist[i].Health == 0)
+			if (playersalive[i].Health == 0)
 			{
 				deadplayer += 1;
 			}
@@ -1126,9 +1126,9 @@ public partial class Main : Node2D
 						return useditem;
 					case "StealItem":
 						bool enemyhasitem = false;
-						for (int i = 0; i < Playerlist.Length; i++)
+						for (int i = 0; i < playersalive.Count; i++)
 						{
-							if (Array.Exists(Playerlist[i].Inventory, item => item != "0"))
+							if (Array.Exists(playersalive[i].Inventory, item => item != "0"))
 							{
 								enemyhasitem = true;
 							}
@@ -1246,9 +1246,9 @@ public partial class Main : Node2D
 						return useditem;
 					case "StealItem":
 						bool enemyhasitem = false;
-						for (int i = 0; i < Playerlist.Length; i++)
+						for (int i = 0; i < playersalive.Count; i++)
 						{
-							if (Array.Exists(Playerlist[i].Inventory, item => item != "0"))
+							if (Array.Exists(playersalive[i].Inventory, item => item != "0"))
 							{
 								enemyhasitem = true;
 							}
@@ -1365,9 +1365,9 @@ public partial class Main : Node2D
 						return useditem;
 					case "StealItem":
 						bool enemyhasitem = false;
-						for (int i = 0; i < Playerlist.Length; i++)
+						for (int i = 0; i < playersalive.Count; i++)
 						{
-							if (Array.Exists(Playerlist[i].Inventory, item => item != "0"))
+							if (Array.Exists(playersalive[i].Inventory, item => item != "0"))
 							{
 								enemyhasitem = true;
 							}
@@ -1478,11 +1478,11 @@ public partial class Main : Node2D
 		bool runloop = true;
 		while (runloop)
 		{
-			int rndplayer = rnd.Next(0, Playerlist.Length);
-			if (player != Playerlist[rndplayer])
+			int rndplayer = rnd.Next(0, playersalive.Count);
+			if (player != playersalive[rndplayer])
 			{
-				player.Position = Playerlist[rndplayer].Position;
-				player.PositionSpace = Playerlist[rndplayer].PositionSpace;
+				player.Position = playersalive[rndplayer].Position;
+				player.PositionSpace = playersalive[rndplayer].PositionSpace;
 				runloop = false;
 			}
 		}
@@ -1493,17 +1493,17 @@ public partial class Main : Node2D
 		bool runloop = true;
 		while (runloop)
 		{
-			int rndplayer = rnd.Next(0, Playerlist.Length);
-			if (player != Playerlist[rndplayer])
+			int rndplayer = rnd.Next(0, playersalive.Count);
+			if (player != playersalive[rndplayer])
 			{
 				Vector2 originalposition = player.Position;
 				int originalpositionspace = player.PositionSpace;
 
-				player.Position = Playerlist[rndplayer].Position;
-				player.PositionSpace = Playerlist[rndplayer].PositionSpace;
+				player.Position = playersalive[rndplayer].Position;
+				player.PositionSpace = playersalive[rndplayer].PositionSpace;
 
-				Playerlist[rndplayer].Position = originalposition;
-				Playerlist[rndplayer].PositionSpace = originalpositionspace;
+				playersalive[rndplayer].Position = originalposition;
+				playersalive[rndplayer].PositionSpace = originalpositionspace;
 				runloop = false;
 			}
 		}
@@ -1515,16 +1515,16 @@ public partial class Main : Node2D
 		bool runloop = true;
 		while (runloop)
 		{
-			for (int i = 0; i < Playerlist.Length; i++)
+			for (int i = 0; i < playersalive.Count; i++)
 			{
-				if (Playerlist[i].HasCap)
+				if (playersalive[i].HasCap)
 				{
-					if (Playerlist[i].Health > 10)
+					if (playersalive[i].Health > 10)
 					{
-						Playerlist[i].Health -= 10;
+						playersalive[i].Health -= 10;
 					}
-					Playerlist[i].HasCap = false;
-					victim = Playerlist[i].Name;
+					playersalive[i].HasCap = false;
+					victim = playersalive[i].Name;
 					runloop = false;
 				}
 			}
@@ -1537,10 +1537,10 @@ public partial class Main : Node2D
 		bool runloop = true;
 		while (runloop)
 		{
-			int rndplayer = rnd.Next(0, Playerlist.Length);
-			if (player != Playerlist[rndplayer])
+			int rndplayer = rnd.Next(0, playersalive.Count);
+			if (player != playersalive[rndplayer])
 			{
-				Playerlist[rndplayer].RollAdjustment -= 5;
+				playersalive[rndplayer].RollAdjustment -= 5;
 				runloop = false;
 			}
 		}
@@ -1552,10 +1552,10 @@ public partial class Main : Node2D
 		bool runloop = true;
 		while (runloop)
 		{
-			int rndplayer = rnd.Next(0, Playerlist.Length);
-			if (player != Playerlist[rndplayer])
+			int rndplayer = rnd.Next(0, playersalive.Count);
+			if (player != playersalive[rndplayer])
 			{
-				int stolenamount = rnd.Next(0, Playerlist[rndplayer].Currency / 5);
+				int stolenamount = rnd.Next(0, playersalive[rndplayer].Currency / 5);
 				player.Currency += stolenamount;
 				runloop = false;
 			}
@@ -1573,12 +1573,12 @@ public partial class Main : Node2D
 		int howmanyitems = 0;
 		while (runloop1)
 		{
-			int rndplayer = rnd.Next(0, Playerlist.Length);
-			if (player != Playerlist[rndplayer])
+			int rndplayer = rnd.Next(0, playersalive.Count);
+			if (player != playersalive[rndplayer])
 			{
 				for (int i = 0; i < 2; i++)
 				{
-					if (Playerlist[rndplayer].Inventory[i] != "0") //gaat van de gekozen speler zen inv af, om te checken of hij wel items heeft
+					if (playersalive[rndplayer].Inventory[i] != "0") //gaat van de gekozen speler zen inv af, om te checken of hij wel items heeft
 					{
 						howmanyitems++;
 					}
@@ -1590,7 +1590,7 @@ public partial class Main : Node2D
 					{
 						if (player.Inventory[i] != "0")
 						{
-							player.Inventory[i] = Playerlist[rndplayer].Inventory[rnd.Next(0, 3)];
+							player.Inventory[i] = playersalive[rndplayer].Inventory[rnd.Next(0, 3)];
 							runloop1 = false;
 							runloop2 = false;
 						}
