@@ -10,11 +10,11 @@ public partial class Menu : Node2D
 	Button ktwee = new Button();
 	Button kdrie = new Button();
 	Button kvier = new Button();
-	int Speler = 0;
+	
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
-	{
+	{	GlobalVariables.Instance.playeramount = 0;
 		AddChild(start);
 		AddChild(ktwee);
 		AddChild(kdrie);
@@ -36,7 +36,7 @@ public partial class Menu : Node2D
 		kdrie.ZIndex = 3;
 		kvier.ZIndex = 3;
 
-		start.Pressed += ()=> StartGame(Speler);
+		start.Pressed += ()=> StartGame(GlobalVariables.Instance.playeramount);
 		ktwee.Pressed += ()=> twee();
 		kdrie.Pressed += ()=> drie();
 		kvier.Pressed += ()=> vier();
@@ -53,8 +53,8 @@ public partial class Menu : Node2D
 			GD.Print("Selecteer het aantal spelers");
 		}
 		else
-		{
-			GetTree().ChangeSceneToFile("res://scenes/main.tscn");
+		{	
+			GlobalVariables.Instance.SwitchToMainBoard();
 		}
 		
 	}
