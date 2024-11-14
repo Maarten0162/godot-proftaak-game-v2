@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class Minigame1 : Node
 {
@@ -11,49 +12,49 @@ public partial class Minigame1 : Node
 	private Timer gameTimer;
 	private bool isGameActive = true;
 	private string highscoreFilePath = "res://Minigame1/Highscore.txt";
+	int minigameplayeramount;
 
 
-	public override void _Ready()
-	{	
-	if(GlobalVariables.Instance.playeramount == 4){
-		horseSprites[0] = GetNode<Sprite2D>("Horse1");
-		horseSprites[1] = GetNode<Sprite2D>("Horse2");
-		horseSprites[2] = GetNode<Sprite2D>("Horse3");
-		horseSprites[3] = GetNode<Sprite2D>("Horse4");
-
-		scoreLabels[0] = GetNode<Label>("label1");
-		scoreLabels[1] = GetNode<Label>("label2");
-		scoreLabels[0] = GetNode<Label>("label1");
-		scoreLabels[0] = GetNode<Label>("label1");
-		
-	}
-	else if(GlobalVariables.Instance.playeramount == 3){
-		horseSprites[0] = GetNode<Sprite2D>("Horse1");
-		horseSprites[1] = GetNode<Sprite2D>("Horse2");
-		horseSprites[2] = GetNode<Sprite2D>("Horse3");
-	
-		scoreLabels[0] = GetNode<Label>("label1");
-		
-	}
-	else if(GlobalVariables.Instance.playeramount == 2){
-		horseSprites[0] = GetNode<Sprite2D>("Horse1");
-		horseSprites[1] = GetNode<Sprite2D>("Horse2");
-	
-	
-	}
-		
+	public override async void _Ready()
+	{
+		minigameplayeramount = 0;
+		if (Array.Exists(GlobalVariables.Instance.playersalive, element => element == 1))
+		{
+			horseSprites[0] = GetNode<Sprite2D>("Horse1");
+			scoreLabels[0] = GetNode<Label>("Label1");
+			minigameplayeramount++;
+		}
+		if (Array.Exists(GlobalVariables.Instance.playersalive, element => element == 2))
+		{
+			horseSprites[1] = GetNode<Sprite2D>("Horse2");
+			scoreLabels[1] = GetNode<Label>("Label2");
+			minigameplayeramount++;
+		}
+		if (Array.Exists(GlobalVariables.Instance.playersalive, element => element == 3))
+		{
+			horseSprites[2] = GetNode<Sprite2D>("Horse3");
+			scoreLabels[2] = GetNode<Label>("Label3");
+			minigameplayeramount++;
+		}
+		if (Array.Exists(GlobalVariables.Instance.playersalive, element => element == 4))
+		{
+			horseSprites[3] = GetNode<Sprite2D>("Horse4");
+			scoreLabels[3] = GetNode<Label>("Label4");
+			minigameplayeramount++;
+		}
 
 
 		highscoreLabel = GetNode<Label>("LabelHighscore");
 
 		gameTimer = GetNode<Timer>("Timer");
 		gameTimer.Connect("timeout", new Callable(this, nameof(OnTimerTimeout)));
-	
+
 
 		LoadHighscore();
 		gameTimer.Start(); // Start de timer
 
 		UpdateUI();
+		// await Readyup();
 	}
 
 	public override void _Process(double delta)
@@ -110,7 +111,7 @@ public partial class Minigame1 : Node
 				float newX = scores[i] * 10; // Pas de factor aan op basis van je layout
 				horseSprites[i].Position = new Vector2(newX, horseSprites[i].Position.Y);
 			}
-			
+
 			if (scoreLabels[i] != null)
 			{
 				// Update de score label
@@ -135,7 +136,7 @@ public partial class Minigame1 : Node
 			highscoreLabel.Text = $"Highscore: {highscore}";
 			file.Close();
 		}
-		
+
 	}
 
 	private void OnTimerTimeout()
@@ -145,21 +146,76 @@ public partial class Minigame1 : Node
 		CheckWinner(GlobalVariables.Instance.playeramount);
 		GlobalVariables.Instance.SwitchToMainBoard();
 	}
-	private void CheckWinner(int playeramount){
+	private void CheckWinner(int playeramount)
+	{
 		int highestscore = 0;
-		for(int i = 0; i < playeramount; i++){
-			if(scores[i] > highestscore){
+		for (int i = 0; i < playeramount; i++)
+		{
+			if (scores[i] > highestscore)
+			{
 				scores[i] = highestscore;
 			}
 		}
-		for(int i = 0; i < playeramount; i++){
-			if(highestscore == scores[i]){
-					GD.Print(i);
+		for (int i = 0; i < playeramount; i++)
+		{
+			if (highestscore == scores[i])
+			{
+				GD.Print(i);
 				GlobalVariables.Instance.Winner = $"player{i}";
 				GD.Print(GlobalVariables.Instance.Winner + "is the winner");
 			}
 		}
 
 
+	}
+	async Task Readyup()
+	{	GD.Print("Players Ready up with A");
+		int readyuppedplayer = 0;
+		bool player1notready = true;
+		bool player2notready = true;
+		bool player3notready = true;
+		bool player4notready = true;
+		bool runloop = true;
+		while (runloop)
+
+		if (Array.Exists(GlobalVariables.Instance.playersalive, element => element == 1 && player1notready))
+		{
+			if (Input.IsActionJustPressed("A_1"))
+			{
+				readyuppedplayer++;
+				player1notready = false;
+			}
+		}
+
+		if (Array.Exists(GlobalVariables.Instance.playersalive, element => element == 2 && player2notready))
+		{
+			if (Input.IsActionJustPressed("A_1"))
+			{
+				readyuppedplayer++;
+				player2notready = false;
+			}
+		}
+
+		if (Array.Exists(GlobalVariables.Instance.playersalive, element => element == 3 && player3notready))
+		{
+			if (Input.IsActionJustPressed("A_1"))
+			{
+				readyuppedplayer++;
+				player3notready = false;
+			}
+		}
+
+		if (Array.Exists(GlobalVariables.Instance.playersalive, element => element == 4 && player4notready))
+		{
+			if (Input.IsActionJustPressed("A_1"))
+			{
+				readyuppedplayer++;
+				player4notready = false;
+			}
+		}
+		if(readyuppedplayer == minigameplayeramount){
+			runloop = false;
+		}
+		await ToSignal(GetTree().CreateTimer(0), "timeout");
 	}
 }

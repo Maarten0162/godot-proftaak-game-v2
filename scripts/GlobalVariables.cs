@@ -55,6 +55,7 @@ public partial class GlobalVariables : Node
     private Node currentScene;
     private Node StartGame;
     public int TurnCount { get; set; }
+    public int[] playersalive { get; set; }
 
     
     public override void _Ready()
