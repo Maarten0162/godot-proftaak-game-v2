@@ -11,21 +11,25 @@ public class PlayerState
     public bool HasCap { get; set; }
     public bool HasKnuckles { get; set; }
     public bool HasGoldenKnuckles { get; set; }
-    public string[] Items { get; set; }
+    public string[] Inventory { get; set; }
     public int RollAdjustment { get; set; }
 
+
     // Constructor that accepts player state data
-    public PlayerState(Vector2 position, int positionspace, int health, int currency, bool skipturn, bool hascap, bool hasknuckles, bool hasgoldenknuckles, string[] items, int rolladjustment)
+  public PlayerState(Player player)
     {
-        Position = position;
-        PositionSpace = positionspace;
-        Health = health;
-        Currency = currency;
-        SkipTurn = skipturn;
-        HasCap = hascap;
-        HasKnuckles = hasknuckles;
-        HasGoldenKnuckles = hasgoldenknuckles;
-        Items = items;
-        RollAdjustment = rolladjustment;
+        Position = player.Position;
+        PositionSpace = player.PositionSpace;
+        Health = player.Health;
+        Currency = player.Currency;
+        SkipTurn = player.SkipTurn;
+        HasCap = player.HasCap;
+        HasKnuckles = player.HasKnuckles;
+        HasGoldenKnuckles = player.HasGoldenKnuckles;
+        Inventory = player.Inventory;
+        RollAdjustment = player.RollAdjustment;
+
+     
     }
+
 }

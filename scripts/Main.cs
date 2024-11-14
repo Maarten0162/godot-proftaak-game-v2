@@ -191,9 +191,9 @@ public partial class Main : Node2D
 	}
 	//movement
 	async Task StartMovement(Player player, int diceRoll)
-	{
+	{GD.Print("in startmovement");
 		if (diceRoll >= 0)
-		{
+		{		
 			await Movement(player, diceRoll);
 		}
 		else
@@ -202,13 +202,13 @@ public partial class Main : Node2D
 		}
 	}
 	async Task Movement(Player player, int diceRoll)
-	{
+	{	GD.Print("in movement");
 		bool hasattacked = false;
 		ContinueLoop = true;
 		for (int i = 0; i < diceRoll && ContinueLoop; i++)
-		{
+		{	GD.Print("in movement loop");
 			int spaceinfront = (player.PositionSpace + 1) % spacesInfo.Length;
-
+			GD.Print("1");
 			if (player.HasCap || player.HasKnuckles || player.HasGoldenKnuckles) //checkt of current speler de cap heeft
 			{
 
@@ -275,7 +275,7 @@ public partial class Main : Node2D
 				}
 			}			
 			if (ContinueLoop)
-			{
+			{GD.Print("2");
 				player.PositionSpace = (player.PositionSpace + 1) % spacesInfo.Length;
 
 				player.Position = spacesInfo[player.PositionSpace].Space.Position;
@@ -294,8 +294,9 @@ public partial class Main : Node2D
 				else GD.Print("sorry " + player.Name + " you don't have enough pounds.");
 			}
 			await ToSignal(GetTree().CreateTimer(0.4), "timeout");
+			
 		}
-
+GD.Print("5");
 
 	}
 	async Task NegMovement(Player player, int diceRoll)
@@ -625,7 +626,7 @@ public partial class Main : Node2D
 			if (useditem != "dice")
 			{
 				diceRoll = await AwaitButtonPress(player); // ik kies nu betterdice maar dit moet dus eigenlijk gedaan worden via buttons in het menu? idk wrs kunenn we gwn doen A is dice 1, B is dice 2, X is dice 3 met kleine animatie.
-
+				GD.Print("uit diceroll");
 				await StartMovement(player, diceRoll);
 			}
 
@@ -661,7 +662,7 @@ public partial class Main : Node2D
 		{
 
 			if (Input.IsActionJustPressed($"A_{WhatPlayer}"))
-			{
+			{	
 				diceRoll = basicdice.diceroll();
 				player.Currency -= basicdice.Price;
 				updateDobbelSprite(diceRoll);
@@ -698,7 +699,7 @@ public partial class Main : Node2D
 			else if (Input.IsActionJustPressed("1"))
 			{
 				diceRoll = 1;
-
+				SpawnRazorCap();
 				updateDobbelSprite(diceRoll);
 				waitingforbuttonpress = false;
 				return diceRoll;
@@ -897,11 +898,11 @@ public partial class Main : Node2D
 				rndRazorCapSpace += 1;
 			}
 		}
-		Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{rndRazorCapSpace + 1}"); // het is + 1 omdat de markers 1 voorop lopen met de spaces tellen dan we in de index hebben staan
+		Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{2 + 1}"); // het is + 1 omdat de markers 1 voorop lopen met de spaces tellen dan we in de index hebben staan
 
 		var sprite = markerNode.GetChild<Sprite2D>(0);
 		sprite.Texture = GD.Load<Texture2D>("res://assets/Spaces/RazorCap_Space.png");
-		spacesInfo[rndRazorCapSpace].Name = "Razorcap_Space";
+		spacesInfo[2].Name = "Razorcap_Space";
 		GD.Print("razorcap ligt op vak " + rndRazorCapSpace);
 
 	}
@@ -1434,59 +1435,60 @@ public partial class Main : Node2D
 		
 	}
 	public void SaveAllStates()
+{
+    for (int playerNumber = 1; playerNumber <= Playerlist.Length; playerNumber++)
     {
-        for (int playerNumber = 1; playerNumber <= Playerlist.Length; playerNumber++)
-        {
-            // Example of retrieving player-specific data, such as position
-            Player playerNode = GetNode<Player>($"player{playerNumber}");
-            Vector2 position = playerNode.Position;
-			int positionspace = playerNode.PositionSpace;
-            int health = playerNode.Health;
-            int currency = playerNode.Currency;
-			bool skipturn = playerNode.SkipTurn;
-            bool hascap = playerNode.HasCap;
-            bool hasknuckles = playerNode.HasKnuckles;
-			bool hasgoldenknuckles = playerNode.HasGoldenKnuckles;
-            string [] items = new string[3];
-			Array.Copy(playerNode.Inventory, items, playerNode.Inventory.Length);
-			int rolladjustment = playerNode.RollAdjustment;
-            
-
-            // Save the state for this player
-            GlobalVariables.Instance.SavePlayerState(playerNumber, position, positionspace, health, currency, skipturn, hascap, hasknuckles, hasgoldenknuckles, items, rolladjustment);
-        }
-	
-
-	
+        // Get the player node
+        Player playerNode = GetNode<Player>($"player{playerNumber}");
+        
+        // Save the player's state
+        PlayerState playerState = playerNode.SavePlayerState();
+        
+        // Save the state to GlobalVariables or another state management system
+        GlobalVariables.Instance.SavePlayerState(playerNumber, playerNode);
     }
+		Node2D[] spaceNodes = new Node2D[spacesInfo.Length];
+    	string[] spaceNames = new string[spacesInfo.Length];
+    	string[] spaceOriginalNames = new string[spacesInfo.Length];
+		for(int i = 0; i < spacesAmount; i++){
+			
+        	spaceNames[i] = spacesInfo[i].Name;   // Accessing the Name from the tuple
+        	spaceOriginalNames[i] = spacesInfo[i].OriginalName;  // Accessing the OriginalName
+		}
+		
+		
+		GlobalVariables.Instance.SaveBoardState(spaceNodes, spaceNames, spaceOriginalNames);
+	
+	
+
+}
+
 
     public void RestoreAllStates()
-    {	GD.Print("in restorefunction");
-        for (int playerNumber = 1; playerNumber <= 4; playerNumber++)
-        {
-            PlayerState playerState = GlobalVariables.Instance.GetPlayerState(playerNumber);
-            
-            // Get the player node
-            Player playerNode = GetNode<Player>($"player{playerNumber}");
-            
-            // Restore each property from the saved state
-            playerNode.Position = playerState.Position;
-			playerNode.PositionSpace = playerState.PositionSpace;
-            playerNode.Health = playerState.Health;
-            playerNode.Currency = playerState.Currency;
-			playerNode.SkipTurn = playerState.SkipTurn;
-            playerNode.HasCap = playerState.HasCap;
-            playerNode.HasKnuckles = playerState.HasKnuckles;
-            playerNode.HasGoldenKnuckles = playerState.HasGoldenKnuckles;
-			playerNode.Items = new string[playerState.Items.Length];
-        	Array.Copy(playerState.Items, playerNode.Items, playerState.Items.Length);
-
-            playerNode.RollAdjustment = playerState.RollAdjustment;
-        }	
-		
-
+{
+    for (int playerNumber = 1; playerNumber <= Playerlist.Length; playerNumber++)
+    {
+        // Retrieve the saved player state
+        PlayerState playerState = GlobalVariables.Instance.GetPlayerState(playerNumber);
+        
+        // Get the player node
+        Player playerNode = GetNode<Player>($"player{playerNumber}");
+        
+        // Load the state into the player node
+        playerNode.LoadPlayerState(playerState);
     }
-	
+	BoardState bord = GlobalVariables.Instance.GetBoardState();
+	for(int i = 0; i < spacesAmount; i++){
+			
+        	spacesInfo[i].Name = bord.Names[i];
+        	spacesInfo[i].OriginalName = bord.OriginalNames[i];
+			
+			Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{i + 1}");
+				var sprite = markerNode.GetChild<Sprite2D>(0);
+				sprite.Texture = GD.Load<Texture2D>($"res://assets/Spaces/{spacesInfo[i].Name}.png");
+		}
+		
+}
 
     
 

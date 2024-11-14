@@ -11,25 +11,33 @@ public partial class GlobalVariables : Node
     public int playeramount { get; set; }
     public string Winner { get; set; }
         // Dictionary to store the state of each player
-    public Dictionary<int, PlayerState> BoardState = new Dictionary<int, PlayerState>();
+    public Dictionary<int, PlayerState> PlayerStates = new Dictionary<int, PlayerState>();
+   BoardState boardState;
 
     // Method to save the state of a player
-    public void SavePlayerState(int playerNumber, Vector2 position, int positionspace, int health, int currency, bool skipturn, bool hascap, bool hasknuckles, bool hasgoldenknuckles, string[] items, int rolladjustment)
+    public void SavePlayerState(int playerNumber, Player player)
     {
         // Create a new PlayerState and store it in the dictionary for the given player
-        BoardState[playerNumber] = new PlayerState(position, positionspace, health, currency, skipturn, hascap, hasknuckles, hasgoldenknuckles, items, rolladjustment);
+        PlayerStates[playerNumber] = new PlayerState(player);
+    }
+    public void SaveBoardState(Node2D[] spaces, string[] name, string[] originalname){
+        boardState = new BoardState(name, originalname);
     }
 
     // Method to retrieve a player's state, or create a default if it doesn't exist
     public PlayerState GetPlayerState(int playerNumber)
     {
-        if (BoardState.TryGetValue(playerNumber, out PlayerState playerState))
+        if (PlayerStates.TryGetValue(playerNumber, out PlayerState playerState))
         {
             return playerState;
         }
         
         // Return a default PlayerState if the player's state hasn't been saved
-        return new PlayerState(Vector2.Zero, 42, 100, 100, false, false, false, false, new string[3], 0);  // Adjust default values as needed
+        return playerState;  // Adjust default values as needed
+    }
+    public BoardState GetBoardState(){
+        GD.Print("in getboardstate");
+        return boardState;
     }
 
 
@@ -62,18 +70,18 @@ public partial class GlobalVariables : Node
     {
         // If we are coming back from a minigame, restore the board state here
         ChangeScene(menuScene);
-        RestoreBoardState();
+        RestorePlayerStates();
     }
     public void SwitchToMainBoard()
     {
         // If we are coming back from a minigame, restore the board state here
         ChangeScene(mainBoardScene);
-        RestoreBoardState();
+        RestorePlayerStates();
     }
     public void SwitchToMinigame()
     {
         // Save the board state before switching
-        SaveBoardState();
+        SavePlayerStates();
 
         // Load the minigame scene
         ChangeScene(minigameScene);
@@ -91,21 +99,21 @@ public partial class GlobalVariables : Node
         AddChild(currentScene);
     }
 
-    private void SaveBoardState()
+    private void SavePlayerStates()
     {
         // Save any necessary data about the board's state
-        // For example, you can get player positions, scores, etc. and store them in BoardState
+        // For example, you can get player positions, scores, etc. and store them in PlayerStates
         // Example:
         
     }
 
-    private void RestoreBoardState()
+    private void RestorePlayerStates()
     {
         // Restore the saved state to the board when switching back
         // Example:
-        // if (BoardState.ContainsKey("PlayerPosition"))
+        // if (PlayerStates.ContainsKey("PlayerPosition"))
         // {
-        //     boardScene.GetNode<Player>("Player").Position = (Vector2)BoardState["PlayerPosition"];
+        //     boardScene.GetNode<Player>("Player").Position = (Vector2)PlayerStates["PlayerPosition"];
         // }
     }
 

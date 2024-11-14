@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dol6hnh1qws33"
-path="res://.godot/imported/blueSpace.png-2c7d6c1a5e394f8c9b0ee6fc8cd638d3.ctex"
+uid="uid://d1bmf0rqhpaph"
+path="res://.godot/imported/greenpipe - Copy - Copy.png-bfa876ba9525eb8e3b6f3887a788243c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Spaces/blueSpace.png"
-dest_files=["res://.godot/imported/blueSpace.png-2c7d6c1a5e394f8c9b0ee6fc8cd638d3.ctex"]
+source_file="res://assets/Spaces/greenpipe - Copy - Copy.png"
+dest_files=["res://.godot/imported/greenpipe - Copy - Copy.png-bfa876ba9525eb8e3b6f3887a788243c.ctex"]
 
 [params]
 
