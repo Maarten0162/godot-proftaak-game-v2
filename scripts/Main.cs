@@ -726,21 +726,21 @@ public partial class Main : Node2D
 	}
 	private async void ChooseTurn()
 	{
-		if(PlayerAmount == 4){
+		if(GlobalVariables.Instance.playeramount == 4){
 		while (true)
 		{GD.Print("playeramount is 4");
 
 			await Turn4();
 
 		}}
-			if(PlayerAmount == 3){
+			if(GlobalVariables.Instance.playeramount == 3){
 		while (true)
 		{
 
 			await Turn3();
 
 		}}
-			if(PlayerAmount == 2){
+			if(GlobalVariables.Instance.playeramount == 2){
 		while (true)
 		{
 
