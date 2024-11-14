@@ -730,7 +730,7 @@ public partial class Main : Node2D
 		while (true)
 		{GD.Print("playeramount is 4");
 
-			await Turn();
+			await Turn4();
 
 		}}
 			if(PlayerAmount == 3){
