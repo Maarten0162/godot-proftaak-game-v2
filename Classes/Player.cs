@@ -138,6 +138,26 @@ public partial class Player : CharacterBody2D
 			hasgoldenknuckles = value;
 		}
 	}
-		
-}
+
+   public PlayerState SavePlayerState()
+    {
+        return new PlayerState(this);
+    }
+
+    // You can also implement a load method to restore the state
+    public void LoadPlayerState(PlayerState state)
+    {
+        Position = state.Position;
+        PositionSpace = state.PositionSpace;
+        Health = state.Health;
+        Currency = state.Currency;
+        SkipTurn = state.SkipTurn;
+        HasCap = state.HasCap;
+        HasKnuckles = state.HasKnuckles;
+        HasGoldenKnuckles = state.HasGoldenKnuckles;
+        Inventory = state.Inventory;
+        RollAdjustment = state.RollAdjustment;
+
+       
+    }}
 

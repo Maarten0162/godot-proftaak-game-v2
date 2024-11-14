@@ -8,8 +8,10 @@ using System.Xml;
 
 
 public partial class Main : Node2D
-{
-	private int TurnCount;
+{	
+
+
+	
 	private AnimatedSprite2D dobbelSprite;
 
 	int spacesAmount = 42;
@@ -55,8 +57,12 @@ public partial class Main : Node2D
 	string itemId;
 	int WhatPlayer;
 	public int PlayerAmount;
+	
+	
 	public override void _Ready()
-	{
+	{	
+		
+ 	
 		dobbelgeluid = GetNode<AudioStreamPlayer>("Dobbelgeluid");
 
 		// Initialiseer de dobbelstenen met het dobbelgeluid.
@@ -70,6 +76,7 @@ public partial class Main : Node2D
 		twentydice = new Dice(-20, 21, dobbelgeluid, 0);
 
 		spacesInfo = new (Node2D, string, string)[spacesAmount];
+		
 		for (int i = 1; i <= spacesAmount; i++)
 		{
 			Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{i}");
@@ -147,7 +154,11 @@ public partial class Main : Node2D
 			EmitSignal("updateplayerui", Playerlist[i]);
 		}
 		}
-		
+		GD.Print("TurnCount " + GlobalVariables.Instance.TurnCount + "global TurnCount is " + GlobalVariables.Instance.TurnCount);
+		if(GlobalVariables.Instance.TurnCount > 0){
+		RestoreAllStates();
+		}
+			GD.Print(player1.Currency);
 
 		
 
@@ -180,9 +191,9 @@ public partial class Main : Node2D
 	}
 	//movement
 	async Task StartMovement(Player player, int diceRoll)
-	{
+	{GD.Print("in startmovement");
 		if (diceRoll >= 0)
-		{
+		{		
 			await Movement(player, diceRoll);
 		}
 		else
@@ -191,13 +202,13 @@ public partial class Main : Node2D
 		}
 	}
 	async Task Movement(Player player, int diceRoll)
-	{
+	{	GD.Print("in movement");
 		bool hasattacked = false;
 		ContinueLoop = true;
 		for (int i = 0; i < diceRoll && ContinueLoop; i++)
-		{
+		{	GD.Print("in movement loop");
 			int spaceinfront = (player.PositionSpace + 1) % spacesInfo.Length;
-
+			GD.Print("1");
 			if (player.HasCap || player.HasKnuckles || player.HasGoldenKnuckles) //checkt of current speler de cap heeft
 			{
 
@@ -264,7 +275,7 @@ public partial class Main : Node2D
 				}
 			}			
 			if (ContinueLoop)
-			{
+			{GD.Print("2");
 				player.PositionSpace = (player.PositionSpace + 1) % spacesInfo.Length;
 
 				player.Position = spacesInfo[player.PositionSpace].Space.Position;
@@ -283,8 +294,9 @@ public partial class Main : Node2D
 				else GD.Print("sorry " + player.Name + " you don't have enough pounds.");
 			}
 			await ToSignal(GetTree().CreateTimer(0.4), "timeout");
+			
 		}
-
+GD.Print("5");
 
 	}
 	async Task NegMovement(Player player, int diceRoll)
@@ -435,9 +447,9 @@ public partial class Main : Node2D
 
 	//TURNS
 	async Task Turn4()
-	{	GD.Print("in turn 4");
+	{	
 		if (player1.Health != 0)
-		{GD.Print("player 1 starts turn");
+		{
 			await Turn_Player(player1);
 		}
 		if (player2.Health != 0)
@@ -453,15 +465,17 @@ public partial class Main : Node2D
 			await Turn_Player(player4);
 		}
 
-		TurnCount++;
+		GlobalVariables.Instance.TurnCount++;
+		SaveAllStates();
 
 		if (CheckWinCondition()) //functie checkt of alle spelers op 1 na dood zijn, of dat er 15 turns voorbij zijn gegaan.
 		{
 			EndGame();
 		}
-		// ChooseMiniGame();
-		await selectTrapPositon();
-		if (TurnCount >= 0) //dit zorgt ervoor dat de cap gaat spawnen
+		
+		
+		
+		if (GlobalVariables.Instance.TurnCount >= 0) //dit zorgt ervoor dat de cap gaat spawnen
 		{
 			bool RunLoop = true;
 			while (RunLoop)
@@ -488,11 +502,10 @@ public partial class Main : Node2D
 
 			}
 		}
-		GD.Print("einde van turn " + TurnCount + ". " + (TurnCount + 1) + " begint nu!");
-		WhatPlayer = 0;
+		ChooseMiniGame();
 	}
 		async Task Turn3()
-	{
+	{	
 		if (player1.Health != 0)
 		{
 			await Turn_Player(player1);
@@ -506,16 +519,17 @@ public partial class Main : Node2D
 			await Turn_Player(player3);
 		}
 
-
-		TurnCount++;
+		
+		GlobalVariables.Instance.TurnCount++;
 
 		if (CheckWinCondition()) //functie checkt of alle spelers op 1 na dood zijn, of dat er 15 turns voorbij zijn gegaan.
 		{
 			EndGame();
 		}
-		// ChooseMiniGame();
-		await selectTrapPositon();
-		if (TurnCount >= 0) //dit zorgt ervoor dat de cap gaat spawnen
+		
+		
+		
+		if (GlobalVariables.Instance.TurnCount >= 0) //dit zorgt ervoor dat de cap gaat spawnen
 		{
 			bool RunLoop = true;
 			while (RunLoop)
@@ -542,7 +556,9 @@ public partial class Main : Node2D
 
 			}
 		}
-		GD.Print("einde van turn " + TurnCount + ". " + (TurnCount + 1) + " begint nu!");
+		SaveAllStates();
+		ChooseMiniGame();
+		GD.Print("einde van turn " + GlobalVariables.Instance.TurnCount + ". " + (GlobalVariables.Instance.TurnCount + 1) + " begint nu!");
 		WhatPlayer = 0;
 	}
 	async Task Turn2()
@@ -557,16 +573,16 @@ public partial class Main : Node2D
 		}
 
 
-		TurnCount++;
+		GlobalVariables.Instance.TurnCount++;
 
 		if (CheckWinCondition()) //functie checkt of alle spelers op 1 na dood zijn, of dat er 15 turns voorbij zijn gegaan.
 		{
 			EndGame();
 		}
-		// ChooseMiniGame();
+	
 
-		await selectTrapPositon();
-		if (TurnCount >= 0) //dit zorgt ervoor dat de cap gaat spawnen
+		
+		if (GlobalVariables.Instance.TurnCount >= 0) //dit zorgt ervoor dat de cap gaat spawnen
 		{
 			bool RunLoop = true;
 			while (RunLoop)
@@ -593,7 +609,8 @@ public partial class Main : Node2D
 
 			}
 		}
-		GD.Print("einde van turn " + TurnCount + ". " + (TurnCount + 1) + " begint nu!");
+			ChooseMiniGame();
+		GD.Print("einde van turn " + GlobalVariables.Instance.TurnCount + ". " + (GlobalVariables.Instance.TurnCount + 1) + " begint nu!");
 		WhatPlayer = 0;
 	}
 	async Task Turn_Player(Player player)
@@ -609,7 +626,7 @@ public partial class Main : Node2D
 			if (useditem != "dice")
 			{
 				diceRoll = await AwaitButtonPress(player); // ik kies nu betterdice maar dit moet dus eigenlijk gedaan worden via buttons in het menu? idk wrs kunenn we gwn doen A is dice 1, B is dice 2, X is dice 3 met kleine animatie.
-
+				GD.Print("uit diceroll");
 				await StartMovement(player, diceRoll);
 			}
 
@@ -645,7 +662,7 @@ public partial class Main : Node2D
 		{
 
 			if (Input.IsActionJustPressed($"A_{WhatPlayer}"))
-			{
+			{	
 				diceRoll = basicdice.diceroll();
 				player.Currency -= basicdice.Price;
 				updateDobbelSprite(diceRoll);
@@ -682,7 +699,7 @@ public partial class Main : Node2D
 			else if (Input.IsActionJustPressed("1"))
 			{
 				diceRoll = 1;
-
+				SpawnRazorCap();
 				updateDobbelSprite(diceRoll);
 				waitingforbuttonpress = false;
 				return diceRoll;
@@ -725,22 +742,22 @@ public partial class Main : Node2D
 		return 0;
 	}
 	private async void ChooseTurn()
-	{GD.Print("in chooseturn");
-		if(Playerlist.Length == 4){
-		while (true)
-		{GD.Print("playeramount is 4");
+	{
+		if(GlobalVariables.Instance.playeramount == 4){
+		
+		GD.Print("playeramount is 4");
 
 			await Turn4();
 
-		}}
-			if(Playerlist.Length == 3){
+		}
+			if(GlobalVariables.Instance.playeramount == 3){
 		while (true)
 		{
 
 			await Turn3();
 
 		}}
-			if(Playerlist.Length == 2){
+			if(GlobalVariables.Instance.playeramount == 2){
 		while (true)
 		{
 
@@ -881,11 +898,11 @@ public partial class Main : Node2D
 				rndRazorCapSpace += 1;
 			}
 		}
-		Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{rndRazorCapSpace + 1}"); // het is + 1 omdat de markers 1 voorop lopen met de spaces tellen dan we in de index hebben staan
+		Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{2 + 1}"); // het is + 1 omdat de markers 1 voorop lopen met de spaces tellen dan we in de index hebben staan
 
 		var sprite = markerNode.GetChild<Sprite2D>(0);
 		sprite.Texture = GD.Load<Texture2D>("res://assets/Spaces/RazorCap_Space.png");
-		spacesInfo[rndRazorCapSpace].Name = "Razorcap_Space";
+		spacesInfo[2].Name = "Razorcap_Space";
 		GD.Print("razorcap ligt op vak " + rndRazorCapSpace);
 
 	}
@@ -900,7 +917,7 @@ public partial class Main : Node2D
 				deadplayer += 1;
 			}
 		}
-		if (deadplayer == Playerlist.Length - 1 || TurnCount == 15)
+		if (deadplayer == Playerlist.Length - 1 || GlobalVariables.Instance.TurnCount == 15)
 		{
 			return true;
 		}
@@ -1338,11 +1355,10 @@ public partial class Main : Node2D
 		player.HasGoldenKnuckles = true;
 	}	
 
-	// void ChooseMiniGame()
-	// {
-	// 	int Whatminigame = rnd.Next(1, MiniGames.Length);
-	// 	GetTree().ChangeSceneToFile($"pathtoscene{Whatminigame}");//hier pakt hij 1 van de minigames die net random is gekozen.
-	// }
+	void ChooseMiniGame()
+	{
+		GlobalVariables.Instance.SwitchToMinigame();
+	}
 
 		async Task selectTrapPositon() 
 	{	GD.Print("in buttonselect");
@@ -1379,6 +1395,7 @@ public partial class Main : Node2D
 		buttonmin2.Show();
 		buttonplus1.Show();
 		buttonplus2.Show();
+		await Task.CompletedTask;
 	}
 	
 	
@@ -1414,9 +1431,78 @@ public partial class Main : Node2D
 				Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{player.PositionSpace + 1}");
 				var sprite = markerNode.GetChild<Sprite2D>(0);
 				sprite.Texture = GD.Load<Texture2D>($"res://assets/Spaces/{spacesInfo[player.PositionSpace].OriginalName}.png");
-			
+			await Task.CompletedTask;
 		
 	}
+	public void SaveAllStates()
+{
+    for (int playerNumber = 1; playerNumber <= Playerlist.Length; playerNumber++)
+    {
+        // Get the player node
+        Player playerNode = GetNode<Player>($"player{playerNumber}");
+        
+        // Save the player's state
+        PlayerState playerState = playerNode.SavePlayerState();
+        
+        // Save the state to GlobalVariables or another state management system
+        GlobalVariables.Instance.SavePlayerState(playerNumber, playerNode);
+    }
+		Node2D[] spaceNodes = new Node2D[spacesInfo.Length];
+    	string[] spaceNames = new string[spacesInfo.Length];
+    	string[] spaceOriginalNames = new string[spacesInfo.Length];
+		for(int i = 0; i < spacesAmount; i++){
+			
+        	spaceNames[i] = spacesInfo[i].Name;   // Accessing the Name from the tuple
+        	spaceOriginalNames[i] = spacesInfo[i].OriginalName;  // Accessing the OriginalName
+		}
+		
+		
+		GlobalVariables.Instance.SaveBoardState(spaceNodes, spaceNames, spaceOriginalNames);
+	
+	
 
 }
+
+
+    public void RestoreAllStates()
+{
+    for (int playerNumber = 1; playerNumber <= Playerlist.Length; playerNumber++)
+    {
+        // Retrieve the saved player state
+        PlayerState playerState = GlobalVariables.Instance.GetPlayerState(playerNumber);
+        
+        // Get the player node
+        Player playerNode = GetNode<Player>($"player{playerNumber}");
+        
+        // Load the state into the player node
+        playerNode.LoadPlayerState(playerState);
+    }
+	BoardState bord = GlobalVariables.Instance.GetBoardState();
+	for(int i = 0; i < spacesAmount; i++){
+			
+        	spacesInfo[i].Name = bord.Names[i];
+        	spacesInfo[i].OriginalName = bord.OriginalNames[i];
+			
+			Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{i + 1}");
+				var sprite = markerNode.GetChild<Sprite2D>(0);
+				sprite.Texture = GD.Load<Texture2D>($"res://assets/Spaces/{spacesInfo[i].Name}.png");
+		}
+		
+}
+
+    
+
+   
+}
+
+
+
+
+
+
+
+
+
+
+
 
