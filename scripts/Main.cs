@@ -77,7 +77,7 @@ public partial class Main : Node2D
 			spacesInfo[i - 1] = (markerNode, sprite.Name, sprite.Name);
 			GD.Print("plek " + i + " is gevuld en de kleur is" + sprite.Name);
 		}
-		int PlayerAmount = GlobalVariables.Instance.playeramount; 
+		int PlayerAmount = GlobalVariables.Instance.playeramount;
 
 		if(PlayerAmount == 2)
 		{				Vector2 player1start = spacesInfo[0].Space.Position;
@@ -90,7 +90,7 @@ public partial class Main : Node2D
 				player2.PositionSpace = 30;				
 				
 				Playerlist = new Player[2] { player1, player2};
-		for (int i = 0; i < PlayerAmount; i++)
+		for (int i = 0; i < Playerlist.Length; i++)
 		{
 			EmitSignal("updateplayerui", Playerlist[i]);
 		}
@@ -112,13 +112,13 @@ public partial class Main : Node2D
 				player3.Position = player3start;
 				player3.PositionSpace = 30;
 				Playerlist = new Player[3] { player1, player2, player3};
-		for (int i = 0; i < PlayerAmount; i++)
+		for (int i = 0; i < Playerlist.Length; i++)
 		{
 			EmitSignal("updateplayerui", Playerlist[i]);
 		}
 		}
 		else if(PlayerAmount == 4)
-		{	
+		{	GD.Print("in 4 spelers");
 		
 		
 			Vector2 topLeft = spacesInfo[0].Space.Position;
@@ -142,7 +142,7 @@ public partial class Main : Node2D
 		player4.PositionSpace = 30;
 		
 		Playerlist = new Player[4] { player1, player2, player3, player4 };
-		for (int i = 0; i < PlayerAmount; i++)
+		for (int i = 0; i < Playerlist.Length; i++)
 		{
 			EmitSignal("updateplayerui", Playerlist[i]);
 		}
@@ -202,7 +202,7 @@ public partial class Main : Node2D
 			{
 
 				GD.Print("in playerhascap check");
-				for (int x = 0; x < PlayerAmount; x++) // cycled door elke speler heen zolang de speler nog dicerolls heeft 
+				for (int x = 0; x < Playerlist.Length; x++) // cycled door elke speler heen zolang de speler nog dicerolls heeft 
 				{
 
 					//15 en 36 zijn hetzelfde vak
@@ -296,7 +296,7 @@ public partial class Main : Node2D
 		{
 			int spaceBehind = (player.PositionSpace - 1 + spacesInfo.Length) % spacesInfo.Length;
 
-			for (int x = 0; x < PlayerAmount; x++) // cycled door elke speler heenzolang de speler nog dicerolls heeft
+			for (int x = 0; x < Playerlist.Length; x++) // cycled door elke speler heenzolang de speler nog dicerolls heeft
 			{
 
 				if (spaceBehind == 15 || spaceBehind == 36)
@@ -434,9 +434,9 @@ public partial class Main : Node2D
 	}
 
 	//TURNS
-	async Task Turn()
-	{	
-		if (player1.Health != 0 && player1 != null)
+	async Task Turn4()
+	{
+		if (player1.Health != 0)
 		{
 			await Turn_Player(player1);
 		}
@@ -466,7 +466,7 @@ public partial class Main : Node2D
 			bool RunLoop = true;
 			while (RunLoop)
 			{
-				for (int i = 0; i < PlayerAmount; i++)
+				for (int i = 0; i < Playerlist.Length; i++)
 				{
 					if (Playerlist[i].HasCap)
 					{
@@ -520,7 +520,7 @@ public partial class Main : Node2D
 			bool RunLoop = true;
 			while (RunLoop)
 			{
-				for (int i = 0; i < PlayerAmount; i++)
+				for (int i = 0; i < Playerlist.Length; i++)
 				{
 					if (Playerlist[i].HasCap)
 					{
@@ -571,7 +571,7 @@ public partial class Main : Node2D
 			bool RunLoop = true;
 			while (RunLoop)
 			{
-				for (int i = 0; i < PlayerAmount; i++)
+				for (int i = 0; i < Playerlist.Length; i++)
 				{
 					if (Playerlist[i].HasCap)
 					{
@@ -726,21 +726,21 @@ public partial class Main : Node2D
 	}
 	private async void ChooseTurn()
 	{
-		if(GlobalVariables.Instance.playeramount == 4){
+		if(PlayerAmount == 4){
 		while (true)
-		{
+		{GD.Print("playeramount is 4");
 
 			await Turn();
 
 		}}
-			if(GlobalVariables.Instance.playeramount == 3){
+			if(PlayerAmount == 3){
 		while (true)
 		{
 
 			await Turn3();
 
 		}}
-			if(GlobalVariables.Instance.playeramount == 2){
+			if(PlayerAmount == 2){
 		while (true)
 		{
 
@@ -874,7 +874,7 @@ public partial class Main : Node2D
 		{
 			rndRazorCapSpace += 1;
 		}
-		for (int i = 0; i < PlayerAmount; i++)
+		for (int i = 0; i < Playerlist.Length; i++)
 		{
 			if (rndRazorCapSpace == Playerlist[i].PositionSpace)
 			{
@@ -893,14 +893,14 @@ public partial class Main : Node2D
 	bool CheckWinCondition()
 	{
 		int deadplayer = 0;
-		for (int i = 0; i < PlayerAmount; i++)
+		for (int i = 0; i < Playerlist.Length; i++)
 		{
 			if (Playerlist[i].Health == 0)
 			{
 				deadplayer += 1;
 			}
 		}
-		if (deadplayer == PlayerAmount - 1 || TurnCount == 15)
+		if (deadplayer == Playerlist.Length - 1 || TurnCount == 15)
 		{
 			return true;
 		}
@@ -1214,7 +1214,7 @@ public partial class Main : Node2D
 		bool runloop = true;
 		while (runloop)
 		{
-			int rndplayer = rnd.Next(0, PlayerAmount);
+			int rndplayer = rnd.Next(0, Playerlist.Length);
 			if (player != Playerlist[rndplayer])
 			{
 				player.Position = Playerlist[rndplayer].Position;
@@ -1229,7 +1229,7 @@ public partial class Main : Node2D
 		bool runloop = true;
 		while (runloop)
 		{
-			int rndplayer = rnd.Next(0, PlayerAmount);
+			int rndplayer = rnd.Next(0, Playerlist.Length);
 			if (player != Playerlist[rndplayer])
 			{
 				Vector2 originalposition = player.Position;
@@ -1251,7 +1251,7 @@ public partial class Main : Node2D
 		bool runloop = true;
 		while (runloop)
 		{
-			for (int i = 0; i < PlayerAmount; i++)
+			for (int i = 0; i < Playerlist.Length; i++)
 			{
 				if (Playerlist[i].HasCap)
 				{
@@ -1272,7 +1272,7 @@ public partial class Main : Node2D
 		bool runloop = true;
 		while (runloop)
 		{
-			int rndplayer = rnd.Next(0, PlayerAmount);
+			int rndplayer = rnd.Next(0, Playerlist.Length);
 			if (player != Playerlist[rndplayer])
 			{
 				Playerlist[rndplayer].RollAdjustment -= 5;
@@ -1286,7 +1286,7 @@ public partial class Main : Node2D
 		bool runloop = true;
 		while (runloop)
 		{
-			int rndplayer = rnd.Next(0, PlayerAmount);
+			int rndplayer = rnd.Next(0, Playerlist.Length);
 			if (player != Playerlist[rndplayer])
 			{
 				int stolenamount = rnd.Next(0, Playerlist[rndplayer].Currency / 5);
@@ -1304,7 +1304,7 @@ public partial class Main : Node2D
 		int howmanyitems = 0;
 		while (runloop1)
 		{
-			int rndplayer = rnd.Next(0, PlayerAmount);
+			int rndplayer = rnd.Next(0, Playerlist.Length);
 			if (player != Playerlist[rndplayer])
 			{
 				for (int i = 0; i < 2; i++)
