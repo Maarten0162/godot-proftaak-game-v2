@@ -50,7 +50,10 @@ public partial class GlobalVariables : Node
     private PackedScene mainBoardScene;
     private PackedScene minigameScene;
     private PackedScene menuScene;
-
+    public Player player1   { get; set; }
+    public Player player2   { get; set; }
+    public Player player3   { get; set; }
+    public Player player4   { get; set; }
     // Instance of the currently active scene
     private Node currentScene;
     private Node StartGame;

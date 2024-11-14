@@ -182,6 +182,10 @@ public partial class Main : Node2D
 
 	
 		GlobalVariables.Instance.playersalive = playersalive;
+		GlobalVariables.Instance.player1 = player1;
+		GlobalVariables.Instance.player2 = player2;
+		GlobalVariables.Instance.player3 = player3;
+		GlobalVariables.Instance.player4 = player4;
 		Iteminfo = new (string Name, int Price)[15] { ("Whiskey", 10), ("GoldenPipe", 10), ("DoubleDice", 10), ("TripleDice", 10), ("TwentyDice", 10), ("TenDice", 10), ("DashMushroom", 10), ("TeleportTorndPlayer", 10), ("SwitchPlaces", 10), ("StealPlayerCap", 10), ("PoisonMushroom", 10), ("StealCoins", 10), ("BrassKnuckles", 10), ("StealItem", 10), ("GoldenKnuckles", 10) };
 		ShopInv = new (string Name, int Price)[3] { ("test", 10), ("test", 10), ("test", 10) };
 
