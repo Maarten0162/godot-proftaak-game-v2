@@ -17,12 +17,11 @@ public partial class Minigame1 : Node
 	private bool[] playerReadyFlags = new bool[4]; // Track readiness of players
 	private int readyPlayers = 0; // Count of ready players
 	private int minigameplayeramount; // Number of players in the game
-	private Main main;
+
 
 
 	public override async void _Ready()
-	{
-		main = GetNode<Main>("/root/Node2D");
+	{			
 		minigameplayeramount = 0;
 		horseSprites = new List<Sprite2D>();
 		if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player1"))

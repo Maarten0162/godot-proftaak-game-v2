@@ -64,6 +64,14 @@ public partial class Main : Node2D
 	public override void _Ready()
 	{
 
+		//zet players invisble worden visible in Updatehud()
+		GetNode<Node2D>($"Node2D/CanvasLayer/player1").Hide();
+		GetNode<Node2D>($"Node2D/CanvasLayer/player2").Hide();
+		GetNode<Node2D>($"Node2D/CanvasLayer/player3").Hide();
+		GetNode<Node2D>($"Node2D/CanvasLayer/player4").Hide();
+
+
+
 
 		dobbelgeluid = GetNode<AudioStreamPlayer>("Dobbelgeluid");
 
@@ -1734,12 +1742,23 @@ public partial class Main : Node2D
 
 	}
 	//andere ui
-    void Updatehud(Player player){
-
+    void Updatehud(Player player)
+	{
+		TextureRect icon = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/");
+		
         Label currency = GetNode<Label>($"Node2D/CanvasLayer/{player.Name}/Playerhud/Currency{player.Name}");
         Label health = GetNode<Label>($"Node2D/CanvasLayer/{player.Name}/Playerhud/Health{player.Name}");
         currency.Text = player.Currency.ToString();
         health.Text = player.Health.ToString();
+		GD.Print(player.Name);
+		GetNode<Node2D>($"Node2D/CanvasLayer/{player.Name}").Show();
+
+
+		
+		if (player.Health == 0) {
+			icon.Texture = GD.Load<Texture2D>($"res://assets/hud/{player.Name}Dead.png");
+		}
+
     }
 
 
