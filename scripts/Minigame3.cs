@@ -1,31 +1,59 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public partial class Minigame3 : Node2D
 {
-     private float[] reactietijden = new float[4];
+    private float[] reactietijden = new float[4];
     private bool[] heeftGereageerd = new bool[4];
     private Timer spelTimer;
     private Timer reactieTimer;
     private Random random = new Random();
     private Label[] reactieLabels = new Label[4];
     private Label winnaarLabel;
-    private Label winnaarResultaatLabel;  // Nieuw label voor de winnaar
-    private Sprite2D[] preReactSprites = new Sprite2D[4];
-    private Sprite2D[] postReactSprites = new Sprite2D[4];
+    private Label winnaarResultaatLabel;
+    private List<Sprite2D> preReactSprites = new List<Sprite2D>();
+    private List<Sprite2D> postReactSprites = new List<Sprite2D>();
+
     private bool spelActief = false;
+    int minigameplayeramount;
 
     public override void _Ready()
     {
-        for (int i = 0; i < 4; i++)
+        if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player1"))
+        {
+            preReactSprites.Add(GetNode<Sprite2D>("PreReactSprite1"));
+            preReactSprites.Add(GetNode<Sprite2D>("PostReactSprite1"));
+            minigameplayeramount++;
+        }
+        if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player2"))
+        {
+            preReactSprites.Add(GetNode<Sprite2D>("PreReactSprite2"));
+            preReactSprites.Add(GetNode<Sprite2D>("PostReactSprite2"));
+            minigameplayeramount++;
+        }
+        if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player3"))
+        {
+            preReactSprites.Add(GetNode<Sprite2D>("PreReactSprite3"));
+            preReactSprites.Add(GetNode<Sprite2D>("PostReactSprite3"));
+            minigameplayeramount++;
+        }
+        if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player4"))
+        {
+            preReactSprites.Add(GetNode<Sprite2D>("PreReactSprite4"));
+            preReactSprites.Add(GetNode<Sprite2D>("PostReactSprite4"));
+            minigameplayeramount++;
+        }
+
+        for (int i = 0; i < minigameplayeramount; i++)
         {
             reactieLabels[i] = GetNode<Label>($"Label{i + 1}");
             preReactSprites[i] = GetNode<Sprite2D>($"PreReactSprite{i + 1}");
             postReactSprites[i] = GetNode<Sprite2D>($"PostReactSprite{i + 1}");
         }
         winnaarLabel = GetNode<Label>("WinnaarLabel");
-        winnaarResultaatLabel = GetNode<Label>("WinnaarResultaatLabel"); // Nieuwe label reference
-
+        winnaarResultaatLabel = GetNode<Label>("WinnaarResultaatLabel"); 
         spelTimer = GetNode<Timer>("SpelTimer");
         reactieTimer = GetNode<Timer>("ReactieTimer");
 
@@ -41,7 +69,7 @@ public partial class Minigame3 : Node2D
         heeftGereageerd = new bool[4];
         reactietijden = new float[4];
         winnaarLabel.Text = "Wacht tot het signaal...";
-        winnaarResultaatLabel.Text = "";  // Maak het winnaarresultaat leeg
+        winnaarResultaatLabel.Text = ""; 
         SetSpritesVisibility(true, false);
 
         float startTijd = (float)random.NextDouble() * 5f;
@@ -52,14 +80,13 @@ public partial class Minigame3 : Node2D
     {
         spelActief = true;
         winnaarLabel.Text = "Schiet nu!";
-        reactieTimer.Start(); // Start de timer zonder tijdslimiet, we gebruiken hem alleen om tijd te meten
+        reactieTimer.Start(); 
     }
 
     public override void _Process(double delta)
     {
         if (spelActief)
         {
-            // Nu reageren de knoppen als het spel actief is en de reactie timer draait
             CheckPlayerInput("button_press_space", 0);
             CheckPlayerInput("button_press_w", 1);
             CheckPlayerInput("button_press_e", 2);
@@ -88,7 +115,7 @@ public partial class Minigame3 : Node2D
     private void EindeReactieFase()
     {
         spelActief = false;
-        reactieTimer.Stop(); // Stop de timer
+        reactieTimer.Stop();
         int winnaarIndex = GetWinnerIndex();
         
         if (winnaarIndex >= 0)
@@ -99,8 +126,6 @@ public partial class Minigame3 : Node2D
         {
             winnaarResultaatLabel.Text = "Niemand heeft op tijd gereageerd.";
         }
-
-        // StartSpel(); // Verwijder deze lijn om het spel niet automatisch opnieuw te starten
     }
 
     private int GetWinnerIndex()
