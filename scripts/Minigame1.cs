@@ -70,19 +70,19 @@ public partial class Minigame1 : Node
 
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionJustPressed("button_press_space"))
+		if (Input.IsActionJustPressed("A_1"))
 		{
 			OnKeyPressed(0);
 		}
-		if (Input.IsActionJustPressed("button_press_w"))
+		if (Input.IsActionJustPressed("A_2"))
 		{
 			OnKeyPressed(1);
 		}
-		if (Input.IsActionJustPressed("button_press_e"))
+		if (Input.IsActionJustPressed("A_3"))
 		{
 			OnKeyPressed(2);
 		}
-		if (Input.IsActionJustPressed("button_press_r"))
+		if (Input.IsActionJustPressed("A_4"))
 		{
 			OnKeyPressed(3);
 		}
