@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://scripts/Main.cs" id="1_xihgb"]
 [ext_resource type="Texture2D" uid="uid://8mxqq2p862wb" path="res://assets/Boards/BoardWIP3.png" id="2_8r7vv"]
 [ext_resource type="Script" path="res://Classes/Player.cs" id="2_etkhv"]
-[ext_resource type="Texture2D" uid="uid://bv55x1xvnhlk2" path="res://assets/Boards/BoardWIP2.png" id="2_iosb1"]
 [ext_resource type="Texture2D" uid="uid://insiyhwvq4cl" path="res://assets/dice/default-dice/Dobbel-1.png" id="4_lgpu5"]
 [ext_resource type="Texture2D" uid="uid://tuw1uchf463i" path="res://assets/dice/default-dice/Dobbel1.png" id="4_xrfbe"]
 [ext_resource type="Texture2D" uid="uid://c0ktibn6olxwb" path="res://assets/dice/default-dice/Dobbel-2.png" id="5_4w8of"]
@@ -19,7 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://dol6hnh1qws33" path="res://assets/Spaces/blueSpace.png" id="16_a006q"]
 [ext_resource type="Texture2D" uid="uid://bh0oghc7f3r32" path="res://assets/Spaces/greenpipe.png" id="16_v2g8y"]
 [ext_resource type="Texture2D" uid="uid://d1pifwujewrmq" path="res://assets/dice/default-dice/Dobbel9.png" id="16_xc1rm"]
-[ext_resource type="Texture2D" uid="uid://th5esly73wm0" path="res://assets/Spaces/redspace.png" id="17_vh1sw"]
+[ext_resource type="Texture2D" uid="uid://th5esly73wm0" path="res://assets/Spaces/redSpace.png" id="17_vh1sw"]
 [ext_resource type="Texture2D" uid="uid://breb301qf7jth" path="res://assets/Spaces/Event_Space.png" id="19_srds4"]
 [ext_resource type="Texture2D" uid="uid://cujsv23d5gvki" path="res://assets/Player_icons/Player1.png" id="21_uwqye"]
 [ext_resource type="Texture2D" uid="uid://bdgy0jd42qaw6" path="res://assets/Player_icons/Player2.png" id="22_njgqf"]
@@ -368,7 +367,6 @@ script = ExtResource("1_xihgb")
 position = Vector2(564, 316)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_8r7vv")
-texture = ExtResource("2_iosb1")
 
 [node name="dobbelSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(535, 188)
@@ -756,6 +754,7 @@ text = "NaN"
 label_settings = SubResource("LabelSettings_1j2pu")
 
 [node name="Currencyplayer1" type="Label" parent="Node2D/CanvasLayer/player1/Playerhud"]
+layout_mode = 0
 offset_left = 44.1247
 offset_top = 18.2254
 offset_right = 105.125
@@ -777,6 +776,7 @@ texture = ExtResource("29_1sk77")
 expand_mode = 3
 
 [node name="Healthplayer2" type="Label" parent="Node2D/CanvasLayer/player2/Playerhud"]
+layout_mode = 0
 offset_left = 43.6451
 offset_top = 10.5516
 offset_right = 104.645
@@ -786,6 +786,7 @@ text = "NaN"
 label_settings = SubResource("LabelSettings_1j2pu")
 
 [node name="Currencyplayer2" type="Label" parent="Node2D/CanvasLayer/player2/Playerhud"]
+layout_mode = 0
 offset_left = 44.1247
 offset_top = 18.2254
 offset_right = 105.125
@@ -808,6 +809,7 @@ texture = ExtResource("30_5aixp")
 expand_mode = 3
 
 [node name="Healthplayer3" type="Label" parent="Node2D/CanvasLayer/player3/Playerhud"]
+layout_mode = 0
 offset_left = 43.6451
 offset_top = 10.5516
 offset_right = 104.645
@@ -817,6 +819,7 @@ text = "NaN"
 label_settings = SubResource("LabelSettings_1j2pu")
 
 [node name="Currencyplayer3" type="Label" parent="Node2D/CanvasLayer/player3/Playerhud"]
+layout_mode = 0
 offset_left = 44.1247
 offset_top = 18.2254
 offset_right = 105.125
@@ -839,6 +842,7 @@ texture = ExtResource("31_ivek0")
 expand_mode = 3
 
 [node name="Healthplayer4" type="Label" parent="Node2D/CanvasLayer/player4/Playerhud"]
+layout_mode = 0
 offset_left = 43.6451
 offset_top = 10.5516
 offset_right = 104.645
@@ -848,6 +852,7 @@ text = "NaN"
 label_settings = SubResource("LabelSettings_1j2pu")
 
 [node name="Currencyplayer4" type="Label" parent="Node2D/CanvasLayer/player4/Playerhud"]
+layout_mode = 0
 offset_left = 44.1247
 offset_top = 18.2254
 offset_right = 105.125

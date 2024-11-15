@@ -118,10 +118,7 @@ public partial class Main : Node2D
 
 			Playerlist = new Player[2] { player1, player2 };
 			playersalive = new List<Player> { player1, player2 };
-			for (int i = 0; i < Playerlist.Length; i++)
-			{
-				EmitSignal("updateplayerui", Playerlist[i]);
-			}
+
 
 
 		}
@@ -141,10 +138,7 @@ public partial class Main : Node2D
 			player3.PositionSpace = 30;
 			Playerlist = new Player[3] { player1, player2, player3 };
 			playersalive = new List<Player> { player1, player2, player3 };
-			for (int i = 0; i < Playerlist.Length; i++)
-			{
-				EmitSignal("updateplayerui", Playerlist[i]);
-			}
+
 		}
 		else if (PlayerAmount == 4)
 		{
@@ -173,15 +167,15 @@ public partial class Main : Node2D
 
 			Playerlist = new Player[4] { player1, player2, player3, player4 };
 			playersalive = new List<Player> { player1, player2, player3, player4 };
-			for (int i = 0; i < Playerlist.Length; i++)
-			{
-				EmitSignal("updateplayerui", Playerlist[i]);
-			}
+			
 		}
 		if (GlobalVariables.Instance.TurnCount > 0)
 		{ RestoreAllStates(); }
 
-
+			for (int i = 0; i < Playerlist.Length; i++)
+			{
+				Updatehud(Playerlist[i]);
+			}
 
 
 
@@ -581,7 +575,7 @@ public partial class Main : Node2D
 				await Placedetection(spacesInfo[player.PositionSpace].Name, player);
 			}
 
-			EmitSignal("updateplayerui", player);
+			Updatehud(player);
 
 			if (player.Health > 0)
 			{
@@ -823,13 +817,13 @@ public partial class Main : Node2D
 		victim.Health -= attackdamage;
 		attacker.HasKnuckles = false;
 		GD.Print(attacker.Name + " hit " + victim.Name + " for " + attackdamage + ". " + victim.Name + " has " + victim.Health + " health remaining");
-		EmitSignal("updateplayerui", attacker);
+		Updatehud(attacker);
 		if (victim.Health == 0)
 		{
 			playersalive.Remove(victim);
 			victim.Hide();
 		}
-		EmitSignal("updateplayerui", victim);
+		Updatehud(victim);
 	}
 
 	void RazorCapAttack(Player attacker, Player victim)
@@ -838,13 +832,13 @@ public partial class Main : Node2D
 		victim.Health -= attackdamage;
 		attacker.HasCap = false;
 		GD.Print(attacker.Name + " hit " + victim.Name + " for " + attackdamage + ". " + victim.Name + " has " + victim.Health + " health remaining");
-		EmitSignal("updateplayerui", attacker);
+		Updatehud(attacker);
 		if (victim.Health == 0)
 		{
 			playersalive.Remove(victim);
 			victim.Hide();
 		}
-		EmitSignal("updateplayerui", victim);
+		Updatehud(victim);
 	}
 	void SpawnRazorCap()
 	{
@@ -1435,7 +1429,7 @@ public partial class Main : Node2D
 			}
 			await ToSignal(GetTree().CreateTimer(0), "timeout");
 		}
-		EmitSignal("updateplayerui", player);
+		Updatehud(player);
 		return useditem;
 	}
 	//items en item spaces
@@ -1445,7 +1439,7 @@ public partial class Main : Node2D
 		player.SkipTurn = true;
 		player.Currency -= player.Currency / 3;
 		GD.Print("You got too drunk and went on a spending spree! also you have to skip your next turn because of your hangover");
-		EmitSignal("updateplayerui", player);
+		Updatehud(player);
 	}
 	void Beartrap(Player player) // dit is de space
 	{
@@ -1456,7 +1450,7 @@ public partial class Main : Node2D
 		Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{player.PositionSpace + 1}");
 		var sprite = markerNode.GetChild<Sprite2D>(0);
 		sprite.Texture = GD.Load<Texture2D>($"res://assets/Spaces/{spacesInfo[player.PositionSpace].OriginalName}.png");
-		EmitSignal("updateplayerui", player);
+		Updatehud(player);
 	}
 	void GoldenPipe(Player player) //**KAN ALLEEN AANGEVRAAGD WORDEN ALS DE razorcapspace op het bord zit!
 	{
@@ -1507,7 +1501,7 @@ public partial class Main : Node2D
 	void DashMushroom(Player player) // doet Plus X bij deze speler zijn volgende dice roll
 	{
 		player.RollAdjustment += 5;
-		EmitSignal("updateplayerui", player);
+		Updatehud(player);
 	}
 	void TeleportTorndPlayer(Player player) //teleport to a random player
 	{
@@ -1566,7 +1560,7 @@ public partial class Main : Node2D
 				}
 			}
 		}
-		EmitSignal("updateplayerui", player);
+		Updatehud(player);
 		GD.Print(player.Name + "used his goons to steal te cap from: " + victim);
 	}
 	void PoisonMushroom(Player player)//geeft een random player een roll debuff next turn
@@ -1581,7 +1575,7 @@ public partial class Main : Node2D
 				runloop = false;
 			}
 		}
-		EmitSignal("updateplayerui", player);
+		Updatehud(player);
 
 	}
 	void StealCoins(Player player) // steelt currency tussen 1 en de helft van een random persoon;
@@ -1597,18 +1591,18 @@ public partial class Main : Node2D
 				runloop = false;
 			}
 		}
-		EmitSignal("updateplayerui", player);
+		Updatehud(player);
 	}
 	void BrassKnuckles(Player player) //de player krijgt brass knuckles, een mini razor cap die minder damage doet maar waar je ook niet stopt nadat je aangevallen hebt, kan in combinatie met de razorcap
 	{
 		player.HasKnuckles = true;
-		EmitSignal("updateplayerui", player);
+		Updatehud(player);
 	}
 	
 	void GoldenKnuckles(Player player) // goldenknuckles, knuckles die niet kapot gaan.
 	{
 		player.HasGoldenKnuckles = true;
-		EmitSignal("updateplayerui", player);
+		Updatehud(player);
 	}
 
 	void ChooseMiniGame()
@@ -1740,7 +1734,7 @@ public partial class Main : Node2D
 
 	}
 	//andere ui
-    void updatehud(Player player){
+    void Updatehud(Player player){
 
         Label currency = GetNode<Label>($"Node2D/CanvasLayer/{player.Name}/Playerhud/Currency{player.Name}");
         Label health = GetNode<Label>($"Node2D/CanvasLayer/{player.Name}/Playerhud/Health{player.Name}");
