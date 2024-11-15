@@ -25,7 +25,7 @@ public partial class Main : Node2D
 	public Player player3;
 	public Player player4;
 	public Player[] Playerlist;
-	
+
 
 
 	[Signal]
@@ -64,7 +64,7 @@ public partial class Main : Node2D
 	public override void _Ready()
 	{
 
-			
+
 		dobbelgeluid = GetNode<AudioStreamPlayer>("Dobbelgeluid");
 
 		// Initialiseer de dobbelstenen met het dobbelgeluid.
@@ -93,17 +93,18 @@ public partial class Main : Node2D
 		int PlayerAmount = GlobalVariables.Instance.playeramount;
 
 		if (GlobalVariables.Instance.TurnCount > 0)
-		{	GD.Print("in niet ronde 1");
-			GlobalVariables.Instance.Winner.Currency +=10;
+		{
+			GD.Print("in niet ronde 1");
+			GlobalVariables.Instance.Winner.Currency += 10;
 			GD.Print(GlobalVariables.Instance.Winner.Currency);
 			for (int i = 0; i < spacesAmount; i++)
 			{
 				Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{i + 1}");
 				spacesInfo[i].Space = markerNode;
 			}
-			
+
 		}
-		
+
 		if (PlayerAmount == 2)
 		{
 			Vector2 player1start = spacesInfo[0].Space.Position;
@@ -139,7 +140,7 @@ public partial class Main : Node2D
 			player3.Position = player3start;
 			player3.PositionSpace = 30;
 			Playerlist = new Player[3] { player1, player2, player3 };
-			playersalive = new List<Player> { player1, player2, player3};
+			playersalive = new List<Player> { player1, player2, player3 };
 			for (int i = 0; i < Playerlist.Length; i++)
 			{
 				EmitSignal("updateplayerui", Playerlist[i]);
@@ -178,12 +179,12 @@ public partial class Main : Node2D
 			}
 		}
 		if (GlobalVariables.Instance.TurnCount > 0)
-		{RestoreAllStates();}
+		{ RestoreAllStates(); }
 
 
 
 
-	
+
 		GlobalVariables.Instance.playersalive = playersalive;
 		GlobalVariables.Instance.player1 = player1;
 		GlobalVariables.Instance.player2 = player2;
@@ -263,8 +264,9 @@ public partial class Main : Node2D
 							{
 								RazorCapAttack(player, playersalive[x]);
 								hasattacked = true;
+								ContinueLoop = false;
 							}
-							ContinueLoop = false;
+							
 						}
 					}
 					if (spaceinfront == playersalive[x].PositionSpace && i != diceRoll && player != playersalive[x]) //als currenct speler en een andere speler dezelfde positie hebben EN het is niet dezelfde speler, hij checkt 2 posities voor zich omdat hij checkt voordat hij beweegt, als je checkt nadat hij beweegt en de speler gooit 1 dan werkt het niet
@@ -278,8 +280,9 @@ public partial class Main : Node2D
 						{
 							RazorCapAttack(player, playersalive[x]);
 							hasattacked = true;
+							ContinueLoop = false;
 						}
-						ContinueLoop = false;
+						
 					}
 
 				}
@@ -358,8 +361,9 @@ public partial class Main : Node2D
 						{
 							RazorCapAttack(playersalive[x], player);
 							hasattacked = true;
+							ContinueLoop = false;
 						}
-						ContinueLoop = false;
+						
 					}
 				}
 
@@ -373,8 +377,9 @@ public partial class Main : Node2D
 					{
 						RazorCapAttack(playersalive[x], player);
 						hasattacked = true;
+						ContinueLoop = false;
 					}
-					ContinueLoop = false;
+					
 
 				}
 			}
@@ -478,13 +483,15 @@ public partial class Main : Node2D
 
 	//TURNS
 	async Task Turn()
-	{	
-		for(int i = 0; i < playersalive.Count; i ++){
-		if(playersalive[i].Health == 0){
-			playersalive.Remove(Playerlist[i]);
-			i--;
+	{
+		for (int i = 0; i < playersalive.Count; i++)
+		{
+			if (playersalive[i].Health == 0)
+			{
+				playersalive.Remove(Playerlist[i]);
+				i--;
+			}
 		}
-	}
 		if (player1.Health != 0)
 		{
 			await Turn_Player(player1);
@@ -548,7 +555,7 @@ public partial class Main : Node2D
 
 		SaveAllStates();
 		ChooseMiniGame();
-		
+
 	}
 
 	async Task Turn_Player(Player player)
@@ -560,11 +567,11 @@ public partial class Main : Node2D
 			//choose wich dice, hiervoor hebben we de shop mechanic + een shop menu nodig
 
 			string useditem = await ChooseUseItem(player);
-			diceRoll += player.RollAdjustment;
+
 			if (useditem != "dice")
 			{
 				diceRoll = await AwaitButtonPress(player);
-
+				diceRoll += player.RollAdjustment;
 				await StartMovement(player, diceRoll);
 			}
 
@@ -818,7 +825,8 @@ public partial class Main : Node2D
 		GD.Print(attacker.Name + " hit " + victim.Name + " for " + attackdamage + ". " + victim.Name + " has " + victim.Health + " health remaining");
 		EmitSignal("updateplayerui", attacker);
 		if (victim.Health == 0)
-		{	playersalive.Remove(victim);
+		{
+			playersalive.Remove(victim);
 			victim.Hide();
 		}
 		EmitSignal("updateplayerui", victim);
@@ -832,7 +840,8 @@ public partial class Main : Node2D
 		GD.Print(attacker.Name + " hit " + victim.Name + " for " + attackdamage + ". " + victim.Name + " has " + victim.Health + " health remaining");
 		EmitSignal("updateplayerui", attacker);
 		if (victim.Health == 0)
-		{	playersalive.Remove(victim);
+		{
+			playersalive.Remove(victim);
 			victim.Hide();
 		}
 		EmitSignal("updateplayerui", victim);
@@ -1060,11 +1069,24 @@ public partial class Main : Node2D
 						return useditem;
 
 					case "GoldenPipe":
-						GoldenPipe(player);
-						useditem = "nodice";
-						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-						player.Inventory[0] = "0";
-						return useditem;
+						bool canuse = false;
+						for (int i = 0; i < spacesAmount; i++)
+						{
+							if (spacesInfo[i].Name == "RazorCap_Space")
+							{
+								canuse = true;
+							}
+						}
+						if (canuse)
+						{
+							GoldenPipe(player);
+							useditem = "nodice";
+							GD.Print("Used item GoldenPipe  it has vanished from their inventory.");
+							player.Inventory[0] = "0";
+							return useditem;
+						}
+						else GD.Print("no razorcapspace");
+						break;
 
 					case "DoubleDice":
 						await DoubleDice(player);
@@ -1109,11 +1131,23 @@ public partial class Main : Node2D
 						player.Inventory[0] = "0";
 						return useditem;
 					case "StealPlayerCap":
+						bool canuse1 = false;
+						for (int i = 0; i < playersalive.Count; i++)
+						{
+							if (playersalive[i].HasCap)
+							{
+								canuse1 = true;
+							}
+						}
+						if(canuse1){
 						StealPlayerCap(player);
 						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
 						useditem = "nodice";
 						player.Inventory[0] = "0";
 						return useditem;
+				}
+				else GD.Print("no one has the cap, better luck next time");
+				break;
 					case "PoisonMushroom":
 						PoisonMushroom(player);
 						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
@@ -1180,11 +1214,24 @@ public partial class Main : Node2D
 						return useditem;
 
 					case "GoldenPipe":
-						GoldenPipe(player);
-						useditem = "nodice";
-						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-						player.Inventory[1] = "0";
-						return useditem;
+						bool canuse = false;
+						for (int i = 0; i < spacesAmount; i++)
+						{
+							if (spacesInfo[i].Name == "RazorCap_Space")
+							{
+								canuse = true;
+							}
+						}
+						if (canuse)
+						{
+							GoldenPipe(player);
+							useditem = "nodice";
+							GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
+							player.Inventory[0] = "0";
+							return useditem;
+						}
+						else GD.Print("no razorcapspace");
+						break;
 
 					case "DoubleDice":
 						await DoubleDice(player);
@@ -1229,11 +1276,23 @@ public partial class Main : Node2D
 						player.Inventory[1] = "0";
 						return useditem;
 					case "StealPlayerCap":
+						bool canuse1 = false;
+						for (int i = 0; i < playersalive.Count; i++)
+						{
+							if (playersalive[i].HasCap)
+							{
+								canuse1 = true;
+							}
+						}
+						if(canuse1){
 						StealPlayerCap(player);
 						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
 						useditem = "nodice";
-						player.Inventory[1] = "0";
+						player.Inventory[0] = "0";
 						return useditem;
+				}
+				else GD.Print("no one has the cap, better luck next time");
+				break;
 					case "PoisonMushroom":
 						PoisonMushroom(player);
 						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
@@ -1299,11 +1358,25 @@ public partial class Main : Node2D
 						return useditem;
 
 					case "GoldenPipe":
-						GoldenPipe(player);
-						useditem = "nodice";
-						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-						player.Inventory[2] = "0";
-						return useditem;
+						bool canuse = false;
+						for (int i = 0; i < spacesAmount; i++)
+						{
+							GD.Print("checking for razorcapspace" + i);
+							if (spacesInfo[i].Name == "RazorCap_Space")
+							{
+								canuse = true;
+							}
+						}
+						if (canuse)
+						{
+							GoldenPipe(player);
+							useditem = "nodice";
+							GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
+							player.Inventory[0] = "0";
+							return useditem;
+						}
+						else GD.Print("no razorcapspace");
+						break;
 
 					case "DoubleDice":
 						await DoubleDice(player);
@@ -1348,11 +1421,23 @@ public partial class Main : Node2D
 						player.Inventory[2] = "0";
 						return useditem;
 					case "StealPlayerCap":
+						bool canuse1 = false;
+						for (int i = 0; i < playersalive.Count; i++)
+						{
+							if (playersalive[i].HasCap)
+							{
+								canuse1 = true;
+							}
+						}
+						if(canuse1){
 						StealPlayerCap(player);
 						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
 						useditem = "nodice";
-						player.Inventory[2] = "0";
+						player.Inventory[0] = "0";
 						return useditem;
+				}
+				else GD.Print("no one has the cap, better luck next time");
+				break;
 					case "PoisonMushroom":
 						PoisonMushroom(player);
 						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
@@ -1419,7 +1504,7 @@ public partial class Main : Node2D
 		GD.Print("You got too drunk and went on a spending spree! also you have to skip your next turn because of your hangover");
 		EmitSignal("updateplayerui", player);
 	}
-	void Beartrap(Player player)
+	void Beartrap(Player player) // dit is de space
 	{
 		GD.Print("you stepped into a beartrap, you take damage and next turn cant walk well");
 		player.Health -= 20;
@@ -1434,7 +1519,7 @@ public partial class Main : Node2D
 	{
 		for (int i = 0; i < spacesAmount; i++)
 		{
-			if (spacesInfo[i].Name == "Razorcap_Space")
+			if (spacesInfo[i].Name == "RazorCap_Space")
 			{
 				if (i == 0)
 				{
@@ -1532,6 +1617,7 @@ public partial class Main : Node2D
 						playersalive[i].Health -= 10;
 					}
 					playersalive[i].HasCap = false;
+					player.HasCap = true;
 					victim = playersalive[i].Name;
 					runloop = false;
 				}
@@ -1619,8 +1705,8 @@ public partial class Main : Node2D
 
 	void ChooseMiniGame()
 	{
-		GlobalVariables.Instance.SwitchToMinigame();		
-		
+		GlobalVariables.Instance.SwitchToMinigame();
+
 	}
 
 	async Task selectTrapPositon()
@@ -1745,6 +1831,14 @@ public partial class Main : Node2D
 		}
 
 	}
+	//andere ui
+    void updatehud(Player player){
+
+        Label currency = GetNode<Label>($"Node2D/CanvasLayer/{player.Name}/Playerhud/Currency{player.Name}");
+        Label health = GetNode<Label>($"Node2D/CanvasLayer/{player.Name}/Playerhud/Health{player.Name}");
+        currency.Text = player.Currency.ToString();
+        health.Text = player.Health.ToString();
+    }
 
 
 
