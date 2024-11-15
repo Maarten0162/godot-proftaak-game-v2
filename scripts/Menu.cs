@@ -45,7 +45,28 @@ public partial class Menu : Node2D
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
-	{	}
+	{
+		if(Input.IsActionJustPressed("D-Pad-left_1"))
+		{
+			twee();
+		}
+
+		if(Input.IsActionJustPressed("D-Pad-up_1"))
+		{
+			drie();
+		}
+
+		if(Input.IsActionJustPressed("D-Pad-right_1"))
+		{
+			vier();
+		}
+
+		if(Input.IsActionJustPressed("D-Pad-down_1"))
+		{
+			StartGame(GlobalVariables.Instance.playeramount);
+		}
+
+	}
 	private void StartGame(int Speler)
 	{
 		if(GlobalVariables.Instance.playeramount == 0)

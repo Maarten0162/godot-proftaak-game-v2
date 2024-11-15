@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://th5esly73wm0"
-path="res://.godot/imported/redspace.png-46243292350de427e2ddd8d3978ee0bd.ctex"
+uid="uid://cid7jjis26urf"
+path="res://.godot/imported/Peaky-Party-Logo.png-7978e9e33079b3ebf62cbe8f2d3dda93.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Spaces/redspace.png"
-dest_files=["res://.godot/imported/redspace.png-46243292350de427e2ddd8d3978ee0bd.ctex"]
+source_file="res://assets/Peaky-Party-Logo.png"
+dest_files=["res://.godot/imported/Peaky-Party-Logo.png-7978e9e33079b3ebf62cbe8f2d3dda93.ctex"]
 
 [params]
 

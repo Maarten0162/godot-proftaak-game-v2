@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://th5esly73wm0"
-path="res://.godot/imported/redspace.png-46243292350de427e2ddd8d3978ee0bd.ctex"
+uid="uid://cn6qbwytkbmqo"
+path="res://.godot/imported/Platform_Player.png-8b0f4b99aa204c4262d72a65e01dae72.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Spaces/redspace.png"
-dest_files=["res://.godot/imported/redspace.png-46243292350de427e2ddd8d3978ee0bd.ctex"]
+source_file="res://assets/Platform_Player.png"
+dest_files=["res://.godot/imported/Platform_Player.png-8b0f4b99aa204c4262d72a65e01dae72.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://th5esly73wm0"
-path="res://.godot/imported/redspace.png-46243292350de427e2ddd8d3978ee0bd.ctex"
+uid="uid://c6r6vf66j5ctk"
+path="res://.godot/imported/Whiskey_Space.png-8d27eaeaa823f4c2e3e9d1f39538cf09.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Spaces/redspace.png"
-dest_files=["res://.godot/imported/redspace.png-46243292350de427e2ddd8d3978ee0bd.ctex"]
+source_file="res://assets/Spaces/Whiskey_Space.png"
+dest_files=["res://.godot/imported/Whiskey_Space.png-8d27eaeaa823f4c2e3e9d1f39538cf09.ctex"]
 
 [params]
 

@@ -77,7 +77,7 @@ public partial class Minigame2 : Node2D
         // wanneer een speler op de knop drukt
         for (int i = 0; i < players.Length; i++)
         {
-            if (Input.IsActionJustPressed($"button_press{i + 1}") && !playerHasPressedButton[i])
+            if (Input.IsActionJustPressed($"A_{i + 1}") && !playerHasPressedButton[i])
             {
                 OnPlayerPressed(i);
             }
