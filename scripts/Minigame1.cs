@@ -1,59 +1,71 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 public partial class Minigame1 : Node
 {
 	private int[] scores = new int[4];
-	private Sprite2D[] horseSprites = new Sprite2D[4];
+	private List<Sprite2D> horseSprites = new List<Sprite2D>();
 	private Label[] scoreLabels = new Label[4];
 	private Label highscoreLabel;
 	private int highscore = 0;
 	private Timer gameTimer;
 	private bool isGameActive = true;
 	private string highscoreFilePath = "res://Minigame1/Highscore.txt";
+	private bool[] playerReadyFlags = new bool[4]; // Track readiness of players
+	private int readyPlayers = 0; // Count of ready players
+	private int minigameplayeramount; // Number of players in the game
+	private Main main;
 
 
-	public override void _Ready()
-	{	
-	if(GlobalVariables.Instance.playeramount == 4){
-		horseSprites[0] = GetNode<Sprite2D>("Horse1");
-		horseSprites[1] = GetNode<Sprite2D>("Horse2");
-		horseSprites[2] = GetNode<Sprite2D>("Horse3");
-		horseSprites[3] = GetNode<Sprite2D>("Horse4");
-
-		scoreLabels[0] = GetNode<Label>("label1");
-		scoreLabels[1] = GetNode<Label>("label2");
-		scoreLabels[0] = GetNode<Label>("label1");
-		scoreLabels[0] = GetNode<Label>("label1");
-		
-	}
-	else if(GlobalVariables.Instance.playeramount == 3){
-		horseSprites[0] = GetNode<Sprite2D>("Horse1");
-		horseSprites[1] = GetNode<Sprite2D>("Horse2");
-		horseSprites[2] = GetNode<Sprite2D>("Horse3");
-	
-		scoreLabels[0] = GetNode<Label>("label1");
-		
-	}
-	else if(GlobalVariables.Instance.playeramount == 2){
-		horseSprites[0] = GetNode<Sprite2D>("Horse1");
-		horseSprites[1] = GetNode<Sprite2D>("Horse2");
-	
-	
-	}
-		
+	public override async void _Ready()
+	{
+		main = GetNode<Main>("/root/Node2D");
+		minigameplayeramount = 0;
+		horseSprites = new List<Sprite2D>();
+		if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player1"))
+		{
+			horseSprites.Add(GetNode<Sprite2D>("Horse1"));
+			GetNode<Sprite2D>("Horse1").Show();
+			// scoreLabels[0] = GetNode<Label>("Label1");
+			minigameplayeramount++;
+		}
+		if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player2"))
+		{
+			horseSprites.Add(GetNode<Sprite2D>("Horse2"));
+			GetNode<Sprite2D>("Horse2").Show();
+			// scoreLabels[1] = GetNode<Label>("Label2");
+			minigameplayeramount++;
+		}
+		if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player3"))
+		{
+			horseSprites.Add(GetNode<Sprite2D>("Horse3"));
+			GetNode<Sprite2D>("Horse3").Show();
+			// scoreLabels[2] = GetNode<Label>("Label3");
+			minigameplayeramount++;
+		}
+		if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player4"))
+		{
+			horseSprites.Add(GetNode<Sprite2D>("Horse4"));
+			GetNode<Sprite2D>("Horse4").Show();
+			// scoreLabels[3] = GetNode<Label>("Label4");
+			minigameplayeramount++;
+		}
 
 
 		highscoreLabel = GetNode<Label>("LabelHighscore");
 
 		gameTimer = GetNode<Timer>("Timer");
 		gameTimer.Connect("timeout", new Callable(this, nameof(OnTimerTimeout)));
-	
+
 
 		LoadHighscore();
 		gameTimer.Start(); // Start de timer
 
 		UpdateUI();
+
 	}
 
 	public override void _Process(double delta)
@@ -102,7 +114,7 @@ public partial class Minigame1 : Node
 
 	private void UpdateUI()
 	{
-		for (int i = 0; i < GlobalVariables.Instance.playeramount; i++)
+		for (int i = 0; i < minigameplayeramount; i++)
 		{
 			if (horseSprites[i] != null)
 			{
@@ -110,7 +122,7 @@ public partial class Minigame1 : Node
 				float newX = scores[i] * 10; // Pas de factor aan op basis van je layout
 				horseSprites[i].Position = new Vector2(newX, horseSprites[i].Position.Y);
 			}
-			
+
 			if (scoreLabels[i] != null)
 			{
 				// Update de score label
@@ -135,31 +147,51 @@ public partial class Minigame1 : Node
 			highscoreLabel.Text = $"Highscore: {highscore}";
 			file.Close();
 		}
-		
+
 	}
 
 	private void OnTimerTimeout()
 	{
 		isGameActive = false;
 		GD.Print("Tijd is om!"); // Debug bericht om te zien dat de timer is afgelopen
-		CheckWinner(GlobalVariables.Instance.playeramount);
+		CheckWinner();
 		GlobalVariables.Instance.SwitchToMainBoard();
 	}
-	private void CheckWinner(int playeramount){
-		int highestscore = 0;
-		for(int i = 0; i < playeramount; i++){
-			if(scores[i] > highestscore){
-				scores[i] = highestscore;
-			}
-		}
-		for(int i = 0; i < playeramount; i++){
-			if(highestscore == scores[i]){
-					GD.Print(i);
-				GlobalVariables.Instance.Winner = $"player{i}";
-				GD.Print(GlobalVariables.Instance.Winner + "is the winner");
-			}
-		}
+	private void CheckWinner()
+	{
+		GD.Print("checkwinner");
 
+// Initialize the highest score
+int highestscore = 0;
 
-	}
+// Find the highest score
+for (int i = 0; i < minigameplayeramount; i++)
+{
+    if (scores[i] > highestscore)
+    {
+        GD.Print("highestscore updated");
+        highestscore = scores[i];
+    }
 }
+
+// Find the player(s) with the highest score
+for (int i = 0; i < minigameplayeramount; i++)
+{
+    GD.Print("checking which player has highest score");
+
+    if (highestscore == scores[i])
+    {
+        // Print player information (e.g., their name, score, etc.)
+        GD.Print($"Player {i} has the highest score: {scores[i]}");
+
+        // Assign the player with the highest score as the winner
+        GlobalVariables.Instance.Winner = GlobalVariables.Instance.playersalive[i];
+
+        
+
+        
+        break;
+    }
+}
+}}
+
