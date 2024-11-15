@@ -713,15 +713,15 @@ public partial class Main : Node2D
 	//EVENTSPACES
 	void BlueSpace(Player player)
 	{
-		player.Currency += 3;
+		player.Currency += 10;
 	}
 	void RedSpace(Player player)
 	{
-		player.Currency -= 3;
+		player.Currency -= 10;
 	}
 	int Robbery(Player player)
 	{
-		int lostcurrency = rnd.Next(8, 31);
+		int lostcurrency = rnd.Next(10, 31);
 		player.Currency -= lostcurrency;
 		player.Health -= 10;
 		return lostcurrency;

@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://cg37l1h63iykf"]
+[gd_scene load_steps=53 format=3 uid="uid://cg37l1h63iykf"]
 
 [ext_resource type="Script" path="res://scripts/Main.cs" id="1_xihgb"]
 [ext_resource type="Texture2D" uid="uid://8mxqq2p862wb" path="res://assets/Boards/BoardWIP3.png" id="2_8r7vv"]
@@ -16,13 +16,18 @@
 [ext_resource type="Texture2D" uid="uid://dyk8ejepe1vww" path="res://assets/dice/default-dice/Dobbel7.png" id="14_3fmk5"]
 [ext_resource type="Texture2D" uid="uid://ccu36fjro5msm" path="res://assets/dice/default-dice/Dobbel8.png" id="15_cv46h"]
 [ext_resource type="Texture2D" uid="uid://dol6hnh1qws33" path="res://assets/Spaces/blueSpace.png" id="16_a006q"]
-[ext_resource type="Texture2D" uid="uid://bh0oghc7f3r32" path="res://assets/Spaces/greenpipe.png" id="16_v2g8y"]
+[ext_resource type="Texture2D" uid="uid://yu4l0530gi5x" path="res://assets/Spaces/topLeftsc.png" id="16_lbrca"]
 [ext_resource type="Texture2D" uid="uid://d1pifwujewrmq" path="res://assets/dice/default-dice/Dobbel9.png" id="16_xc1rm"]
 [ext_resource type="Texture2D" uid="uid://th5esly73wm0" path="res://assets/Spaces/redSpace.png" id="17_vh1sw"]
-[ext_resource type="Texture2D" uid="uid://breb301qf7jth" path="res://assets/Spaces/Event_Space.png" id="19_srds4"]
+[ext_resource type="Texture2D" uid="uid://d6fynx1abavh" path="res://assets/Spaces/robSpace.png" id="19_g0xgm"]
+[ext_resource type="Texture2D" uid="uid://bpgph68doahmu" path="res://assets/Spaces/topRightsc.png" id="20_vxcpt"]
+[ext_resource type="Texture2D" uid="uid://ddmdgo1mp0hi5" path="res://assets/Spaces/getRobbedSpace.png" id="21_5ywyp"]
 [ext_resource type="Texture2D" uid="uid://cujsv23d5gvki" path="res://assets/Player_icons/Player1.png" id="21_uwqye"]
+[ext_resource type="Texture2D" uid="uid://ik8sy7b7upcs" path="res://assets/Spaces/knockoutSpace.png" id="22_hwv6p"]
 [ext_resource type="Texture2D" uid="uid://bdgy0jd42qaw6" path="res://assets/Player_icons/Player2.png" id="22_njgqf"]
+[ext_resource type="Texture2D" uid="uid://ch73axs36y1c8" path="res://assets/Spaces/botLeftsc.png" id="23_1ju3i"]
 [ext_resource type="Texture2D" uid="uid://5bky3fkh32ov" path="res://assets/Player_icons/Player3.png" id="23_uhmr6"]
+[ext_resource type="Texture2D" uid="uid://bk8pxxiav8jmt" path="res://assets/Spaces/botRightsc.png" id="24_crmrk"]
 [ext_resource type="Texture2D" uid="uid://cbt3kbt34uvqx" path="res://assets/Player_icons/player4.png" id="24_tkr76"]
 [ext_resource type="PackedScene" uid="uid://c2dkuem4bxt8d" path="res://scenes/HorseRace.tscn" id="25_kb01l"]
 [ext_resource type="AudioStream" uid="uid://3w3hotdkdetk" path="res://assets/Muziek/diceeee-99427.mp3" id="27_agmsy"]
@@ -381,7 +386,7 @@ position = Vector2(162, 123)
 
 [node name="topLeftsc" type="Sprite2D" parent="spaces/Marker2D1"]
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("16_v2g8y")
+texture = ExtResource("16_lbrca")
 
 [node name="Marker2D2" type="Marker2D" parent="spaces"]
 position = Vector2(252, 105)
@@ -409,7 +414,7 @@ position = Vector2(496, 45)
 
 [node name="robSpace" type="Sprite2D" parent="spaces/Marker2D5"]
 scale = Vector2(0.11, 0.11)
-texture = ExtResource("19_srds4")
+texture = ExtResource("19_g0xgm")
 
 [node name="Marker2D6" type="Marker2D" parent="spaces"]
 position = Vector2(583, 50)
@@ -444,7 +449,7 @@ position = Vector2(1035, 106)
 
 [node name="topRightsc" type="Sprite2D" parent="spaces/Marker2D10"]
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("16_v2g8y")
+texture = ExtResource("20_vxcpt")
 
 [node name="Marker2D11" type="Marker2D" parent="spaces"]
 position = Vector2(1002, 205)
@@ -472,7 +477,7 @@ position = Vector2(723, 232)
 
 [node name="getRobbedSpace" type="Sprite2D" parent="spaces/Marker2D14"]
 scale = Vector2(0.11, 0.11)
-texture = ExtResource("19_srds4")
+texture = ExtResource("21_5ywyp")
 
 [node name="Marker2D15" type="Marker2D" parent="spaces"]
 position = Vector2(658, 304)
@@ -500,7 +505,7 @@ position = Vector2(286, 368)
 
 [node name="knockoutSpace" type="Sprite2D" parent="spaces/Marker2D18"]
 scale = Vector2(0.11, 0.11)
-texture = ExtResource("19_srds4")
+texture = ExtResource("22_hwv6p")
 
 [node name="Marker2D19" type="Marker2D" parent="spaces"]
 position = Vector2(200, 371)
@@ -528,7 +533,7 @@ position = Vector2(157, 544)
 
 [node name="botLeftsc" type="Sprite2D" parent="spaces/Marker2D22"]
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("16_v2g8y")
+texture = ExtResource("23_1ju3i")
 
 [node name="Marker2D23" type="Marker2D" parent="spaces"]
 position = Vector2(277, 520)
@@ -557,7 +562,7 @@ position = Vector2(536, 528)
 
 [node name="robSpace" type="Sprite2D" parent="spaces/Marker2D26"]
 scale = Vector2(0.11, 0.11)
-texture = ExtResource("19_srds4")
+texture = ExtResource("19_g0xgm")
 
 [node name="Marker2D27" type="Marker2D" parent="spaces"]
 position = Vector2(616, 530)
@@ -592,7 +597,7 @@ position = Vector2(1014, 572)
 
 [node name="botRightsc" type="Sprite2D" parent="spaces/Marker2D31"]
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("16_v2g8y")
+texture = ExtResource("24_crmrk")
 
 [node name="Marker2D32" type="Marker2D" parent="spaces"]
 position = Vector2(1016, 445)
