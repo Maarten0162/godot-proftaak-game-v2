@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cg37l1h63iykf"]
+[gd_scene load_steps=48 format=3 uid="uid://cg37l1h63iykf"]
 
 [ext_resource type="Script" path="res://scripts/Main.cs" id="1_xihgb"]
 [ext_resource type="Texture2D" uid="uid://8mxqq2p862wb" path="res://assets/Boards/BoardWIP3.png" id="2_8r7vv"]
@@ -19,14 +19,17 @@
 [ext_resource type="Texture2D" uid="uid://bh0oghc7f3r32" path="res://assets/Spaces/greenpipe.png" id="16_v2g8y"]
 [ext_resource type="Texture2D" uid="uid://d1pifwujewrmq" path="res://assets/dice/default-dice/Dobbel9.png" id="16_xc1rm"]
 [ext_resource type="Texture2D" uid="uid://th5esly73wm0" path="res://assets/Spaces/redSpace.png" id="17_vh1sw"]
-[ext_resource type="Texture2D" uid="uid://dpcp018yag0ko" path="res://assets/Player1.png" id="19_bwuok"]
 [ext_resource type="Texture2D" uid="uid://breb301qf7jth" path="res://assets/Spaces/Event_Space.png" id="19_srds4"]
-[ext_resource type="Texture2D" uid="uid://meqcks5t4j1q" path="res://assets/Player2.png" id="20_epi1k"]
-[ext_resource type="Texture2D" uid="uid://c0ysmcgfrk0hq" path="res://assets/Player3.png" id="21_56lhf"]
-[ext_resource type="Texture2D" uid="uid://cha53i6v5dxbx" path="res://assets/player4.png" id="22_mmax3"]
+[ext_resource type="Texture2D" uid="uid://cujsv23d5gvki" path="res://assets/Player_icons/Player1.png" id="21_uwqye"]
+[ext_resource type="Texture2D" uid="uid://bdgy0jd42qaw6" path="res://assets/Player_icons/Player2.png" id="22_njgqf"]
+[ext_resource type="Texture2D" uid="uid://5bky3fkh32ov" path="res://assets/Player_icons/Player3.png" id="23_uhmr6"]
+[ext_resource type="Texture2D" uid="uid://cbt3kbt34uvqx" path="res://assets/Player_icons/player4.png" id="24_tkr76"]
 [ext_resource type="PackedScene" uid="uid://c2dkuem4bxt8d" path="res://scenes/HorseRace.tscn" id="25_kb01l"]
-[ext_resource type="Script" path="res://scripts/UI.cs" id="26_3o2pn"]
 [ext_resource type="AudioStream" uid="uid://3w3hotdkdetk" path="res://assets/Muziek/diceeee-99427.mp3" id="27_agmsy"]
+[ext_resource type="Texture2D" uid="uid://c2a7lsqldk6c1" path="res://assets/hud/player1.png" id="28_rmfta"]
+[ext_resource type="Texture2D" uid="uid://dk1tlgvs4ww31" path="res://assets/hud/player2.png" id="29_1sk77"]
+[ext_resource type="Texture2D" uid="uid://clvf85myrmxb" path="res://assets/hud/player3.png" id="30_5aixp"]
+[ext_resource type="Texture2D" uid="uid://bxekb623gpxua" path="res://assets/hud/player4.png" id="31_ivek0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7y5x1"]
 atlas = ExtResource("4_lgpu5")
@@ -189,7 +192,175 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dd3ac"]
 
+[sub_resource type="FontFile" id="FontFile_84c6n"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/15/0/ascent = 0.0
+cache/0/15/0/descent = 0.0
+cache/0/15/0/underline_position = 0.0
+cache/0/15/0/underline_thickness = 0.0
+cache/0/15/0/scale = 1.0
+cache/0/14/0/ascent = 0.0
+cache/0/14/0/descent = 0.0
+cache/0/14/0/underline_position = 0.0
+cache/0/14/0/underline_thickness = 0.0
+cache/0/14/0/scale = 1.0
+cache/0/13/0/ascent = 0.0
+cache/0/13/0/descent = 0.0
+cache/0/13/0/underline_position = 0.0
+cache/0/13/0/underline_thickness = 0.0
+cache/0/13/0/scale = 1.0
+cache/0/12/0/ascent = 0.0
+cache/0/12/0/descent = 0.0
+cache/0/12/0/underline_position = 0.0
+cache/0/12/0/underline_thickness = 0.0
+cache/0/12/0/scale = 1.0
+cache/0/11/0/ascent = 0.0
+cache/0/11/0/descent = 0.0
+cache/0/11/0/underline_position = 0.0
+cache/0/11/0/underline_thickness = 0.0
+cache/0/11/0/scale = 1.0
+cache/0/10/0/ascent = 0.0
+cache/0/10/0/descent = 0.0
+cache/0/10/0/underline_position = 0.0
+cache/0/10/0/underline_thickness = 0.0
+cache/0/10/0/scale = 1.0
+cache/0/9/0/ascent = 0.0
+cache/0/9/0/descent = 0.0
+cache/0/9/0/underline_position = 0.0
+cache/0/9/0/underline_thickness = 0.0
+cache/0/9/0/scale = 1.0
+cache/0/8/0/ascent = 0.0
+cache/0/8/0/descent = 0.0
+cache/0/8/0/underline_position = 0.0
+cache/0/8/0/underline_thickness = 0.0
+cache/0/8/0/scale = 1.0
+cache/0/7/0/ascent = 0.0
+cache/0/7/0/descent = 0.0
+cache/0/7/0/underline_position = 0.0
+cache/0/7/0/underline_thickness = 0.0
+cache/0/7/0/scale = 1.0
+cache/0/17/0/ascent = 0.0
+cache/0/17/0/descent = 0.0
+cache/0/17/0/underline_position = 0.0
+cache/0/17/0/underline_thickness = 0.0
+cache/0/17/0/scale = 1.0
+cache/0/18/0/ascent = 0.0
+cache/0/18/0/descent = 0.0
+cache/0/18/0/underline_position = 0.0
+cache/0/18/0/underline_thickness = 0.0
+cache/0/18/0/scale = 1.0
+cache/0/19/0/ascent = 0.0
+cache/0/19/0/descent = 0.0
+cache/0/19/0/underline_position = 0.0
+cache/0/19/0/underline_thickness = 0.0
+cache/0/19/0/scale = 1.0
+cache/0/20/0/ascent = 0.0
+cache/0/20/0/descent = 0.0
+cache/0/20/0/underline_position = 0.0
+cache/0/20/0/underline_thickness = 0.0
+cache/0/20/0/scale = 1.0
+cache/0/21/0/ascent = 0.0
+cache/0/21/0/descent = 0.0
+cache/0/21/0/underline_position = 0.0
+cache/0/21/0/underline_thickness = 0.0
+cache/0/21/0/scale = 1.0
+cache/0/22/0/ascent = 0.0
+cache/0/22/0/descent = 0.0
+cache/0/22/0/underline_position = 0.0
+cache/0/22/0/underline_thickness = 0.0
+cache/0/22/0/scale = 1.0
+cache/0/23/0/ascent = 0.0
+cache/0/23/0/descent = 0.0
+cache/0/23/0/underline_position = 0.0
+cache/0/23/0/underline_thickness = 0.0
+cache/0/23/0/scale = 1.0
+cache/0/24/0/ascent = 0.0
+cache/0/24/0/descent = 0.0
+cache/0/24/0/underline_position = 0.0
+cache/0/24/0/underline_thickness = 0.0
+cache/0/24/0/scale = 1.0
+cache/0/25/0/ascent = 0.0
+cache/0/25/0/descent = 0.0
+cache/0/25/0/underline_position = 0.0
+cache/0/25/0/underline_thickness = 0.0
+cache/0/25/0/scale = 1.0
+cache/0/26/0/ascent = 0.0
+cache/0/26/0/descent = 0.0
+cache/0/26/0/underline_position = 0.0
+cache/0/26/0/underline_thickness = 0.0
+cache/0/26/0/scale = 1.0
+cache/0/27/0/ascent = 0.0
+cache/0/27/0/descent = 0.0
+cache/0/27/0/underline_position = 0.0
+cache/0/27/0/underline_thickness = 0.0
+cache/0/27/0/scale = 1.0
+cache/0/28/0/ascent = 0.0
+cache/0/28/0/descent = 0.0
+cache/0/28/0/underline_position = 0.0
+cache/0/28/0/underline_thickness = 0.0
+cache/0/28/0/scale = 1.0
+cache/0/29/0/ascent = 0.0
+cache/0/29/0/descent = 0.0
+cache/0/29/0/underline_position = 0.0
+cache/0/29/0/underline_thickness = 0.0
+cache/0/29/0/scale = 1.0
+cache/0/30/0/ascent = 0.0
+cache/0/30/0/descent = 0.0
+cache/0/30/0/underline_position = 0.0
+cache/0/30/0/underline_thickness = 0.0
+cache/0/30/0/scale = 1.0
+cache/0/31/0/ascent = 0.0
+cache/0/31/0/descent = 0.0
+cache/0/31/0/underline_position = 0.0
+cache/0/31/0/underline_thickness = 0.0
+cache/0/31/0/scale = 1.0
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/33/0/ascent = 0.0
+cache/0/33/0/descent = 0.0
+cache/0/33/0/underline_position = 0.0
+cache/0/33/0/underline_thickness = 0.0
+cache/0/33/0/scale = 1.0
+cache/0/34/0/ascent = 0.0
+cache/0/34/0/descent = 0.0
+cache/0/34/0/underline_position = 0.0
+cache/0/34/0/underline_thickness = 0.0
+cache/0/34/0/scale = 1.0
+cache/0/35/0/ascent = 0.0
+cache/0/35/0/descent = 0.0
+cache/0/35/0/underline_position = 0.0
+cache/0/35/0/underline_thickness = 0.0
+cache/0/35/0/scale = 1.0
+cache/0/36/0/ascent = 0.0
+cache/0/36/0/descent = 0.0
+cache/0/36/0/underline_position = 0.0
+cache/0/36/0/underline_thickness = 0.0
+cache/0/36/0/scale = 1.0
+cache/0/37/0/ascent = 0.0
+cache/0/37/0/descent = 0.0
+cache/0/37/0/underline_position = 0.0
+cache/0/37/0/underline_thickness = 0.0
+cache/0/37/0/scale = 1.0
+cache/0/38/0/ascent = 0.0
+cache/0/38/0/descent = 0.0
+cache/0/38/0/underline_position = 0.0
+cache/0/38/0/underline_thickness = 0.0
+cache/0/38/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_1j2pu"]
+font = SubResource("FontFile_84c6n")
+font_size = 38
+font_color = Color(0, 0, 0, 1)
+
 [node name="Node2D" type="Node2D"]
+position = Vector2(12, 8)
 script = ExtResource("1_xihgb")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
@@ -206,175 +377,175 @@ animation = &"4"
 [node name="spaces" type="Node" parent="."]
 
 [node name="Marker2D1" type="Marker2D" parent="spaces"]
-position = Vector2(150, 115)
+position = Vector2(162, 123)
 
 [node name="topLeftsc" type="Sprite2D" parent="spaces/Marker2D1"]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("16_v2g8y")
 
 [node name="Marker2D2" type="Marker2D" parent="spaces"]
-position = Vector2(240, 97)
+position = Vector2(252, 105)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D2"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D3" type="Marker2D" parent="spaces"]
-position = Vector2(324, 79)
+position = Vector2(336, 87)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D3"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D4" type="Marker2D" parent="spaces"]
-position = Vector2(403, 65)
+position = Vector2(415, 73)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D4"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D5" type="Marker2D" parent="spaces"]
-position = Vector2(484, 37)
+position = Vector2(496, 45)
 
 [node name="robSpace" type="Sprite2D" parent="spaces/Marker2D5"]
 scale = Vector2(0.11, 0.11)
 texture = ExtResource("19_srds4")
 
 [node name="Marker2D6" type="Marker2D" parent="spaces"]
-position = Vector2(571, 42)
+position = Vector2(583, 50)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D6"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D7" type="Marker2D" parent="spaces"]
-position = Vector2(677, 91)
+position = Vector2(689, 99)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D7"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D8" type="Marker2D" parent="spaces"]
-position = Vector2(764, 96)
+position = Vector2(776, 104)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D8"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D9" type="Marker2D" parent="spaces"]
-position = Vector2(889, 93)
+position = Vector2(901, 101)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D9"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D10" type="Marker2D" parent="spaces"]
-position = Vector2(1023, 98)
+position = Vector2(1035, 106)
 
 [node name="topRightsc" type="Sprite2D" parent="spaces/Marker2D10"]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("16_v2g8y")
 
 [node name="Marker2D11" type="Marker2D" parent="spaces"]
-position = Vector2(990, 197)
+position = Vector2(1002, 205)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D11"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D12" type="Marker2D" parent="spaces"]
-position = Vector2(899, 203)
+position = Vector2(911, 211)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D12"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D13" type="Marker2D" parent="spaces"]
-position = Vector2(812, 209)
+position = Vector2(824, 217)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D13"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D14" type="Marker2D" parent="spaces"]
-position = Vector2(711, 224)
+position = Vector2(723, 232)
 
 [node name="getRobbedSpace" type="Sprite2D" parent="spaces/Marker2D14"]
 scale = Vector2(0.11, 0.11)
 texture = ExtResource("19_srds4")
 
 [node name="Marker2D15" type="Marker2D" parent="spaces"]
-position = Vector2(646, 296)
+position = Vector2(658, 304)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D15"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D16" type="Marker2D" parent="spaces"]
-position = Vector2(530, 316)
+position = Vector2(542, 324)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D16"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D17" type="Marker2D" parent="spaces"]
-position = Vector2(406, 336)
+position = Vector2(418, 344)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D17"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D18" type="Marker2D" parent="spaces"]
-position = Vector2(274, 360)
+position = Vector2(286, 368)
 
 [node name="knockoutSpace" type="Sprite2D" parent="spaces/Marker2D18"]
 scale = Vector2(0.11, 0.11)
 texture = ExtResource("19_srds4")
 
 [node name="Marker2D19" type="Marker2D" parent="spaces"]
-position = Vector2(188, 363)
+position = Vector2(200, 371)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D19"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D20" type="Marker2D" parent="spaces"]
-position = Vector2(126, 374)
+position = Vector2(138, 382)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D20"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D21" type="Marker2D" parent="spaces"]
-position = Vector2(111, 458)
+position = Vector2(123, 466)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D21"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D22" type="Marker2D" parent="spaces"]
-position = Vector2(145, 536)
+position = Vector2(157, 544)
 
 [node name="botLeftsc" type="Sprite2D" parent="spaces/Marker2D22"]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("16_v2g8y")
 
 [node name="Marker2D23" type="Marker2D" parent="spaces"]
-position = Vector2(265, 512)
+position = Vector2(277, 520)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D23"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D24" type="Marker2D" parent="spaces"]
-position = Vector2(353, 517)
+position = Vector2(365, 525)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D24"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D25" type="Marker2D" parent="spaces"]
-position = Vector2(454, 546)
+position = Vector2(466, 554)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D25"]
 position = Vector2(1, 0)
@@ -382,126 +553,126 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D26" type="Marker2D" parent="spaces"]
-position = Vector2(524, 520)
+position = Vector2(536, 528)
 
 [node name="robSpace" type="Sprite2D" parent="spaces/Marker2D26"]
 scale = Vector2(0.11, 0.11)
 texture = ExtResource("19_srds4")
 
 [node name="Marker2D27" type="Marker2D" parent="spaces"]
-position = Vector2(604, 522)
+position = Vector2(616, 530)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D27"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D28" type="Marker2D" parent="spaces"]
-position = Vector2(691, 544)
+position = Vector2(703, 552)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D28"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D29" type="Marker2D" parent="spaces"]
-position = Vector2(784, 566)
+position = Vector2(796, 574)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D29"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D30" type="Marker2D" parent="spaces"]
-position = Vector2(884, 560)
+position = Vector2(896, 568)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D30"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D31" type="Marker2D" parent="spaces"]
-position = Vector2(1002, 564)
+position = Vector2(1014, 572)
 
 [node name="botRightsc" type="Sprite2D" parent="spaces/Marker2D31"]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("16_v2g8y")
 
 [node name="Marker2D32" type="Marker2D" parent="spaces"]
-position = Vector2(1004, 437)
+position = Vector2(1016, 445)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D32"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D33" type="Marker2D" parent="spaces"]
-position = Vector2(936, 411)
+position = Vector2(948, 419)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D33"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D34" type="Marker2D" parent="spaces"]
-position = Vector2(829, 410)
+position = Vector2(841, 418)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D34"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D35" type="Marker2D" parent="spaces"]
-position = Vector2(731, 400)
+position = Vector2(743, 408)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D35"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D36" type="Marker2D" parent="spaces"]
-position = Vector2(609, 369)
+position = Vector2(621, 377)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D36"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D37" type="Marker2D" parent="spaces"]
-position = Vector2(531, 315)
+position = Vector2(543, 323)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D37"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D38" type="Marker2D" parent="spaces"]
-position = Vector2(450, 272)
+position = Vector2(462, 280)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D38"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D39" type="Marker2D" parent="spaces"]
-position = Vector2(368, 246)
+position = Vector2(380, 254)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D39"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D40" type="Marker2D" parent="spaces"]
-position = Vector2(257, 241)
+position = Vector2(269, 249)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D40"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D41" type="Marker2D" parent="spaces"]
-position = Vector2(150, 223)
+position = Vector2(162, 231)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D41"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D42" type="Marker2D" parent="spaces"]
-position = Vector2(102, 169)
+position = Vector2(114, 177)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D42"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("17_vh1sw")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(247, 323)
+position = Vector2(244, 316)
 offset = Vector2(320, 0)
 
 [node name="player1" type="CharacterBody2D" parent="."]
@@ -511,7 +682,7 @@ scale = Vector2(0.1, 0.1)
 script = ExtResource("2_etkhv")
 
 [node name="Sprite2D" type="Sprite2D" parent="player1"]
-texture = ExtResource("19_bwuok")
+texture = ExtResource("21_uwqye")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player1"]
 shape = SubResource("RectangleShape2D_dd3ac")
@@ -523,7 +694,7 @@ scale = Vector2(0.1, 0.1)
 script = ExtResource("2_etkhv")
 
 [node name="Sprite2D" type="Sprite2D" parent="player2"]
-texture = ExtResource("20_epi1k")
+texture = ExtResource("22_njgqf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player2"]
 shape = SubResource("RectangleShape2D_dd3ac")
@@ -535,7 +706,7 @@ scale = Vector2(0.1, 0.1)
 script = ExtResource("2_etkhv")
 
 [node name="Sprite2D" type="Sprite2D" parent="player3"]
-texture = ExtResource("21_56lhf")
+texture = ExtResource("23_uhmr6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player3"]
 shape = SubResource("RectangleShape2D_dd3ac")
@@ -547,7 +718,7 @@ scale = Vector2(0.1, 0.1)
 script = ExtResource("2_etkhv")
 
 [node name="Sprite2D" type="Sprite2D" parent="player4"]
-texture = ExtResource("22_mmax3")
+texture = ExtResource("24_tkr76")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player4"]
 shape = SubResource("RectangleShape2D_dd3ac")
@@ -558,86 +729,136 @@ shape = SubResource("RectangleShape2D_dd3ac")
 stream = ExtResource("27_agmsy")
 volume_db = 1.955
 
-[node name="player1 UI" type="Control" parent="."]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
-top_level = true
-layout_mode = 3
-anchors_preset = 0
-offset_left = 45.0
-offset_top = 25.0
-offset_right = 85.0
-offset_bottom = 65.0
-script = ExtResource("26_3o2pn")
+[node name="Node2D" type="Node2D" parent="."]
 
-[node name="CoinCountplayer1" type="Label" parent="player1 UI"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = -45.0
-offset_top = -25.0
-offset_right = 17.0
-offset_bottom = -2.0
-text = "Player 1"
+[node name="CanvasLayer" type="CanvasLayer" parent="Node2D"]
 
-[node name="CoinCountplayer2" type="Label" parent="player1 UI"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = 908.0
-offset_top = -26.0
-offset_right = 970.0
-offset_bottom = -3.0
-text = "Player 2"
+[node name="player1" type="Node2D" parent="Node2D/CanvasLayer"]
 
-[node name="CoinCountplayer3" type="Label" parent="player1 UI"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = -65.0
-offset_top = 534.0
-offset_right = -3.0
-offset_bottom = 557.0
-text = "Player 3"
+[node name="Playerhud" type="TextureRect" parent="Node2D/CanvasLayer/player1"]
+z_index = 1
+offset_right = 89.595
+offset_bottom = 40.0
+scale = Vector2(2.085, 2.085)
+texture = ExtResource("28_rmfta")
+expand_mode = 3
 
-[node name="CoinCountplayer4" type="Label" parent="player1 UI"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
+[node name="Healthplayer1" type="Label" parent="Node2D/CanvasLayer/player1/Playerhud"]
 layout_mode = 0
-offset_left = 888.0
-offset_top = 523.0
-offset_right = 950.0
-offset_bottom = 546.0
-text = "Player 4"
+offset_left = 43.6451
+offset_top = 10.5516
+offset_right = 104.645
+offset_bottom = 61.5516
+scale = Vector2(0.14139, 0.14139)
+text = "NaN"
+label_settings = SubResource("LabelSettings_1j2pu")
 
-[node name="Healthplayer1" type="Label" parent="player1 UI"]
-self_modulate = Color(0, 0, 0, 1)
+[node name="Currencyplayer1" type="Label" parent="Node2D/CanvasLayer/player1/Playerhud"]
 layout_mode = 0
-offset_left = -32.0
-offset_top = 4.0
-offset_right = 8.0
-offset_bottom = 27.0
+offset_left = 44.1247
+offset_top = 18.2254
+offset_right = 105.125
+offset_bottom = 69.2254
+scale = Vector2(0.14139, 0.14139)
+text = "NaN"
+label_settings = SubResource("LabelSettings_1j2pu")
 
-[node name="Healthplayer2" type="Label" parent="player1 UI"]
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = 951.0
-offset_top = -1.0
-offset_right = 991.0
-offset_bottom = 22.0
+[node name="player2" type="Node2D" parent="Node2D/CanvasLayer"]
 
-[node name="Healthplayer3" type="Label" parent="player1 UI"]
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = -57.0
-offset_top = 563.0
-offset_right = -17.0
-offset_bottom = 586.0
+[node name="Playerhud" type="TextureRect" parent="Node2D/CanvasLayer/player2"]
+z_index = 1
+offset_left = 1062.0
+offset_right = 1152.18
+offset_bottom = 40.0
+scale = Vector2(2.085, 2.085)
+pivot_offset = Vector2(90.178, 0)
+texture = ExtResource("29_1sk77")
+expand_mode = 3
 
-[node name="Healthplayer4" type="Label" parent="player1 UI"]
-self_modulate = Color(0, 0, 0, 1)
+[node name="Healthplayer2" type="Label" parent="Node2D/CanvasLayer/player2/Playerhud"]
 layout_mode = 0
-offset_left = 923.0
-offset_top = 553.0
-offset_right = 963.0
-offset_bottom = 576.0
+offset_left = 43.6451
+offset_top = 10.5516
+offset_right = 104.645
+offset_bottom = 61.5516
+scale = Vector2(0.14139, 0.14139)
+text = "NaN"
+label_settings = SubResource("LabelSettings_1j2pu")
+
+[node name="Currencyplayer2" type="Label" parent="Node2D/CanvasLayer/player2/Playerhud"]
+layout_mode = 0
+offset_left = 44.1247
+offset_top = 18.2254
+offset_right = 105.125
+offset_bottom = 69.2254
+scale = Vector2(0.14139, 0.14139)
+text = "NaN"
+label_settings = SubResource("LabelSettings_1j2pu")
+
+[node name="player3" type="Node2D" parent="Node2D/CanvasLayer"]
+
+[node name="Playerhud" type="TextureRect" parent="Node2D/CanvasLayer/player3"]
+z_index = 1
+offset_left = 1062.0
+offset_top = 608.0
+offset_right = 1152.18
+offset_bottom = 648.0
+scale = Vector2(2.085, 2.085)
+pivot_offset = Vector2(90.178, 40)
+texture = ExtResource("30_5aixp")
+expand_mode = 3
+
+[node name="Healthplayer3" type="Label" parent="Node2D/CanvasLayer/player3/Playerhud"]
+layout_mode = 0
+offset_left = 43.6451
+offset_top = 10.5516
+offset_right = 104.645
+offset_bottom = 61.5516
+scale = Vector2(0.14139, 0.14139)
+text = "NaN"
+label_settings = SubResource("LabelSettings_1j2pu")
+
+[node name="Currencyplayer3" type="Label" parent="Node2D/CanvasLayer/player3/Playerhud"]
+layout_mode = 0
+offset_left = 44.1247
+offset_top = 18.2254
+offset_right = 105.125
+offset_bottom = 69.2254
+scale = Vector2(0.14139, 0.14139)
+text = "NaN"
+label_settings = SubResource("LabelSettings_1j2pu")
+
+[node name="player4" type="Node2D" parent="Node2D/CanvasLayer"]
+
+[node name="Playerhud" type="TextureRect" parent="Node2D/CanvasLayer/player4"]
+z_index = 1
+offset_left = -1.0
+offset_top = 608.0
+offset_right = 89.0353
+offset_bottom = 648.0
+scale = Vector2(2.085, 2.085)
+pivot_offset = Vector2(0, 40)
+texture = ExtResource("31_ivek0")
+expand_mode = 3
+
+[node name="Healthplayer4" type="Label" parent="Node2D/CanvasLayer/player4/Playerhud"]
+layout_mode = 0
+offset_left = 43.6451
+offset_top = 10.5516
+offset_right = 104.645
+offset_bottom = 61.5516
+scale = Vector2(0.14139, 0.14139)
+text = "NaN"
+label_settings = SubResource("LabelSettings_1j2pu")
+
+[node name="Currencyplayer4" type="Label" parent="Node2D/CanvasLayer/player4/Playerhud"]
+layout_mode = 0
+offset_left = 44.1247
+offset_top = 18.2254
+offset_right = 105.125
+offset_bottom = 69.2254
+scale = Vector2(0.14139, 0.14139)
+text = "NaN"
+label_settings = SubResource("LabelSettings_1j2pu")
+
+[node name="playerclass" type="Node2D" parent="."]
