@@ -17,12 +17,12 @@ public partial class Minigame1 : Node
 	private bool[] playerReadyFlags = new bool[4]; // Track readiness of players
 	private int readyPlayers = 0; // Count of ready players
 	private int minigameplayeramount; // Number of players in the game
-	private Main main;
+	
 
 
-	public override async void _Ready()
+	public override void _Ready()
 	{
-		main = GetNode<Main>("/root/Node2D");
+		
 		minigameplayeramount = 0;
 		horseSprites = new List<Sprite2D>();
 		if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player1"))
@@ -70,19 +70,19 @@ public partial class Minigame1 : Node
 
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionJustPressed("button_press_space"))
+		if (Input.IsActionJustPressed("A_1"))
 		{
 			OnKeyPressed(0);
 		}
-		if (Input.IsActionJustPressed("button_press_w"))
+		if (Input.IsActionJustPressed("A_2"))
 		{
 			OnKeyPressed(1);
 		}
-		if (Input.IsActionJustPressed("button_press_e"))
+		if (Input.IsActionJustPressed("A_3"))
 		{
 			OnKeyPressed(2);
 		}
-		if (Input.IsActionJustPressed("button_press_r"))
+		if (Input.IsActionJustPressed("A_4"))
 		{
 			OnKeyPressed(3);
 		}
