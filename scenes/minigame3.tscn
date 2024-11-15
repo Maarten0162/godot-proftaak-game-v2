@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=5 format=3 uid="uid://bmrjqurw5tkuu"]
+=======
+[gd_scene load_steps=5 format=3 uid="uid://d2w4cqvkjf1dh"]
+>>>>>>> Stashed changes
 
 [ext_resource type="Script" path="res://scripts/Minigame3.cs" id="1_nn6t3"]
 [ext_resource type="Texture2D" uid="uid://08e4gvva1xuu" path="res://Minigame3/achtergrond.jpeg" id="2_kjeyj"]
