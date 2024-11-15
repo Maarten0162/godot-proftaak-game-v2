@@ -64,7 +64,7 @@ public partial class Main : Node2D
 	public override void _Ready()
 	{
 
-
+			
 		dobbelgeluid = GetNode<AudioStreamPlayer>("Dobbelgeluid");
 
 		// Initialiseer de dobbelstenen met het dobbelgeluid.
@@ -78,6 +78,7 @@ public partial class Main : Node2D
 		twentydice = new Dice(-20, 21, dobbelgeluid, 0);
 
 		spacesInfo = new (Node2D, string, string)[spacesAmount];
+		GlobalVariables.Instance.playersalive = new List<Player>();
 
 		if (GlobalVariables.Instance.TurnCount == 0)
 		{
@@ -92,7 +93,9 @@ public partial class Main : Node2D
 		int PlayerAmount = GlobalVariables.Instance.playeramount;
 
 		if (GlobalVariables.Instance.TurnCount > 0)
-		{
+		{	GD.Print("in niet ronde 1");
+			GlobalVariables.Instance.Winner.Currency +=10;
+			GD.Print(GlobalVariables.Instance.Winner.Currency);
 			for (int i = 0; i < spacesAmount; i++)
 			{
 				Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{i + 1}");
@@ -475,7 +478,8 @@ public partial class Main : Node2D
 
 	//TURNS
 	async Task Turn()
-	{	for(int i = 0; i < Playerlist.Length; i ++){
+	{	
+		for(int i = 0; i < playersalive.Count; i ++){
 		if(playersalive[i].Health == 0){
 			playersalive.Remove(Playerlist[i]);
 			i--;
@@ -1615,7 +1619,8 @@ public partial class Main : Node2D
 
 	void ChooseMiniGame()
 	{
-		GlobalVariables.Instance.SwitchToMinigame();
+		GlobalVariables.Instance.SwitchToMinigame();		
+		
 	}
 
 	async Task selectTrapPositon()

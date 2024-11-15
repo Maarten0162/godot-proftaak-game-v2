@@ -12,7 +12,7 @@ public partial class UI : Control
 	  public override void _Ready()
 	{
 	   
-	   main = GetNode<Main>("/root/Node2D");
+	   main = GetTree().Root.GetNode<Main>("/root/Node2D");
 	 
 	   if(main == null)
 	   {

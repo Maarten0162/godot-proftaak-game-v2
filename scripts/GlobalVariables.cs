@@ -9,7 +9,7 @@ public partial class GlobalVariables : Node
 
     public Player[] Playerlist { get; set; }
     public int playeramount { get; set; }
-    public string Winner { get; set; }
+    public Player Winner { get; set; }
         // Dictionary to store the state of each player
     public Dictionary<int, PlayerState> PlayerStates = new Dictionary<int, PlayerState>();
    BoardState boardState;
@@ -67,7 +67,7 @@ public partial class GlobalVariables : Node
             mainBoardScene = (PackedScene)ResourceLoader.Load(MainBoardScenePath);
             minigameScene = (PackedScene)ResourceLoader.Load(MinigameScenePath);
             menuScene = (PackedScene)ResourceLoader.Load(MenuScenePath);
-            
+            Winner = player1;
 
     }
       public void SwitchToMenu()

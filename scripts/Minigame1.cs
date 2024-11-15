@@ -28,25 +28,29 @@ public partial class Minigame1 : Node
 		if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player1"))
 		{
 			horseSprites.Add(GetNode<Sprite2D>("Horse1"));
-			scoreLabels[0] = GetNode<Label>("Label1");
+			GetNode<Sprite2D>("Horse1").Show();
+			// scoreLabels[0] = GetNode<Label>("Label1");
 			minigameplayeramount++;
 		}
 		if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player2"))
 		{
 			horseSprites.Add(GetNode<Sprite2D>("Horse2"));
-			scoreLabels[1] = GetNode<Label>("Label2");
+			GetNode<Sprite2D>("Horse2").Show();
+			// scoreLabels[1] = GetNode<Label>("Label2");
 			minigameplayeramount++;
 		}
 		if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player3"))
 		{
 			horseSprites.Add(GetNode<Sprite2D>("Horse3"));
-			scoreLabels[2] = GetNode<Label>("Label3");
+			GetNode<Sprite2D>("Horse3").Show();
+			// scoreLabels[2] = GetNode<Label>("Label3");
 			minigameplayeramount++;
 		}
 		if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player4"))
 		{
 			horseSprites.Add(GetNode<Sprite2D>("Horse4"));
-			scoreLabels[3] = GetNode<Label>("Label4");
+			GetNode<Sprite2D>("Horse4").Show();
+			// scoreLabels[3] = GetNode<Label>("Label4");
 			minigameplayeramount++;
 		}
 
@@ -150,30 +154,44 @@ public partial class Minigame1 : Node
 	{
 		isGameActive = false;
 		GD.Print("Tijd is om!"); // Debug bericht om te zien dat de timer is afgelopen
-		CheckWinner(GlobalVariables.Instance.playeramount);
+		CheckWinner();
 		GlobalVariables.Instance.SwitchToMainBoard();
 	}
-	private void CheckWinner(int playeramount)
+	private void CheckWinner()
 	{
-		int highestscore = 0;
-		for (int i = 0; i < playeramount; i++)
-		{
-			if (scores[i] > highestscore)
-			{
-				scores[i] = highestscore;
-			}
-		}
-		for (int i = 0; i < playeramount; i++)
-		{
-			if (highestscore == scores[i])
-			{
-				GD.Print(i);
-				GlobalVariables.Instance.Winner = $"player{i}";
-				GD.Print(GlobalVariables.Instance.Winner + "is the winner");
-			}
-		}
+		GD.Print("checkwinner");
 
+// Initialize the highest score
+int highestscore = 0;
 
-	}
+// Find the highest score
+for (int i = 0; i < minigameplayeramount; i++)
+{
+    if (scores[i] > highestscore)
+    {
+        GD.Print("highestscore updated");
+        highestscore = scores[i];
+    }
 }
+
+// Find the player(s) with the highest score
+for (int i = 0; i < minigameplayeramount; i++)
+{
+    GD.Print("checking which player has highest score");
+
+    if (highestscore == scores[i])
+    {
+        // Print player information (e.g., their name, score, etc.)
+        GD.Print($"Player {i} has the highest score: {scores[i]}");
+
+        // Assign the player with the highest score as the winner
+        GlobalVariables.Instance.Winner = GlobalVariables.Instance.playersalive[i];
+
+        
+
+        
+        break;
+    }
+}
+}}
 
