@@ -1,8 +1,8 @@
 [gd_scene load_steps=43 format=3 uid="uid://cg37l1h63iykf"]
 
 [ext_resource type="Script" path="res://scripts/Main.cs" id="1_xihgb"]
+[ext_resource type="Texture2D" uid="uid://8mxqq2p862wb" path="res://assets/Boards/BoardWIP3.png" id="2_8r7vv"]
 [ext_resource type="Script" path="res://Classes/Player.cs" id="2_etkhv"]
-[ext_resource type="Texture2D" uid="uid://b0ia6ivd8k00n" path="res://assets/Boards/backgroundWIP.png" id="2_f4udn"]
 [ext_resource type="Texture2D" uid="uid://insiyhwvq4cl" path="res://assets/dice/default-dice/Dobbel-1.png" id="4_lgpu5"]
 [ext_resource type="Texture2D" uid="uid://tuw1uchf463i" path="res://assets/dice/default-dice/Dobbel1.png" id="4_xrfbe"]
 [ext_resource type="Texture2D" uid="uid://c0ktibn6olxwb" path="res://assets/dice/default-dice/Dobbel-2.png" id="5_4w8of"]
@@ -195,7 +195,7 @@ script = ExtResource("1_xihgb")
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 position = Vector2(564, 316)
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("2_f4udn")
+texture = ExtResource("2_8r7vv")
 
 [node name="dobbelSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(535, 188)
