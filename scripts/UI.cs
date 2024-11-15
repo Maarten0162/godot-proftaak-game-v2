@@ -31,10 +31,10 @@ public partial class UI : Control
 
 	void UpdateUI(Player player)
 	{	
-		coincount = GetNode<Label>($"CoinCount{player.Name}");
-		Health = GetNode<Label>($"Health{player.Name}");
-		coincount.Text = $"Coins: {player.Currency}";		
-			Health.Text = $"Health: {player.Health}";
+		// coincount = GetNode<Label>($"CoinCount{player.Name}");
+		// Health = GetNode<Label>($"Health{player.Name}");
+		// coincount.Text = $"Coins: {player.Currency}";		
+		// 	Health.Text = $"Health: {player.Health}";
 		
 		 //hier komt een death UI icon;
 	}
