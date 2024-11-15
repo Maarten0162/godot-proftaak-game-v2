@@ -190,7 +190,7 @@ public partial class Main : Node2D
 		GlobalVariables.Instance.player2 = player2;
 		GlobalVariables.Instance.player3 = player3;
 		GlobalVariables.Instance.player4 = player4;
-		Iteminfo = new (string Name, int Price)[15] { ("Whiskey", 10), ("GoldenPipe", 10), ("DoubleDice", 10), ("TripleDice", 10), ("TwentyDice", 10), ("TenDice", 10), ("DashMushroom", 10), ("TeleportTorndPlayer", 10), ("SwitchPlaces", 10), ("StealPlayerCap", 10), ("PoisonMushroom", 10), ("StealCoins", 10), ("BrassKnuckles", 10), ("StealItem", 10), ("GoldenKnuckles", 10) };
+		Iteminfo = new (string Name, int Price)[14] { ("Whiskey", 10), ("GoldenPipe", 10), ("DoubleDice", 10), ("TripleDice", 10), ("TwentyDice", 10), ("TenDice", 10), ("DashMushroom", 10), ("TeleportTorndPlayer", 10), ("SwitchPlaces", 10), ("StealPlayerCap", 10), ("PoisonMushroom", 10), ("StealCoins", 10), ("BrassKnuckles", 10), ("GoldenKnuckles", 10) };
 		ShopInv = new (string Name, int Price)[3] { ("test", 10), ("test", 10), ("test", 10) };
 
 		MiniGames = new int[10];
@@ -1166,26 +1166,7 @@ public partial class Main : Node2D
 						useditem = "nodice";
 						player.Inventory[0] = "0";
 						return useditem;
-					case "StealItem":
-						bool enemyhasitem = false;
-						for (int i = 0; i < playersalive.Count; i++)
-						{
-							if (Array.Exists(playersalive[i].Inventory, item => item != "0"))
-							{
-								enemyhasitem = true;
-							}
-						}
-						if (enemyhasitem)
-						{
-							player.Inventory[0] = "0";
-							StealItem(player);
-							GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-							useditem = "nodice";
-
-							return useditem;
-						}
-						GD.Print("no one had an item, try again!");
-						break;
+					
 					case "GoldenKnuckles":
 						GoldenKnuckles(player);
 						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
@@ -1311,26 +1292,7 @@ public partial class Main : Node2D
 						useditem = "nodice";
 						player.Inventory[1] = "0";
 						return useditem;
-					case "StealItem":
-						bool enemyhasitem = false;
-						for (int i = 0; i < playersalive.Count; i++)
-						{
-							if (Array.Exists(playersalive[i].Inventory, item => item != "0"))
-							{
-								enemyhasitem = true;
-							}
-						}
-						if (enemyhasitem)
-						{
-							player.Inventory[1] = "0";
-							StealItem(player);
-							GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-							useditem = "nodice";
-
-							return useditem;
-						}
-						GD.Print("no one had an item, try again!");
-						break;
+					
 					case "GoldenKnuckles":
 						GoldenKnuckles(player);
 						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
@@ -1456,26 +1418,7 @@ public partial class Main : Node2D
 						useditem = "nodice";
 						player.Inventory[2] = "0";
 						return useditem;
-					case "StealItem":
-						bool enemyhasitem = false;
-						for (int i = 0; i < playersalive.Count; i++)
-						{
-							if (Array.Exists(playersalive[i].Inventory, item => item != "0"))
-							{
-								enemyhasitem = true;
-							}
-						}
-						if (enemyhasitem)
-						{
-							player.Inventory[2] = "0";
-							StealItem(player);
-							GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-							useditem = "nodice";
-
-							return useditem;
-						}
-						GD.Print("no one had an item, try again!");
-						break;
+					
 					case "GoldenKnuckles":
 						GoldenKnuckles(player);
 						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
@@ -1661,42 +1604,7 @@ public partial class Main : Node2D
 		player.HasKnuckles = true;
 		EmitSignal("updateplayerui", player);
 	}
-	void StealItem(Player player) // **steal een random item van een random player, MOET WEL EEN CHECK ZIJN OF ER EEN SPELER IS MET EEN ITEM!!!
-	{
-		bool runloop1 = true;
-		int howmanyitems = 0;
-		while (runloop1)
-		{
-			int rndplayer = rnd.Next(0, playersalive.Count);
-			if (player != playersalive[rndplayer])
-			{
-				for (int i = 0; i < 2; i++)
-				{
-					if (playersalive[rndplayer].Inventory[i] != "0") //gaat van de gekozen speler zen inv af, om te checken of hij wel items heeft
-					{
-						howmanyitems++;
-					}
-				}
-				if (howmanyitems != 0) // de gekozen speler heeft items
-				{
-					bool runloop2 = true;
-					for (int i = 0; i <= 2 && runloop2; i++)
-					{
-						if (player.Inventory[i] != "0")
-						{
-							player.Inventory[i] = playersalive[rndplayer].Inventory[rnd.Next(0, 3)];
-							runloop1 = false;
-							runloop2 = false;
-						}
-					}
-				}
-			}
-			EmitSignal("updateplayerui", player);
-
-		}
-
-
-	}
+	
 	void GoldenKnuckles(Player player) // goldenknuckles, knuckles die niet kapot gaan.
 	{
 		player.HasGoldenKnuckles = true;
