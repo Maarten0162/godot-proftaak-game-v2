@@ -569,8 +569,19 @@ public partial class Main : Node2D
 	}
 
 	async Task Turn_Player(Player player)
-	{
-		WhatPlayer++;
+	{	if(player == player1){
+		WhatPlayer = 1;
+	}
+	else if(player == player2){
+		WhatPlayer = 2;
+	}
+	else if(player == player3){
+		WhatPlayer = 3;
+	}
+	else if(player == player4){
+		WhatPlayer = 4;
+	}
+		
 		GD.Print(player.Name + " Its your turn!");
 		if (player.SkipTurn == false) // dit checkt of de speler zen beurt moet overslaan
 		{
