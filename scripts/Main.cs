@@ -13,7 +13,8 @@ public partial class Main : Node2D
 {
 
 
-
+	int lostcurrency;
+	int gainedCurrency;
 	private AnimatedSprite2D dobbelSprite;
 
 	int spacesAmount = 42;
@@ -108,7 +109,7 @@ public partial class Main : Node2D
 	Vector2 Sprite1OldPos;
 	Vector2 Sprite2OldPos;
 	Vector2 Sprite3OldPos;
-
+	Label Spacelabel;
 	Vector2 Slot1OldPos;
 	Vector2 Slot2OldPos;
 	Vector2 Slot3OldPos;
@@ -116,7 +117,7 @@ public partial class Main : Node2D
 
 	public override void _Ready()
 	{
-
+		Spacelabel = GetNode<Label>("CanvasLayerspaces/SpaceLabel");
 		invSprite1Play1Pos = GetNode<TextureRect>($"Node2D/CanvasLayer/player1/Playerhud/item1").Position;
 		invSprite2Play1Pos = GetNode<TextureRect>($"Node2D/CanvasLayer/player1/Playerhud/item2").Position;
 		invSprite3Play1Pos = GetNode<TextureRect>($"Node2D/CanvasLayer/player1/Playerhud/item3").Position;
@@ -397,7 +398,7 @@ public partial class Main : Node2D
 					}
 				}
 				if (hasitemspace)
-				{
+				{	UpdateSpaceLabel("Shop", player);
 					await ShopAsk(player);
 				}
 			}
@@ -415,7 +416,7 @@ public partial class Main : Node2D
 			if (spacesInfo[player.PositionSpace].Name == "RazorCap_Space" && i != diceRoll)
 			{
 				if (player.Currency >= 50)
-				{
+				{	UpdateSpaceLabel("RazorCappurchase", player);
 					await RazorcapPurchase(player);
 				}
 				else GD.Print("sorry " + player.Name + " you don't have enough pounds.");
@@ -494,7 +495,7 @@ public partial class Main : Node2D
 					}
 				}
 				if (hasitemspace)
-				{
+				{	UpdateSpaceLabel("Shop", player);
 					await ShopAsk(player);
 				}
 			}
@@ -507,7 +508,7 @@ public partial class Main : Node2D
 			if (spacesInfo[player.PositionSpace].Name == "RazorCap_Space" && i != diceRoll)
 			{
 				if (player.Currency >= 50)
-				{
+				{	UpdateSpaceLabel("RazorCappurchase", player);
 					await RazorcapPurchase(player);
 				}
 				else GD.Print("sorry " + player.Name + " you don't have enough pounds.");
@@ -528,10 +529,13 @@ public partial class Main : Node2D
 		if (typeOfSpace == "blueSpace")
 		{
 			BlueSpace(player);
+			UpdateSpaceLabel("blueSpace",player);
+
 		}
 		else if (typeOfSpace == "redSpace")
 		{
 			RedSpace(player);
+			UpdateSpaceLabel("redSpace",player);
 		}
 		else if (typeOfSpace.Contains("sc"))
 		{
@@ -540,21 +544,23 @@ public partial class Main : Node2D
 			{
 				if (typeOfSpace.Contains("Left"))
 				{
+					UpdateSpaceLabel("TopLeftShortcut",player);
 					TopLeftshortcut(player);
 				}
-				else TopRightshortcut(player);
+				else { TopRightshortcut(player); UpdateSpaceLabel("TopRightShortcut",player); }
 			}
 			else if (typeOfSpace.Contains("Left"))
 			{
 
 				BottomLeftShortcut(player);
-
+				UpdateSpaceLabel("BottomLeftShortcut",player);
 			}
-			else BottomRightShortcut(player);
+			else { BottomRightShortcut(player); UpdateSpaceLabel("TopRightShortcut",player); }
 		}
 		else if (typeOfSpace == "getRobbedSpace")
 		{
 			int robbedAmount = Robbery(player);
+			UpdateSpaceLabel("Robbery",player);
 			if (robbedAmount > player.Currency)
 			{
 				GD.Print("They took every penny you had!");
@@ -565,16 +571,19 @@ public partial class Main : Node2D
 		else if (typeOfSpace == "knockoutSpace")
 		{
 			SkipNextTurn(player);
+			UpdateSpaceLabel("KnockoutSpace",player);
 			GD.Print("You just got knocked out! you have to skip a turn");
 		}
 		else if (typeOfSpace == "robSpace")
 		{
 			int robbedAmount = RobSomeone(player);
+			UpdateSpaceLabel("robSpace",player);
 			GD.Print("You just robbed someone! you gained " + robbedAmount + " Pounds!");
 		}
 		else if (typeOfSpace == "Whiskey_Space")
 		{
 			Whiskey(player);
+			UpdateSpaceLabel("Whiskey_Space",player);
 			spacesInfo[player.PositionSpace].Name = spacesInfo[player.PositionSpace].OriginalName;
 			Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{player.PositionSpace + 1}");
 			var sprite = markerNode.GetChild<Sprite2D>(0);
@@ -658,7 +667,7 @@ public partial class Main : Node2D
 		SaveAllStates();
 		if (playersalive.Count == 1 || GlobalVariables.Instance.TurnCount == 15)
 		{
-			await EndGame();
+			EndGame();
 		}
 		else ChooseMiniGame();
 
@@ -862,14 +871,14 @@ public partial class Main : Node2D
 	}
 	int Robbery(Player player)
 	{
-		int lostcurrency = rnd.Next(10, 31);
+		lostcurrency = rnd.Next(10, 31);
 		player.Currency -= lostcurrency;
 		player.Health -= 10;
 		return lostcurrency;
 	}
 	int RobSomeone(Player player)
 	{
-		int gainedCurrency = rnd.Next(10, 31);
+		gainedCurrency = rnd.Next(10, 31);
 		player.Currency += gainedCurrency;
 		return gainedCurrency;
 	}
@@ -995,24 +1004,8 @@ public partial class Main : Node2D
 
 	}
 
-	async Task CheckWinCondition()
-	{
-		GD.Print("in checkwincondition");
-		int deadplayer = 0;
-		for (int i = 0; i < playersalive.Count; i++)
-		{
-			if (playersalive[i].Health == 0)
-			{
-				deadplayer += 1;
-			}
-		}
-		if (playersalive.Count == 1 || GlobalVariables.Instance.TurnCount == 15)
-		{
-			ChooseMiniGame();
-		}
 
-	}
-	async Task EndGame()
+	void EndGame()
 	{
 		GD.Print("in end screen");
 		GlobalVariables.Instance.SwitchToendscreen();
@@ -2375,6 +2368,58 @@ public partial class Main : Node2D
 
 		}
 
+	}
+
+	void UpdateSpaceLabel(string whatspace, Player player)
+	{	GD.Print("in updatelabel");
+		if (whatspace == "blueSpace")
+		{
+			Spacelabel.Text = player.Name + " staat op een blauw vakje. je krijgt 15 pond.";
+
+		}
+		else if (whatspace == "redSpace")
+		{
+			Spacelabel.Text = player.Name + " staat op een rood vakje, je verliest 15 pond.";
+		}
+		else if (whatspace == "TopLeftShortcut")
+		{
+			Spacelabel.Text = player.Name + " staat bij een roeiboot. je gebruikt de boot om op de rivier te varen ";
+		}
+		else if (whatspace == "TopRightShortcut")
+		{
+			Spacelabel.Text = player.Name + " staat bij het station. je stapt op de trein";
+		}
+		else if (whatspace == "BotLeftShortcut")
+		{
+			Spacelabel.Text = player.Name + " staat bij een roeiboot. je gebruikt de boot om op de rivier te varen ";
+		}
+		else if (whatspace == "BotRightShortcut")
+		{
+			Spacelabel.Text = player.Name + " staat bij het station. je stapt op de trein";
+		}
+		else if (whatspace == "getRobbedSpace")
+		{
+			Spacelabel.Text = player.Name + ", je bent beroofd! je verliest " + lostcurrency + " en ze doen 10 damage!";
+		}
+		else if (whatspace == "knockoutSpace")
+		{
+			Spacelabel.Text = player.Name + ", je word bewusteloos geslagen! je moet je volgende beurt overslaan.";
+		}
+		else if (whatspace == "robSpace")
+		{
+			Spacelabel.Text = player.Name + ", je ziet een doelwit en overvalt hem, je steelt " + gainedCurrency + " pond!";
+		}
+		else if (whatspace == "Whiskey_Space")
+		{
+			Spacelabel.Text = player.Name + ", je ziet een fles whiskey staan en drinkt hem helemaal op! daarna ga je de kroeg in en besteed je een substantieel bedrag. je slaat volgende beurt over om je kater weg te werken.";
+
+		}
+		else if(whatspace == "RazorCappurchase"){
+			Spacelabel.Text = player.Name + "je hebt de optie om een razorcap te kopen voor 50 pond. kies linker bumper voor ja en rechterbumper voor nee."; 
+		}
+		else if(whatspace == "Shop"){
+			Spacelabel.Text = player.Name + ""; 
+		}
 	}
 
 }
