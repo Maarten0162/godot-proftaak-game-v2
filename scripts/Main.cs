@@ -160,10 +160,11 @@ public partial class Main : Node2D
 		twentydice = new Dice(-20, 21, dobbelgeluid, 0);
 
 		spacesInfo = new (Node2D, string, string)[spacesAmount];
-		
+
 
 		if (GlobalVariables.Instance.TurnCount == 0)
-		{	GlobalVariables.Instance.playersalive = new List<Player>();
+		{
+			GlobalVariables.Instance.playersalive = new List<Player>();
 			for (int i = 1; i <= spacesAmount; i++)
 			{
 				Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{i}");
@@ -177,8 +178,8 @@ public partial class Main : Node2D
 		if (GlobalVariables.Instance.TurnCount > 0)
 		{
 			GD.Print("in niet ronde 1");
-			
-			
+
+
 			for (int i = 0; i < spacesAmount; i++)
 			{
 				Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{i + 1}");
@@ -251,10 +252,23 @@ public partial class Main : Node2D
 			playersalive = new List<Player> { player1, player2, player3, player4 };
 
 		}
-			GlobalVariables.Instance.playersalive = playersalive;
+		GlobalVariables.Instance.playersalive = playersalive;
 		if (GlobalVariables.Instance.TurnCount > 0)
-		{ 	RestoreAllStates(); 
-			playersalive[GlobalVariables.Instance.Winner].Currency +=30;			
+		{
+			RestoreAllStates();
+			playersalive[GlobalVariables.Instance.Winner].Currency += 30;
+		}
+
+		for (int i = 0; i < Playerlist.Length; i++)
+		{
+			if (Playerlist[i].Health == 0)
+			{
+				Playerlist[i].Hide();
+			}
+
+
+
+
 		}
 
 		for (int i = 0; i < playersalive.Count; i++)
@@ -262,14 +276,14 @@ public partial class Main : Node2D
 			Updatehud(playersalive[i]);
 		}
 		GD.Print($"Players Alive: {GlobalVariables.Instance.playersalive.Count}");
-for (int i = 0; i < GlobalVariables.Instance.playersalive.Count; i++)
-{
-    GD.Print($"Player {i}: {GlobalVariables.Instance.playersalive[i].Name}");
-}
+		for (int i = 0; i < GlobalVariables.Instance.playersalive.Count; i++)
+		{
+			GD.Print($"Player {i}: {GlobalVariables.Instance.playersalive[i].Name}");
+		}
 
 
 
-	
+
 
 		Iteminfo = new (string Name, int Price)[15] { ("Whiskey", 20), ("GoldenPipe", 20), ("DoubleDice", 10), ("TripleDice", 13), ("TwentyDice", 20), ("TenDice", 8), ("DashMushroom", 5), ("TeleportTorndPlayer", 15), ("SwitchPlaces", 15), ("StealPlayerCap", 40), ("PoisonMushroom", 5), ("StealCoins", 30), ("BrassKnuckles", 20), ("GoldenKnuckles", 50), ("BearTrap", 40) };
 		ShopInv = new (string Name, int Price)[3] { ("test", 10), ("test", 10), ("test", 10) };
@@ -287,7 +301,7 @@ for (int i = 0; i < GlobalVariables.Instance.playersalive.Count; i++)
 		buttonmin2 = new Button();
 		buttonplus1 = new Button();
 		buttonplus2 = new Button();
-	
+
 		ChooseTurn();
 
 	}
@@ -609,10 +623,7 @@ for (int i = 0; i < GlobalVariables.Instance.playersalive.Count; i++)
 		GlobalVariables.Instance.TurnCount++;
 
 
-		if (CheckWinCondition()) //functie checkt of alle spelers op 1 na dood zijn, of dat er 15 turns voorbij zijn gegaan.
-		{
-			EndGame();
-		}
+
 		GD.Print("voor razorcap");
 		if (GlobalVariables.Instance.TurnCount > 0) //dit zorgt ervoor dat de cap gaat spawnen
 		{
@@ -643,8 +654,13 @@ for (int i = 0; i < GlobalVariables.Instance.playersalive.Count; i++)
 			}
 		}
 
+
 		SaveAllStates();
-		ChooseMiniGame();
+		if (playersalive.Count == 1 || GlobalVariables.Instance.TurnCount == 15)
+		{
+			await EndGame();
+		}
+		else ChooseMiniGame();
 
 	}
 
@@ -979,8 +995,9 @@ for (int i = 0; i < GlobalVariables.Instance.playersalive.Count; i++)
 
 	}
 
-	bool CheckWinCondition()
+	async Task CheckWinCondition()
 	{
+		GD.Print("in checkwincondition");
 		int deadplayer = 0;
 		for (int i = 0; i < playersalive.Count; i++)
 		{
@@ -989,15 +1006,16 @@ for (int i = 0; i < GlobalVariables.Instance.playersalive.Count; i++)
 				deadplayer += 1;
 			}
 		}
-		if (deadplayer == Playerlist.Length - 1 || GlobalVariables.Instance.TurnCount == 15)
+		if (playersalive.Count == 1 || GlobalVariables.Instance.TurnCount == 15)
 		{
-			return true;
+			ChooseMiniGame();
 		}
-		else return false;
-	}
-	void EndGame()
-	{
 
+	}
+	async Task EndGame()
+	{
+		GD.Print("in end screen");
+		GlobalVariables.Instance.SwitchToendscreen();
 	}
 
 	async Task ShopAsk(Player player)
@@ -2008,7 +2026,7 @@ for (int i = 0; i < GlobalVariables.Instance.playersalive.Count; i++)
 
 		updateInvSprite(player);
 	}
-	public async Task updateInvPos(Player player)
+	public void updateInvPos(Player player)
 	{
 		GD.Print("run updateInvPos");
 
