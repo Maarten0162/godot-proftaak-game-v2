@@ -1997,12 +1997,18 @@ public partial class Main : Node2D
 
 		Label currency = GetNode<Label>($"Node2D/CanvasLayer/{player.Name}/Playerhud/Currency{player.Name}");
 		Label health = GetNode<Label>($"Node2D/CanvasLayer/{player.Name}/Playerhud/Health{player.Name}");
+		Label rolladjustLabel = GetNode<Label>($"Node2D/CanvasLayer/{player.Name}/Playerhud/rolladjust/Label");
+
 		currency.Text = player.Currency.ToString();
 		health.Text = player.Health.ToString();
 		GD.Print(player.Name);
 		GetNode<Node2D>($"Node2D/CanvasLayer/{player.Name}").Show();
 
+		Control cap = GetNode<Control>($"Node2D/CanvasLayer/{player.Name}/Playerhud/razorCap");
 
+		Control brassknuckles = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/knuckles/brass");
+
+		Control goldenknuckles = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/knuckles/golden");
 
 		//update alive sprite	
 		if (player.Health == 0)
@@ -2010,6 +2016,31 @@ public partial class Main : Node2D
 			icon.Texture = GD.Load<Texture2D>($"res://assets/hud/{player.Name}Dead.png");
 		}
 
+		if (player.HasCap == true) {
+			cap.Show();
+		}else {
+			cap.Hide();
+		}
+
+		if (player.HasKnuckles == true) {
+			brassknuckles.Show();
+		}else {
+			brassknuckles.Hide();
+		}
+
+		if (player.HasGoldenKnuckles == true) {
+			goldenknuckles.Show();
+		}else {
+			goldenknuckles.Hide();
+		}
+
+		if (player.RollAdjustment == 0) {
+			rolladjustLabel.Hide();
+		} else if (player.RollAdjustment > 0) {
+			rolladjustLabel.Text = "+" + player.RollAdjustment.ToString();
+		} else if (player.RollAdjustment < 0) {
+			rolladjustLabel.Text = player.RollAdjustment.ToString();
+		}
 
 		for (int i = 0; i < 4; i++)
 		{

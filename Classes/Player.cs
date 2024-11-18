@@ -11,6 +11,10 @@ public partial class Player : CharacterBody2D
 		health = 20;
 		inventory = new string[3] {"Whiskey", "TripleDice", "PoisonMushroom"};
 		rollAdjustment = 0;
+		inventory = new string[3] {"0", "TripleDice", "PoisonMushroom"};
+		rollAdjustment = 2;
+		hasCap = false;
+		hasgoldenknuckles = true;
 	}
 
 	private int currency;
