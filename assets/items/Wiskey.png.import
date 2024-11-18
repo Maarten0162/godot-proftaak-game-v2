@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dol6hnh1qws33"
-path="res://.godot/imported/blueSpace.png-2c7d6c1a5e394f8c9b0ee6fc8cd638d3.ctex"
+uid="uid://g8wkqsv7c36a"
+path="res://.godot/imported/Wiskey.png-1af63f885c82ed92461c9547f3c23157.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Spaces/blueSpace.png"
-dest_files=["res://.godot/imported/blueSpace.png-2c7d6c1a5e394f8c9b0ee6fc8cd638d3.ctex"]
+source_file="res://assets/items/Wiskey.png"
+dest_files=["res://.godot/imported/Wiskey.png-1af63f885c82ed92461c9547f3c23157.ctex"]
 
 [params]
 
