@@ -8,7 +8,7 @@ public partial class End_Screen : Node
 	public override void _Ready()
 	{
 		winnerlabel = GetNode<Label>("WinnerLabel");
-		winnerlabel.Text = "The winner of the game is: " + GlobalVariables.Instance.playersalive[0].Name;
+		winnerlabel.Text = "The winner of the game is: " + GlobalVariables.Instance.playersalive[0].Name + "!!!";
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
