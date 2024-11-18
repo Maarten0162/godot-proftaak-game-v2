@@ -142,6 +142,10 @@ public partial class Minigame2 : Node2D
         }
     }
 
+    private void ReturnToMainScene()
+    {
+        GlobalVariables.Instance.SwitchToMainBoard();
+    }
     private void CheckWinner()
     {
         // Start met de eerste speler
@@ -166,6 +170,6 @@ public partial class Minigame2 : Node2D
         LabelWinnaar.Text = $"{closestPlayer} is het dichtst bij 10 sec met {closestTimeDiff:F2} sec verschil";
         LabelWinnaar.SelfModulate = new Color(1, 1, 0);  // Geel super mooi kleurtje voor de winnaar
         LabelWinnaar.Show();
-        GlobalVariables.Instance.SwitchToMainBoard();
+        GetTree().CreateTimer(3f).Connect("timeout", new Callable(this, nameof(ReturnToMainScene)));
     }
 }

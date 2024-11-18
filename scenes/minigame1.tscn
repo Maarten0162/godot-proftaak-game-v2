@@ -39,6 +39,9 @@ texture = ExtResource("2_10ftx")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
 
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 10.0
+
 [node name="Label1" type="Label" parent="."]
 offset_left = 983.0
 offset_top = 55.0
