@@ -42,66 +42,78 @@ public partial class GlobalVariables : Node
 
 
 
-    // Path to main board and minigame scenes
-    private const string MainBoardScenePath = "res://scenes/main.tscn";
-    private const string MinigameScenePath = "res://scenes/minigame3.tscn";
-    private const string MenuScenePath = "res://scenes/Menu.tscn";
+        // Path to main board and minigame scenes
+        private const string MainBoardScenePath = "res://scenes/main.tscn";
+        private const string MinigameScenePath = "res://scenes/minigame3.tscn";
+        private const string MenuScenePath = "res://scenes/Menu.tscn";
+        private const string EndscreenPath = "res://scenes/End_Screen.tscn";
 
-    private PackedScene mainBoardScene;
-    private PackedScene minigameScene;
-    private PackedScene menuScene;
-    public Player player1   { get; set; }
-    public Player player2   { get; set; }
-    public Player player3   { get; set; }
-    public Player player4   { get; set; }
-    // Instance of the currently active scene
-    private Node currentScene;
-    private Node StartGame;
-    public int TurnCount { get; set; }
-    public List<Player> playersalive { get; set; }
+        private PackedScene mainBoardScene;
+        private PackedScene minigameScene;
+        private PackedScene menuScene;
+        private PackedScene endscreen;
+        public Player player1   { get; set; }
+        public Player player2   { get; set; }
+        public Player player3   { get; set; }
+        public Player player4   { get; set; }
+        // Instance of the currently active scene
+        private Node currentScene;
+        private Node StartGame;
+        public int TurnCount { get; set; }
+        public List<Player> playersalive { get; set; }
 
-    
-    public override void _Ready()
-    {      
-        Instance = this;
-            mainBoardScene = (PackedScene)ResourceLoader.Load(MainBoardScenePath);
-            minigameScene = (PackedScene)ResourceLoader.Load(MinigameScenePath);
-            menuScene = (PackedScene)ResourceLoader.Load(MenuScenePath);
-            
+        
+        public override void _Ready()
+        {      
+            Instance = this;
+                mainBoardScene = (PackedScene)ResourceLoader.Load(MainBoardScenePath);
+                minigameScene = (PackedScene)ResourceLoader.Load(MinigameScenePath);
+                menuScene = (PackedScene)ResourceLoader.Load(MenuScenePath);
+                endscreen = (PackedScene)ResourceLoader.Load(EndscreenPath);
+                
 
-    }
-      public void SwitchToMenu()
-    {
-        // If we are coming back from a minigame, restore the board state here
-        ChangeScene(menuScene);
-        RestorePlayerStates();
-    }
-    public void SwitchToMainBoard()
-    {
-        // If we are coming back from a minigame, restore the board state here
-        ChangeScene(mainBoardScene);
-        RestorePlayerStates();
-    }
-    public void SwitchToMinigame()
-    {
-        // Save the board state before switching
-        SavePlayerStates();
-
-        // Load the minigame scene
-        ChangeScene(minigameScene);
-    }
-    private void ChangeScene(PackedScene newScene)
-    {       
-        // Remove the current scene if there is one
-        if (currentScene != null)
+        }
+        public void SwitchToMenu()
         {
-            currentScene.QueueFree();
+            // If we are coming back from a minigame, restore the board state here
+            ChangeScene(menuScene);
+            RestorePlayerStates();
+        }
+        public void SwitchToMainBoard()
+        {
+            // If we are coming back from a minigame, restore the board state here
+            ChangeScene(mainBoardScene);
+            RestorePlayerStates();
         }
 
-        // Instance and add the new scene
-        currentScene = newScene.Instantiate();
-        AddChild(currentScene);
-    }
+        public void SwitchToMinigame()
+        {
+            // Save the board state before switching
+            SavePlayerStates();
+
+            // Load the minigame scene
+            ChangeScene(minigameScene);
+        }
+                public void SwitchToendscreen()
+        {
+            // Save the board state before switching
+            SavePlayerStates();
+
+            // Load the minigame scene
+            ChangeScene(endscreen);
+        }
+        private void ChangeScene(PackedScene newScene)
+        {       
+            // Remove the current scene if there is one
+            if (currentScene != null)
+            {
+                currentScene.QueueFree();
+            }
+
+            // Instance and add the new scene
+            currentScene = newScene.Instantiate();
+            AddChild(currentScene);
+        }
 
     private void SavePlayerStates()
     {

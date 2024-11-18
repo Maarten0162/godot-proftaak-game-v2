@@ -609,10 +609,7 @@ for (int i = 0; i < GlobalVariables.Instance.playersalive.Count; i++)
 		GlobalVariables.Instance.TurnCount++;
 
 
-		if (CheckWinCondition()) //functie checkt of alle spelers op 1 na dood zijn, of dat er 15 turns voorbij zijn gegaan.
-		{
-			EndGame();
-		}
+	
 		GD.Print("voor razorcap");
 		if (GlobalVariables.Instance.TurnCount > 0) //dit zorgt ervoor dat de cap gaat spawnen
 		{
@@ -642,9 +639,14 @@ for (int i = 0; i < GlobalVariables.Instance.playersalive.Count; i++)
 
 			}
 		}
+			
 
 		SaveAllStates();
-		ChooseMiniGame();
+		if (playersalive.Count == 1 || GlobalVariables.Instance.TurnCount == 15)
+		{	
+			await EndGame();
+		}
+		else ChooseMiniGame();
 
 	}
 
@@ -979,8 +981,8 @@ for (int i = 0; i < GlobalVariables.Instance.playersalive.Count; i++)
 
 	}
 
-	bool CheckWinCondition()
-	{
+	async Task CheckWinCondition()
+	{	GD.Print("in checkwincondition");
 		int deadplayer = 0;
 		for (int i = 0; i < playersalive.Count; i++)
 		{
@@ -989,15 +991,15 @@ for (int i = 0; i < GlobalVariables.Instance.playersalive.Count; i++)
 				deadplayer += 1;
 			}
 		}
-		if (deadplayer == Playerlist.Length - 1 || GlobalVariables.Instance.TurnCount == 15)
-		{
-			return true;
+		if (playersalive.Count == 1 || GlobalVariables.Instance.TurnCount == 15)
+		{	
+			ChooseMiniGame();
 		}
-		else return false;
+		
 	}
-	void EndGame()
-	{
-
+	async Task EndGame()
+	{	GD.Print("in end screen");
+		GlobalVariables.Instance.SwitchToendscreen();
 	}
 
 	async Task ShopAsk(Player player)
@@ -2008,7 +2010,7 @@ for (int i = 0; i < GlobalVariables.Instance.playersalive.Count; i++)
 
 		updateInvSprite(player);
 	}
-	public async Task updateInvPos(Player player)
+	public void updateInvPos(Player player)
 	{
 		GD.Print("run updateInvPos");
 
