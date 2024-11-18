@@ -27,6 +27,10 @@ window/stretch/mode="canvas_items"
 
 project/assembly_name="proftaak-game"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/addons/TextureRectRounded/plugin.cfg")
+
 [input]
 
 1={

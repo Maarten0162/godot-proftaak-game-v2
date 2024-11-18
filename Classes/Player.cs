@@ -9,7 +9,7 @@ public partial class Player : CharacterBody2D
 	{
 		currency = 25;
 		health = 100;
-		inventory = new string[3] {"BrassKnuckles", "GoldenKnuckles", "0"};
+		inventory = new string[3] {"DoubleDice", "TripleDice", "PoisonMushroom"};
 		rollAdjustment = 0;
 	}
 
