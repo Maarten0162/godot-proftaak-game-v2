@@ -186,11 +186,7 @@ for (int i = 0; i < minigameplayeramount; i++)
 	
 
         // Assign the player with the highest score as the winner
-        GlobalVariables.Instance.Winner = i;;
-		
-		
-
-        
+        GlobalVariables.Instance.Winner = i;   
 
         
         break;

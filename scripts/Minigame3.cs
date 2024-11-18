@@ -125,6 +125,7 @@ public partial class Minigame3 : Node2D
         {
             winnaarResultaatLabel.Text = "Niemand heeft op tijd gereageerd.";
         }
+        GlobalVariables.Instance.Winner = winnaarIndex;
     }
 
     private int GetWinnerIndex()

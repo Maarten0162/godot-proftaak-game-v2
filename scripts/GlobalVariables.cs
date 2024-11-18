@@ -44,7 +44,7 @@ public partial class GlobalVariables : Node
 
     // Path to main board and minigame scenes
     private const string MainBoardScenePath = "res://scenes/main.tscn";
-    private const string MinigameScenePath = "res://scenes/minigame1.tscn";
+    private const string MinigameScenePath = "res://scenes/minigame3.tscn";
     private const string MenuScenePath = "res://scenes/Menu.tscn";
 
     private PackedScene mainBoardScene;
