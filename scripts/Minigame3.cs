@@ -15,42 +15,40 @@ public partial class Minigame3 : Node2D
     private Label winnaarResultaatLabel;
     private List<Sprite2D> preReactSprites = new List<Sprite2D>();
     private List<Sprite2D> postReactSprites = new List<Sprite2D>();
+    private int minigameplayeramount;
 
     private bool spelActief = false;
-    int minigameplayeramount;
 
     public override void _Ready()
     {
         if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player1"))
         {
             preReactSprites.Add(GetNode<Sprite2D>("PreReactSprite1"));
-            preReactSprites.Add(GetNode<Sprite2D>("PostReactSprite1"));
+            postReactSprites.Add(GetNode<Sprite2D>("PostReactSprite1"));
             minigameplayeramount++;
         }
         if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player2"))
         {
             preReactSprites.Add(GetNode<Sprite2D>("PreReactSprite2"));
-            preReactSprites.Add(GetNode<Sprite2D>("PostReactSprite2"));
+            postReactSprites.Add(GetNode<Sprite2D>("PostReactSprite2"));
             minigameplayeramount++;
         }
         if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player3"))
         {
             preReactSprites.Add(GetNode<Sprite2D>("PreReactSprite3"));
-            preReactSprites.Add(GetNode<Sprite2D>("PostReactSprite3"));
+            postReactSprites.Add(GetNode<Sprite2D>("PostReactSprite3"));
             minigameplayeramount++;
         }
         if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player4"))
         {
             preReactSprites.Add(GetNode<Sprite2D>("PreReactSprite4"));
-            preReactSprites.Add(GetNode<Sprite2D>("PostReactSprite4"));
+            postReactSprites.Add(GetNode<Sprite2D>("PostReactSprite4"));
             minigameplayeramount++;
         }
 
         for (int i = 0; i < minigameplayeramount; i++)
         {
             reactieLabels[i] = GetNode<Label>($"Label{i + 1}");
-            preReactSprites[i] = GetNode<Sprite2D>($"PreReactSprite{i + 1}");
-            postReactSprites[i] = GetNode<Sprite2D>($"PostReactSprite{i + 1}");
         }
         winnaarLabel = GetNode<Label>("WinnaarLabel");
         winnaarResultaatLabel = GetNode<Label>("WinnaarResultaatLabel"); 
@@ -61,6 +59,7 @@ public partial class Minigame3 : Node2D
         reactieTimer.Connect("timeout", new Callable(this, nameof(EindeReactieFase)));
         
         StartSpel();
+        GD.Print("aantal spelers:", minigameplayeramount);
     }
 
     private void StartSpel()
@@ -147,7 +146,7 @@ public partial class Minigame3 : Node2D
 
     private void SetSpritesVisibility(bool preReact, bool postReact, int? specificIndex = null)
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < minigameplayeramount; i++)
         {
             if (specificIndex.HasValue && specificIndex.Value != i)
                 continue;
