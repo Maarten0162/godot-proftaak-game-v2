@@ -253,10 +253,8 @@ public partial class Main : Node2D
 		}
 			GlobalVariables.Instance.playersalive = playersalive;
 		if (GlobalVariables.Instance.TurnCount > 0)
-		{ RestoreAllStates(); 
-			playersalive[GlobalVariables.Instance.Winner].Currency +=30;
-		
-			
+		{ 	RestoreAllStates(); 
+			playersalive[GlobalVariables.Instance.Winner].Currency +=30;			
 		}
 
 		for (int i = 0; i < playersalive.Count; i++)
