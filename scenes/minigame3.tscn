@@ -14,41 +14,49 @@ scale = Vector2(0.257191, 0.258114)
 texture = ExtResource("2_kjeyj")
 
 [node name="PreReactSprite1" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(292, 212)
 scale = Vector2(0.185937, 0.157343)
 texture = ExtResource("3_q17yp")
 
 [node name="PostReactSprite1" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(278, 214)
 scale = Vector2(0.459253, 0.465)
 texture = ExtResource("4_5jyg5")
 
 [node name="PreReactSprite2" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(920.25, 210)
 scale = Vector2(0.185937, 0.157343)
 texture = ExtResource("3_q17yp")
 
 [node name="PostReactSprite2" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(906.25, 212)
 scale = Vector2(0.459253, 0.465)
 texture = ExtResource("4_5jyg5")
 
 [node name="PreReactSprite3" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(306.25, 483)
 scale = Vector2(0.185937, 0.157343)
 texture = ExtResource("3_q17yp")
 
 [node name="PostReactSprite3" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(292.25, 485)
 scale = Vector2(0.459253, 0.465)
 texture = ExtResource("4_5jyg5")
 
 [node name="PreReactSprite4" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(920.25, 486)
 scale = Vector2(0.185937, 0.157343)
 texture = ExtResource("3_q17yp")
 
 [node name="PostReactSprite4" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(906.25, 488)
 scale = Vector2(0.459253, 0.465)
 texture = ExtResource("4_5jyg5")

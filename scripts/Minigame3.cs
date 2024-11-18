@@ -54,10 +54,10 @@ public partial class Minigame3 : Node2D
         winnaarResultaatLabel = GetNode<Label>("WinnaarResultaatLabel"); 
         spelTimer = GetNode<Timer>("SpelTimer");
         reactieTimer = GetNode<Timer>("ReactieTimer");
-
+        spelTimer.Start();
         spelTimer.Connect("timeout", new Callable(this, nameof(StartReactieFase)));
-        reactieTimer.Connect("timeout", new Callable(this, nameof(EindeReactieFase)));
         
+        reactieTimer.Connect("timeout", new Callable(this, nameof(EindeReactieFase)));
         StartSpel();
         GD.Print("aantal spelers:", minigameplayeramount);
     }
@@ -65,8 +65,8 @@ public partial class Minigame3 : Node2D
     private void StartSpel()
     {
         spelActief = false;
-        heeftGereageerd = new bool[4];
-        reactietijden = new float[4];
+        heeftGereageerd = new bool[minigameplayeramount];
+        reactietijden = new float[minigameplayeramount];
         winnaarLabel.Text = "Wacht tot het signaal...";
         winnaarResultaatLabel.Text = ""; 
         SetSpritesVisibility(true, false);
@@ -80,6 +80,7 @@ public partial class Minigame3 : Node2D
         spelActief = true;
         winnaarLabel.Text = "Schiet nu!";
         reactieTimer.Start(); 
+        
     }
 
     public override void _Process(double delta)
@@ -126,6 +127,7 @@ public partial class Minigame3 : Node2D
             winnaarResultaatLabel.Text = "Niemand heeft op tijd gereageerd.";
         }
         GlobalVariables.Instance.Winner = winnaarIndex;
+        GlobalVariables.Instance.SwitchToMainBoard();
     }
 
     private int GetWinnerIndex()
@@ -133,7 +135,7 @@ public partial class Minigame3 : Node2D
         float snelsteTijd = float.MaxValue;
         int winnaarIndex = -1;
         
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < minigameplayeramount; i++)
         {
             if (heeftGereageerd[i] && reactietijden[i] < snelsteTijd)
             {
