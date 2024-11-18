@@ -160,10 +160,10 @@ public partial class Main : Node2D
 		twentydice = new Dice(-20, 21, dobbelgeluid, 0);
 
 		spacesInfo = new (Node2D, string, string)[spacesAmount];
-		GlobalVariables.Instance.playersalive = new List<Player>();
+		
 
 		if (GlobalVariables.Instance.TurnCount == 0)
-		{
+		{	GlobalVariables.Instance.playersalive = new List<Player>();
 			for (int i = 1; i <= spacesAmount; i++)
 			{
 				Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{i}");
@@ -177,8 +177,8 @@ public partial class Main : Node2D
 		if (GlobalVariables.Instance.TurnCount > 0)
 		{
 			GD.Print("in niet ronde 1");
-			GlobalVariables.Instance.Winner.Currency += 30;
-			GD.Print(GlobalVariables.Instance.Winner.Currency);
+			
+			
 			for (int i = 0; i < spacesAmount; i++)
 			{
 				Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{i + 1}");
@@ -251,21 +251,28 @@ public partial class Main : Node2D
 			playersalive = new List<Player> { player1, player2, player3, player4 };
 
 		}
+			GlobalVariables.Instance.playersalive = playersalive;
 		if (GlobalVariables.Instance.TurnCount > 0)
-		{ RestoreAllStates(); }
-
-		for (int i = 0; i < Playerlist.Length; i++)
-		{
-			Updatehud(Playerlist[i]);
+		{ RestoreAllStates(); 
+			playersalive[GlobalVariables.Instance.Winner].Currency +=30;
+		
+			
 		}
 
+		for (int i = 0; i < playersalive.Count; i++)
+		{
+			Updatehud(playersalive[i]);
+		}
+		GD.Print($"Players Alive: {GlobalVariables.Instance.playersalive.Count}");
+for (int i = 0; i < GlobalVariables.Instance.playersalive.Count; i++)
+{
+    GD.Print($"Player {i}: {GlobalVariables.Instance.playersalive[i].Name}");
+}
 
 
-		GlobalVariables.Instance.playersalive = playersalive;
-		GlobalVariables.Instance.player1 = player1;
-		GlobalVariables.Instance.player2 = player2;
-		GlobalVariables.Instance.player3 = player3;
-		GlobalVariables.Instance.player4 = player4;
+
+	
+
 		Iteminfo = new (string Name, int Price)[15] { ("Whiskey", 20), ("GoldenPipe", 20), ("DoubleDice", 10), ("TripleDice", 13), ("TwentyDice", 20), ("TenDice", 8), ("DashMushroom", 5), ("TeleportTorndPlayer", 15), ("SwitchPlaces", 15), ("StealPlayerCap", 40), ("PoisonMushroom", 5), ("StealCoins", 30), ("BrassKnuckles", 20), ("GoldenKnuckles", 50), ("BearTrap", 40) };
 		ShopInv = new (string Name, int Price)[3] { ("test", 10), ("test", 10), ("test", 10) };
 
@@ -282,7 +289,7 @@ public partial class Main : Node2D
 		buttonmin2 = new Button();
 		buttonplus1 = new Button();
 		buttonplus2 = new Button();
-
+	
 		ChooseTurn();
 
 	}
@@ -827,30 +834,7 @@ public partial class Main : Node2D
 	}
 	private async void ChooseTurn()
 	{
-		if (GlobalVariables.Instance.playeramount == 4)
-		{
-
-
-
-			await Turn();
-
-		}
-		if (GlobalVariables.Instance.playeramount == 3)
-		{
-
-
-
-			await Turn();
-
-		}
-		if (GlobalVariables.Instance.playeramount == 2)
-		{
-
-
-
-			await Turn();
-
-		}
+		await Turn();
 	}
 
 	//EVENTSPACES

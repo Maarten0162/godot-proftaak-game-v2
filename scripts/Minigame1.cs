@@ -70,7 +70,7 @@ public partial class Minigame1 : Node
 
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionJustPressed("A_1"))
+		if (Input.IsActionJustPressed("A_1") || Input.IsActionJustPressed("1"))
 		{
 			OnKeyPressed(0);
 		}
@@ -183,15 +183,19 @@ for (int i = 0; i < minigameplayeramount; i++)
     {
         // Print player information (e.g., their name, score, etc.)
         GD.Print($"Player {i} has the highest score: {scores[i]}");
+	
 
         // Assign the player with the highest score as the winner
-        GlobalVariables.Instance.Winner = GlobalVariables.Instance.playersalive[i];
+        GlobalVariables.Instance.Winner = i;;
+		
+		
 
         
 
         
         break;
     }
+	
 }
 }}
 
