@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4slasupr6op3"]
+[gd_scene load_steps=5 format=3 uid="uid://ck50mouvua0dg"]
 
 [ext_resource type="Script" path="res://scripts/Minigame3.cs" id="1_nn6t3"]
 [ext_resource type="Texture2D" uid="uid://08e4gvva1xuu" path="res://Minigame3/achtergrond.jpeg" id="2_kjeyj"]
@@ -9,7 +9,7 @@
 script = ExtResource("1_nn6t3")
 
 [node name="Achtergrond" type="Sprite2D" parent="."]
-position = Vector2(611, 339)
+position = Vector2(595, 328)
 scale = Vector2(0.257191, 0.258114)
 texture = ExtResource("2_kjeyj")
 
@@ -98,5 +98,7 @@ offset_right = 660.0
 offset_bottom = 412.0
 
 [node name="SpelTimer" type="Timer" parent="."]
+
+[node name="DelayTimer" type="Timer" parent="."]
 
 [node name="ReactieTimer" type="Timer" parent="."]
