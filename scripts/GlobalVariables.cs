@@ -98,7 +98,7 @@ public partial class GlobalVariables : Node
             SavePlayerStates();
 
             // Load the minigame scene
-            ChangeScene(minigame2Scene);
+            ChangeScene(minigame1Scene);
         }
                 public void SwitchToendscreen()
         {
