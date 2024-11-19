@@ -1,4 +1,5 @@
 [gd_scene load_steps=106 format=3 uid="uid://cg37l1h63iykf"]
+[gd_scene load_steps=106 format=3 uid="uid://cg37l1h63iykf"]
 
 [ext_resource type="Script" path="res://scripts/Main.cs" id="1_xihgb"]
 [ext_resource type="Texture2D" uid="uid://8n3od4yuo4jk" path="res://assets/Boards/board finished.png" id="2_ebqpb"]
@@ -15,11 +16,11 @@
 [ext_resource type="Texture2D" uid="uid://ntnjriij4xb7" path="res://assets/dice/default-dice/Dobbel6.png" id="10_l64x0"]
 [ext_resource type="Texture2D" uid="uid://dyk8ejepe1vww" path="res://assets/dice/default-dice/Dobbel7.png" id="14_3fmk5"]
 [ext_resource type="Texture2D" uid="uid://ccu36fjro5msm" path="res://assets/dice/default-dice/Dobbel8.png" id="15_cv46h"]
-[ext_resource type="Texture2D" uid="uid://dol6hnh1qws33" path="res://assets/Spaces/bluespace.png" id="16_a006q"]
+[ext_resource type="Texture2D" uid="uid://dol6hnh1qws33" path="res://assets/Spaces/blueSpace.png" id="16_a006q"]
 [ext_resource type="Texture2D" uid="uid://yu4l0530gi5x" path="res://assets/Spaces/topLeftsc.png" id="16_lbrca"]
 [ext_resource type="Texture2D" uid="uid://d1pifwujewrmq" path="res://assets/dice/default-dice/Dobbel9.png" id="16_xc1rm"]
 [ext_resource type="Texture2D" uid="uid://nki7dvd54tw4" path="res://assets/Spaces/graySpace.png" id="17_v2eak"]
-[ext_resource type="Texture2D" uid="uid://th5esly73wm0" path="res://assets/Spaces/redspace.png" id="17_vh1sw"]
+[ext_resource type="Texture2D" uid="uid://th5esly73wm0" path="res://assets/Spaces/redSpace.png" id="17_vh1sw"]
 [ext_resource type="Texture2D" uid="uid://d6fynx1abavh" path="res://assets/Spaces/robSpace.png" id="19_g0xgm"]
 [ext_resource type="Texture2D" uid="uid://bpgph68doahmu" path="res://assets/Spaces/topRightsc.png" id="20_vxcpt"]
 [ext_resource type="Texture2D" uid="uid://ddmdgo1mp0hi5" path="res://assets/Spaces/getRobbedSpace.png" id="21_5ywyp"]
@@ -50,7 +51,19 @@
 [ext_resource type="Texture2D" uid="uid://bop5w1jgj1xb1" path="res://assets/hud/grayslot.png" id="47_rmdg1"]
 [ext_resource type="Texture2D" uid="uid://bfngjnjv43jx6" path="res://assets/items/BearTrap.png" id="48_d40qk"]
 [ext_resource type="Texture2D" uid="uid://ba4migac8j07i" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/D-Pad/button_xboxone_dpad_light_4.png" id="49_hpi5p"]
+[ext_resource type="Texture2D" uid="uid://ba4migac8j07i" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/D-Pad/button_xboxone_dpad_light_4.png" id="49_hpi5p"]
 [ext_resource type="Texture2D" uid="uid://b0h6e5ncbuxlg" path="res://assets/hud/shopKeeper.png" id="50_mi2s7"]
+[ext_resource type="Texture2D" uid="uid://77beik8ydmor" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/D-Pad/button_xboxone_dpad_light_1.png" id="51_6dq4m"]
+[ext_resource type="Texture2D" uid="uid://d37roews6cau4" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/ABXY/button_xbox_digital_b_1.png" id="52_6nig2"]
+[ext_resource type="Texture2D" uid="uid://capfytlqo0ujd" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/D-Pad/button_xboxone_dpad_light_2.png" id="52_rp0r3"]
+[ext_resource type="Texture2D" uid="uid://cx3skduiddtax" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/ABXY/button_xbox_digital_a_1.png" id="53_ioj5k"]
+[ext_resource type="Texture2D" uid="uid://dcoh6hiwapyof" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/D-Pad/button_xboxone_dpad_light_3.png" id="53_r6gal"]
+[ext_resource type="Texture2D" uid="uid://b3b4t6ywg66vg" path="res://assets/dice/0-3.png" id="56_u1n05"]
+[ext_resource type="Texture2D" uid="uid://coktak147vywq" path="res://assets/dice/1-6.png" id="57_ub2e3"]
+[ext_resource type="Texture2D" uid="uid://br0nkv8flippa" path="res://assets/dice/3-6.png" id="59_8eb0a"]
+[ext_resource type="Texture2D" uid="uid://dyw161a1nqj67" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/ABXY/button_xbox_digital_x_1.png" id="60_ifpiy"]
+[ext_resource type="Texture2D" uid="uid://cwgifh35o50as" path="res://assets/dice/-3-9.png" id="61_8bqih"]
+[ext_resource type="Texture2D" uid="uid://ecf0infi502y" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/ABXY/button_xbox_digital_y_1.png" id="62_808mh"]
 [ext_resource type="Texture2D" uid="uid://77beik8ydmor" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/D-Pad/button_xboxone_dpad_light_1.png" id="51_6dq4m"]
 [ext_resource type="Texture2D" uid="uid://d37roews6cau4" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/ABXY/button_xbox_digital_b_1.png" id="52_6nig2"]
 [ext_resource type="Texture2D" uid="uid://capfytlqo0ujd" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/D-Pad/button_xboxone_dpad_light_2.png" id="52_rp0r3"]
@@ -567,6 +580,8 @@ anti_aliasing = false
 [sub_resource type="LabelSettings" id="LabelSettings_od6xc"]
 outline_size = 6
 outline_color = Color(0, 0, 0, 1)
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(12, 8)
@@ -612,6 +627,7 @@ texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D3" type="Marker2D" parent="spaces"]
 position = Vector2(343, 90)
+position = Vector2(343, 90)
 scale = Vector2(0.1, 0.1)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D3"]
@@ -619,6 +635,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D4" type="Marker2D" parent="spaces"]
+position = Vector2(430, 68)
 position = Vector2(430, 68)
 scale = Vector2(0.1, 0.1)
 
@@ -628,6 +645,7 @@ texture = ExtResource("16_a006q")
 
 [node name="Marker2D5" type="Marker2D" parent="spaces"]
 position = Vector2(509, 48)
+position = Vector2(509, 48)
 scale = Vector2(0.1, 0.1)
 
 [node name="robSpace" type="Sprite2D" parent="spaces/Marker2D5"]
@@ -635,6 +653,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("19_g0xgm")
 
 [node name="Marker2D6" type="Marker2D" parent="spaces"]
+position = Vector2(574, 71)
 position = Vector2(574, 71)
 scale = Vector2(0.1, 0.1)
 
@@ -644,6 +663,7 @@ texture = ExtResource("16_a006q")
 
 [node name="Marker2D7" type="Marker2D" parent="spaces"]
 position = Vector2(704, 114)
+position = Vector2(704, 114)
 scale = Vector2(0.1, 0.1)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D7"]
@@ -652,6 +672,7 @@ texture = ExtResource("16_a006q")
 
 [node name="Marker2D8" type="Marker2D" parent="spaces"]
 position = Vector2(814, 115)
+position = Vector2(814, 115)
 scale = Vector2(0.1, 0.1)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D8"]
@@ -659,6 +680,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D9" type="Marker2D" parent="spaces"]
+position = Vector2(908, 109)
 position = Vector2(908, 109)
 scale = Vector2(0.1, 0.1)
 
@@ -685,6 +707,7 @@ texture = ExtResource("17_v2eak")
 
 [node name="Marker2D11" type="Marker2D" parent="spaces"]
 position = Vector2(1004, 214)
+position = Vector2(1004, 214)
 scale = Vector2(0.1, 0.1)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D11"]
@@ -692,6 +715,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D12" type="Marker2D" parent="spaces"]
+position = Vector2(907, 219)
 position = Vector2(907, 219)
 scale = Vector2(0.1, 0.1)
 
@@ -701,6 +725,7 @@ texture = ExtResource("16_a006q")
 
 [node name="Marker2D13" type="Marker2D" parent="spaces"]
 position = Vector2(822, 223)
+position = Vector2(822, 223)
 scale = Vector2(0.1, 0.1)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D13"]
@@ -709,6 +734,7 @@ texture = ExtResource("16_a006q")
 
 [node name="Marker2D14" type="Marker2D" parent="spaces"]
 position = Vector2(722, 241)
+position = Vector2(722, 241)
 scale = Vector2(0.1, 0.1)
 
 [node name="getRobbedSpace" type="Sprite2D" parent="spaces/Marker2D14"]
@@ -716,6 +742,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("21_5ywyp")
 
 [node name="Marker2D15" type="Marker2D" parent="spaces"]
+position = Vector2(652, 312)
 position = Vector2(652, 312)
 scale = Vector2(0.1, 0.1)
 
@@ -733,6 +760,7 @@ texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D17" type="Marker2D" parent="spaces"]
 position = Vector2(436, 329)
+position = Vector2(436, 329)
 scale = Vector2(0.1, 0.1)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D17"]
@@ -740,6 +768,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D18" type="Marker2D" parent="spaces"]
+position = Vector2(347, 360)
 position = Vector2(347, 360)
 scale = Vector2(0.1, 0.1)
 
@@ -749,6 +778,7 @@ texture = ExtResource("22_hwv6p")
 
 [node name="Marker2D19" type="Marker2D" parent="spaces"]
 position = Vector2(270, 365)
+position = Vector2(270, 365)
 scale = Vector2(0.1, 0.1)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D19"]
@@ -756,6 +786,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D20" type="Marker2D" parent="spaces"]
+position = Vector2(185, 370)
 position = Vector2(185, 370)
 scale = Vector2(0.1, 0.1)
 
@@ -765,6 +796,7 @@ texture = ExtResource("16_a006q")
 
 [node name="Marker2D21" type="Marker2D" parent="spaces"]
 position = Vector2(167, 452)
+position = Vector2(167, 452)
 scale = Vector2(0.1, 0.1)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D21"]
@@ -773,9 +805,11 @@ texture = ExtResource("16_a006q")
 
 [node name="Marker2D22" type="Marker2D" parent="spaces"]
 position = Vector2(166, 510)
+position = Vector2(166, 510)
 scale = Vector2(0.1, 0.1)
 
 [node name="botLeftsc" type="Sprite2D" parent="spaces/Marker2D22"]
+position = Vector2(-440, 430)
 position = Vector2(-440, 430)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("23_1ju3i")
@@ -790,6 +824,7 @@ texture = ExtResource("17_v2eak")
 
 [node name="Marker2D23" type="Marker2D" parent="spaces"]
 position = Vector2(233, 540)
+position = Vector2(233, 540)
 scale = Vector2(0.1, 0.1)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D23"]
@@ -798,6 +833,7 @@ texture = ExtResource("16_a006q")
 
 [node name="Marker2D24" type="Marker2D" parent="spaces"]
 position = Vector2(347, 528)
+position = Vector2(347, 528)
 scale = Vector2(0.1, 0.1)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D24"]
@@ -805,6 +841,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D25" type="Marker2D" parent="spaces"]
+position = Vector2(468, 564)
 position = Vector2(468, 564)
 scale = Vector2(0.1, 0.1)
 
@@ -815,6 +852,7 @@ texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D26" type="Marker2D" parent="spaces"]
 position = Vector2(561, 538)
+position = Vector2(561, 538)
 scale = Vector2(0.1, 0.1)
 
 [node name="robSpace" type="Sprite2D" parent="spaces/Marker2D26"]
@@ -822,6 +860,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("19_g0xgm")
 
 [node name="Marker2D27" type="Marker2D" parent="spaces"]
+position = Vector2(618, 480)
 position = Vector2(618, 480)
 scale = Vector2(0.1, 0.1)
 
@@ -831,6 +870,7 @@ texture = ExtResource("16_a006q")
 
 [node name="Marker2D28" type="Marker2D" parent="spaces"]
 position = Vector2(713, 490)
+position = Vector2(713, 490)
 scale = Vector2(0.1, 0.1)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D28"]
@@ -839,6 +879,7 @@ texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D29" type="Marker2D" parent="spaces"]
 position = Vector2(791, 505)
+position = Vector2(791, 505)
 scale = Vector2(0.1, 0.1)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D29"]
@@ -846,6 +887,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D30" type="Marker2D" parent="spaces"]
+position = Vector2(900, 494)
 position = Vector2(900, 494)
 scale = Vector2(0.1, 0.1)
 
@@ -872,6 +914,7 @@ texture = ExtResource("17_v2eak")
 
 [node name="Marker2D32" type="Marker2D" parent="spaces"]
 position = Vector2(980, 427)
+position = Vector2(980, 427)
 scale = Vector2(0.1, 0.1)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D32"]
@@ -879,6 +922,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D33" type="Marker2D" parent="spaces"]
+position = Vector2(895, 419)
 position = Vector2(895, 419)
 scale = Vector2(0.1, 0.1)
 
@@ -888,6 +932,7 @@ texture = ExtResource("16_a006q")
 
 [node name="Marker2D34" type="Marker2D" parent="spaces"]
 position = Vector2(787, 416)
+position = Vector2(787, 416)
 scale = Vector2(0.1, 0.1)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D34"]
@@ -895,6 +940,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D35" type="Marker2D" parent="spaces"]
+position = Vector2(696, 405)
 position = Vector2(696, 405)
 scale = Vector2(0.1, 0.1)
 
@@ -920,9 +966,11 @@ texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D38" type="Marker2D" parent="spaces"]
 position = Vector2(452, 284)
+position = Vector2(452, 284)
 scale = Vector2(0.1, 0.1)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D38"]
+position = Vector2(0, 10)
 position = Vector2(0, 10)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("17_vh1sw")
@@ -2099,6 +2147,12 @@ offset_right = 513.5
 offset_bottom = 436.0
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("49_hpi5p")
+offset_left = 33.5
+offset_top = -44.0
+offset_right = 513.5
+offset_bottom = 436.0
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("49_hpi5p")
 
 [node name="itemTex" type="TextureRect" parent="CanvasLayersshop/TextureRectRounded/Slot1Rect"]
 z_index = 1
@@ -2126,6 +2180,8 @@ offset_bottom = 743.0
 scale = Vector2(10, 10)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
 text = "£ NaN"
 horizontal_alignment = 1
 
@@ -2136,6 +2192,8 @@ offset_left = 16.5
 offset_top = 124.0
 offset_right = 99.5
 offset_bottom = 147.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 text = "test"
@@ -2155,6 +2213,8 @@ offset_right = 47.5
 offset_bottom = 173.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 text = "test test test test test test test test test test test test "
@@ -2200,6 +2260,8 @@ offset_bottom = 743.0
 scale = Vector2(10, 10)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
 text = "£ NaN"
 horizontal_alignment = 1
 
@@ -2210,6 +2272,8 @@ offset_left = 16.5
 offset_top = 124.0
 offset_right = 99.5
 offset_bottom = 147.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 text = "test"
@@ -2231,6 +2295,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 0
 text = "test test test test test test test test test test test test "
 label_settings = SubResource("LabelSettings_802gb")
@@ -2240,6 +2306,12 @@ autowrap_mode = 2
 [node name="input" type="TextureRect" parent="CanvasLayersshop/TextureRectRounded/Slot2Rect"]
 z_index = 1
 layout_mode = 0
+offset_left = 34.5
+offset_top = -47.0
+offset_right = 514.5
+offset_bottom = 433.0
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("51_6dq4m")
 offset_left = 34.5
 offset_top = -47.0
 offset_right = 514.5
@@ -2285,6 +2357,8 @@ offset_bottom = 743.0
 scale = Vector2(10, 10)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
 text = "£ NaN"
 horizontal_alignment = 1
 
@@ -2295,6 +2369,8 @@ offset_left = 16.5
 offset_top = 124.0
 offset_right = 99.5
 offset_bottom = 147.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 text = "test"
@@ -2316,6 +2392,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 0
 text = "test test test test test test test test test test test test "
 label_settings = SubResource("LabelSettings_802gb")
@@ -2325,6 +2403,12 @@ autowrap_mode = 2
 [node name="input" type="TextureRect" parent="CanvasLayersshop/TextureRectRounded/Slot3Rect"]
 z_index = 1
 layout_mode = 0
+offset_left = 40.0
+offset_top = -47.0
+offset_right = 520.0
+offset_bottom = 433.0
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("52_rp0r3")
 offset_left = 40.0
 offset_top = -47.0
 offset_right = 520.0
@@ -2341,9 +2425,18 @@ offset_right = 148.5
 offset_bottom = 430.0
 scale = Vector2(0.07, 0.07)
 texture = ExtResource("53_r6gal")
+scale = Vector2(0.07, 0.07)
+texture = ExtResource("53_r6gal")
 
 [node name="Label" type="Label" parent="CanvasLayersshop/TextureRectRounded/input"]
 layout_mode = 0
+offset_left = 542.857
+offset_top = 100.0
+offset_right = 629.857
+offset_bottom = 123.0
+scale = Vector2(10, 10)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
 offset_left = 542.857
 offset_top = 100.0
 offset_right = 629.857
@@ -2785,10 +2878,51 @@ offset_bottom = 885.0
 scale = Vector2(14, 14)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
 text = "Naamloze karacter:   Welcome to my shop. Come take a look what we have in store."
 label_settings = SubResource("LabelSettings_od6xc")
 horizontal_alignment = 1
 autowrap_mode = 2
+
+[node name="yesbutton" type="TextureRect" parent="CanvasLayersshop/WelcomeScreen/TextureRect"]
+layout_mode = 0
+offset_left = 1260.0
+offset_top = 1730.0
+offset_right = 1740.0
+offset_bottom = 2210.0
+texture = ExtResource("52_6nig2")
+
+[node name="Label" type="Label" parent="CanvasLayersshop/WelcomeScreen/TextureRect/yesbutton"]
+layout_mode = 0
+offset_left = 590.0
+offset_top = 110.0
+offset_right = 630.0
+offset_bottom = 133.0
+scale = Vector2(12, 12)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+text = "Yes"
+
+[node name="nobutton" type="TextureRect" parent="CanvasLayersshop/WelcomeScreen/TextureRect"]
+z_index = 1
+layout_mode = 0
+offset_left = 3660.0
+offset_top = 1710.0
+offset_right = 4140.0
+offset_bottom = 2190.0
+texture = ExtResource("53_ioj5k")
+
+[node name="Label" type="Label" parent="CanvasLayersshop/WelcomeScreen/TextureRect/nobutton"]
+layout_mode = 0
+offset_left = 590.0
+offset_top = 110.0
+offset_right = 630.0
+offset_bottom = 133.0
+scale = Vector2(12, 12)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+text = "No"
 
 [node name="yesbutton" type="TextureRect" parent="CanvasLayersshop/WelcomeScreen/TextureRect"]
 layout_mode = 0
