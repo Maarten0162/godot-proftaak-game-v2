@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://dc6nkqosur54e"]
+
+[ext_resource type="Script" path="res://scripts/minigame4.cs" id="1_3uii6"]
+
+[node name="Minigame4" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3uii6")
+
+[node name="ResultaatLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 415.0
+offset_top = 34.0
+offset_right = 455.0
+offset_bottom = 57.0
+
+[node name="KeuzeLabel" type="Label" parent="."]
+offset_left = 92.0
+offset_top = 183.0
+offset_right = 132.0
+offset_bottom = 206.0
+
+[node name="RondeLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="WinnaarLabel" type="Label" parent="."]
+offset_left = 457.0
+offset_top = 193.0
+offset_right = 497.0
+offset_bottom = 216.0
+
+[node name="LabelWincondities" type="Label" parent="."]
+offset_left = 767.0
+offset_top = 1.0
+offset_right = 807.0
+offset_bottom = 24.0
+
+[node name="Timer" type="Timer" parent="."]

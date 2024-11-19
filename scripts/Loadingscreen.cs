@@ -11,7 +11,7 @@ public partial class Loadingscreen : Node2D
     public delegate void LoadingCompleteEventHandler();
 
     public override void _Ready()
-    {
+    {   
         labelMinigame = GetNode<Label>("LabelMinigame");
         uitleg = GetNode<Label>("Uitleg");
         timer = GetNode<Timer>("Timer");
@@ -53,5 +53,6 @@ public partial class Loadingscreen : Node2D
         labelMinigame.Visible = false;
         uitleg.Visible = false;
         GlobalVariables.Instance.SwitchToMainBoard();
+       
     }
 }
