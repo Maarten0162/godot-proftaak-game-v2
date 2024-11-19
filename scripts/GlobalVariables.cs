@@ -49,6 +49,7 @@ public partial class GlobalVariables : Node
           private const string Minigame3ScenePath = "res://scenes/minigame3.tscn";
            private const string Minigame4ScenePath = "res://scenes/minigame4.tscn";
             private const string Minigame5ScenePath = "res://scenes/minigame5.tscn";
+             private const string Minigame6ScenePath = "res://scenes/Bomb.tscn";
         private const string MenuScenePath = "res://scenes/Menu.tscn";
         private const string EndscreenPath = "res://scenes/End_Screen.tscn";
 
@@ -61,6 +62,7 @@ public partial class GlobalVariables : Node
         private PackedScene minigame3Scene;
         private PackedScene minigame4Scene;
         private PackedScene minigame5Scene;
+        private PackedScene minigame6Scene;
         private PackedScene menuScene;
         private PackedScene endscreen;
         private PackedScene LoadingScreen;
@@ -85,6 +87,7 @@ public partial class GlobalVariables : Node
                 minigame3Scene = (PackedScene)ResourceLoader.Load(Minigame3ScenePath);
                 minigame4Scene = (PackedScene)ResourceLoader.Load(Minigame4ScenePath);
                 minigame5Scene = (PackedScene)ResourceLoader.Load(Minigame5ScenePath);
+                minigame6Scene = (PackedScene)ResourceLoader.Load(Minigame6ScenePath);
                 
                 menuScene = (PackedScene)ResourceLoader.Load(MenuScenePath);
                 endscreen = (PackedScene)ResourceLoader.Load(EndscreenPath);
@@ -159,6 +162,15 @@ public partial class GlobalVariables : Node
 
             // Load the minigame scene
                 ChangeScene(minigame5Scene);
+        }
+
+         public void SwitchToMinigame6()
+        {
+            // Save the board state before switching
+            SavePlayerStates();
+
+            // Load the minigame scene
+                ChangeScene(minigame6Scene);
         }
                 public void SwitchToendscreen()
         {

@@ -1892,11 +1892,16 @@ public partial class Main : Node2D
 	}
 
 	void ChooseMiniGame()
+<<<<<<< Updated upstream
 	{		int selectedGame = rnd.Next(1,4);
+=======
+	{		int selectedGame = rnd.Next(1,2);
+>>>>>>> Stashed changes
 		switch (selectedGame)
         {
             case 1:
-                GlobalVariables.Instance.SwitchToMinigame1();
+                // GlobalVariables.Instance.SwitchToMinigame1();
+				GlobalVariables.Instance.SwitchToMinigame6();
                 break;
             case 2:
                 GlobalVariables.Instance.SwitchToMinigame2();
