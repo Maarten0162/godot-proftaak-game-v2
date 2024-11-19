@@ -419,7 +419,7 @@ public partial class Main : Node2D
 			{
 				if (player.Currency >= 50)
 				{
-					UpdateSpaceLabel("RazorCappurchase", player);
+					
 					await RazorcapPurchase(player);
 				}
 				else GD.Print("sorry " + player.Name + " you don't have enough pounds.");
@@ -513,7 +513,7 @@ public partial class Main : Node2D
 			{
 				if (player.Currency >= 50)
 				{
-					UpdateSpaceLabel("RazorCappurchase", player);
+					
 					await RazorcapPurchase(player);
 				}
 				else GD.Print("sorry " + player.Name + " you don't have enough pounds.");
@@ -921,9 +921,9 @@ public partial class Main : Node2D
 	}
 
 	async Task RazorcapPurchase(Player player)
-	{
+	{	
 		bool waitingforbuttonpressRazorcap = true;
-		GD.Print("Do you want to buy the razorcap for 50 pounds? Press left bumper for yes, right bumper for no");
+		UpdateSpaceLabel("RazorCappurchase", player);
 		while (waitingforbuttonpressRazorcap)
 		{
 			if (Input.IsActionJustPressed($"yes_{WhatPlayer}"))
@@ -946,7 +946,7 @@ public partial class Main : Node2D
 			await ToSignal(GetTree().CreateTimer(0), "timeout");
 
 		}
-
+		UpdateSpaceLabel("clear", player);
 
 	}
 
@@ -2563,63 +2563,63 @@ public partial class Main : Node2D
 			{
 
 				case "Whiskey":
-					GD.Print("WHiskey");
-					DescriptionLabel.Text = "Force a random player to drink Whiskey and cause him to black out.";
+					GD.Print("Whiskey");
+					DescriptionLabel.Text = "gooi dit item op een vak en zie een speler al zijn geld wegdrinken.";
 					break;
 
 				case "GoldenPipe":
-					DescriptionLabel.Text = "Take a carage straight the razorcap.";
+					DescriptionLabel.Text = "gebruik deze koets om naar de razorcap te racen.";
 					break;
 
 				case "DoubleDice":
-					DescriptionLabel.Text = "Why throw one when you can throw two. (Throw 2 dices with each a value between 0-6)";
+					DescriptionLabel.Text = "2 dice van 0-6.";
 					break;
 
 				case "TripleDice":
-					DescriptionLabel.Text = "The only thing better than two dices are three dices. (Throw 3 dices with each a value between 0-6)";
+					DescriptionLabel.Text = "3 dice van 0-6.";
 					break;
 
 				case "TwentyDice":
-					DescriptionLabel.Text = "Throw a dice with an eyecount between -20 and 20";
+					DescriptionLabel.Text = "een dice van -20/20.";
 					break;
 				case "TenDice":
-					DescriptionLabel.Text = "Throw a dice with an eyecount between 0 and 10";
+					DescriptionLabel.Text = "een dice van 0-10.";
 					break;
 
 				case "DashMushroom":
-					DescriptionLabel.Text = "These speedy boots will make you the fastest man in England (adds a random number to your next throw)";
+					DescriptionLabel.Text = "gebruik deze schoenen om bij je volgende dobbel +5 te krijgen.";
 					break;
 
 				case "TeleportTorndPlayer":
-					DescriptionLabel.Text = "Teleport to random player on the board.";
+					DescriptionLabel.Text = "gebruik dit item om naar een willekeurige speler te transporteren.";
 					break;
 
 				case "SwitchPlaces":
-					DescriptionLabel.Text = "Swap places with a random player on the board.";
+					DescriptionLabel.Text = "gebruik dit item om met een willekeurige speler van plek te ruilen.";
 					break;
 
 				case "StealPlayerCap":
-					DescriptionLabel.Text = "Steal the Razor cap from the player that has it.";
+					DescriptionLabel.Text = "gebruik dit item om de razorcap van een speler af te pakken.";
 					break;
 
 				case "PoisonMushroom":
-					DescriptionLabel.Text = "Removes a random number from your next throw.";
+					DescriptionLabel.Text = "gebruik dit item om bij een willekeurige speler -5 van zijn volgende dobbel te halen.";
 					break;
 
 				case "StealCoins":
-					DescriptionLabel.Text = "Steal coins from a random player.";
+					DescriptionLabel.Text = "steel ponden van een willekeurige speler";
 					break;
 
 				case "BrassKnuckles":
-					DescriptionLabel.Text = "Knuckels that will deal 20 damage to a player when passing them. (1 use only)";
+					DescriptionLabel.Text = "dit item kan je gebruiken om een persoon waar je langsloopt te damagen, na 1 keer gaat hij kapot.";
 					break;
 
 				case "GoldenKnuckles":
-					DescriptionLabel.Text = "Knuckels that will deal 20 damage to a player when passing them. (∞ uses)";
+					DescriptionLabel.Text = "dit item kan je gebruiken om een persoon waar je langsloopt te damagen, hij gaat de hele game mee.";
 					break;
 
 				case "BearTrap":
-					DescriptionLabel.Text = "Place a bear trap somewhere on the board. (Deals damage to passing players and cause them to skip a turn)";
+					DescriptionLabel.Text = "gooi dit item op een vak om een berenval te plaatsen die een speler vastklemt.";
 					break;
 			}
 			itemTex.Texture = GD.Load<Texture2D>($"res://assets/items/{currentItem.Name}.png");

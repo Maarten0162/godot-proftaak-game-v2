@@ -162,7 +162,7 @@ public partial class Minigame1 : Node
     {
         GlobalVariables.Instance.SwitchToMainBoard();
     }
-	private void CheckWinner()
+	private async void CheckWinner()
 	{
 		GD.Print("checkwinner");
 
@@ -189,7 +189,7 @@ for (int i = 0; i < minigameplayeramount; i++)
         // Print player information (e.g., their name, score, etc.)
         GD.Print($"Player {i} has the highest score: {scores[i]}");
 	
-
+		await WaitForSeconds(3);
         // Assign the player with the highest score as the winner
         GlobalVariables.Instance.Winner = i;   
 
@@ -198,5 +198,9 @@ for (int i = 0; i < minigameplayeramount; i++)
     }
 	
 }
-}}
+}
+private async Task WaitForSeconds(float seconds)
+	{
+		await ToSignal(GetTree().CreateTimer(seconds), "timeout");
+	}}
 
