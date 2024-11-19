@@ -98,7 +98,7 @@ public partial class Main : Node2D
 	private (string Name, int Price)[] Iteminfo; // hier gaan de namen van alle items in.
 	private (string Name, int Price)[] ShopInv;
 	public List<Player> playersalive;
-	private int[] MiniGames;
+
 	bool waitingforbuttonpress;
 	bool ContinueLoop;
 	bool useItem;
@@ -293,11 +293,7 @@ public partial class Main : Node2D
 		Iteminfo = new (string Name, int Price)[15] { ("Whiskey", 20), ("GoldenPipe", 20), ("DoubleDice", 10), ("TripleDice", 13), ("TwentyDice", 20), ("TenDice", 8), ("DashMushroom", 5), ("TeleportTorndPlayer", 15), ("SwitchPlaces", 15), ("StealPlayerCap", 40), ("PoisonMushroom", 5), ("StealCoins", 30), ("BrassKnuckles", 20), ("GoldenKnuckles", 50), ("BearTrap", 40) };
 		ShopInv = new (string Name, int Price)[3] { ("test", 10), ("test", 10), ("test", 10) };
 
-		MiniGames = new int[10];
-		for (int i = 0; i < 9; i++)
-		{
-			MiniGames[i] = i;
-		}
+
 
 		dobbelSprite = GetNode<AnimatedSprite2D>("dobbelSprite");
 		dobbelSprite.Play("0");
@@ -501,8 +497,7 @@ public partial class Main : Node2D
 					}
 				}
 				if (hasitemspace)
-				{
-					UpdateSpaceLabel("Shop", player);
+				{	UpdateSpaceLabel("Shop", player);
 					await ShopAsk(player);
 				}
 			}
@@ -677,7 +672,10 @@ public partial class Main : Node2D
 		{
 			EndGame();
 		}
-		else ChooseMiniGame();
+		else {
+			await WaitForSeconds(3);
+			ChooseMiniGame();
+		}
 
 	}
 
@@ -769,8 +767,10 @@ public partial class Main : Node2D
 				player.SkipTurn = false;// dit zorgt ervoor dat next turn deze speler wel dingen mag doen
 				GD.Print(player.Name + " Had to skip his turn!");
 			}
-
-
+			GD.Print("before timer");
+			await WaitForSeconds(2);
+			GD.Print("after timer");
+			Spacelabel.Text = "";
 		}
 		async Task<int> AwaitButtonPress(Player player)
 		{
@@ -1020,7 +1020,7 @@ public partial class Main : Node2D
 	}
 
 	async Task ShopAsk(Player player)
-	{
+	{	UpdateSpaceLabel("Shop", player);
 		bool RunLoop = true;
 		if (player.Currency > 0)
 		{
@@ -1206,7 +1206,7 @@ public partial class Main : Node2D
 						player.Inventory[0] = "0";
 						updateInvSprite(player);
 						await selectTrapPositon("Whiskey");
-						GD.Print("Used item Beartrap; it has vanished from their inventory.");
+						GD.Print("Used item Whiskey; it has vanished from their inventory.");
 						useditem = "nodice";
 						return useditem;
 
@@ -1366,7 +1366,7 @@ public partial class Main : Node2D
 						player.Inventory[1] = "0";
 						updateInvSprite(player);
 						await selectTrapPositon("Whiskey");
-						GD.Print("Used item Beartrap; it has vanished from their inventory.");
+						GD.Print("Used item Whiskey; it has vanished from their inventory.");
 						useditem = "nodice";
 						return useditem;
 
@@ -1526,7 +1526,7 @@ public partial class Main : Node2D
 						player.Inventory[2] = "0";
 						updateInvSprite(player);
 						await selectTrapPositon("Whiskey");
-						GD.Print("Used item Beartrap  it has vanished from their inventory.");
+						GD.Print("Used item Whiskey  it has vanished from their inventory.");
 						useditem = "nodice";
 						return useditem;
 
@@ -1682,7 +1682,7 @@ public partial class Main : Node2D
 		Updatehud(player);
 	}
 	void Beartrap(Player player) // dit is de space
-	{
+	{	UpdateSpaceLabel("BearTrap", player);
 		GD.Print("you stepped into a beartrap, you take damage and next turn cant walk well");
 		player.Health -= 40;
 		player.RollAdjustment += -5;
@@ -2434,59 +2434,63 @@ public partial class Main : Node2D
 	}
 
 	void UpdateSpaceLabel(string whatspace, Player player)
-	{
-		GD.Print("in updatelabel");
+	{	GD.Print("in updatelabel");
 		if (whatspace == "blueSpace")
 		{
-			Spacelabel.Text = player.Name + " staat op een blauw vakje. je krijgt 15 pond.";
+			Spacelabel.Text ="Je staat op een blauw vakje. je krijgt 15 pond.";
 
 		}
 		else if (whatspace == "redSpace")
 		{
-			Spacelabel.Text = player.Name + " staat op een rood vakje, je verliest 15 pond.";
+			Spacelabel.Text = "Je staat op een rood vakje, je verliest 15 pond.";
 		}
 		else if (whatspace == "TopLeftShortcut")
 		{
-			Spacelabel.Text = player.Name + " staat bij een roeiboot. je gebruikt de boot om op de rivier te varen ";
+			Spacelabel.Text = "Je staat bij een roeiboot. je gebruikt de boot om op de rivier te varen ";
 		}
 		else if (whatspace == "TopRightShortcut")
 		{
-			Spacelabel.Text = player.Name + " staat bij het station. je stapt op de trein";
+			Spacelabel.Text = "Je staat bij op het station. je stapt op de trein";
 		}
 		else if (whatspace == "BotLeftShortcut")
 		{
-			Spacelabel.Text = player.Name + " staat bij een roeiboot. je gebruikt de boot om op de rivier te varen ";
+			Spacelabel.Text = "Je staat bij een roeiboot. je gebruikt de boot om op de rivier te varen ";
 		}
 		else if (whatspace == "BotRightShortcut")
 		{
-			Spacelabel.Text = player.Name + " staat bij het station. je stapt op de trein";
+			Spacelabel.Text = "Je staat bij op het station. je stapt op de trein";
 		}
 		else if (whatspace == "getRobbedSpace")
 		{
-			Spacelabel.Text = player.Name + ", je bent beroofd! je verliest " + lostcurrency + " en ze doen 10 damage!";
+			Spacelabel.Text = "je bent beroofd! je verliest " + lostcurrency + " en ze doen 10 damage!";
 		}
 		else if (whatspace == "knockoutSpace")
 		{
-			Spacelabel.Text = player.Name + ", je word bewusteloos geslagen! je moet je volgende beurt overslaan.";
+			Spacelabel.Text = "je word bewusteloos geslagen! je moet je volgende beurt overslaan.";
 		}
 		else if (whatspace == "robSpace")
 		{
-			Spacelabel.Text = player.Name + ", je ziet een doelwit en overvalt hem, je steelt " + gainedCurrency + " pond!";
+			Spacelabel.Text = "je ziet een doelwit en overvalt hem, je steelt " + gainedCurrency + " pond!";
 		}
 		else if (whatspace == "Whiskey_Space")
 		{
-			Spacelabel.Text = player.Name + ", je ziet een fles whiskey staan en drinkt hem helemaal op! daarna ga je de kroeg in en besteed je een substantieel bedrag. je slaat volgende beurt over om je kater weg te werken.";
+			Spacelabel.Text = "je ziet een fles whiskey staan en drinkt hem helemaal op! daarna ga je de kroeg in en besteed je een substantieel bedrag. je slaat volgende beurt over om je kater weg te werken.";
 
 		}
-		else if (whatspace == "RazorCappurchase")
-		{
-			Spacelabel.Text = player.Name + "je hebt de optie om een razorcap te kopen voor 50 pond. kies linker bumper voor ja en rechterbumper voor nee.";
+		else if(whatspace == "RazorCappurchase"){
+			Spacelabel.Text = "je hebt de optie om een razorcap te kopen voor 50 pond. kies linker bumper voor ja en rechterbumper voor nee."; 
 		}
-		else if (whatspace == "Shop")
-		{
-			Spacelabel.Text = player.Name + "";
+		else if(whatspace == "Shop"){
+			Spacelabel.Text = "je staat bij de shop, wil je naar binnen?";
+		}
+		else if(whatspace == "BearTrap"){
+			Spacelabel.Text = "Je staat in een berenval en verliest 40 health, ook loop je volgende beurt mank.";
 		}
 	}
+	 private async Task WaitForSeconds(float seconds)
+    {
+        await ToSignal(GetTree().CreateTimer(seconds), "timeout");
+    }
 
 	void openMainShop((string Name, int Price)[] shopItems, Player player)
 	{
