@@ -1,6 +1,8 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+
 
 public partial class minigame5 : Control
 {
@@ -31,43 +33,57 @@ public partial class minigame5 : Control
     private int huidigeVraagIndex = -1;
 
     private int[] scores = { 0, 0, 0, 0 };
-    private bool[] heeftGeantwoord = { false, false, false, false };
-    private string[] antwoorden = { "", "", "", "" };
+    private List<bool> heeftGeantwoord;
+    private List<string> antwoorden;
     private int aantalGeantwoord = 0;
     private int snelsteSpeler = -1;
 
     private Label vraagLabel;
-    private Label[] spelerStatusLabels;
-    private Label[] spelerScoreLabels;
+    private List<Label> spelerStatusLabels;
+    private List<Label> spelerScoreLabels;
 
     public override void _Ready()
     {
         vraagLabel = GetNode<Label>("VraagLabel");
 
         // Verwijzingen naar spelerstatus- en scorelabels
-        spelerStatusLabels = new Label[]
+        spelerStatusLabels = new List<Label>();
+        spelerScoreLabels = new List<Label>();
+        if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player1"))
         {
-            GetNode<Label>("MarginContainer_Player1/StatusLabel"),
-            GetNode<Label>("MarginContainer_Player2/StatusLabel"),
-            GetNode<Label>("MarginContainer_Player3/StatusLabel"),
-            GetNode<Label>("MarginContainer_Player4/StatusLabel"),
-        };
+            spelerStatusLabels.Add(GetNode<Label>("MarginContainer_Player1/StatusLabel"));
+            spelerScoreLabels.Add(GetNode<Label>("MarginContainer_Player1/ScoreLabel"));
 
-        spelerScoreLabels = new Label[]
+        }
+        if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player2"))
         {
-            GetNode<Label>("MarginContainer_Player1/ScoreLabel"),
-            GetNode<Label>("MarginContainer_Player2/ScoreLabel"),
-            GetNode<Label>("MarginContainer_Player3/ScoreLabel"),
-            GetNode<Label>("MarginContainer_Player4/ScoreLabel"),
-        };
+            spelerStatusLabels.Add(GetNode<Label>("MarginContainer_Player2/StatusLabel"));
+            spelerScoreLabels.Add(GetNode<Label>("MarginContainer_Player2/ScoreLabel"));
+        }
+        if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player3"))
+        {
+            spelerStatusLabels.Add(GetNode<Label>("MarginContainer_Player3/StatusLabel"));
+            spelerScoreLabels.Add(GetNode<Label>("MarginContainer_Player3/ScoreLabel"));
+        }
+        if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player4"))
+        {
+            spelerStatusLabels.Add(GetNode<Label>("MarginContainer_Player4/StatusLabel"));
+            spelerScoreLabels.Add(GetNode<Label>("MarginContainer_Player4/ScoreLabel"));
+        }
+        heeftGeantwoord = new List<bool>();
+        antwoorden = new List<string>();
 
         KiesVolgendeVraag();
         UpdateSpelerUI();
     }
 
     private void KiesVolgendeVraag()
-    {
-        if (huidigeVraagIndex >= 4)
+    {   for(int i = 0; i < GlobalVariables.Instance.playersalive.Count; i++){
+        heeftGeantwoord[i] = false;
+    }   
+     aantalGeantwoord = 0;
+    
+        if (huidigeVraagIndex >= 3)
         {
             BepaalWinnaar();
             return;
@@ -79,9 +95,8 @@ public partial class minigame5 : Control
         huidigeVraag = vragen[randomVraagIndex];
         vragen.RemoveAt(randomVraagIndex);
 
-        heeftGeantwoord = new bool[4];
-        antwoorden = new string[4];
-        aantalGeantwoord = 0;
+        
+       
         snelsteSpeler = -1;
 
         ToonVraag();
@@ -99,7 +114,7 @@ public partial class minigame5 : Control
 
     private void UpdateSpelerUI()
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < GlobalVariables.Instance.playersalive.Count; i++)
         {
             spelerStatusLabels[i].Text = $"Status: {(heeftGeantwoord[i] ? "Gekozen" : "Nog niet gekozen")}";
             spelerScoreLabels[i].Text = $"Score: {scores[i]}";
@@ -122,7 +137,7 @@ public partial class minigame5 : Control
 
         UpdateSpelerUI();
 
-        if (aantalGeantwoord == 4)
+        if (aantalGeantwoord == GlobalVariables.Instance.playersalive.Count)
         {
             ToonCorrectAntwoord();
         }
@@ -134,10 +149,10 @@ public partial class minigame5 : Control
 
         if (snelsteSpeler != -1 && antwoorden[snelsteSpeler] == huidigeVraag.CorrectAntwoord)
         {
-            scores[snelsteSpeler] += 3;
+            scores[snelsteSpeler] += GlobalVariables.Instance.playersalive.Count - 1;
         }
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < GlobalVariables.Instance.playersalive.Count; i++)
         {
             if (heeftGeantwoord[i] && antwoorden[i] == huidigeVraag.CorrectAntwoord && i != snelsteSpeler)
             {
