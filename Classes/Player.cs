@@ -7,10 +7,12 @@ public partial class Player : CharacterBody2D
 
 	public Player()
 	{
-		currency = 25;
-		health = 100;
-		inventory = new string[3] {"BrassKnuckles", "GoldenKnuckles", "0"};
+		currency = 100;
+		health = 20;
+		inventory = new string[3] {"Whiskey", "TripleDice", "PoisonMushroom"};
 		rollAdjustment = 0;
+		inventory = new string[3] {"0", "TripleDice", "PoisonMushroom"};
+
 	}
 
 	private int currency;

@@ -1,13 +1,13 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-
+using System.Linq;
 public partial class Minigame2 : Node2D
 {
     // Lijst van spelers en hun labels
     private string[] players = { "Player 1", "Player 2", "Player 3", "Player 4" };
     private Dictionary<string, float> reactionTimes = new Dictionary<string, float>();
-    private bool[] playerHasPressedButton = new bool[4];  // Huidige staat van de spelers (of ze al hebben gedrukt)
+    private bool[] playerHasPressedButton;  // Huidige staat van de spelers (of ze al hebben gedrukt)
 
     // Timer en status
     private DateTime startTime;
@@ -23,18 +23,29 @@ public partial class Minigame2 : Node2D
     private ColorRect[] playerColorRects = new ColorRect[4];  // Verwijzingen naar de ColorRect's
 
     public override void _Ready()
-    {
+    { playerHasPressedButton = new bool[GlobalVariables.Instance.playersalive.Count];
+        
         // Verwijzingen naar UI-elementen
         TimerLabel = GetNodeOrNull<Label>("GameUI/TimerLabel");
         LabelWinnaar = GetNodeOrNull<Label>("GameUI/CenterContainer/LabelWinnaar");
 
-        // Verbind de labels en colorrects(=roodkleurtje) van de spelers
-        for (int i = 0; i < players.Length; i++)
-        {
-            playerLabels[i] = GetNodeOrNull<Label>($"GameUI/LabelSpeler{i + 1}");
-            playerColorRects[i] = GetNodeOrNull<ColorRect>($"GameUI/MarginContainer{i + 1}/TextureRect/ColorRect");
-
-        }
+      if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player1")){
+            playerLabels[0] = GetNodeOrNull<Label>($"GameUI/LabelSpeler{0 + 1}");
+            playerColorRects[0] = GetNodeOrNull<ColorRect>($"GameUI/MarginContainer{0 + 1}/TextureRect/ColorRect");
+      }
+            if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player2")){
+            playerLabels[1] = GetNodeOrNull<Label>($"GameUI/LabelSpeler{1 + 1}");
+            playerColorRects[1] = GetNodeOrNull<ColorRect>($"GameUI/MarginContainer{1 + 1}/TextureRect/ColorRect");
+      }
+            if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player3")){
+            playerLabels[2] = GetNodeOrNull<Label>($"GameUI/LabelSpeler{2 + 1}");
+            playerColorRects[2] = GetNodeOrNull<ColorRect>($"GameUI/MarginContainer{2 + 1}/TextureRect/ColorRect");
+      }
+            if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player4")){
+            playerLabels[3] = GetNodeOrNull<Label>($"GameUI/LabelSpeler{3 + 1}");
+            playerColorRects[3] = GetNodeOrNull<ColorRect>($"GameUI/MarginContainer{3 + 1}/TextureRect/ColorRect");
+      }
+        
 
         // Stel de countdown timer in 
         countdownTimer = new Timer(); 
@@ -75,7 +86,7 @@ public partial class Minigame2 : Node2D
     public override void _Process(double delta)
     {
         // wanneer een speler op de knop drukt
-        for (int i = 0; i < players.Length; i++)
+        for (int i = 0; i < GlobalVariables.Instance.playersalive.Count; i++)
         {
             if (Input.IsActionJustPressed($"A_{i + 1}") && !playerHasPressedButton[i])
             {
@@ -109,7 +120,7 @@ public partial class Minigame2 : Node2D
     {
         // Controleer of alle spelers hebben gedrukt
         bool allPlayersPressed = true;
-        for (int i = 0; i < players.Length; i++)
+        for (int i = 0; i < GlobalVariables.Instance.playersalive.Count; i++)
         {
             if (!playerHasPressedButton[i])
             {
@@ -121,7 +132,7 @@ public partial class Minigame2 : Node2D
         // Als alle spelers hebben gedrukt, toon de reactietijd en de winnaar, dus degene die het dichstebij 10 zit
         if (allPlayersPressed)
         {
-            for (int i = 0; i < players.Length; i++)
+            for (int i = 0; i < GlobalVariables.Instance.playersalive.Count; i++)
             {
                 playerLabels[i].Text = $"{players[i]} - Reactietijd: {reactionTimes[players[i]]:F2} sec";
                 
@@ -131,6 +142,10 @@ public partial class Minigame2 : Node2D
         }
     }
 
+    private void ReturnToMainScene()
+    {
+        GlobalVariables.Instance.SwitchToMainBoard();
+    }
     private void CheckWinner()
     {
         // Start met de eerste speler
@@ -138,7 +153,7 @@ public partial class Minigame2 : Node2D
         float closestTimeDiff = Math.Abs(reactionTimes[players[0]] - 10);
 
         // Vergelijk elke speler's reactietijd met 10 seconden
-        for (int i = 1; i < players.Length; i++)
+        for (int i = 1; i < GlobalVariables.Instance.playersalive.Count; i++)
         {
             float timeDiff = Math.Abs(reactionTimes[players[i]] - 10);
 
@@ -147,6 +162,7 @@ public partial class Minigame2 : Node2D
             {
                 closestTimeDiff = timeDiff;
                 closestPlayer = players[i];
+                GlobalVariables.Instance.Winner = i;
             }
         }
 
@@ -154,5 +170,6 @@ public partial class Minigame2 : Node2D
         LabelWinnaar.Text = $"{closestPlayer} is het dichtst bij 10 sec met {closestTimeDiff:F2} sec verschil";
         LabelWinnaar.SelfModulate = new Color(1, 1, 0);  // Geel super mooi kleurtje voor de winnaar
         LabelWinnaar.Show();
+        GetTree().CreateTimer(3f).Connect("timeout", new Callable(this, nameof(ReturnToMainScene)));
     }
 }

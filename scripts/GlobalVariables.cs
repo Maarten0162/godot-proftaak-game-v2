@@ -9,7 +9,7 @@ public partial class GlobalVariables : Node
 
     public Player[] Playerlist { get; set; }
     public int playeramount { get; set; }
-    public Player Winner { get; set; }
+    public int Winner { get; set; }
         // Dictionary to store the state of each player
     public Dictionary<int, PlayerState> PlayerStates = new Dictionary<int, PlayerState>();
    BoardState boardState;
@@ -42,66 +42,84 @@ public partial class GlobalVariables : Node
 
 
 
-    // Path to main board and minigame scenes
-    private const string MainBoardScenePath = "res://scenes/main.tscn";
-    private const string MinigameScenePath = "res://scenes/minigame1.tscn";
-    private const string MenuScenePath = "res://scenes/Menu.tscn";
+        // Path to main board and minigame scenes
+        private const string MainBoardScenePath = "res://scenes/main.tscn";
+        private const string Minigame1ScenePath = "res://scenes/minigame1.tscn";
+         private const string Minigame2ScenePath = "res://scenes/minigame2.tscn";
+          private const string Minigame3ScenePath = "res://scenes/minigame3.tscn";
+        private const string MenuScenePath = "res://scenes/Menu.tscn";
+        private const string EndscreenPath = "res://scenes/End_Screen.tscn";
 
-    private PackedScene mainBoardScene;
-    private PackedScene minigameScene;
-    private PackedScene menuScene;
-    public Player player1   { get; set; }
-    public Player player2   { get; set; }
-    public Player player3   { get; set; }
-    public Player player4   { get; set; }
-    // Instance of the currently active scene
-    private Node currentScene;
-    private Node StartGame;
-    public int TurnCount { get; set; }
-    public List<Player> playersalive { get; set; }
+        private PackedScene mainBoardScene;
+        private PackedScene minigame1Scene;
+        private PackedScene minigame2Scene;
+        private PackedScene minigame3Scene;
+        private PackedScene menuScene;
+        private PackedScene endscreen;
+        public Player player1   { get; set; }
+        public Player player2   { get; set; }
+        public Player player3   { get; set; }
+        public Player player4   { get; set; }
+        // Instance of the currently active scene
+        private Node currentScene;
+        private Node StartGame;
+        public int TurnCount { get; set; }
+        public List<Player> playersalive { get; set; }
 
-    
-    public override void _Ready()
-    {      
-        Instance = this;
-            mainBoardScene = (PackedScene)ResourceLoader.Load(MainBoardScenePath);
-            minigameScene = (PackedScene)ResourceLoader.Load(MinigameScenePath);
-            menuScene = (PackedScene)ResourceLoader.Load(MenuScenePath);
-            Winner = player1;
+        
+        public override void _Ready()
+        {      
+            Instance = this;
+                mainBoardScene = (PackedScene)ResourceLoader.Load(MainBoardScenePath);
+                minigame1Scene = (PackedScene)ResourceLoader.Load(Minigame1ScenePath);
+                minigame2Scene = (PackedScene)ResourceLoader.Load(Minigame2ScenePath);
+                minigame3Scene = (PackedScene)ResourceLoader.Load(Minigame3ScenePath);
+                menuScene = (PackedScene)ResourceLoader.Load(MenuScenePath);
+                endscreen = (PackedScene)ResourceLoader.Load(EndscreenPath);
+                
 
-    }
-      public void SwitchToMenu()
-    {
-        // If we are coming back from a minigame, restore the board state here
-        ChangeScene(menuScene);
-        RestorePlayerStates();
-    }
-    public void SwitchToMainBoard()
-    {
-        // If we are coming back from a minigame, restore the board state here
-        ChangeScene(mainBoardScene);
-        RestorePlayerStates();
-    }
-    public void SwitchToMinigame()
-    {
-        // Save the board state before switching
-        SavePlayerStates();
-
-        // Load the minigame scene
-        ChangeScene(minigameScene);
-    }
-    private void ChangeScene(PackedScene newScene)
-    {       
-        // Remove the current scene if there is one
-        if (currentScene != null)
+        }
+        public void SwitchToMenu()
         {
-            currentScene.QueueFree();
+            // If we are coming back from a minigame, restore the board state here
+            ChangeScene(menuScene);
+            RestorePlayerStates();
+        }
+        public void SwitchToMainBoard()
+        {
+            // If we are coming back from a minigame, restore the board state here
+            ChangeScene(mainBoardScene);
+            RestorePlayerStates();
         }
 
-        // Instance and add the new scene
-        currentScene = newScene.Instantiate();
-        AddChild(currentScene);
-    }
+        public void SwitchToMinigame()
+        {
+            // Save the board state before switching
+            SavePlayerStates();
+
+            // Load the minigame scene
+            ChangeScene(minigame1Scene);
+        }
+                public void SwitchToendscreen()
+        {
+            // Save the board state before switching
+            SavePlayerStates();
+
+            // Load the minigame scene
+            ChangeScene(endscreen);
+        }
+        private void ChangeScene(PackedScene newScene)
+        {       
+            // Remove the current scene if there is one
+            if (currentScene != null)
+            {
+                currentScene.QueueFree();
+            }
+
+            // Instance and add the new scene
+            currentScene = newScene.Instantiate();
+            AddChild(currentScene);
+        }
 
     private void SavePlayerStates()
     {

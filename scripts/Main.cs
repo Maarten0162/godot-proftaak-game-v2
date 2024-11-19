@@ -2,6 +2,8 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Xml;
 
@@ -11,7 +13,8 @@ public partial class Main : Node2D
 {
 
 
-
+	int lostcurrency;
+	int gainedCurrency;
 	private AnimatedSprite2D dobbelSprite;
 
 	int spacesAmount = 42;
@@ -20,12 +23,54 @@ public partial class Main : Node2D
 	public Button buttonplus1;
 	public Button buttonplus2;
 
+
+
 	public Player player1;
 	public Player player2;
 	public Player player3;
 	public Player player4;
 	public Player[] Playerlist;
 
+	TextureRect invSprite1;
+	TextureRect invSprite2;
+	TextureRect invSprite3;
+
+	Label turnLabel;
+
+	Vector2 invSprite1Play1Pos;
+	Vector2 invSprite2Play1Pos;
+	Vector2 invSprite3Play1Pos;
+
+	Vector2 invSprite1Play2Pos;
+	Vector2 invSprite2Play2Pos;
+	Vector2 invSprite3Play2Pos;
+
+
+	Vector2 invSprite1Play3Pos;
+	Vector2 invSprite2Play3Pos;
+	Vector2 invSprite3Play3Pos;
+
+
+	Vector2 invSprite1Play4Pos;
+	Vector2 invSprite2Play4Pos;
+	Vector2 invSprite3Play4Pos;
+
+
+	Control mainShop;
+	Control textShop;
+
+
+	Panel invSlot1;
+	Panel invSlot2;
+	Panel invSlot3;
+
+	TextureRect turnDpadIcon1;
+	TextureRect turnDpadIcon2;
+	TextureRect turnDpadIcon3;
+
+	TextureRect dpadIcon1;
+	TextureRect dpadIcon2;
+	TextureRect dpadIcon3;
 
 
 	[Signal]
@@ -35,6 +80,8 @@ public partial class Main : Node2D
 	Random rnd = new Random();
 
 	private AudioStreamPlayer dobbelgeluid;
+
+
 
 
 	Dice basicdice;
@@ -51,7 +98,7 @@ public partial class Main : Node2D
 	private (string Name, int Price)[] Iteminfo; // hier gaan de namen van alle items in.
 	private (string Name, int Price)[] ShopInv;
 	public List<Player> playersalive;
-	private int[] MiniGames;
+
 	bool waitingforbuttonpress;
 	bool ContinueLoop;
 	bool useItem;
@@ -60,9 +107,41 @@ public partial class Main : Node2D
 	int WhatPlayer;
 	public int PlayerAmount;
 
+	Vector2 Sprite1OldPos;
+	Vector2 Sprite2OldPos;
+	Vector2 Sprite3OldPos;
+	Label Spacelabel;
+	Vector2 Slot1OldPos;
+	Vector2 Slot2OldPos;
+	Vector2 Slot3OldPos;
+
 
 	public override void _Ready()
 	{
+		mainShop = GetNode<Control>("CanvasLayersshop/TextureRectRounded");
+		textShop = GetNode<Control>("CanvasLayersshop/WelcomeScreen");
+
+		Spacelabel = GetNode<Label>("CanvasLayerspaces/SpaceLabel");
+		invSprite1Play1Pos = GetNode<TextureRect>($"Node2D/CanvasLayer/player1/Playerhud/item1").Position;
+		invSprite2Play1Pos = GetNode<TextureRect>($"Node2D/CanvasLayer/player1/Playerhud/item2").Position;
+		invSprite3Play1Pos = GetNode<TextureRect>($"Node2D/CanvasLayer/player1/Playerhud/item3").Position;
+
+		invSprite1Play2Pos = GetNode<TextureRect>($"Node2D/CanvasLayer/player2/Playerhud/item1").Position;
+		invSprite2Play2Pos = GetNode<TextureRect>($"Node2D/CanvasLayer/player2/Playerhud/item2").Position;
+		invSprite3Play2Pos = GetNode<TextureRect>($"Node2D/CanvasLayer/player2/Playerhud/item3").Position;
+
+		invSprite1Play3Pos = GetNode<TextureRect>($"Node2D/CanvasLayer/player3/Playerhud/item1").Position;
+		invSprite2Play3Pos = GetNode<TextureRect>($"Node2D/CanvasLayer/player3/Playerhud/item2").Position;
+		invSprite3Play3Pos = GetNode<TextureRect>($"Node2D/CanvasLayer/player3/Playerhud/item3").Position;
+
+		invSprite1Play4Pos = GetNode<TextureRect>($"Node2D/CanvasLayer/player4/Playerhud/item1").Position;
+		invSprite2Play4Pos = GetNode<TextureRect>($"Node2D/CanvasLayer/player4/Playerhud/item2").Position;
+		invSprite3Play4Pos = GetNode<TextureRect>($"Node2D/CanvasLayer/player4/Playerhud/item3").Position;
+
+		turnLabel = GetNode<Label>("Node2D/CanvasLayer/Label");
+
+		turnLabel.Text = "Speler1 is aan de beurt, kies een item om te gebruiken";
+
 
 		//zet players invisble worden visible in Updatehud()
 		GetNode<Node2D>($"Node2D/CanvasLayer/player1").Hide();
@@ -70,8 +149,8 @@ public partial class Main : Node2D
 		GetNode<Node2D>($"Node2D/CanvasLayer/player3").Hide();
 		GetNode<Node2D>($"Node2D/CanvasLayer/player4").Hide();
 
-
-
+		textShop.Hide();
+		mainShop.Hide();
 
 		dobbelgeluid = GetNode<AudioStreamPlayer>("Dobbelgeluid");
 
@@ -86,10 +165,11 @@ public partial class Main : Node2D
 		twentydice = new Dice(-20, 21, dobbelgeluid, 0);
 
 		spacesInfo = new (Node2D, string, string)[spacesAmount];
-		GlobalVariables.Instance.playersalive = new List<Player>();
+
 
 		if (GlobalVariables.Instance.TurnCount == 0)
 		{
+			GlobalVariables.Instance.playersalive = new List<Player>();
 			for (int i = 1; i <= spacesAmount; i++)
 			{
 				Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{i}");
@@ -103,8 +183,8 @@ public partial class Main : Node2D
 		if (GlobalVariables.Instance.TurnCount > 0)
 		{
 			GD.Print("in niet ronde 1");
-			GlobalVariables.Instance.Winner.Currency += 30;
-			GD.Print(GlobalVariables.Instance.Winner.Currency);
+
+
 			for (int i = 0; i < spacesAmount; i++)
 			{
 				Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{i + 1}");
@@ -177,29 +257,43 @@ public partial class Main : Node2D
 			playersalive = new List<Player> { player1, player2, player3, player4 };
 
 		}
+		GlobalVariables.Instance.playersalive = playersalive;
 		if (GlobalVariables.Instance.TurnCount > 0)
-		{ RestoreAllStates(); }
+		{
+			RestoreAllStates();
+			playersalive[GlobalVariables.Instance.Winner].Currency += 30;
+		}
 
 		for (int i = 0; i < Playerlist.Length; i++)
 		{
-			Updatehud(Playerlist[i]);
+			if (Playerlist[i].Health == 0)
+			{
+				Playerlist[i].Hide();
+			}
+
+
+
+
+		}
+
+		for (int i = 0; i < playersalive.Count; i++)
+		{
+			Updatehud(playersalive[i]);
+		}
+		GD.Print($"Players Alive: {GlobalVariables.Instance.playersalive.Count}");
+		for (int i = 0; i < GlobalVariables.Instance.playersalive.Count; i++)
+		{
+			GD.Print($"Player {i}: {GlobalVariables.Instance.playersalive[i].Name}");
 		}
 
 
 
-		GlobalVariables.Instance.playersalive = playersalive;
-		GlobalVariables.Instance.player1 = player1;
-		GlobalVariables.Instance.player2 = player2;
-		GlobalVariables.Instance.player3 = player3;
-		GlobalVariables.Instance.player4 = player4;
+
+
 		Iteminfo = new (string Name, int Price)[15] { ("Whiskey", 20), ("GoldenPipe", 20), ("DoubleDice", 10), ("TripleDice", 13), ("TwentyDice", 20), ("TenDice", 8), ("DashMushroom", 5), ("TeleportTorndPlayer", 15), ("SwitchPlaces", 15), ("StealPlayerCap", 40), ("PoisonMushroom", 5), ("StealCoins", 30), ("BrassKnuckles", 20), ("GoldenKnuckles", 50), ("BearTrap", 40) };
 		ShopInv = new (string Name, int Price)[3] { ("test", 10), ("test", 10), ("test", 10) };
 
-		MiniGames = new int[10];
-		for (int i = 0; i < 9; i++)
-		{
-			MiniGames[i] = i;
-		}
+
 
 		dobbelSprite = GetNode<AnimatedSprite2D>("dobbelSprite");
 		dobbelSprite.Play("0");
@@ -305,6 +399,7 @@ public partial class Main : Node2D
 				}
 				if (hasitemspace)
 				{
+					UpdateSpaceLabel("Shop", player);
 					await ShopAsk(player);
 				}
 			}
@@ -323,6 +418,7 @@ public partial class Main : Node2D
 			{
 				if (player.Currency >= 50)
 				{
+					UpdateSpaceLabel("RazorCappurchase", player);
 					await RazorcapPurchase(player);
 				}
 				else GD.Print("sorry " + player.Name + " you don't have enough pounds.");
@@ -401,7 +497,7 @@ public partial class Main : Node2D
 					}
 				}
 				if (hasitemspace)
-				{
+				{	UpdateSpaceLabel("Shop", player);
 					await ShopAsk(player);
 				}
 			}
@@ -415,6 +511,7 @@ public partial class Main : Node2D
 			{
 				if (player.Currency >= 50)
 				{
+					UpdateSpaceLabel("RazorCappurchase", player);
 					await RazorcapPurchase(player);
 				}
 				else GD.Print("sorry " + player.Name + " you don't have enough pounds.");
@@ -435,10 +532,13 @@ public partial class Main : Node2D
 		if (typeOfSpace == "blueSpace")
 		{
 			BlueSpace(player);
+			UpdateSpaceLabel("blueSpace", player);
+
 		}
 		else if (typeOfSpace == "redSpace")
 		{
 			RedSpace(player);
+			UpdateSpaceLabel("redSpace", player);
 		}
 		else if (typeOfSpace.Contains("sc"))
 		{
@@ -447,21 +547,23 @@ public partial class Main : Node2D
 			{
 				if (typeOfSpace.Contains("Left"))
 				{
+					UpdateSpaceLabel("TopLeftShortcut", player);
 					TopLeftshortcut(player);
 				}
-				else TopRightshortcut(player);
+				else { TopRightshortcut(player); UpdateSpaceLabel("TopRightShortcut", player); }
 			}
 			else if (typeOfSpace.Contains("Left"))
 			{
 
 				BottomLeftShortcut(player);
-
+				UpdateSpaceLabel("BottomLeftShortcut", player);
 			}
-			else BottomRightShortcut(player);
+			else { BottomRightShortcut(player); UpdateSpaceLabel("TopRightShortcut", player); }
 		}
 		else if (typeOfSpace == "getRobbedSpace")
 		{
 			int robbedAmount = Robbery(player);
+			UpdateSpaceLabel("Robbery", player);
 			if (robbedAmount > player.Currency)
 			{
 				GD.Print("They took every penny you had!");
@@ -472,19 +574,23 @@ public partial class Main : Node2D
 		else if (typeOfSpace == "knockoutSpace")
 		{
 			SkipNextTurn(player);
+			UpdateSpaceLabel("KnockoutSpace", player);
 			GD.Print("You just got knocked out! you have to skip a turn");
 		}
 		else if (typeOfSpace == "robSpace")
 		{
 			int robbedAmount = RobSomeone(player);
+			UpdateSpaceLabel("robSpace", player);
 			GD.Print("You just robbed someone! you gained " + robbedAmount + " Pounds!");
 		}
-		else if(typeOfSpace == "Whiskey_Space"){
+		else if (typeOfSpace == "Whiskey_Space")
+		{
 			Whiskey(player);
+			UpdateSpaceLabel("Whiskey_Space", player);
 			spacesInfo[player.PositionSpace].Name = spacesInfo[player.PositionSpace].OriginalName;
-				Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{player.PositionSpace + 1}");
-				var sprite = markerNode.GetChild<Sprite2D>(0);
-				sprite.Texture = GD.Load<Texture2D>($"res://assets/Spaces/{spacesInfo[player.PositionSpace].OriginalName}.png");
+			Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{player.PositionSpace + 1}");
+			var sprite = markerNode.GetChild<Sprite2D>(0);
+			sprite.Texture = GD.Load<Texture2D>($"res://assets/Spaces/{spacesInfo[player.PositionSpace].OriginalName}.png");
 
 		}
 		await Task.CompletedTask;
@@ -529,10 +635,7 @@ public partial class Main : Node2D
 		GlobalVariables.Instance.TurnCount++;
 
 
-		if (CheckWinCondition()) //functie checkt of alle spelers op 1 na dood zijn, of dat er 15 turns voorbij zijn gegaan.
-		{
-			EndGame();
-		}
+
 		GD.Print("voor razorcap");
 		if (GlobalVariables.Instance.TurnCount > 0) //dit zorgt ervoor dat de cap gaat spawnen
 		{
@@ -563,167 +666,206 @@ public partial class Main : Node2D
 			}
 		}
 
+
 		SaveAllStates();
-		ChooseMiniGame();
+		if (playersalive.Count == 1 || GlobalVariables.Instance.TurnCount == 15)
+		{
+			EndGame();
+		}
+		else {
+			await WaitForSeconds(3);
+			ChooseMiniGame();
+		}
 
 	}
 
 	async Task Turn_Player(Player player)
 	{
-		WhatPlayer++;
-		GD.Print(player.Name + " Its your turn!");
-		if (player.SkipTurn == false) // dit checkt of de speler zen beurt moet overslaan
+
+		turnDpadIcon1 = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/slot1/inputBox");
+		turnDpadIcon2 = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/slot2/inputBox");
+		turnDpadIcon3 = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/slot3/inputBox");
+
+		invSprite1 = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/item1");
+		invSprite2 = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/item2");
+		invSprite3 = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/item3");
+
+		invSlot1 = GetNode<Panel>($"Node2D/CanvasLayer/{player.Name}/Playerhud/slot1");
+		invSlot2 = GetNode<Panel>($"Node2D/CanvasLayer/{player.Name}/Playerhud/slot2");
+		invSlot3 = GetNode<Panel>($"Node2D/CanvasLayer/{player.Name}/Playerhud/slot3");
+
+
+
 		{
-			//choose wich dice, hiervoor hebben we de shop mechanic + een shop menu nodig
-
-			string useditem = await ChooseUseItem(player);
-
-			if (useditem != "dice")
+			if (player == player1)
 			{
-				diceRoll = await AwaitButtonPress(player);
-				diceRoll += player.RollAdjustment;
-				await StartMovement(player, diceRoll);
+				WhatPlayer = 1;
+			}
+			else if (player == player2)
+			{
+				WhatPlayer = 2;
+			}
+			else if (player == player3)
+			{
+				WhatPlayer = 3;
+			}
+			else if (player == player4)
+			{
+				WhatPlayer = 4;
 			}
 
-			if (diceRoll != 0)// zorgt ervoor dat als iemand 0  gooit de space niet nog een keer geactivate word, dat willen we niet.
+			GD.Print(player.Name + " Its your turn!");
+
+			turnLabel.Text = $"{player.Name} is aan de beurt, wil je een item gebruiken?";
+			turnLabel.Show();
+			if (player.SkipTurn == false) // dit checkt of de speler zen beurt moet overslaan
 			{
-				player.RollAdjustment = 0; //dit zorgt ervoor dat volgende turn deze geen roll buff of debuff heeft.
-				await Placedetection(spacesInfo[player.PositionSpace].Name, player);
+				//choose wich dice, hiervoor hebben we de shop mechanic + een shop menu nodig
+				string useditem = await ChooseUseItem(player);
+
+
+
+				invSprite1.Scale = new Vector2(0.01f, 0.01f);
+				invSprite2.Scale = new Vector2(0.01f, 0.01f);
+				invSprite3.Scale = new Vector2(0.01f, 0.01f);
+
+				invSlot1.Scale = new Vector2(0.7f, 0.7f);
+				invSlot2.Scale = new Vector2(0.7f, 0.7f);
+				invSlot3.Scale = new Vector2(0.7f, 0.7f);
+
+
+
+
+				if (useditem != "dice")
+				{
+					diceRoll = await AwaitButtonPress(player);
+					diceRoll += player.RollAdjustment;
+					await StartMovement(player, diceRoll);
+				}
+
+				if (diceRoll != 0)// zorgt ervoor dat als iemand 0  gooit de space niet nog een keer geactivate word, dat willen we niet.
+				{
+					player.RollAdjustment = 0; //dit zorgt ervoor dat volgende turn deze geen roll buff of debuff heeft.
+					await Placedetection(spacesInfo[player.PositionSpace].Name, player);
+				}
+
+				Updatehud(player);
+
+				if (player.Health > 0)
+				{
+					GD.Print(player.Name + " staat op " + spacesInfo[player.PositionSpace].Name + player.PositionSpace + " na " + diceRoll + " te hebben gegooid.");
+				}
+				else
+				{
+					player.Hide();
+				}
 			}
 
-			Updatehud(player);
 
-			if (player.Health > 0)
+			if (player.SkipTurn == true)
 			{
-				GD.Print(player.Name + " staat op " + spacesInfo[player.PositionSpace].Name + player.PositionSpace + " na " + diceRoll + " te hebben gegooid.");
+				player.SkipTurn = false;// dit zorgt ervoor dat next turn deze speler wel dingen mag doen
+				GD.Print(player.Name + " Had to skip his turn!");
 			}
-			else
-			{
-				player.Hide();
-			}
+			GD.Print("before timer");
+			await WaitForSeconds(2);
+			GD.Print("after timer");
+			Spacelabel.Text = "";
 		}
-
-
-		if (player.SkipTurn == true)
+		async Task<int> AwaitButtonPress(Player player)
 		{
-			player.SkipTurn = false;// dit zorgt ervoor dat next turn deze speler wel dingen mag doen
-			GD.Print(player.Name + " Had to skip his turn!");
+			waitingforbuttonpress = true;
+			turnLabel.Hide();
+			turnDpadIcon1.Hide();
+			turnDpadIcon2.Hide();
+			turnDpadIcon3.Hide();
+			while (waitingforbuttonpress)
+			{
+
+				if (Input.IsActionJustPressed($"A_{WhatPlayer}"))
+				{
+					diceRoll = basicdice.diceroll();
+					player.Currency -= basicdice.Price;
+					updateDobbelSprite(diceRoll);
+					waitingforbuttonpress = false;
+					return diceRoll;
+				}
+				else if (Input.IsActionJustPressed($"B_{WhatPlayer}"))
+				{
+					diceRoll = betterdice.diceroll();
+					player.Currency -= betterdice.Price;
+					updateDobbelSprite(diceRoll);
+					waitingforbuttonpress = false;
+					return diceRoll;
+
+				}
+				else if (Input.IsActionJustPressed($"X_{WhatPlayer}"))
+				{
+					diceRoll = riskydice.diceroll();
+					player.Currency -= riskydice.Price;
+					updateDobbelSprite(diceRoll);
+					waitingforbuttonpress = false;
+					return diceRoll;
+
+				}
+				else if (Input.IsActionJustPressed($"Y_{WhatPlayer}"))
+				{
+					diceRoll = turbodice.diceroll();
+					player.Currency -= turbodice.Price;
+					updateDobbelSprite(diceRoll);
+					waitingforbuttonpress = false;
+					return diceRoll;
+
+				}
+				else if (Input.IsActionJustPressed("1"))
+				{
+					diceRoll = 1;
+
+					updateDobbelSprite(diceRoll);
+					waitingforbuttonpress = false;
+					return diceRoll;
+				}
+				else if (Input.IsActionJustPressed("2"))
+				{
+					diceRoll = 2;
+
+					updateDobbelSprite(diceRoll);
+					waitingforbuttonpress = false;
+					return diceRoll;
+				}
+				else if (Input.IsActionJustPressed("3"))
+				{
+					diceRoll = 3;
+
+					updateDobbelSprite(diceRoll);
+					waitingforbuttonpress = false;
+					return diceRoll;
+				}
+				else if (Input.IsActionJustPressed("4"))
+				{
+					diceRoll = -1;
+
+					updateDobbelSprite(diceRoll);
+					waitingforbuttonpress = false;
+					return diceRoll;
+				}
+				else if (Input.IsActionJustPressed("5"))
+				{
+					diceRoll = -2;
+
+					updateDobbelSprite(diceRoll);
+					waitingforbuttonpress = false;
+					return diceRoll;
+				}
+				await ToSignal(GetTree().CreateTimer(0), "timeout");
+			}
+			GD.Print("GEEN BUTTON GEPRESSED, ERROR ERROR ERROR");
+			return 0;
 		}
-
-
-	}
-	async Task<int> AwaitButtonPress(Player player)
-	{
-		waitingforbuttonpress = true;
-		while (waitingforbuttonpress)
-		{
-
-			if (Input.IsActionJustPressed($"A_{WhatPlayer}"))
-			{
-				diceRoll = basicdice.diceroll();
-				player.Currency -= basicdice.Price;
-				updateDobbelSprite(diceRoll);
-				waitingforbuttonpress = false;
-				return diceRoll;
-			}
-			else if (Input.IsActionJustPressed($"B_{WhatPlayer}"))
-			{
-				diceRoll = betterdice.diceroll();
-				player.Currency -= betterdice.Price;
-				updateDobbelSprite(diceRoll);
-				waitingforbuttonpress = false;
-				return diceRoll;
-
-			}
-			else if (Input.IsActionJustPressed($"X_{WhatPlayer}"))
-			{
-				diceRoll = riskydice.diceroll();
-				player.Currency -= riskydice.Price;
-				updateDobbelSprite(diceRoll);
-				waitingforbuttonpress = false;
-				return diceRoll;
-
-			}
-			else if (Input.IsActionJustPressed($"Y_{WhatPlayer}"))
-			{
-				diceRoll = turbodice.diceroll();
-				player.Currency -= turbodice.Price;
-				updateDobbelSprite(diceRoll);
-				waitingforbuttonpress = false;
-				return diceRoll;
-
-			}
-			else if (Input.IsActionJustPressed("1"))
-			{
-				diceRoll = 1;
-
-				updateDobbelSprite(diceRoll);
-				waitingforbuttonpress = false;
-				return diceRoll;
-			}
-			else if (Input.IsActionJustPressed("2"))
-			{
-				diceRoll = 2;
-
-				updateDobbelSprite(diceRoll);
-				waitingforbuttonpress = false;
-				return diceRoll;
-			}
-			else if (Input.IsActionJustPressed("3"))
-			{
-				diceRoll = 3;
-
-				updateDobbelSprite(diceRoll);
-				waitingforbuttonpress = false;
-				return diceRoll;
-			}
-			else if (Input.IsActionJustPressed("4"))
-			{
-				diceRoll = -1;
-
-				updateDobbelSprite(diceRoll);
-				waitingforbuttonpress = false;
-				return diceRoll;
-			}
-			else if (Input.IsActionJustPressed("5"))
-			{
-				diceRoll = -2;
-
-				updateDobbelSprite(diceRoll);
-				waitingforbuttonpress = false;
-				return diceRoll;
-			}
-			await ToSignal(GetTree().CreateTimer(0), "timeout");
-		}
-		GD.Print("GEEN BUTTON GEPRESSED, ERROR ERROR ERROR");
-		return 0;
 	}
 	private async void ChooseTurn()
 	{
-		if (GlobalVariables.Instance.playeramount == 4)
-		{
-
-
-
-			await Turn();
-
-		}
-		if (GlobalVariables.Instance.playeramount == 3)
-		{
-
-
-
-			await Turn();
-
-		}
-		if (GlobalVariables.Instance.playeramount == 2)
-		{
-
-
-
-			await Turn();
-
-		}
+		await Turn();
 	}
 
 	//EVENTSPACES
@@ -737,14 +879,14 @@ public partial class Main : Node2D
 	}
 	int Robbery(Player player)
 	{
-		int lostcurrency = rnd.Next(10, 31);
+		lostcurrency = rnd.Next(10, 31);
 		player.Currency -= lostcurrency;
 		player.Health -= 10;
 		return lostcurrency;
 	}
 	int RobSomeone(Player player)
 	{
-		int gainedCurrency = rnd.Next(10, 31);
+		gainedCurrency = rnd.Next(10, 31);
 		player.Currency += gainedCurrency;
 		return gainedCurrency;
 	}
@@ -870,29 +1012,15 @@ public partial class Main : Node2D
 
 	}
 
-	bool CheckWinCondition()
-	{
-		int deadplayer = 0;
-		for (int i = 0; i < playersalive.Count; i++)
-		{
-			if (playersalive[i].Health == 0)
-			{
-				deadplayer += 1;
-			}
-		}
-		if (deadplayer == Playerlist.Length - 1 || GlobalVariables.Instance.TurnCount == 15)
-		{
-			return true;
-		}
-		else return false;
-	}
+
 	void EndGame()
 	{
-
+		GD.Print("in end screen");
+		GlobalVariables.Instance.SwitchToendscreen();
 	}
 
 	async Task ShopAsk(Player player)
-	{
+	{	UpdateSpaceLabel("Shop", player);
 		bool RunLoop = true;
 		if (player.Currency > 0)
 		{
@@ -903,6 +1031,7 @@ public partial class Main : Node2D
 				{
 					GD.Print("Okay, come on in");
 					await GenerateShopInv(player);
+
 					RunLoop = false;
 				}
 				else if (Input.IsActionJustPressed($"no_{WhatPlayer}")) //no i dont want to shop
@@ -939,7 +1068,7 @@ public partial class Main : Node2D
 					ShopInv[i] = (Iteminfo[randomList[i]].Name, Iteminfo[randomList[i]].Price); //pakt 3 random getallen en kiest 3 items.
 					runloop = false;
 				}
-
+				openShop(ShopInv, player);
 				await Shop(ShopInv, player);
 
 			}
@@ -960,23 +1089,32 @@ public partial class Main : Node2D
 				if (Input.IsActionJustPressed($"D-Pad-left_{WhatPlayer}"))
 				{
 					if (player.Currency >= Shopinv[0].Price)
+					{
+						mainShop.Hide();
 						ChosenItem = Shopinv[0].Name;
-					GD.Print("chose item: " + ChosenItem);
-					runLoop2 = false;
+						GD.Print("chose item: " + ChosenItem);
+						runLoop2 = false;
+					}
 				}
 				if (Input.IsActionJustPressed($"D-Pad-up_{WhatPlayer}"))
 				{
 					if (player.Currency >= Shopinv[1].Price)
+					{
+						mainShop.Hide();
 						ChosenItem = Shopinv[1].Name;
-					GD.Print("chose item: " + ChosenItem);
-					runLoop2 = false;
+						GD.Print("chose item: " + ChosenItem);
+						runLoop2 = false;
+					}
 				}
 				if (Input.IsActionJustPressed($"D-Pad-right_{WhatPlayer}"))
 				{
 					if (player.Currency >= Shopinv[2].Price)
+					{
 						ChosenItem = Shopinv[2].Name;
-					GD.Print("chose item: " + ChosenItem);
-					runLoop2 = false;
+						GD.Print("chose item: " + ChosenItem);
+						mainShop.Hide();
+						runLoop2 = false;
+					}
 				}
 				await ToSignal(GetTree().CreateTimer(0), "timeout");
 
@@ -1028,6 +1166,7 @@ public partial class Main : Node2D
 		{
 			if (Input.IsActionJustPressed($"yes_{WhatPlayer}"))
 			{
+				updateInvPos(player);
 				GD.Print("said yes");
 				useditem = await ChooseItem(player);
 
@@ -1048,287 +1187,28 @@ public partial class Main : Node2D
 	{
 		string useditem = "";
 		GD.Print("in Choose item");
+		turnLabel.Text = $"{player.Name} is aan de beurt, Kies een item om te gebruiken?";
 		useItem = true;
 		while (useItem)
 		{
 			if (Input.IsActionJustPressed($"D-Pad-left_{WhatPlayer}"))
 			{
+				turnLabel.Hide();
+				resetInvPos(player);
 				itemId = player.Inventory[0];
 				switch (itemId)
 				{
 					case "0":
 						GD.Print("no item in this slot");
-
 						break;
+
 					case "Whiskey":
+						player.Inventory[0] = "0";
+						updateInvSprite(player);
 						await selectTrapPositon("Whiskey");
-						GD.Print("Used item Beartrap  it has vanished from their inventory.");
+						GD.Print("Used item Whiskey; it has vanished from their inventory.");
 						useditem = "nodice";
-						player.Inventory[0] = "0";
-						return useditem;						
-
-					case "GoldenPipe":
-						bool canuse = false;
-						for (int i = 0; i < spacesAmount; i++)
-						{
-							if (spacesInfo[i].Name == "RazorCap_Space")
-							{
-								canuse = true;
-							}
-						}
-						if (canuse)
-						{
-							GoldenPipe(player);
-							useditem = "nodice";
-							GD.Print("Used item GoldenPipe  it has vanished from their inventory.");
-							player.Inventory[0] = "0";
-							return useditem;
-						}
-						else GD.Print("no razorcapspace");
-						break;
-
-					case "DoubleDice":
-						await DoubleDice(player);
-						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-						useditem = "dice";
-						player.Inventory[0] = "0";
 						return useditem;
-					case "TripleDice":
-						await TripleDice(player);
-						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-						useditem = "dice";
-						player.Inventory[0] = "0";
-						return useditem;
-					case "TwentyDice":
-						await TwentyDice(player);
-						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-						useditem = "dice";
-						player.Inventory[0] = "0";
-						return useditem;
-					case "TenDice":
-						await TenDice(player);
-						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-						useditem = "dice";
-						player.Inventory[0] = "0";
-						return useditem;
-					case "DashMushroom":
-						DashMushroom(player);
-						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-						useditem = "nodice";
-						player.Inventory[0] = "0";
-						return useditem;
-					case "TeleportTorndPlayer":
-						TeleportTorndPlayer(player);
-						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-						useditem = "nodice";
-						player.Inventory[0] = "0";
-						return useditem;
-					case "SwitchPlaces":
-						SwitchPlaces(player);
-						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-						useditem = "nodice";
-						player.Inventory[0] = "0";
-						return useditem;
-					case "StealPlayerCap":
-						bool canuse1 = false;
-						for (int i = 0; i < playersalive.Count; i++)
-						{
-							if (playersalive[i].HasCap)
-							{
-								canuse1 = true;
-							}
-						}
-						if (canuse1)
-						{
-							StealPlayerCap(player);
-							GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-							useditem = "nodice";
-							player.Inventory[0] = "0";
-							return useditem;
-						}
-						else GD.Print("no one has the cap, better luck next time");
-						break;
-					case "BearTrap":
-						await selectTrapPositon("BearTrap");
-						GD.Print("Used item Beartrap  it has vanished from their inventory.");
-						useditem = "nodice";
-						player.Inventory[0] = "0";
-						return useditem;
-					case "PoisonMushroom":
-						PoisonMushroom(player);
-						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-						useditem = "nodice";
-						player.Inventory[0] = "0";
-						return useditem;
-					case "StealCoins":
-						StealCoins(player);
-						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-						useditem = "nodice";
-						player.Inventory[0] = "0";
-						return useditem;
-					case "BrassKnuckles":
-						BrassKnuckles(player);
-						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-						useditem = "nodice";
-						player.Inventory[0] = "0";
-						return useditem;
-
-					case "GoldenKnuckles":
-						GoldenKnuckles(player);
-						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-						useditem = "nodice";
-						player.Inventory[0] = "0";
-						return useditem;
-
-				}
-
-			}
-			if (Input.IsActionJustPressed($"D-Pad-up_{WhatPlayer}"))
-			{
-				itemId = player.Inventory[1];
-				switch (itemId)
-				{
-					case "0":
-						GD.Print("no item in this slot");
-
-						break;
-					case "Whiskey":
-						await selectTrapPositon("Whiskey");
-						GD.Print("Used item Beartrap  it has vanished from their inventory.");
-						useditem = "nodice";
-						player.Inventory[1] = "0";
-						return useditem;	
-
-					case "GoldenPipe":
-						bool canuse = false;
-						for (int i = 0; i < spacesAmount; i++)
-						{
-							if (spacesInfo[i].Name == "RazorCap_Space")
-							{
-								canuse = true;
-							}
-						}
-						if (canuse)
-						{
-							GoldenPipe(player);
-							useditem = "nodice";
-							GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-							player.Inventory[0] = "0";
-							return useditem;
-						}
-						else GD.Print("no razorcapspace");
-						break;
-
-					case "DoubleDice":
-						await DoubleDice(player);
-						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-						useditem = "dice";
-						player.Inventory[1] = "0";
-						return useditem;
-					case "TripleDice":
-						await TripleDice(player);
-						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-						useditem = "dice";
-						player.Inventory[1] = "0";
-						return useditem;
-					case "TwentyDice":
-						await TwentyDice(player);
-						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-						useditem = "dice";
-						player.Inventory[1] = "0";
-						return useditem;
-					case "TenDice":
-						await TenDice(player);
-						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-						useditem = "dice";
-						player.Inventory[1] = "0";
-						return useditem;
-					case "DashMushroom":
-						DashMushroom(player);
-						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-						useditem = "nodice";
-						player.Inventory[1] = "0";
-						return useditem;
-					case "TeleportTorndPlayer":
-						TeleportTorndPlayer(player);
-						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-						useditem = "nodice";
-						player.Inventory[1] = "0";
-						return useditem;
-					case "SwitchPlaces":
-						SwitchPlaces(player);
-						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-						useditem = "nodice";
-						player.Inventory[1] = "0";
-						return useditem;
-					case "StealPlayerCap":
-						bool canuse1 = false;
-						for (int i = 0; i < playersalive.Count; i++)
-						{
-							if (playersalive[i].HasCap)
-							{
-								canuse1 = true;
-							}
-						}
-						if (canuse1)
-						{
-							StealPlayerCap(player);
-							GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-							useditem = "nodice";
-							player.Inventory[0] = "0";
-							return useditem;
-						}
-						else GD.Print("no one has the cap, better luck next time");
-						break;
-					case "PoisonMushroom":
-						PoisonMushroom(player);
-						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-						useditem = "nodice";
-						player.Inventory[1] = "0";
-						return useditem;
-						case "BearTrap":
-						await selectTrapPositon("BearTrap");
-						GD.Print("Used item Beartrap  it has vanished from their inventory.");
-						useditem = "nodice";
-						player.Inventory[1] = "0";
-						return useditem;
-					case "StealCoins":
-						StealCoins(player);
-						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-						useditem = "nodice";
-						player.Inventory[1] = "0";
-						return useditem;
-					case "BrassKnuckles":
-						BrassKnuckles(player);
-						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-						useditem = "nodice";
-						player.Inventory[1] = "0";
-						return useditem;
-
-					case "GoldenKnuckles":
-						GoldenKnuckles(player);
-						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-						useditem = "nodice";
-						player.Inventory[1] = "0";
-						return useditem;
-				}
-
-			}
-			if (Input.IsActionJustPressed($"D-Pad-right_{WhatPlayer}"))
-			{
-				itemId = player.Inventory[2];
-				switch (itemId)
-				{
-					case "0":
-						GD.Print("no item in this slot");
-
-						break;
-					case "Whiskey":
-						await selectTrapPositon("Whiskey");
-						GD.Print("Used item Beartrap  it has vanished from their inventory.");
-						useditem = "nodice";
-						player.Inventory[2] = "0";
-						return useditem;	
 
 					case "GoldenPipe":
 						bool canuse = false;
@@ -1342,56 +1222,384 @@ public partial class Main : Node2D
 						}
 						if (canuse)
 						{
+							player.Inventory[0] = "0";
+							updateInvSprite(player);
 							GoldenPipe(player);
 							useditem = "nodice";
-							GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
-							player.Inventory[0] = "0";
+							GD.Print("Used item " + useditem + "; it has vanished from their inventory.");
 							return useditem;
 						}
 						else GD.Print("no razorcapspace");
 						break;
 
 					case "DoubleDice":
+						player.Inventory[0] = "0";
+						updateInvSprite(player);
+						await DoubleDice(player);
+						GD.Print("Used item " + useditem + "; it has vanished from their inventory.");
+						useditem = "dice";
+						return useditem;
+
+					case "TripleDice":
+						player.Inventory[0] = "0";
+						updateInvSprite(player);
+						await TripleDice(player);
+						GD.Print("Used item " + useditem + "; it has vanished from their inventory.");
+						useditem = "dice";
+						return useditem;
+
+					case "TwentyDice":
+						player.Inventory[0] = "0";
+						updateInvSprite(player);
+						await TwentyDice(player);
+						GD.Print("Used item " + useditem + "; it has vanished from their inventory.");
+						useditem = "dice";
+						return useditem;
+
+					case "TenDice":
+						player.Inventory[0] = "0";
+						updateInvSprite(player);
+						await TenDice(player);
+						GD.Print("Used item " + useditem + "; it has vanished from their inventory.");
+						useditem = "dice";
+						return useditem;
+
+					case "DashMushroom":
+						player.Inventory[0] = "0";
+						updateInvSprite(player);
+						DashMushroom(player);
+						GD.Print("Used item " + useditem + "; it has vanished from their inventory.");
+						useditem = "nodice";
+						return useditem;
+
+					case "TeleportTorndPlayer":
+						player.Inventory[0] = "0";
+						updateInvSprite(player);
+						TeleportTorndPlayer(player);
+						GD.Print("Used item " + useditem + "; it has vanished from their inventory.");
+						useditem = "nodice";
+						return useditem;
+
+					case "SwitchPlaces":
+						player.Inventory[0] = "0";
+						updateInvSprite(player);
+						SwitchPlaces(player);
+						GD.Print("Used item " + useditem + "; it has vanished from their inventory.");
+						useditem = "nodice";
+						return useditem;
+
+					case "StealPlayerCap":
+						bool canuse1 = false;
+						for (int i = 0; i < playersalive.Count; i++)
+						{
+							if (playersalive[i].HasCap)
+							{
+								canuse1 = true;
+							}
+						}
+						if (canuse1)
+						{
+							player.Inventory[0] = "0";
+							updateInvSprite(player);
+							StealPlayerCap(player);
+							GD.Print("Used item " + useditem + "; it has vanished from their inventory.");
+							useditem = "nodice";
+							return useditem;
+						}
+						else GD.Print("no one has the cap, better luck next time");
+						break;
+
+					case "PoisonMushroom":
+						player.Inventory[0] = "0";
+						updateInvSprite(player);
+						PoisonMushroom(player);
+						GD.Print("Used item " + useditem + "; it has vanished from their inventory.");
+						useditem = "nodice";
+						return useditem;
+
+					case "BearTrap":
+						player.Inventory[0] = "0";
+						updateInvSprite(player);
+						await selectTrapPositon("BearTrap");
+						GD.Print("Used item Beartrap; it has vanished from their inventory.");
+						useditem = "nodice";
+						return useditem;
+
+					case "StealCoins":
+						player.Inventory[0] = "0";
+						updateInvSprite(player);
+						StealCoins(player);
+						GD.Print("Used item " + useditem + "; it has vanished from their inventory.");
+						useditem = "nodice";
+						return useditem;
+
+					case "BrassKnuckles":
+						player.Inventory[0] = "0";
+						updateInvSprite(player);
+						BrassKnuckles(player);
+						GD.Print("Used item " + useditem + "; it has vanished from their inventory.");
+						useditem = "nodice";
+						return useditem;
+
+					case "GoldenKnuckles":
+						player.Inventory[0] = "0";
+						updateInvSprite(player);
+						GoldenKnuckles(player);
+						GD.Print("Used item " + useditem + "; it has vanished from their inventory.");
+						useditem = "nodice";
+						return useditem;
+				}
+				updateInvSprite(player);
+			}
+			if (Input.IsActionJustPressed($"D-Pad-up_{WhatPlayer}"))
+			{
+				turnLabel.Hide();
+				resetInvPos(player);
+				itemId = player.Inventory[1];
+				switch (itemId)
+				{
+					case "0":
+						GD.Print("no item in this slot");
+						break;
+
+					case "Whiskey":
+						player.Inventory[1] = "0";
+						updateInvSprite(player);
+						await selectTrapPositon("Whiskey");
+						GD.Print("Used item Whiskey; it has vanished from their inventory.");
+						useditem = "nodice";
+						return useditem;
+
+					case "GoldenPipe":
+						bool canuse = false;
+						for (int i = 0; i < spacesAmount; i++)
+						{
+							GD.Print("checking for razorcapspace" + i);
+							if (spacesInfo[i].Name == "RazorCap_Space")
+							{
+								canuse = true;
+							}
+						}
+						if (canuse)
+						{
+							player.Inventory[1] = "0";
+							updateInvSprite(player);
+							GoldenPipe(player);
+							useditem = "nodice";
+							GD.Print("Used item " + useditem + "; it has vanished from their inventory.");
+							return useditem;
+						}
+						else GD.Print("no razorcapspace");
+						break;
+
+					case "DoubleDice":
+						player.Inventory[1] = "0";
+						updateInvSprite(player);
+						await DoubleDice(player);
+						GD.Print("Used item " + useditem + "; it has vanished from their inventory.");
+						useditem = "dice";
+						return useditem;
+
+					case "TripleDice":
+						player.Inventory[1] = "0";
+						updateInvSprite(player);
+						await TripleDice(player);
+						GD.Print("Used item " + useditem + "; it has vanished from their inventory.");
+						useditem = "dice";
+						return useditem;
+
+					case "TwentyDice":
+						player.Inventory[1] = "0";
+						updateInvSprite(player);
+						await TwentyDice(player);
+						GD.Print("Used item " + useditem + "; it has vanished from their inventory.");
+						useditem = "dice";
+						return useditem;
+
+					case "TenDice":
+						player.Inventory[1] = "0";
+						updateInvSprite(player);
+						await TenDice(player);
+						GD.Print("Used item " + useditem + "; it has vanished from their inventory.");
+						useditem = "dice";
+						return useditem;
+
+					case "DashMushroom":
+						player.Inventory[1] = "0";
+						updateInvSprite(player);
+						DashMushroom(player);
+						GD.Print("Used item " + useditem + "; it has vanished from their inventory.");
+						useditem = "nodice";
+						return useditem;
+
+					case "TeleportTorndPlayer":
+						player.Inventory[1] = "0";
+						updateInvSprite(player);
+						TeleportTorndPlayer(player);
+						GD.Print("Used item " + useditem + "; it has vanished from their inventory.");
+						useditem = "nodice";
+						return useditem;
+
+					case "SwitchPlaces":
+						player.Inventory[1] = "0";
+						updateInvSprite(player);
+						SwitchPlaces(player);
+						GD.Print("Used item " + useditem + "; it has vanished from their inventory.");
+						useditem = "nodice";
+						return useditem;
+
+					case "StealPlayerCap":
+						bool canuse1 = false;
+						for (int i = 0; i < playersalive.Count; i++)
+						{
+							if (playersalive[i].HasCap)
+							{
+								canuse1 = true;
+							}
+						}
+						if (canuse1)
+						{
+							player.Inventory[1] = "0";
+							updateInvSprite(player);
+							StealPlayerCap(player);
+							GD.Print("Used item " + useditem + "; it has vanished from their inventory.");
+							useditem = "nodice";
+							return useditem;
+						}
+						else GD.Print("no one has the cap, better luck next time");
+						break;
+
+					case "PoisonMushroom":
+						player.Inventory[1] = "0";
+						updateInvSprite(player);
+						PoisonMushroom(player);
+						GD.Print("Used item " + useditem + "; it has vanished from their inventory.");
+						useditem = "nodice";
+						return useditem;
+
+					case "BearTrap":
+						player.Inventory[1] = "0";
+						updateInvSprite(player);
+						await selectTrapPositon("BearTrap");
+						GD.Print("Used item Beartrap; it has vanished from their inventory.");
+						useditem = "nodice";
+						return useditem;
+
+					case "StealCoins":
+						player.Inventory[1] = "0";
+						updateInvSprite(player);
+						StealCoins(player);
+						GD.Print("Used item " + useditem + "; it has vanished from their inventory.");
+						useditem = "nodice";
+						return useditem;
+
+					case "BrassKnuckles":
+						player.Inventory[1] = "0";
+						updateInvSprite(player);
+						BrassKnuckles(player);
+						GD.Print("Used item " + useditem + "; it has vanished from their inventory.");
+						useditem = "nodice";
+						return useditem;
+
+					case "GoldenKnuckles":
+						player.Inventory[1] = "0";
+						updateInvSprite(player);
+						GoldenKnuckles(player);
+						GD.Print("Used item " + useditem + "; it has vanished from their inventory.");
+						useditem = "nodice";
+						return useditem;
+				}
+				updateInvSprite(player);
+			}
+			if (Input.IsActionJustPressed($"D-Pad-right_{WhatPlayer}"))
+			{
+				turnLabel.Hide();
+				resetInvPos(player);
+				itemId = player.Inventory[2];
+				switch (itemId)
+				{
+					case "0":
+						GD.Print("no item in this slot");
+
+						break;
+					case "Whiskey":
+						player.Inventory[2] = "0";
+						updateInvSprite(player);
+						await selectTrapPositon("Whiskey");
+						GD.Print("Used item Whiskey  it has vanished from their inventory.");
+						useditem = "nodice";
+						return useditem;
+
+					case "GoldenPipe":
+						bool canuse = false;
+						for (int i = 0; i < spacesAmount; i++)
+						{
+							GD.Print("checking for razorcapspace" + i);
+							if (spacesInfo[i].Name == "RazorCap_Space")
+							{
+								canuse = true;
+							}
+						}
+						if (canuse)
+						{
+							player.Inventory[2] = "0";
+							updateInvSprite(player);
+							GoldenPipe(player);
+							useditem = "nodice";
+							GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
+							return useditem;
+						}
+						else GD.Print("no razorcapspace");
+						break;
+
+					case "DoubleDice":
+						player.Inventory[2] = "0";
+						updateInvSprite(player);
 						await DoubleDice(player);
 						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
 						useditem = "dice";
-						player.Inventory[2] = "0";
 						return useditem;
 					case "TripleDice":
+						player.Inventory[2] = "0";
+						updateInvSprite(player);
 						await TripleDice(player);
 						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
 						useditem = "dice";
-						player.Inventory[2] = "0";
 						return useditem;
 					case "TwentyDice":
+						player.Inventory[2] = "0";
+						updateInvSprite(player);
 						await TwentyDice(player);
 						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
 						useditem = "dice";
-						player.Inventory[2] = "0";
 						return useditem;
 					case "TenDice":
+						player.Inventory[2] = "0";
+						updateInvSprite(player);
 						await TenDice(player);
 						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
 						useditem = "dice";
-						player.Inventory[2] = "0";
 						return useditem;
 					case "DashMushroom":
+						player.Inventory[2] = "0";
+						updateInvSprite(player);
 						DashMushroom(player);
 						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
 						useditem = "nodice";
-						player.Inventory[2] = "0";
 						return useditem;
 					case "TeleportTorndPlayer":
+						player.Inventory[2] = "0";
+						updateInvSprite(player);
 						TeleportTorndPlayer(player);
 						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
 						useditem = "nodice";
-						player.Inventory[2] = "0";
 						return useditem;
 					case "SwitchPlaces":
+						player.Inventory[2] = "0";
+						updateInvSprite(player);
 						SwitchPlaces(player);
 						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
 						useditem = "nodice";
-						player.Inventory[2] = "0";
 						return useditem;
 					case "StealPlayerCap":
 						bool canuse1 = false;
@@ -1404,50 +1612,58 @@ public partial class Main : Node2D
 						}
 						if (canuse1)
 						{
+							player.Inventory[2] = "0";
+							updateInvSprite(player);
 							StealPlayerCap(player);
 							GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
 							useditem = "nodice";
-							player.Inventory[0] = "0";
 							return useditem;
 						}
 						else GD.Print("no one has the cap, better luck next time");
 						break;
 					case "PoisonMushroom":
+						player.Inventory[2] = "0";
+						updateInvSprite(player);
 						PoisonMushroom(player);
 						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
 						useditem = "nodice";
-						player.Inventory[2] = "0";
 						return useditem;
-						case "BearTrap":
+					case "BearTrap":
+						player.Inventory[2] = "0";
+						updateInvSprite(player);
 						await selectTrapPositon("BearTrap");
 						GD.Print("Used item Beartrap  it has vanished from their inventory.");
 						useditem = "nodice";
-						player.Inventory[2] = "0";
 						return useditem;
 					case "StealCoins":
+						player.Inventory[2] = "0";
+						updateInvSprite(player);
 						StealCoins(player);
 						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
 						useditem = "nodice";
-						player.Inventory[2] = "0";
 						return useditem;
 					case "BrassKnuckles":
+						player.Inventory[2] = "0";
+						updateInvSprite(player);
 						BrassKnuckles(player);
 						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
 						useditem = "nodice";
-						player.Inventory[2] = "0";
 						return useditem;
 
 					case "GoldenKnuckles":
+						player.Inventory[2] = "0";
+						updateInvSprite(player);
 						GoldenKnuckles(player);
 						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
 						useditem = "nodice";
-						player.Inventory[2] = "0";
 						return useditem;
 				}
-
 			}
 			if (Input.IsActionJustPressed($"D-Pad-down_{WhatPlayer}"))
 			{
+				turnLabel.Text = $"{player.Name} is aan de beurt, wil je een item gebruiken?";
+				resetInvPos(player);
+				updateInvSprite(player);
 				useItem = false;
 
 			}
@@ -1466,7 +1682,7 @@ public partial class Main : Node2D
 		Updatehud(player);
 	}
 	void Beartrap(Player player) // dit is de space
-	{
+	{	UpdateSpaceLabel("BearTrap", player);
 		GD.Print("you stepped into a beartrap, you take damage and next turn cant walk well");
 		player.Health -= 40;
 		player.RollAdjustment += -5;
@@ -1663,11 +1879,12 @@ public partial class Main : Node2D
 			buttonplus1.Pressed += () => WhiskeyAmount(1);
 			buttonplus2.Pressed += () => WhiskeyAmount(2);
 		}
-		else if(itemused == "BearTrap"){
-		buttonmin1.Pressed += () => beartrapamount(-1);
-		buttonmin2.Pressed += () => beartrapamount(-2);
-		buttonplus1.Pressed += () => beartrapamount(1);
-		buttonplus2.Pressed += () => beartrapamount(2);
+		else if (itemused == "BearTrap")
+		{
+			buttonmin1.Pressed += () => beartrapamount(-1);
+			buttonmin2.Pressed += () => beartrapamount(-2);
+			buttonplus1.Pressed += () => beartrapamount(1);
+			buttonplus2.Pressed += () => beartrapamount(2);
 		}
 		buttonmin1.Position = new Vector2(501, 318);
 		buttonmin2.Position = new Vector2(471, 318);
@@ -1787,38 +2004,627 @@ public partial class Main : Node2D
 
 	}
 	//andere ui
-    void Updatehud(Player player)
+	void Updatehud(Player player)
 	{
+
 		TextureRect icon = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/");
-		
-        Label currency = GetNode<Label>($"Node2D/CanvasLayer/{player.Name}/Playerhud/Currency{player.Name}");
-        Label health = GetNode<Label>($"Node2D/CanvasLayer/{player.Name}/Playerhud/Health{player.Name}");
-        currency.Text = player.Currency.ToString();
-        health.Text = player.Health.ToString();
+
+		invSprite1 = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/item1");
+		invSprite2 = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/item2");
+		invSprite3 = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/item3");
+
+		Label currency = GetNode<Label>($"Node2D/CanvasLayer/{player.Name}/Playerhud/Currency{player.Name}");
+		Label health = GetNode<Label>($"Node2D/CanvasLayer/{player.Name}/Playerhud/Health{player.Name}");
+		Label rolladjustLabel = GetNode<Label>($"Node2D/CanvasLayer/{player.Name}/Playerhud/rolladjust/Label");
+
+		currency.Text = player.Currency.ToString();
+		health.Text = player.Health.ToString();
 		GD.Print(player.Name);
 		GetNode<Node2D>($"Node2D/CanvasLayer/{player.Name}").Show();
 
+		Control cap = GetNode<Control>($"Node2D/CanvasLayer/{player.Name}/Playerhud/razorCap");
 
-		
-		if (player.Health == 0) {
+		Control brassknuckles = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/knuckles/brass");
+
+		Control goldenknuckles = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/knuckles/golden");
+
+		//update alive sprite	
+		if (player.Health == 0)
+		{
 			icon.Texture = GD.Load<Texture2D>($"res://assets/hud/{player.Name}Dead.png");
 		}
 
+		if (player.HasCap == true)
+		{
+			cap.Show();
+		}
+		else
+		{
+			cap.Hide();
+		}
+
+		if (player.HasKnuckles == true)
+		{
+			brassknuckles.Show();
+		}
+		else
+		{
+			brassknuckles.Hide();
+		}
+
+		if (player.HasGoldenKnuckles == true)
+		{
+			goldenknuckles.Show();
+		}
+		else
+		{
+			goldenknuckles.Hide();
+		}
+
+		if (player.RollAdjustment == 0)
+		{
+			rolladjustLabel.Hide();
+		}
+		else if (player.RollAdjustment > 0)
+		{
+			rolladjustLabel.Text = "+" + player.RollAdjustment.ToString();
+		}
+		else if (player.RollAdjustment < 0)
+		{
+			rolladjustLabel.Text = player.RollAdjustment.ToString();
+		}
+
+		for (int i = 0; i < 4; i++)
+		{
+
+		}
+
+
+		updateInvSprite(player);
+	}
+	public void updateInvPos(Player player)
+	{
+		GD.Print("run updateInvPos");
+
+
+		dpadIcon1 = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/slot1/inputBox");
+		dpadIcon2 = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/slot2/inputBox");
+		dpadIcon3 = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/slot3/inputBox");
+
+
+		Label label = GetNode<Label>($"Node2D/CanvasLayer/Label");
+
+		invSprite1 = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/item1");
+		invSprite2 = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/item2");
+		invSprite3 = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/item3");
+
+		invSlot1 = GetNode<Panel>($"Node2D/CanvasLayer/{player.Name}/Playerhud/slot1");
+		invSlot2 = GetNode<Panel>($"Node2D/CanvasLayer/{player.Name}/Playerhud/slot2");
+		invSlot3 = GetNode<Panel>($"Node2D/CanvasLayer/{player.Name}/Playerhud/slot3");
+
+
+		TextureRect Sprite1NewPos = GetNode<TextureRect>($"Node2D/CanvasLayer/item1PosItem");
+		TextureRect Sprite2NewPos = GetNode<TextureRect>($"Node2D/CanvasLayer/item2PosItem");
+		TextureRect Sprite3NewPos = GetNode<TextureRect>($"Node2D/CanvasLayer/item3PosItem");
+
+
+
+
+
+
+		label.Show();
+
+		dpadIcon1.Show();
+		dpadIcon2.Show();
+		dpadIcon3.Show();
+
+
+
+
+		invSprite1.Scale = new Vector2(0.03f, 0.03f);
+		invSprite2.Scale = new Vector2(0.03f, 0.03f);
+		invSprite3.Scale = new Vector2(0.03f, 0.03f);
+
+		invSlot1.Scale = new Vector2(2.1f, 2.1f);
+		invSlot2.Scale = new Vector2(2.1f, 2.1f);
+		invSlot3.Scale = new Vector2(2.1f, 2.1f);
+
+		invSprite1.GlobalPosition = new Vector2(Sprite1NewPos.GlobalPosition.X, Sprite1NewPos.GlobalPosition.Y);
+		invSprite2.GlobalPosition = new Vector2(Sprite2NewPos.GlobalPosition.X, Sprite2NewPos.GlobalPosition.Y);
+		invSprite3.GlobalPosition = new Vector2(Sprite3NewPos.GlobalPosition.X, Sprite3NewPos.GlobalPosition.Y);
+
+		invSlot1.Position = new Vector2(invSprite1.Position.X - 4, invSprite1.Position.Y - 4);
+		invSlot2.Position = new Vector2(invSprite2.Position.X - 4, invSprite2.Position.Y - 4);
+		invSlot3.Position = new Vector2(invSprite3.Position.X - 4, invSprite3.Position.Y - 4);
+
+	}
+	void resetInvPos(Player player)
+	{
+		invSprite1 = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/item1");
+		invSprite2 = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/item2");
+		invSprite3 = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/item3");
+
+		invSlot1 = GetNode<Panel>($"Node2D/CanvasLayer/{player.Name}/Playerhud/slot1");
+		invSlot2 = GetNode<Panel>($"Node2D/CanvasLayer/{player.Name}/Playerhud/slot2");
+		invSlot3 = GetNode<Panel>($"Node2D/CanvasLayer/{player.Name}/Playerhud/slot3");
+
+		TextureRect Sprite1NewPos = GetNode<TextureRect>($"Node2D/CanvasLayer/item1PosItem");
+		TextureRect Sprite2NewPos = GetNode<TextureRect>($"Node2D/CanvasLayer/item2PosItem");
+		TextureRect Sprite3NewPos = GetNode<TextureRect>($"Node2D/CanvasLayer/item3PosItem");
+
+
+
+
+
+
+		if (player == player1)
+		{
+			invSprite1.Position = invSprite1Play1Pos;
+			invSprite2.Position = invSprite2Play1Pos;
+			invSprite3.Position = invSprite3Play1Pos;
+
+			invSlot1.Position = invSprite1Play1Pos;
+			invSlot2.Position = invSprite2Play1Pos;
+			invSlot3.Position = invSprite3Play1Pos;
+		}
+		else if (player == player2)
+		{
+			invSprite1.Position = invSprite1Play2Pos;
+			invSprite2.Position = invSprite2Play2Pos;
+			invSprite3.Position = invSprite3Play2Pos;
+
+			invSlot1.Position = invSprite1Play2Pos;
+			invSlot2.Position = invSprite2Play2Pos;
+			invSlot3.Position = invSprite3Play2Pos;
+		}
+		else if (player == player3)
+		{
+			invSprite1.Position = invSprite1Play3Pos;
+			invSprite2.Position = invSprite2Play3Pos;
+			invSprite3.Position = invSprite3Play3Pos;
+
+			invSlot1.Position = invSprite1Play3Pos;
+			invSlot2.Position = invSprite2Play3Pos;
+			invSlot3.Position = invSprite3Play3Pos;
+		}
+		else if (player == player4)
+		{
+			invSprite1.Position = invSprite1Play4Pos;
+			invSprite2.Position = invSprite2Play4Pos;
+			invSprite3.Position = invSprite3Play4Pos;
+
+			invSlot1.Position = invSprite1Play4Pos;
+			invSlot2.Position = invSprite2Play4Pos;
+			invSlot3.Position = invSprite3Play4Pos;
+		}
+
+		invSprite1.Scale = new Vector2(0.01f, 0.01f);
+		invSprite2.Scale = new Vector2(0.01f, 0.01f);
+		invSprite3.Scale = new Vector2(0.01f, 0.01f);
+
+		invSlot1.Scale = new Vector2(0.7f, 0.7f);
+		invSlot2.Scale = new Vector2(0.7f, 0.7f);
+		invSlot3.Scale = new Vector2(0.7f, 0.7f);
+
+		dpadIcon1.Hide();
+		dpadIcon2.Hide();
+		dpadIcon3.Hide();
+
+
+	}
+
+	//inventory
+	// ("Whiskey", 20), ("GoldenPipe", 20), ("DoubleDice", 10), ("TripleDice", 13), ("TwentyDice", 20), ("TenDice", 8), 
+	// ("DashMushroom", 5), ("TeleportTorndPlayer", 15), ("SwitchPlaces", 15), ("StealPlayerCap", 40), 
+	// ("PoisonMushroom", 5), ("StealCoins", 30), ("BrassKnuckles", 20), ("GoldenKnuckles", 50), 
+	// ("BearTrap", 40) };
+
+	void updateInvSprite(Player player)
+	{
+		switch (player.Inventory[0])
+		{
+			case "0":
+
+				GD.Print("no item in slot 1");
+				invSprite1.Texture = GD.Load<Texture2D>($"res://assets/items/empty.png");
+				break;
+
+			case "Whiskey":
+				invSprite1.Texture = GD.Load<Texture2D>($"res://assets/items/Wiskey.png");
+				break;
+
+			case "GoldenPipe":
+				invSprite1.Texture = GD.Load<Texture2D>($"res://assets/items/GoldenPipe.png");
+				break;
+
+			case "DoubleDice":
+				invSprite1.Texture = GD.Load<Texture2D>($"res://assets/items/DoubleDice.png");
+				break;
+
+			case "TripleDice":
+				invSprite1.Texture = GD.Load<Texture2D>($"res://assets/items/TripleDice.png");
+				break;
+
+			case "TwentyDice":
+				invSprite1.Texture = GD.Load<Texture2D>($"res://assets/items/TwentyDice.png");
+				break;
+			case "TenDice":
+				invSprite1.Texture = GD.Load<Texture2D>($"res://assets/items/TenDice.png");
+				break;
+
+			case "DashMushroom":
+				invSprite1.Texture = GD.Load<Texture2D>($"res://assets/items/DashMushroom.png");
+				break;
+
+			case "TeleportTorndPlayer":
+				invSprite1.Texture = GD.Load<Texture2D>($"res://assets/items/TeleportTorndPlayer.png");
+				break;
+
+			case "SwitchPlaces":
+				invSprite1.Texture = GD.Load<Texture2D>($"res://assets/items/SwitchPlaces.png");
+				break;
+
+			case "StealPlayerCap":
+				invSprite1.Texture = GD.Load<Texture2D>($"res://assets/items/StealPlayerCap.png");
+				break;
+
+			case "PoisonMushroom":
+				invSprite1.Texture = GD.Load<Texture2D>($"res://assets/items/PoisonMushroom.png");
+				break;
+
+			case "StealCoins":
+				invSprite1.Texture = GD.Load<Texture2D>($"res://assets/items/StealCoins.png");
+				break;
+
+			case "BrassKnuckles":
+				invSprite1.Texture = GD.Load<Texture2D>($"res://assets/items/BrassKnuckles.png");
+				break;
+
+			case "GoldenKnuckles":
+				invSprite1.Texture = GD.Load<Texture2D>($"res://assets/items/GoldenKnuckles.png");
+				break;
+
+			case "BearTrap":
+				invSprite1.Texture = GD.Load<Texture2D>($"res://assets/items/Beartrap.png");
+				break;
+
+
+		}
+
+		switch (player.Inventory[1])
+		{
+			case "0":
+
+				GD.Print("no item in slot 1");
+				invSprite2.Texture = GD.Load<Texture2D>($"res://assets/items/empty.png");
+				break;
+
+			case "Whiskey":
+				invSprite2.Texture = GD.Load<Texture2D>($"res://assets/items/Wiskey.png");
+				break;
+
+			case "GoldenPipe":
+				invSprite2.Texture = GD.Load<Texture2D>($"res://assets/items/GoldenPipe.png");
+				break;
+
+			case "DoubleDice":
+				invSprite2.Texture = GD.Load<Texture2D>($"res://assets/items/DoubleDice.png");
+				break;
+
+			case "TripleDice":
+				invSprite2.Texture = GD.Load<Texture2D>($"res://assets/items/TripleDice.png");
+				break;
+
+			case "TwentyDice":
+				invSprite2.Texture = GD.Load<Texture2D>($"res://assets/items/TwentyDice.png");
+				break;
+			case "TenDice":
+				invSprite2.Texture = GD.Load<Texture2D>($"res://assets/items/TenDice.png");
+				break;
+
+			case "DashMushroom":
+				invSprite2.Texture = GD.Load<Texture2D>($"res://assets/items/DashMushroom.png");
+				break;
+
+			case "TeleportTorndPlayer":
+				invSprite2.Texture = GD.Load<Texture2D>($"res://assets/items/TeleportTorndPlayer.png");
+				break;
+
+			case "SwitchPlaces":
+				invSprite2.Texture = GD.Load<Texture2D>($"res://assets/items/SwitchPlaces.png");
+				break;
+
+			case "StealPlayerCap":
+				invSprite2.Texture = GD.Load<Texture2D>($"res://assets/items/StealPlayerCap.png");
+				break;
+
+			case "PoisonMushroom":
+				invSprite2.Texture = GD.Load<Texture2D>($"res://assets/items/PoisonMushroom.png");
+				break;
+
+			case "StealCoins":
+				invSprite2.Texture = GD.Load<Texture2D>($"res://assets/items/StealCoins.png");
+				break;
+
+			case "BrassKnuckles":
+				invSprite2.Texture = GD.Load<Texture2D>($"res://assets/items/BrassKnuckles.png");
+				break;
+
+			case "GoldenKnuckles":
+				invSprite2.Texture = GD.Load<Texture2D>($"res://assets/items/GoldenKnuckles.png");
+				break;
+
+			case "BearTrap":
+				invSprite2.Texture = GD.Load<Texture2D>($"res://assets/items/Beartrap.png");
+				break;
+
+
+		}
+
+		switch (player.Inventory[2])
+		{
+			case "0":
+
+				GD.Print("no item in slot 1");
+				invSprite3.Texture = GD.Load<Texture2D>($"res://assets/items/empty.png");
+				break;
+
+			case "Whiskey":
+				invSprite3.Texture = GD.Load<Texture2D>($"res://assets/items/Wiskey.png");
+				break;
+
+			case "GoldenPipe":
+				invSprite3.Texture = GD.Load<Texture2D>($"res://assets/items/GoldenPipe.png");
+				break;
+
+			case "DoubleDice":
+				invSprite3.Texture = GD.Load<Texture2D>($"res://assets/items/DoubleDice.png");
+				break;
+
+			case "TripleDice":
+				invSprite3.Texture = GD.Load<Texture2D>($"res://assets/items/TripleDice.png");
+				break;
+
+			case "TwentyDice":
+				invSprite3.Texture = GD.Load<Texture2D>($"res://assets/items/TwentyDice.png");
+				break;
+			case "TenDice":
+				invSprite3.Texture = GD.Load<Texture2D>($"res://assets/items/TenDice.png");
+				break;
+
+			case "DashMushroom":
+				invSprite3.Texture = GD.Load<Texture2D>($"res://assets/items/DashMushroom.png");
+				break;
+
+			case "TeleportTorndPlayer":
+				invSprite3.Texture = GD.Load<Texture2D>($"res://assets/items/TeleportTorndPlayer.png");
+				break;
+
+			case "SwitchPlaces":
+				invSprite3.Texture = GD.Load<Texture2D>($"res://assets/items/SwitchPlaces.png");
+				break;
+
+			case "StealPlayerCap":
+				invSprite3.Texture = GD.Load<Texture2D>($"res://assets/items/StealPlayerCap.png");
+				break;
+
+			case "PoisonMushroom":
+				invSprite3.Texture = GD.Load<Texture2D>($"res://assets/items/PoisonMushroom.png");
+				break;
+
+			case "StealCoins":
+				invSprite3.Texture = GD.Load<Texture2D>($"res://assets/items/StealCoins.png");
+				break;
+
+			case "BrassKnuckles":
+				invSprite3.Texture = GD.Load<Texture2D>($"res://assets/items/BrassKnuckles.png");
+				break;
+
+			case "GoldenKnuckles":
+				invSprite3.Texture = GD.Load<Texture2D>($"res://assets/items/GoldenKnuckles.png");
+				break;
+
+			case "BearTrap":
+				invSprite3.Texture = GD.Load<Texture2D>($"res://assets/items/Beartrap.png");
+				break;
+
+
+		}
+
+	}
+
+	void UpdateSpaceLabel(string whatspace, Player player)
+	{	GD.Print("in updatelabel");
+		if (whatspace == "blueSpace")
+		{
+			Spacelabel.Text ="Je staat op een blauw vakje. je krijgt 15 pond.";
+
+		}
+		else if (whatspace == "redSpace")
+		{
+			Spacelabel.Text = "Je staat op een rood vakje, je verliest 15 pond.";
+		}
+		else if (whatspace == "TopLeftShortcut")
+		{
+			Spacelabel.Text = "Je staat bij een roeiboot. je gebruikt de boot om op de rivier te varen ";
+		}
+		else if (whatspace == "TopRightShortcut")
+		{
+			Spacelabel.Text = "Je staat bij op het station. je stapt op de trein";
+		}
+		else if (whatspace == "BotLeftShortcut")
+		{
+			Spacelabel.Text = "Je staat bij een roeiboot. je gebruikt de boot om op de rivier te varen ";
+		}
+		else if (whatspace == "BotRightShortcut")
+		{
+			Spacelabel.Text = "Je staat bij op het station. je stapt op de trein";
+		}
+		else if (whatspace == "getRobbedSpace")
+		{
+			Spacelabel.Text = "je bent beroofd! je verliest " + lostcurrency + " en ze doen 10 damage!";
+		}
+		else if (whatspace == "knockoutSpace")
+		{
+			Spacelabel.Text = "je word bewusteloos geslagen! je moet je volgende beurt overslaan.";
+		}
+		else if (whatspace == "robSpace")
+		{
+			Spacelabel.Text = "je ziet een doelwit en overvalt hem, je steelt " + gainedCurrency + " pond!";
+		}
+		else if (whatspace == "Whiskey_Space")
+		{
+			Spacelabel.Text = "je ziet een fles whiskey staan en drinkt hem helemaal op! daarna ga je de kroeg in en besteed je een substantieel bedrag. je slaat volgende beurt over om je kater weg te werken.";
+
+		}
+		else if(whatspace == "RazorCappurchase"){
+			Spacelabel.Text = "je hebt de optie om een razorcap te kopen voor 50 pond. kies linker bumper voor ja en rechterbumper voor nee."; 
+		}
+		else if(whatspace == "Shop"){
+			Spacelabel.Text = "je staat bij de shop, wil je naar binnen?";
+		}
+		else if(whatspace == "BearTrap"){
+			Spacelabel.Text = "Je staat in een berenval en verliest 40 health, ook loop je volgende beurt mank.";
+		}
+	}
+	 private async Task WaitForSeconds(float seconds)
+    {
+        await ToSignal(GetTree().CreateTimer(seconds), "timeout");
     }
 
+	void openMainShop((string Name, int Price)[] shopItems, Player player)
+	{
+		textShop.Hide();
+		mainShop.Show();
+		string[] textureRectPaths = {
+		"CanvasLayersshop/TextureRectRounded/Slot1Rect/itemTex",
+		"CanvasLayersshop/TextureRectRounded/Slot2Rect/itemTex",
+		"CanvasLayersshop/TextureRectRounded/Slot3Rect/itemTex"
+		};
+
+		string[] titleLabelsPaths = {
+		"CanvasLayersshop/TextureRectRounded/Slot1Rect/title",
+		"CanvasLayersshop/TextureRectRounded/Slot2Rect/title",
+		"CanvasLayersshop/TextureRectRounded/Slot3Rect/title"
+		};
+
+		string[] descriptionLabelsPaths = {
+		"CanvasLayersshop/TextureRectRounded/Slot1Rect/description",
+		"CanvasLayersshop/TextureRectRounded/Slot2Rect/description",
+		"CanvasLayersshop/TextureRectRounded/Slot3Rect/description"
+		};
+
+		string[] priceLabelsPaths = {
+		"CanvasLayersshop/TextureRectRounded/Slot1Rect/itemTex/priceLabel",
+		"CanvasLayersshop/TextureRectRounded/Slot2Rect/itemTex/priceLabel",
+		"CanvasLayersshop/TextureRectRounded/Slot3Rect/itemTex/priceLabel"
+		};
+
+		for (int i = 0; i < shopItems.Length; i++)
+		{
+
+			var currentItem = shopItems[i];
+			TextureRect itemTex = GetNode<TextureRect>(textureRectPaths[i]);
+			Label titleLabel = GetNode<Label>(titleLabelsPaths[i]);
+			Label DescriptionLabel = GetNode<Label>(descriptionLabelsPaths[i]);
+			Label PriceLabel = GetNode<Label>(priceLabelsPaths[i]);
 
 
+			switch (currentItem.Name)
+			{
 
+				case "Whiskey":
+					GD.Print("WHiskey");
+					DescriptionLabel.Text = "Force a random player to drink Whiskey and cause him to black out.";
+					break;
+
+				case "GoldenPipe":
+					DescriptionLabel.Text = "Take a carage straight the razorcap.";
+					break;
+
+				case "DoubleDice":
+					DescriptionLabel.Text = "Why throw one when you can throw two. (Throw 2 dices with each a value between 0-6)";
+					break;
+
+				case "TripleDice":
+					DescriptionLabel.Text = "The only thing better than two dices are three dices. (Throw 3 dices with each a value between 0-6)";
+					break;
+
+				case "TwentyDice":
+					DescriptionLabel.Text = "Throw a dice with an eyecount between -20 and 20";
+					break;
+				case "TenDice":
+					DescriptionLabel.Text = "Throw a dice with an eyecount between 0 and 10";
+					break;
+
+				case "DashMushroom":
+					DescriptionLabel.Text = "These speedy boots will make you the fastest man in England (adds a random number to your next throw)";
+					break;
+
+				case "TeleportTorndPlayer":
+					DescriptionLabel.Text = "Teleport to random player on the board.";
+					break;
+
+				case "SwitchPlaces":
+					DescriptionLabel.Text = "Swap places with a random player on the board.";
+					break;
+
+				case "StealPlayerCap":
+					DescriptionLabel.Text = "Steal the Razor cap from the player that has it.";
+					break;
+
+				case "PoisonMushroom":
+					DescriptionLabel.Text = "Removes a random number from your next throw.";
+					break;
+
+				case "StealCoins":
+					DescriptionLabel.Text = "Steal coins from a random player.";
+					break;
+
+				case "BrassKnuckles":
+					DescriptionLabel.Text = "Knuckels that will deal 20 damage to a player when passing them. (1 use only)";
+					break;
+
+				case "GoldenKnuckles":
+					DescriptionLabel.Text = "Knuckels that will deal 20 damage to a player when passing them. (∞ uses)";
+					break;
+
+				case "BearTrap":
+					DescriptionLabel.Text = "Place a bear trap somewhere on the board. (Deals damage to passing players and cause them to skip a turn)";
+					break;
+			}
+			itemTex.Texture = GD.Load<Texture2D>($"res://assets/items/{currentItem.Name}.png");
+			titleLabel.Text = currentItem.Name.ToString();
+			PriceLabel.Text = "£ " + currentItem.Price.ToString();
+			GD.Print("loaded item texture: " + itemTex);
+			GD.Print($"Item: {currentItem.Name}, Price: {currentItem.Price}");
+		}
+
+	}
+
+	void openShop((string Name, int Price)[] shopItems, Player player)
+	{
+		textShop.Show();
+		Timer timer = new Timer();
+
+		// Set timer properties
+		timer.WaitTime = 3.0f; // Timer duration in seconds
+		timer.OneShot = true;  // The timer will stop after one timeout
+
+		// Add the timer to the scene
+		AddChild(timer);
+
+		// Connect the "timeout" signal to a callback function
+		timer.Timeout += () => OnTimerTimeout(shopItems, player);
+
+		// Start the timer
+		timer.Start();
+	}
+
+	// Callback function to handle timer's timeout signal
+	private void OnTimerTimeout((string Name, int Price)[] shopItems, Player player)
+	{
+		mainShop.Show();
+		openMainShop(shopItems, player);
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
