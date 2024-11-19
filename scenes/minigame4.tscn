@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dc6nkqosur54e"]
+[gd_scene load_steps=3 format=3 uid="uid://dc6nkqosur54e"]
 
 [ext_resource type="Script" path="res://scripts/minigame4.cs" id="1_3uii6"]
+[ext_resource type="Texture2D" uid="uid://bc8oe6x20k71j" path="res://Minigame2/Minigame4.jpg" id="2_2llcs"]
 
 [node name="Minigame4" type="Control"]
 layout_mode = 3
@@ -15,29 +16,42 @@ script = ExtResource("1_3uii6")
 layout_mode = 0
 offset_left = 415.0
 offset_top = 34.0
-offset_right = 455.0
-offset_bottom = 57.0
+offset_right = 647.0
+offset_bottom = 161.0
 
 [node name="KeuzeLabel" type="Label" parent="."]
+layout_mode = 0
 offset_left = 92.0
 offset_top = 183.0
-offset_right = 132.0
-offset_bottom = 206.0
+offset_right = 584.0
+offset_bottom = 486.0
 
 [node name="RondeLabel" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 39.0
 
 [node name="WinnaarLabel" type="Label" parent="."]
-offset_left = 457.0
-offset_top = 193.0
-offset_right = 497.0
-offset_bottom = 216.0
+layout_mode = 0
+offset_left = 634.0
+offset_top = 325.0
+offset_right = 884.0
+offset_bottom = 455.0
 
 [node name="LabelWincondities" type="Label" parent="."]
+layout_mode = 0
 offset_left = 767.0
 offset_top = 1.0
-offset_right = 807.0
-offset_bottom = 24.0
+offset_right = 1111.0
+offset_bottom = 180.0
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -215.0
+offset_top = -218.0
+offset_right = 1240.0
+offset_bottom = 780.0
+texture = ExtResource("2_2llcs")
+expand_mode = 1
