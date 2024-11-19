@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 public partial class Minigame2 : Node2D
 {
     // Lijst van spelers en hun labels
@@ -146,7 +147,7 @@ public partial class Minigame2 : Node2D
     {
         GlobalVariables.Instance.SwitchToMainBoard();
     }
-    private void CheckWinner()
+    private async void CheckWinner()
     {
         // Start met de eerste speler
         string closestPlayer = players[0];
@@ -170,6 +171,13 @@ public partial class Minigame2 : Node2D
         LabelWinnaar.Text = $"{closestPlayer} is het dichtst bij 10 sec met {closestTimeDiff:F2} sec verschil";
         LabelWinnaar.SelfModulate = new Color(1, 1, 0);  // Geel super mooi kleurtje voor de winnaar
         LabelWinnaar.Show();
+        await WaitForSeconds(3);
         GetTree().CreateTimer(3f).Connect("timeout", new Callable(this, nameof(ReturnToMainScene)));
     }
+    private async Task WaitForSeconds(float seconds)
+	{
+		await ToSignal(GetTree().CreateTimer(seconds), "timeout");
+	}
+  
 }
+  

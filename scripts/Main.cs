@@ -59,6 +59,8 @@ public partial class Main : Node2D
 	Control mainShop;
 	Control textShop;
 
+	Panel diceshop;
+
 
 	Panel invSlot1;
 	Panel invSlot2;
@@ -71,6 +73,10 @@ public partial class Main : Node2D
 	TextureRect dpadIcon1;
 	TextureRect dpadIcon2;
 	TextureRect dpadIcon3;
+
+	TextureRect texRectYes;
+
+	TextureRect texRectNo;
 
 
 	[Signal]
@@ -118,6 +124,12 @@ public partial class Main : Node2D
 
 	public override void _Ready()
 	{
+
+		diceshop = GetNode<Panel>("CanvasLayersshop/DiceShop");
+
+		texRectYes = GetNode<TextureRect>("CanvasLayersshop/WelcomeScreen/TextureRect/yesbutton");
+		texRectNo = GetNode<TextureRect>("CanvasLayersshop/WelcomeScreen/TextureRect/nobutton");
+
 		mainShop = GetNode<Control>("CanvasLayersshop/TextureRectRounded");
 		textShop = GetNode<Control>("CanvasLayersshop/WelcomeScreen");
 
@@ -199,10 +211,10 @@ public partial class Main : Node2D
 			player1 = GetNode<Player>("player1");
 			player1.Position = player1start;
 			player1.PositionSpace = 0;
-			Vector2 player2start = spacesInfo[5].Space.Position;
+			Vector2 player2start = spacesInfo[9].Space.Position;
 			player2 = GetNode<Player>("player2");
 			player2.Position = player2start;
-			player2.PositionSpace = 5;
+			player2.PositionSpace = 9;
 
 			Playerlist = new Player[2] { player1, player2 };
 			playersalive = new List<Player> { player1, player2 };
@@ -399,7 +411,8 @@ public partial class Main : Node2D
 				}
 				if (hasitemspace)
 				{
-					UpdateSpaceLabel("Shop", player);
+
+
 					await ShopAsk(player);
 				}
 			}
@@ -418,7 +431,7 @@ public partial class Main : Node2D
 			{
 				if (player.Currency >= 50)
 				{
-					UpdateSpaceLabel("RazorCappurchase", player);
+					
 					await RazorcapPurchase(player);
 				}
 				else GD.Print("sorry " + player.Name + " you don't have enough pounds.");
@@ -497,7 +510,8 @@ public partial class Main : Node2D
 					}
 				}
 				if (hasitemspace)
-				{	UpdateSpaceLabel("Shop", player);
+				{
+					UpdateSpaceLabel("Shop", player);
 					await ShopAsk(player);
 				}
 			}
@@ -511,7 +525,7 @@ public partial class Main : Node2D
 			{
 				if (player.Currency >= 50)
 				{
-					UpdateSpaceLabel("RazorCappurchase", player);
+					
 					await RazorcapPurchase(player);
 				}
 				else GD.Print("sorry " + player.Name + " you don't have enough pounds.");
@@ -672,7 +686,8 @@ public partial class Main : Node2D
 		{
 			EndGame();
 		}
-		else {
+		else
+		{
 			await WaitForSeconds(3);
 			ChooseMiniGame();
 		}
@@ -739,6 +754,7 @@ public partial class Main : Node2D
 				if (useditem != "dice")
 				{
 					diceRoll = await AwaitButtonPress(player);
+					diceshop.Hide();
 					diceRoll += player.RollAdjustment;
 					await StartMovement(player, diceRoll);
 				}
@@ -774,6 +790,7 @@ public partial class Main : Node2D
 		}
 		async Task<int> AwaitButtonPress(Player player)
 		{
+			diceshop.Show();
 			waitingforbuttonpress = true;
 			turnLabel.Hide();
 			turnDpadIcon1.Hide();
@@ -918,9 +935,9 @@ public partial class Main : Node2D
 	}
 
 	async Task RazorcapPurchase(Player player)
-	{
+	{	
 		bool waitingforbuttonpressRazorcap = true;
-		GD.Print("Do you want to buy the razorcap for 50 pounds? Press left bumper for yes, right bumper for no");
+		UpdateSpaceLabel("RazorCappurchase", player);
 		while (waitingforbuttonpressRazorcap)
 		{
 			if (Input.IsActionJustPressed($"yes_{WhatPlayer}"))
@@ -943,7 +960,7 @@ public partial class Main : Node2D
 			await ToSignal(GetTree().CreateTimer(0), "timeout");
 
 		}
-
+		UpdateSpaceLabel("clear", player);
 
 	}
 
@@ -1003,33 +1020,37 @@ public partial class Main : Node2D
 				rndRazorCapSpace += 1;
 			}
 		}
-		Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{2 + 1}"); // het is + 1 omdat de markers 1 voorop lopen met de spaces tellen dan we in de index hebben staan
+		Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{rndRazorCapSpace + 1}"); // het is + 1 omdat de markers 1 voorop lopen met de spaces tellen dan we in de index hebben staan
 
 		var sprite = markerNode.GetChild<Sprite2D>(0);
-		sprite.Texture = GD.Load<Texture2D>("res://assets/Spaces/RazorCap_Space.png");
-		spacesInfo[2].Name = "RazorCap_Space";
+		sprite.Texture = GD.Load<Texture2D>("res://assets/items/RazorCap.png");
+		spacesInfo[rndRazorCapSpace].Name = "RazorCap_Space";
 		GD.Print("razorcap ligt op vak " + rndRazorCapSpace);
 
 	}
 
 
 	void EndGame()
-	{
+	{	
 		GD.Print("in end screen");
 		GlobalVariables.Instance.SwitchToendscreen();
 	}
 
 	async Task ShopAsk(Player player)
-	{	UpdateSpaceLabel("Shop", player);
+	{
+
+
 		bool RunLoop = true;
 		if (player.Currency > 0)
 		{
+			UpdateSpaceLabel("Shop", player);
 			GD.Print("do you want to shop for items here? Left bumper for YES, right bumper for NO");
 			while (RunLoop)
 			{
 				if (Input.IsActionJustPressed($"yes_{WhatPlayer}")) //yes i want to shop
 				{
 					GD.Print("Okay, come on in");
+					UpdateSpaceLabel("clear", player);
 					await GenerateShopInv(player);
 
 					RunLoop = false;
@@ -1079,6 +1100,7 @@ public partial class Main : Node2D
 	{
 		GD.Print("Welcome to the shop, these are my wares: " + Shopinv[0] + ", " + Shopinv[1] + " ," + Shopinv[2]);
 		bool runloop = true;
+		int chosenprice = 0;
 		string ItemConfirm = "X";
 		while (runloop)
 		{
@@ -1092,6 +1114,7 @@ public partial class Main : Node2D
 					{
 						mainShop.Hide();
 						ChosenItem = Shopinv[0].Name;
+						chosenprice = Shopinv[0].Price;
 						GD.Print("chose item: " + ChosenItem);
 						runLoop2 = false;
 					}
@@ -1102,6 +1125,7 @@ public partial class Main : Node2D
 					{
 						mainShop.Hide();
 						ChosenItem = Shopinv[1].Name;
+						chosenprice = Shopinv[1].Price;
 						GD.Print("chose item: " + ChosenItem);
 						runLoop2 = false;
 					}
@@ -1111,28 +1135,47 @@ public partial class Main : Node2D
 					if (player.Currency >= Shopinv[2].Price)
 					{
 						ChosenItem = Shopinv[2].Name;
+						chosenprice = Shopinv[2].Price;
 						GD.Print("chose item: " + ChosenItem);
 						mainShop.Hide();
 						runLoop2 = false;
 					}
 				}
+				if (Input.IsActionJustPressed($"D-Pad-down_{WhatPlayer}"))
+				{
+					runloop = false;
+
+					runLoop2 = false;
+					textShop.Hide();
+					
+
+				}
 				await ToSignal(GetTree().CreateTimer(0), "timeout");
 
 			}
 			bool runLoop3 = true;
+			if (ChosenItem == "0") {
+				shopConfirm(ChosenItem, chosenprice, player);
+			}
+			
 
-			while (runLoop3)
+			while (runLoop3 && ChosenItem != "0")
 			{
 				if (Input.IsActionJustPressed($"B_{WhatPlayer}") || Input.IsActionJustPressed($"yes_{WhatPlayer}"))
 				{
 					runloop = false;
 					runLoop3 = false;
+					mainShop.Hide();
+					textShop.Hide();
 					ItemConfirm = ChosenItem;
+					player.Currency -= chosenprice;
 					GD.Print(player.Name + "has chose item " + ItemConfirm);
 
 				}
 				if (Input.IsActionJustPressed($"A_{WhatPlayer}") || Input.IsActionJustPressed($"no_{WhatPlayer}"))
 				{
+					textShop.Hide();
+					mainShop.Show();
 					runLoop3 = false;
 					GD.Print("choose another item");
 
@@ -1143,8 +1186,8 @@ public partial class Main : Node2D
 		bool runloop4 = true;
 		for (int i = 0; i <= 2 && runloop4; i++)
 		{
-			if (player.Inventory[i] != "0")
-			{
+			if (player.Inventory[i] == "0")
+			{	
 				player.Inventory[i] = ItemConfirm;
 				runloop4 = false;
 			}
@@ -1682,7 +1725,8 @@ public partial class Main : Node2D
 		Updatehud(player);
 	}
 	void Beartrap(Player player) // dit is de space
-	{	UpdateSpaceLabel("BearTrap", player);
+	{
+		UpdateSpaceLabel("BearTrap", player);
 		GD.Print("you stepped into a beartrap, you take damage and next turn cant walk well");
 		player.Health -= 40;
 		player.RollAdjustment += -5;
@@ -1846,8 +1890,25 @@ public partial class Main : Node2D
 	}
 
 	void ChooseMiniGame()
-	{
-		GlobalVariables.Instance.SwitchToMinigame();
+	{		int selectedGame = rnd.Next(0,6);
+		switch (selectedGame)
+        {
+            case 1:
+                GlobalVariables.Instance.SwitchToMinigame1();
+                break;
+            case 2:
+                GlobalVariables.Instance.SwitchToMinigame2();
+                break;
+            case 3:
+                GlobalVariables.Instance.SwitchToMinigame3();
+                break;
+            case 4:
+                GlobalVariables.Instance.SwitchToMinigame4();
+                break;
+            case 5:
+                GlobalVariables.Instance.SwitchToMinigame5();
+                break;
+        }		
 
 	}
 
@@ -2434,10 +2495,11 @@ public partial class Main : Node2D
 	}
 
 	void UpdateSpaceLabel(string whatspace, Player player)
-	{	GD.Print("in updatelabel");
+	{
+		GD.Print("in updatelabel");
 		if (whatspace == "blueSpace")
 		{
-			Spacelabel.Text ="Je staat op een blauw vakje. je krijgt 15 pond.";
+			Spacelabel.Text = "Je staat op een blauw vakje. je krijgt 15 pond.";
 
 		}
 		else if (whatspace == "redSpace")
@@ -2477,20 +2539,27 @@ public partial class Main : Node2D
 			Spacelabel.Text = "je ziet een fles whiskey staan en drinkt hem helemaal op! daarna ga je de kroeg in en besteed je een substantieel bedrag. je slaat volgende beurt over om je kater weg te werken.";
 
 		}
-		else if(whatspace == "RazorCappurchase"){
-			Spacelabel.Text = "je hebt de optie om een razorcap te kopen voor 50 pond. kies linker bumper voor ja en rechterbumper voor nee."; 
+		else if (whatspace == "RazorCappurchase")
+		{
+			Spacelabel.Text = "je hebt de optie om een razorcap te kopen voor 50 pond. kies linker bumper voor ja en rechterbumper voor nee.";
 		}
-		else if(whatspace == "Shop"){
+		else if (whatspace == "Shop")
+		{
 			Spacelabel.Text = "je staat bij de shop, wil je naar binnen?";
 		}
-		else if(whatspace == "BearTrap"){
+		else if (whatspace == "BearTrap")
+		{
 			Spacelabel.Text = "Je staat in een berenval en verliest 40 health, ook loop je volgende beurt mank.";
 		}
+		else if (whatspace == "clear")
+		{
+			Spacelabel.Text = "";
+		}
 	}
-	 private async Task WaitForSeconds(float seconds)
-    {
-        await ToSignal(GetTree().CreateTimer(seconds), "timeout");
-    }
+	private async Task WaitForSeconds(float seconds)
+	{
+		await ToSignal(GetTree().CreateTimer(seconds), "timeout");
+	}
 
 	void openMainShop((string Name, int Price)[] shopItems, Player player)
 	{
@@ -2534,63 +2603,63 @@ public partial class Main : Node2D
 			{
 
 				case "Whiskey":
-					GD.Print("WHiskey");
-					DescriptionLabel.Text = "Force a random player to drink Whiskey and cause him to black out.";
+					GD.Print("Whiskey");
+					DescriptionLabel.Text = "gooi dit item op een vak en zie een speler al zijn geld wegdrinken.";
 					break;
 
 				case "GoldenPipe":
-					DescriptionLabel.Text = "Take a carage straight the razorcap.";
+					DescriptionLabel.Text = "gebruik deze koets om naar de razorcap te racen.";
 					break;
 
 				case "DoubleDice":
-					DescriptionLabel.Text = "Why throw one when you can throw two. (Throw 2 dices with each a value between 0-6)";
+					DescriptionLabel.Text = "2 dice van 0/6.";
 					break;
 
 				case "TripleDice":
-					DescriptionLabel.Text = "The only thing better than two dices are three dices. (Throw 3 dices with each a value between 0-6)";
+					DescriptionLabel.Text = "3 dice van 0/6.";
 					break;
 
 				case "TwentyDice":
-					DescriptionLabel.Text = "Throw a dice with an eyecount between -20 and 20";
+					DescriptionLabel.Text = "een dice van -20/20.";
 					break;
 				case "TenDice":
-					DescriptionLabel.Text = "Throw a dice with an eyecount between 0 and 10";
+					DescriptionLabel.Text = "een dice van 0/10.";
 					break;
 
 				case "DashMushroom":
-					DescriptionLabel.Text = "These speedy boots will make you the fastest man in England (adds a random number to your next throw)";
+					DescriptionLabel.Text = "gebruik deze schoenen om bij je volgende dobbel +5 te krijgen.";
 					break;
 
 				case "TeleportTorndPlayer":
-					DescriptionLabel.Text = "Teleport to random player on the board.";
+					DescriptionLabel.Text = "gebruik dit item om naar een willekeurige speler te transporteren.";
 					break;
 
 				case "SwitchPlaces":
-					DescriptionLabel.Text = "Swap places with a random player on the board.";
+					DescriptionLabel.Text = "gebruik dit item om met een willekeurige speler van plek te ruilen.";
 					break;
 
 				case "StealPlayerCap":
-					DescriptionLabel.Text = "Steal the Razor cap from the player that has it.";
+					DescriptionLabel.Text = "gebruik dit item om de razorcap van een speler af te pakken.";
 					break;
 
 				case "PoisonMushroom":
-					DescriptionLabel.Text = "Removes a random number from your next throw.";
+					DescriptionLabel.Text = "gebruik dit item om bij een willekeurige speler -5 van zijn volgende dobbel te halen.";
 					break;
 
 				case "StealCoins":
-					DescriptionLabel.Text = "Steal coins from a random player.";
+					DescriptionLabel.Text = "steel ponden van een willekeurige speler";
 					break;
 
 				case "BrassKnuckles":
-					DescriptionLabel.Text = "Knuckels that will deal 20 damage to a player when passing them. (1 use only)";
+					DescriptionLabel.Text = "dit item kan je gebruiken om een persoon waar je langsloopt te damagen, na 1 keer gaat hij kapot.";
 					break;
 
 				case "GoldenKnuckles":
-					DescriptionLabel.Text = "Knuckels that will deal 20 damage to a player when passing them. (∞ uses)";
+					DescriptionLabel.Text = "dit item kan je gebruiken om een persoon waar je langsloopt te damagen, hij gaat de hele game mee.";
 					break;
 
 				case "BearTrap":
-					DescriptionLabel.Text = "Place a bear trap somewhere on the board. (Deals damage to passing players and cause them to skip a turn)";
+					DescriptionLabel.Text = "gooi dit item op een vak om een berenval te plaatsen die een speler vastklemt.";
 					break;
 			}
 			itemTex.Texture = GD.Load<Texture2D>($"res://assets/items/{currentItem.Name}.png");
@@ -2605,26 +2674,43 @@ public partial class Main : Node2D
 	void openShop((string Name, int Price)[] shopItems, Player player)
 	{
 		textShop.Show();
+		texRectNo.Hide();
+		texRectYes.Hide();
 		Timer timer = new Timer();
 
-		// Set timer properties
-		timer.WaitTime = 3.0f; // Timer duration in seconds
-		timer.OneShot = true;  // The timer will stop after one timeout
+		timer.WaitTime = 3.0f;
+		timer.OneShot = true; 
 
-		// Add the timer to the scene
+		
 		AddChild(timer);
 
-		// Connect the "timeout" signal to a callback function
+		
 		timer.Timeout += () => OnTimerTimeout(shopItems, player);
 
-		// Start the timer
 		timer.Start();
 	}
 
-	// Callback function to handle timer's timeout signal
+	
 	private void OnTimerTimeout((string Name, int Price)[] shopItems, Player player)
 	{
 		mainShop.Show();
 		openMainShop(shopItems, player);
 	}
+
+	private void shopConfirm(String ChosenItem, int price, Player player) 
+	{
+		
+
+		Label label = GetNode<Label>("CanvasLayersshop/WelcomeScreen/TextureRect/Label");
+		
+		
+		textShop.Show();
+		texRectYes.Show();
+		texRectNo.Show();
+
+		label.Text = "Are you sure you wanna buy " + ChosenItem + " for £" + price + "?";
+
+	}
+
 }
+ 

@@ -25,8 +25,9 @@ public partial class Minigame1 : Node
 		
 		minigameplayeramount = 0;
 		horseSprites = new List<Sprite2D>();
+		GD.Print("in minigame 1");
 		if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player1"))
-		{
+		{	GD.Print("verder");
 			horseSprites.Add(GetNode<Sprite2D>("Horse1"));
 			GetNode<Sprite2D>("Horse1").Show();
 			// scoreLabels[0] = GetNode<Label>("Label1");
@@ -162,7 +163,7 @@ public partial class Minigame1 : Node
     {
         GlobalVariables.Instance.SwitchToMainBoard();
     }
-	private void CheckWinner()
+	private async void CheckWinner()
 	{
 		GD.Print("checkwinner");
 
@@ -189,7 +190,7 @@ for (int i = 0; i < minigameplayeramount; i++)
         // Print player information (e.g., their name, score, etc.)
         GD.Print($"Player {i} has the highest score: {scores[i]}");
 	
-
+		await WaitForSeconds(3);
         // Assign the player with the highest score as the winner
         GlobalVariables.Instance.Winner = i;   
 
@@ -198,5 +199,9 @@ for (int i = 0; i < minigameplayeramount; i++)
     }
 	
 }
-}}
+}
+private async Task WaitForSeconds(float seconds)
+	{
+		await ToSignal(GetTree().CreateTimer(seconds), "timeout");
+	}}
 

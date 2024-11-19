@@ -147,7 +147,7 @@ public partial class Minigame3 : Node2D
     }
 
     private void ReturnToMainScene()
-    {
+    {   
         GlobalVariables.Instance.SwitchToMainBoard();
     }
 
@@ -179,4 +179,5 @@ public partial class Minigame3 : Node2D
             postReactSprites[i].Visible = postReact;
         }
     }
+  
 }

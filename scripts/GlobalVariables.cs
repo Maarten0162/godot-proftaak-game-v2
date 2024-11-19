@@ -47,15 +47,24 @@ public partial class GlobalVariables : Node
         private const string Minigame1ScenePath = "res://scenes/minigame1.tscn";
          private const string Minigame2ScenePath = "res://scenes/minigame2.tscn";
           private const string Minigame3ScenePath = "res://scenes/minigame3.tscn";
+           private const string Minigame4ScenePath = "res://scenes/minigame4.tscn";
+            private const string Minigame5ScenePath = "res://scenes/minigame5.tscn";
         private const string MenuScenePath = "res://scenes/Menu.tscn";
         private const string EndscreenPath = "res://scenes/End_Screen.tscn";
+
+        private const string LoadingScreenpath = "res://scenes/Loadingscreen.tscn";
+        private const string UitlegPath = "res://scenes/Uitleg.tscn";
 
         private PackedScene mainBoardScene;
         private PackedScene minigame1Scene;
         private PackedScene minigame2Scene;
         private PackedScene minigame3Scene;
+        private PackedScene minigame4Scene;
+        private PackedScene minigame5Scene;
         private PackedScene menuScene;
         private PackedScene endscreen;
+        private PackedScene LoadingScreen;
+        private PackedScene Uitleg;
         public Player player1   { get; set; }
         public Player player2   { get; set; }
         public Player player3   { get; set; }
@@ -74,8 +83,13 @@ public partial class GlobalVariables : Node
                 minigame1Scene = (PackedScene)ResourceLoader.Load(Minigame1ScenePath);
                 minigame2Scene = (PackedScene)ResourceLoader.Load(Minigame2ScenePath);
                 minigame3Scene = (PackedScene)ResourceLoader.Load(Minigame3ScenePath);
+                minigame4Scene = (PackedScene)ResourceLoader.Load(Minigame4ScenePath);
+                minigame5Scene = (PackedScene)ResourceLoader.Load(Minigame5ScenePath);
+                
                 menuScene = (PackedScene)ResourceLoader.Load(MenuScenePath);
                 endscreen = (PackedScene)ResourceLoader.Load(EndscreenPath);
+                Uitleg = (PackedScene)ResourceLoader.Load(UitlegPath);
+                LoadingScreen = (PackedScene)ResourceLoader.Load(LoadingScreenpath);
                 
 
         }
@@ -85,6 +99,20 @@ public partial class GlobalVariables : Node
             ChangeScene(menuScene);
             RestorePlayerStates();
         }
+         public void SwitchtoUitleg()
+        {
+            // If we are coming back from a minigame, restore the board state here
+            ChangeScene(Uitleg);
+            RestorePlayerStates();
+            
+        }
+         public void SwitchtoLoadingScreen()
+        {
+            // If we are coming back from a minigame, restore the board state here
+            ChangeScene(LoadingScreen);
+            RestorePlayerStates();
+            
+        }
         public void SwitchToMainBoard()
         {
             // If we are coming back from a minigame, restore the board state here
@@ -92,13 +120,45 @@ public partial class GlobalVariables : Node
             RestorePlayerStates();
         }
 
-        public void SwitchToMinigame()
+        public void SwitchToMinigame1()
         {
             // Save the board state before switching
             SavePlayerStates();
 
             // Load the minigame scene
             ChangeScene(minigame1Scene);
+        }
+         public void SwitchToMinigame2()
+        {
+            // Save the board state before switching
+            SavePlayerStates();
+
+            // Load the minigame scene
+            ChangeScene(minigame2Scene);
+        }
+         public void SwitchToMinigame3()
+        {
+            // Save the board state before switching
+            SavePlayerStates();
+
+            // Load the minigame scene
+            ChangeScene(minigame3Scene);
+        }
+         public void SwitchToMinigame4()
+        {
+            // Save the board state before switching
+            SavePlayerStates();
+
+            // Load the minigame scene
+            ChangeScene(minigame4Scene);
+        }
+         public void SwitchToMinigame5()
+        {
+            // Save the board state before switching
+            SavePlayerStates();
+
+            // Load the minigame scene
+                ChangeScene(minigame5Scene);
         }
                 public void SwitchToendscreen()
         {
