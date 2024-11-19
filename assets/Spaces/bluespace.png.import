@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dol6hnh1qws33"
-path="res://.godot/imported/blueSpace.png-2c7d6c1a5e394f8c9b0ee6fc8cd638d3.ctex"
+path="res://.godot/imported/bluespace.png-b7539f05c7b154a8051d5e31f16fc699.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Spaces/blueSpace.png"
-dest_files=["res://.godot/imported/blueSpace.png-2c7d6c1a5e394f8c9b0ee6fc8cd638d3.ctex"]
+source_file="res://assets/Spaces/bluespace.png"
+dest_files=["res://.godot/imported/bluespace.png-b7539f05c7b154a8051d5e31f16fc699.ctex"]
 
 [params]
 

@@ -1892,7 +1892,7 @@ public partial class Main : Node2D
 	}
 
 	void ChooseMiniGame()
-	{		int selectedGame = rnd.Next(1,4);
+	{		int selectedGame = rnd.Next(5,6);
 		switch (selectedGame)
         {
             case 1:
