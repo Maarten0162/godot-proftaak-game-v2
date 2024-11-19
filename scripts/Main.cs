@@ -125,7 +125,7 @@ public partial class Main : Node2D
 	public override void _Ready()
 	{
 
-		diceshop = GetNode<Panel>("CanvasLayersshop/diceshop");
+		diceshop = GetNode<Panel>("CanvasLayersshop/DiceShop");
 
 		texRectYes = GetNode<TextureRect>("CanvasLayersshop/WelcomeScreen/TextureRect/yesbutton");
 		texRectNo = GetNode<TextureRect>("CanvasLayersshop/WelcomeScreen/TextureRect/nobutton");
@@ -754,6 +754,7 @@ public partial class Main : Node2D
 				if (useditem != "dice")
 				{
 					diceRoll = await AwaitButtonPress(player);
+					diceshop.Hide();
 					diceRoll += player.RollAdjustment;
 					await StartMovement(player, diceRoll);
 				}
@@ -789,6 +790,7 @@ public partial class Main : Node2D
 		}
 		async Task<int> AwaitButtonPress(Player player)
 		{
+			diceshop.Show();
 			waitingforbuttonpress = true;
 			turnLabel.Hide();
 			turnDpadIcon1.Hide();
@@ -1152,7 +1154,10 @@ public partial class Main : Node2D
 
 			}
 			bool runLoop3 = true;
-			shopConfirm(ChosenItem, chosenprice, player);
+			if (ChosenItem == "0") {
+				shopConfirm(ChosenItem, chosenprice, player);
+			}
+			
 
 			while (runLoop3 && ChosenItem != "0")
 			{
