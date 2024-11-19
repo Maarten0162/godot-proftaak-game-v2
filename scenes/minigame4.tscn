@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dc6nkqosur54e"]
+[gd_scene load_steps=3 format=3 uid="uid://dc6nkqosur54e"]
 
 [ext_resource type="Script" path="res://scripts/minigame4.cs" id="1_3uii6"]
+[ext_resource type="Texture2D" uid="uid://bc8oe6x20k71j" path="res://Minigame2/Minigame4.jpg" id="2_2llcs"]
 
 [node name="Minigame4" type="Control"]
 layout_mode = 3
@@ -11,33 +12,65 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3uii6")
 
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -215.0
+offset_top = -198.0
+offset_right = 1240.0
+offset_bottom = 800.0
+texture = ExtResource("2_2llcs")
+expand_mode = 1
+
 [node name="ResultaatLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 415.0
-offset_top = 34.0
-offset_right = 455.0
-offset_bottom = 57.0
+offset_left = 783.0
+offset_top = 492.0
+offset_right = 1015.0
+offset_bottom = 619.0
 
 [node name="KeuzeLabel" type="Label" parent="."]
-offset_left = 92.0
-offset_top = 183.0
-offset_right = 132.0
-offset_bottom = 206.0
+layout_mode = 0
+offset_left = 13.0
+offset_top = 67.0
+offset_right = 505.0
+offset_bottom = 370.0
 
 [node name="RondeLabel" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+layout_mode = 0
+offset_left = 364.0
+offset_top = 5.0
+offset_right = 528.0
+offset_bottom = 44.0
 
 [node name="WinnaarLabel" type="Label" parent="."]
-offset_left = 457.0
-offset_top = 193.0
-offset_right = 497.0
-offset_bottom = 216.0
+layout_mode = 0
+offset_left = 498.0
+offset_top = 456.0
+offset_right = 748.0
+offset_bottom = 586.0
 
 [node name="LabelWincondities" type="Label" parent="."]
-offset_left = 767.0
-offset_top = 1.0
-offset_right = 807.0
-offset_bottom = 24.0
+layout_mode = 0
+offset_left = 911.0
+offset_top = 6.0
+offset_right = 1255.0
+offset_bottom = 185.0
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="SpelerIconLinks" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(50, 20)
+layout_mode = 0
+offset_left = 377.0
+offset_top = 40.0
+offset_right = 468.0
+offset_bottom = 123.0
+expand_mode = 1
+
+[node name="SpelerIconRechts" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 557.0
+offset_top = 41.0
+offset_right = 642.0
+offset_bottom = 117.0
+expand_mode = 1
