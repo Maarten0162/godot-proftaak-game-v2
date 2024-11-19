@@ -207,10 +207,10 @@ public partial class Main : Node2D
 
 		if (PlayerAmount == 2)
 		{
-			Vector2 player1start = spacesInfo[0].Space.Position;
+			Vector2 player1start = spacesInfo[5].Space.Position;
 			player1 = GetNode<Player>("player1");
 			player1.Position = player1start;
-			player1.PositionSpace = 0;
+			player1.PositionSpace = 5;
 			Vector2 player2start = spacesInfo[9].Space.Position;
 			player2 = GetNode<Player>("player2");
 			player2.Position = player2start;
@@ -1076,7 +1076,7 @@ public partial class Main : Node2D
 
 		while (runloop)
 		{
-			int rnditem = rnd.Next(0, 14);
+			int rnditem = rnd.Next(0, 12);
 			if (!randomList.Contains(rnditem))
 			{
 				randomList.Add(rnditem);
