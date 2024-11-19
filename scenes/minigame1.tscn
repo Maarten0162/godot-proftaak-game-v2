@@ -71,3 +71,9 @@ offset_left = 473.0
 offset_top = 7.0
 offset_right = 611.0
 offset_bottom = 49.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Label" type="Label" parent="Sprite2D"]
+offset_right = 40.0
+offset_bottom = 23.0

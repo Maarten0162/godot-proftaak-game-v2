@@ -302,7 +302,7 @@ public partial class Main : Node2D
 
 
 
-		Iteminfo = new (string Name, int Price)[15] { ("Whiskey", 20), ("GoldenPipe", 20), ("DoubleDice", 10), ("TripleDice", 13), ("TwentyDice", 20), ("TenDice", 8), ("DashMushroom", 5), ("TeleportTorndPlayer", 15), ("SwitchPlaces", 15), ("StealPlayerCap", 40), ("PoisonMushroom", 5), ("StealCoins", 30), ("BrassKnuckles", 20), ("GoldenKnuckles", 50), ("BearTrap", 40) };
+		Iteminfo = new (string Name, int Price)[13] { ("GoldenPipe", 20), ("DoubleDice", 10), ("TripleDice", 13), ("TwentyDice", 20), ("TenDice", 8), ("DashMushroom", 5), ("TeleportTorndPlayer", 15), ("SwitchPlaces", 15), ("StealPlayerCap", 40), ("PoisonMushroom", 5), ("StealCoins", 30), ("BrassKnuckles", 20), ("GoldenKnuckles", 50) };
 		ShopInv = new (string Name, int Price)[3] { ("test", 10), ("test", 10), ("test", 10) };
 
 
@@ -665,7 +665,7 @@ public partial class Main : Node2D
 				}
 				for (int i = 0; i < spacesInfo.Length; i++)
 				{
-					if (spacesInfo[i].Name == "Razorcap_Space")
+					if (spacesInfo[i].Name == "RazorCap_Space")
 					{
 						RunLoop = false; //checkt of de map nog te kopen is op de map, zoja spawnt de cap niet
 					}
@@ -678,20 +678,21 @@ public partial class Main : Node2D
 				}
 
 			}
+			GD.Print("uit razorcapspawncheck");
 		}
 
-
+		GD.Print("voor savestates");
 		SaveAllStates();
+		GD.Print("na savestates");
 		if (playersalive.Count == 1 || GlobalVariables.Instance.TurnCount == 15)
-		{
+		{	GD.Print("in endgame");
 			EndGame();
 		}
-		else
-		{
+			GD.Print("naar chooseminigame");
 			await WaitForSeconds(3);
 			ChooseMiniGame();
-		}
-
+		
+		GD.Print("na chooseminigame");
 	}
 
 	async Task Turn_Player(Player player)
@@ -775,14 +776,14 @@ public partial class Main : Node2D
 				{
 					player.Hide();
 				}
-			}
-
-
-			if (player.SkipTurn == true)
+			}else
 			{
 				player.SkipTurn = false;// dit zorgt ervoor dat next turn deze speler wel dingen mag doen
 				GD.Print(player.Name + " Had to skip his turn!");
 			}
+
+
+			
 			GD.Print("before timer");
 			await WaitForSeconds(2);
 			GD.Print("after timer");
@@ -1023,7 +1024,7 @@ public partial class Main : Node2D
 		Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{rndRazorCapSpace + 1}"); // het is + 1 omdat de markers 1 voorop lopen met de spaces tellen dan we in de index hebben staan
 
 		var sprite = markerNode.GetChild<Sprite2D>(0);
-		sprite.Texture = GD.Load<Texture2D>("res://assets/items/RazorCap.png");
+		sprite.Texture = GD.Load<Texture2D>("res://assets/Spaces/RazorCap_Space.png");
 		spacesInfo[rndRazorCapSpace].Name = "RazorCap_Space";
 		GD.Print("razorcap ligt op vak " + rndRazorCapSpace);
 
@@ -1075,7 +1076,7 @@ public partial class Main : Node2D
 
 		while (runloop)
 		{
-			int rnditem = rnd.Next(0, 5);
+			int rnditem = rnd.Next(0, 14);
 			if (!randomList.Contains(rnditem))
 			{
 				randomList.Add(rnditem);
@@ -1189,6 +1190,7 @@ public partial class Main : Node2D
 			if (player.Inventory[i] == "0")
 			{	
 				player.Inventory[i] = ItemConfirm;
+				Updatehud(player);
 				runloop4 = false;
 			}
 		}
@@ -1890,7 +1892,7 @@ public partial class Main : Node2D
 	}
 
 	void ChooseMiniGame()
-	{		int selectedGame = rnd.Next(0,6);
+	{		int selectedGame = rnd.Next(1,4);
 		switch (selectedGame)
         {
             case 1:
@@ -1913,7 +1915,7 @@ public partial class Main : Node2D
 	}
 
 	async Task selectTrapPositon(string itemused)
-	{
+	{	bool runloop = true;
 		GD.Print("in buttonselect");
 
 
@@ -1932,13 +1934,14 @@ public partial class Main : Node2D
 		buttonmin2.Text = "-2";
 		buttonplus1.Text = "+1";
 		buttonplus2.Text = "+2";
-
+		while(runloop){
 		if (itemused == "Whiskey")
 		{
-			buttonmin1.Pressed += () => WhiskeyAmount(-1);
-			buttonmin2.Pressed += () => WhiskeyAmount(-2);
-			buttonplus1.Pressed += () => WhiskeyAmount(1);
-			buttonplus2.Pressed += () => WhiskeyAmount(2);
+			buttonmin1.Pressed += async () => await WhiskeyAmount(-1);
+			buttonmin2.Pressed += async () => await WhiskeyAmount(-2);
+			buttonplus1.Pressed += async () => await WhiskeyAmount(1);
+			buttonplus2.Pressed += async () => await WhiskeyAmount(2);
+			runloop = false;
 		}
 		else if (itemused == "BearTrap")
 		{
@@ -1946,6 +1949,8 @@ public partial class Main : Node2D
 			buttonmin2.Pressed += () => beartrapamount(-2);
 			buttonplus1.Pressed += () => beartrapamount(1);
 			buttonplus2.Pressed += () => beartrapamount(2);
+			runloop = false;
+		}	
 		}
 		buttonmin1.Position = new Vector2(501, 318);
 		buttonmin2.Position = new Vector2(471, 318);
@@ -1960,7 +1965,7 @@ public partial class Main : Node2D
 		await Task.CompletedTask;
 	}
 
-	private void WhiskeyAmount(int WhiskeySpacesamount)
+	async Task WhiskeyAmount(int WhiskeySpacesamount)
 	{
 		GD.Print(WhiskeySpacesamount);
 		int whiskeyspace = player1.PositionSpace + WhiskeySpacesamount;
@@ -2291,7 +2296,7 @@ public partial class Main : Node2D
 				break;
 
 			case "Whiskey":
-				invSprite1.Texture = GD.Load<Texture2D>($"res://assets/items/Wiskey.png");
+				invSprite1.Texture = GD.Load<Texture2D>($"res://assets/items/Whiskey.png");
 				break;
 
 			case "GoldenPipe":
@@ -2361,7 +2366,7 @@ public partial class Main : Node2D
 				break;
 
 			case "Whiskey":
-				invSprite2.Texture = GD.Load<Texture2D>($"res://assets/items/Wiskey.png");
+				invSprite2.Texture = GD.Load<Texture2D>($"res://assets/items/Whiskey.png");
 				break;
 
 			case "GoldenPipe":
@@ -2431,7 +2436,7 @@ public partial class Main : Node2D
 				break;
 
 			case "Whiskey":
-				invSprite3.Texture = GD.Load<Texture2D>($"res://assets/items/Wiskey.png");
+				invSprite3.Texture = GD.Load<Texture2D>($"res://assets/items/Whiskey.png");
 				break;
 
 			case "GoldenPipe":
@@ -2522,11 +2527,11 @@ public partial class Main : Node2D
 		{
 			Spacelabel.Text = "Je staat bij op het station. je stapt op de trein";
 		}
-		else if (whatspace == "getRobbedSpace")
+		else if (whatspace == "Robbery")
 		{
 			Spacelabel.Text = "je bent beroofd! je verliest " + lostcurrency + " en ze doen 10 damage!";
 		}
-		else if (whatspace == "knockoutSpace")
+		else if (whatspace == "KnockoutSpace")
 		{
 			Spacelabel.Text = "je word bewusteloos geslagen! je moet je volgende beurt overslaan.";
 		}
@@ -2541,7 +2546,7 @@ public partial class Main : Node2D
 		}
 		else if (whatspace == "RazorCappurchase")
 		{
-			Spacelabel.Text = "je hebt de optie om een razorcap te kopen voor 50 pond. kies linker bumper voor ja en rechterbumper voor nee.";
+			Spacelabel.Text = "je hebt de optie om een razorcap te kopen voor 60 pond. kies linker bumper voor ja en rechterbumper voor nee.";
 		}
 		else if (whatspace == "Shop")
 		{
@@ -2557,8 +2562,9 @@ public partial class Main : Node2D
 		}
 	}
 	private async Task WaitForSeconds(float seconds)
-	{
+	{	GD.Print("in waitforseconds");
 		await ToSignal(GetTree().CreateTimer(seconds), "timeout");
+		GD.Print("na waitforseconds");
 	}
 
 	void openMainShop((string Name, int Price)[] shopItems, Player player)
