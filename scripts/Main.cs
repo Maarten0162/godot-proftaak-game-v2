@@ -1155,7 +1155,7 @@ public partial class Main : Node2D
 
 			}
 			bool runLoop3 = true;
-			if (ChosenItem == "0") {
+			if (ChosenItem != "0") {
 				shopConfirm(ChosenItem, chosenprice, player);
 			}
 			
