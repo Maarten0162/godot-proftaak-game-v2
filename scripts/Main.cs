@@ -399,7 +399,8 @@ public partial class Main : Node2D
 				}
 				if (hasitemspace)
 				{
-					UpdateSpaceLabel("Shop", player);
+
+
 					await ShopAsk(player);
 				}
 			}
@@ -497,7 +498,8 @@ public partial class Main : Node2D
 					}
 				}
 				if (hasitemspace)
-				{	UpdateSpaceLabel("Shop", player);
+				{
+					UpdateSpaceLabel("Shop", player);
 					await ShopAsk(player);
 				}
 			}
@@ -672,7 +674,8 @@ public partial class Main : Node2D
 		{
 			EndGame();
 		}
-		else {
+		else
+		{
 			await WaitForSeconds(3);
 			ChooseMiniGame();
 		}
@@ -1020,16 +1023,20 @@ public partial class Main : Node2D
 	}
 
 	async Task ShopAsk(Player player)
-	{	UpdateSpaceLabel("Shop", player);
+	{
+
+
 		bool RunLoop = true;
 		if (player.Currency > 0)
 		{
+			UpdateSpaceLabel("Shop", player);
 			GD.Print("do you want to shop for items here? Left bumper for YES, right bumper for NO");
 			while (RunLoop)
 			{
 				if (Input.IsActionJustPressed($"yes_{WhatPlayer}")) //yes i want to shop
 				{
 					GD.Print("Okay, come on in");
+					UpdateSpaceLabel("clear", player);
 					await GenerateShopInv(player);
 
 					RunLoop = false;
@@ -1079,6 +1086,7 @@ public partial class Main : Node2D
 	{
 		GD.Print("Welcome to the shop, these are my wares: " + Shopinv[0] + ", " + Shopinv[1] + " ," + Shopinv[2]);
 		bool runloop = true;
+		int chosenprice = 0;
 		string ItemConfirm = "X";
 		while (runloop)
 		{
@@ -1092,6 +1100,7 @@ public partial class Main : Node2D
 					{
 						mainShop.Hide();
 						ChosenItem = Shopinv[0].Name;
+						chosenprice = Shopinv[0].Price;
 						GD.Print("chose item: " + ChosenItem);
 						runLoop2 = false;
 					}
@@ -1102,6 +1111,7 @@ public partial class Main : Node2D
 					{
 						mainShop.Hide();
 						ChosenItem = Shopinv[1].Name;
+						chosenprice = Shopinv[1].Price;
 						GD.Print("chose item: " + ChosenItem);
 						runLoop2 = false;
 					}
@@ -1111,23 +1121,33 @@ public partial class Main : Node2D
 					if (player.Currency >= Shopinv[2].Price)
 					{
 						ChosenItem = Shopinv[2].Name;
+						chosenprice = Shopinv[2].Price;
 						GD.Print("chose item: " + ChosenItem);
 						mainShop.Hide();
 						runLoop2 = false;
 					}
+				}
+				if (Input.IsActionJustPressed($"D-Pad-down_{WhatPlayer}"))
+				{
+					runloop = false;
+
+					runLoop2 = false;
+					textShop.Hide();
+
 				}
 				await ToSignal(GetTree().CreateTimer(0), "timeout");
 
 			}
 			bool runLoop3 = true;
 
-			while (runLoop3)
+			while (runLoop3 && ChosenItem != "0")
 			{
 				if (Input.IsActionJustPressed($"B_{WhatPlayer}") || Input.IsActionJustPressed($"yes_{WhatPlayer}"))
 				{
 					runloop = false;
 					runLoop3 = false;
 					ItemConfirm = ChosenItem;
+					player.Currency -= chosenprice;
 					GD.Print(player.Name + "has chose item " + ItemConfirm);
 
 				}
@@ -1143,8 +1163,8 @@ public partial class Main : Node2D
 		bool runloop4 = true;
 		for (int i = 0; i <= 2 && runloop4; i++)
 		{
-			if (player.Inventory[i] != "0")
-			{
+			if (player.Inventory[i] == "0")
+			{	
 				player.Inventory[i] = ItemConfirm;
 				runloop4 = false;
 			}
@@ -1682,7 +1702,8 @@ public partial class Main : Node2D
 		Updatehud(player);
 	}
 	void Beartrap(Player player) // dit is de space
-	{	UpdateSpaceLabel("BearTrap", player);
+	{
+		UpdateSpaceLabel("BearTrap", player);
 		GD.Print("you stepped into a beartrap, you take damage and next turn cant walk well");
 		player.Health -= 40;
 		player.RollAdjustment += -5;
@@ -2434,10 +2455,11 @@ public partial class Main : Node2D
 	}
 
 	void UpdateSpaceLabel(string whatspace, Player player)
-	{	GD.Print("in updatelabel");
+	{
+		GD.Print("in updatelabel");
 		if (whatspace == "blueSpace")
 		{
-			Spacelabel.Text ="Je staat op een blauw vakje. je krijgt 15 pond.";
+			Spacelabel.Text = "Je staat op een blauw vakje. je krijgt 15 pond.";
 
 		}
 		else if (whatspace == "redSpace")
@@ -2477,20 +2499,27 @@ public partial class Main : Node2D
 			Spacelabel.Text = "je ziet een fles whiskey staan en drinkt hem helemaal op! daarna ga je de kroeg in en besteed je een substantieel bedrag. je slaat volgende beurt over om je kater weg te werken.";
 
 		}
-		else if(whatspace == "RazorCappurchase"){
-			Spacelabel.Text = "je hebt de optie om een razorcap te kopen voor 50 pond. kies linker bumper voor ja en rechterbumper voor nee."; 
+		else if (whatspace == "RazorCappurchase")
+		{
+			Spacelabel.Text = "je hebt de optie om een razorcap te kopen voor 50 pond. kies linker bumper voor ja en rechterbumper voor nee.";
 		}
-		else if(whatspace == "Shop"){
+		else if (whatspace == "Shop")
+		{
 			Spacelabel.Text = "je staat bij de shop, wil je naar binnen?";
 		}
-		else if(whatspace == "BearTrap"){
+		else if (whatspace == "BearTrap")
+		{
 			Spacelabel.Text = "Je staat in een berenval en verliest 40 health, ook loop je volgende beurt mank.";
 		}
+		else if (whatspace == "clear")
+		{
+			Spacelabel.Text = "";
+		}
 	}
-	 private async Task WaitForSeconds(float seconds)
-    {
-        await ToSignal(GetTree().CreateTimer(seconds), "timeout");
-    }
+	private async Task WaitForSeconds(float seconds)
+	{
+		await ToSignal(GetTree().CreateTimer(seconds), "timeout");
+	}
 
 	void openMainShop((string Name, int Price)[] shopItems, Player player)
 	{
