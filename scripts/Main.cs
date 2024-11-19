@@ -212,10 +212,10 @@ public partial class Main : Node2D
 			player1 = GetNode<Player>("player1");
 			player1.Position = player1start;
 			player1.PositionSpace = 0;
-			Vector2 player2start = spacesInfo[5].Space.Position;
+			Vector2 player2start = spacesInfo[9].Space.Position;
 			player2 = GetNode<Player>("player2");
 			player2.Position = player2start;
-			player2.PositionSpace = 5;
+			player2.PositionSpace = 9;
 
 			Playerlist = new Player[2] { player1, player2 };
 			playersalive = new List<Player> { player1, player2 };
@@ -1021,11 +1021,11 @@ public partial class Main : Node2D
 				rndRazorCapSpace += 1;
 			}
 		}
-		Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{2 + 1}"); // het is + 1 omdat de markers 1 voorop lopen met de spaces tellen dan we in de index hebben staan
+		Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{rndRazorCapSpace + 1}"); // het is + 1 omdat de markers 1 voorop lopen met de spaces tellen dan we in de index hebben staan
 
 		var sprite = markerNode.GetChild<Sprite2D>(0);
 		sprite.Texture = GD.Load<Texture2D>("res://assets/Spaces/RazorCap_Space.png");
-		spacesInfo[2].Name = "RazorCap_Space";
+		spacesInfo[rndRazorCapSpace].Name = "RazorCap_Space";
 		GD.Print("razorcap ligt op vak " + rndRazorCapSpace);
 
 	}
@@ -1890,7 +1890,7 @@ public partial class Main : Node2D
 	}
 
 	void ChooseMiniGame()
-	{		int selectedGame = rnd.Next(0,6);
+	{		int selectedGame = rnd.Next(0,5); /////MINIGAMES NOG NAAR 6 als minigame 5 werkt!!!
 		switch (selectedGame)
         {
             case 1:
