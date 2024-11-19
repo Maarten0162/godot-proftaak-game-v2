@@ -1029,7 +1029,7 @@ public partial class Main : Node2D
 
 
 	void EndGame()
-	{
+	{	
 		GD.Print("in end screen");
 		GlobalVariables.Instance.SwitchToendscreen();
 	}
@@ -1885,8 +1885,25 @@ public partial class Main : Node2D
 	}
 
 	void ChooseMiniGame()
-	{
-		GlobalVariables.Instance.SwitchtoLoadingScreen();
+	{		int selectedGame = rnd.Next(0,6);
+		switch (selectedGame)
+        {
+            case 1:
+                GlobalVariables.Instance.SwitchToMinigame1();
+                break;
+            case 2:
+                GlobalVariables.Instance.SwitchToMinigame2();
+                break;
+            case 3:
+                GlobalVariables.Instance.SwitchToMinigame3();
+                break;
+            case 4:
+                GlobalVariables.Instance.SwitchToMinigame4();
+                break;
+            case 5:
+                GlobalVariables.Instance.SwitchToMinigame5();
+                break;
+        }		
 
 	}
 

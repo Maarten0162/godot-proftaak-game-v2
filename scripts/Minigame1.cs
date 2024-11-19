@@ -25,8 +25,9 @@ public partial class Minigame1 : Node
 		
 		minigameplayeramount = 0;
 		horseSprites = new List<Sprite2D>();
+		GD.Print("in minigame 1");
 		if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player1"))
-		{
+		{	GD.Print("verder");
 			horseSprites.Add(GetNode<Sprite2D>("Horse1"));
 			GetNode<Sprite2D>("Horse1").Show();
 			// scoreLabels[0] = GetNode<Label>("Label1");

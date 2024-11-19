@@ -16,7 +16,7 @@ public partial class Loadingscreen : Node2D
     {
         Random rnd = new Random();
         int RandomGetal = rnd.Next(1, 6); // 0-5 is exclusief 6, dus dit moet zijn 1, 6.
-        
+        RandomGetal = 1;
         labelMinigame = GetNode<Label>("LabelMinigame");
         uitleg = GetNode<Label>("Uitleg");
         timer = GetNode<Timer>("Timer");

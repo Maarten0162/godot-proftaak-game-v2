@@ -103,12 +103,14 @@ public partial class GlobalVariables : Node
         {
             // If we are coming back from a minigame, restore the board state here
             ChangeScene(Uitleg);
+            RestorePlayerStates();
             
         }
          public void SwitchtoLoadingScreen()
         {
             // If we are coming back from a minigame, restore the board state here
             ChangeScene(LoadingScreen);
+            RestorePlayerStates();
             
         }
         public void SwitchToMainBoard()
@@ -156,7 +158,7 @@ public partial class GlobalVariables : Node
             SavePlayerStates();
 
             // Load the minigame scene
-            ChangeScene(minigame5Scene);
+                ChangeScene(minigame5Scene);
         }
                 public void SwitchToendscreen()
         {
