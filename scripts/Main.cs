@@ -59,7 +59,7 @@ public partial class Main : Node2D
 	Control mainShop;
 	Control textShop;
 
-	Control diceshop;
+	Panel diceshop;
 
 
 	Panel invSlot1;
@@ -125,14 +125,13 @@ public partial class Main : Node2D
 	public override void _Ready()
 	{
 
-		
+		diceshop = GetNode<Panel>("CanvasLayersshop/diceshop");
 
 		texRectYes = GetNode<TextureRect>("CanvasLayersshop/WelcomeScreen/TextureRect/yesbutton");
 		texRectNo = GetNode<TextureRect>("CanvasLayersshop/WelcomeScreen/TextureRect/nobutton");
 
 		mainShop = GetNode<Control>("CanvasLayersshop/TextureRectRounded");
 		textShop = GetNode<Control>("CanvasLayersshop/WelcomeScreen");
-		diceshop = GetNode<Control>("CanvasLayersshop/diceshop");
 
 		Spacelabel = GetNode<Label>("CanvasLayerspaces/SpaceLabel");
 		invSprite1Play1Pos = GetNode<TextureRect>($"Node2D/CanvasLayer/player1/Playerhud/item1").Position;
@@ -755,7 +754,6 @@ public partial class Main : Node2D
 				if (useditem != "dice")
 				{
 					diceRoll = await AwaitButtonPress(player);
-					diceshop.Hide();
 					diceRoll += player.RollAdjustment;
 					await StartMovement(player, diceRoll);
 				}
@@ -791,7 +789,6 @@ public partial class Main : Node2D
 		}
 		async Task<int> AwaitButtonPress(Player player)
 		{
-			diceshop.Show();
 			waitingforbuttonpress = true;
 			turnLabel.Hide();
 			turnDpadIcon1.Hide();
@@ -1024,7 +1021,7 @@ public partial class Main : Node2D
 		Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{2 + 1}"); // het is + 1 omdat de markers 1 voorop lopen met de spaces tellen dan we in de index hebben staan
 
 		var sprite = markerNode.GetChild<Sprite2D>(0);
-		sprite.Texture = GD.Load<Texture2D>("res://assets/Spaces/RazorCap_Space.png");
+		sprite.Texture = GD.Load<Texture2D>("res://assets/items/RazorCap.png");
 		spacesInfo[2].Name = "RazorCap_Space";
 		GD.Print("razorcap ligt op vak " + rndRazorCapSpace);
 
@@ -1148,16 +1145,14 @@ public partial class Main : Node2D
 
 					runLoop2 = false;
 					textShop.Hide();
-					mainShop.Hide();
+					
 
 				}
 				await ToSignal(GetTree().CreateTimer(0), "timeout");
 
 			}
 			bool runLoop3 = true;
-			if (ChosenItem != "0") {
-				shopConfirm(ChosenItem, chosenprice, player);
-			}
+			shopConfirm(ChosenItem, chosenprice, player);
 
 			while (runLoop3 && ChosenItem != "0")
 			{
