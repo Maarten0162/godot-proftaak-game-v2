@@ -1155,7 +1155,7 @@ public partial class Main : Node2D
 
 			}
 			bool runLoop3 = true;
-			if (ChosenItem == "0") {
+			if (ChosenItem != "0") {
 				shopConfirm(ChosenItem, chosenprice, player);
 			}
 			
@@ -1896,7 +1896,8 @@ public partial class Main : Node2D
 		switch (selectedGame)
         {
             case 1:
-                GlobalVariables.Instance.SwitchToMinigame1();
+                // GlobalVariables.Instance.SwitchToMinigame1();
+				GlobalVariables.Instance.SwitchToMinigame6();
                 break;
             case 2:
                 GlobalVariables.Instance.SwitchToMinigame2();

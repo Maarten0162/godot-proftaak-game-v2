@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b2kip614gphgo"
-path="res://.godot/imported/TeleportTorndPlayer.png-7acb360362fe2760b1eb6bc0ff657672.ctex"
+path="res://.godot/imported/SwitchPlaces.png-95e9ff08fb07f4bbb553af3b39a220c7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/items/TeleportTorndPlayer.png"
-dest_files=["res://.godot/imported/TeleportTorndPlayer.png-7acb360362fe2760b1eb6bc0ff657672.ctex"]
+source_file="res://assets/items/SwitchPlaces.png"
+dest_files=["res://.godot/imported/SwitchPlaces.png-95e9ff08fb07f4bbb553af3b39a220c7.ctex"]
 
 [params]
 
