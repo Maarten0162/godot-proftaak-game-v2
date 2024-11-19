@@ -25,103 +25,100 @@ public partial class minigame5 : Control
         new Vraag { VraagText = "Welke persoon helpt de Shelby familie met illegale activiteiten in seizoen 2?", Antwoorden = new List<string> { "Arthur Shelby", "Michael Gray", "Alfie Solomons", "John Shelby" }, CorrectAntwoord = "C" },
         new Vraag { VraagText = "Hoe heet de vrouw die Tommy Shelby trouwt in seizoen 4?", Antwoorden = new List<string> { "Grace Burgess", "Linda Shelby", "Polly Gray", "Lizzie Stark" }, CorrectAntwoord = "D" },
         new Vraag { VraagText = "Wat is de naam van het leger dat door Tommy Shelby wordt opgericht in seizoen 4?", Antwoorden = new List<string> { "The Red Brigade", "The Black Hand", "The Peaky Army", "The Birmingham Battalion" }, CorrectAntwoord = "C" }
+    
     };
 
     private Vraag huidigeVraag;
     private int huidigeVraagIndex = -1;
 
-    private int[] scores = { 0, 0, 0, 0 };
-    private bool[] heeftGeantwoord = { false, false, false, false };
-    private string[] antwoorden = { "", "", "", "" };
-    private int aantalGeantwoord = 0;
-    private int snelsteSpeler = -1;
+    private int[] scores = { 0, 0, 0, 0 };  // Scores van de spelers
+    private bool[] heeftGeantwoord = { false, false, false, false };  // Of een speler al geantwoord heeft
+    private string[] antwoorden = { "", "", "", "" };  // De antwoorden van de spelers
+    private int aantalGeantwoord = 0;  // Aantal spelers die geantwoord hebben
+    private int snelsteSpeler = -1;  // De speler die het eerst heeft geantwoord
 
     private Label vraagLabel;
-    private Label[] spelerStatusLabels;
-    private Label[] spelerScoreLabels;
+    private Label statusLabel;
+    private Label scoreLabel;
+    private Timer timer;
 
     public override void _Ready()
     {
         vraagLabel = GetNode<Label>("VraagLabel");
-
-        // Verwijzingen naar spelerstatus- en scorelabels
-        spelerStatusLabels = new Label[]
-        {
-            GetNode<Label>("MarginContainer_Player1/StatusLabel"),
-            GetNode<Label>("MarginContainer_Player2/StatusLabel"),
-            GetNode<Label>("MarginContainer_Player3/StatusLabel"),
-            GetNode<Label>("MarginContainer_Player4/StatusLabel"),
-        };
-
-        spelerScoreLabels = new Label[]
-        {
-            GetNode<Label>("MarginContainer_Player1/ScoreLabel"),
-            GetNode<Label>("MarginContainer_Player2/ScoreLabel"),
-            GetNode<Label>("MarginContainer_Player3/ScoreLabel"),
-            GetNode<Label>("MarginContainer_Player4/ScoreLabel"),
-        };
+        statusLabel = GetNode<Label>("StatusLabel");
+        scoreLabel = GetNode<Label>("ScoreLabel");
+        timer = GetNode<Timer>("Timer");
 
         KiesVolgendeVraag();
-        UpdateSpelerUI();
     }
 
     private void KiesVolgendeVraag()
+{
+    if (huidigeVraagIndex >= 4) // 5 vragen
     {
-        if (huidigeVraagIndex >= 4)
-        {
-            BepaalWinnaar();
-            return;
-        }
-
-        huidigeVraagIndex++;
-        int randomVraagIndex = (int)(GD.Randi() % vragen.Count);
-
-        huidigeVraag = vragen[randomVraagIndex];
-        vragen.RemoveAt(randomVraagIndex);
-
-        heeftGeantwoord = new bool[4];
-        antwoorden = new string[4];
-        aantalGeantwoord = 0;
-        snelsteSpeler = -1;
-
-        ToonVraag();
-        UpdateSpelerUI();
+        BepaalWinnaar();
+        return;
     }
+
+    huidigeVraagIndex++;
+
+    // Hernoemen van de randomIndex naar randomVraagIndex om conflicten te vermijden
+    int randomVraagIndex = (int)(GD.Randi() % vragen.Count);
+
+    // Zorg ervoor dat je de vraag niet herhaalt
+    huidigeVraag = vragen[randomVraagIndex];
+
+    // Verwijder de vraag uit de lijst om duplicaten te voorkomen
+    vragen.RemoveAt(randomVraagIndex);
+
+    // Reset alles voor de nieuwe vraag
+    heeftGeantwoord = new bool[4];
+    antwoorden = new string[4];
+    aantalGeantwoord = 0;
+    snelsteSpeler = -1;
+
+    ToonVraag();
+    ToonStatus();
+}
+
 
     private void ToonVraag()
     {
         vraagLabel.Text = $"{huidigeVraag.VraagText}\n" +
-                          $"(A) = {huidigeVraag.Antwoorden[0]}\n" +
-                          $"(B) = {huidigeVraag.Antwoorden[1]}\n" +
-                          $"(X) = {huidigeVraag.Antwoorden[2]}\n" +
-                          $"(Y) = {huidigeVraag.Antwoorden[3]}";
+                          $"(A) A: {huidigeVraag.Antwoorden[0]}\n" +
+                          $"(B) B: {huidigeVraag.Antwoorden[1]}\n" +
+                          $"(X) C: {huidigeVraag.Antwoorden[2]}\n" +
+                          $"(Y) D: {huidigeVraag.Antwoorden[3]}";
     }
 
-    private void UpdateSpelerUI()
+    private void ToonStatus()
     {
+        string status = "Status:\n";
         for (int i = 0; i < 4; i++)
         {
-            spelerStatusLabels[i].Text = $"Status: {(heeftGeantwoord[i] ? "Gekozen" : "Nog niet gekozen")}";
-            spelerScoreLabels[i].Text = $"Score: {scores[i]}";
+            status += $"Speler {i + 1}: {(heeftGeantwoord[i] ? "Heeft gekozen" : "Nog niet gekozen")}\n";
         }
+        statusLabel.Text = status;
     }
 
     private void RegistreerAntwoord(int speler, string antwoord)
     {
-        if (heeftGeantwoord[speler])
+        if (heeftGeantwoord[speler]) // Dubbele antwoorden blokkeren
             return;
 
         heeftGeantwoord[speler] = true;
         antwoorden[speler] = antwoord;
         aantalGeantwoord++;
 
+        // Als dit de eerste speler is die het juiste antwoord geeft
         if (antwoord == huidigeVraag.CorrectAntwoord && snelsteSpeler == -1)
         {
             snelsteSpeler = speler;
         }
 
-        UpdateSpelerUI();
+        ToonStatus();
 
+        // Als alle spelers hebben geantwoord
         if (aantalGeantwoord == 4)
         {
             ToonCorrectAntwoord();
@@ -132,21 +129,35 @@ public partial class minigame5 : Control
     {
         vraagLabel.Text += $"\nHet juiste antwoord was: {huidigeVraag.CorrectAntwoord}";
 
+        // De snelste speler krijgt 3 punten, als die het juiste antwoord gaf
         if (snelsteSpeler != -1 && antwoorden[snelsteSpeler] == huidigeVraag.CorrectAntwoord)
         {
-            scores[snelsteSpeler] += 3;
+            scores[snelsteSpeler] += 3; // Snelste speler krijgt 3 punten
         }
 
+        // Andere spelers die het juiste antwoord hebben gegeven krijgen 1 punt
         for (int i = 0; i < 4; i++)
         {
             if (heeftGeantwoord[i] && antwoorden[i] == huidigeVraag.CorrectAntwoord && i != snelsteSpeler)
             {
-                scores[i] += 1;
+                scores[i] += 1; // Spelers die het juiste antwoord gaven, maar niet het snelste waren, krijgen 1 punt
             }
         }
 
-        UpdateSpelerUI();
+        // Update de score na het beantwoorden van de vraag
+        UpdateScores();
+
+        // Wacht 3 seconden voordat de volgende vraag wordt geladen
         GetTree().CreateTimer(3).Connect("timeout", Callable.From(KiesVolgendeVraag));
+    }
+
+    private void UpdateScores()
+    {
+        scoreLabel.Text = $"Scores:\n" +
+                          $"Speler 1: {scores[0]}\n" +
+                          $"Speler 2: {scores[1]}\n" +
+                          $"Speler 3: {scores[2]}\n" +
+                          $"Speler 4: {scores[3]}";
     }
 
     private void BepaalWinnaar()
@@ -170,26 +181,27 @@ public partial class minigame5 : Control
 
         vraagLabel.Text = $"Winnaar(s): Speler {string.Join(", Speler ", winnaars)}";
     }
+
     public override void _Input(InputEvent @event)
     {
         if (@event.IsActionPressed("A_1")) RegistreerAntwoord(0, "A");
         if (@event.IsActionPressed("B_1")) RegistreerAntwoord(0, "B");
-        if (@event.IsActionPressed("X_1")) RegistreerAntwoord(0, "C");
-        if (@event.IsActionPressed("Y_1")) RegistreerAntwoord(0, "D");
+        if (@event.IsActionPressed("speler1_c")) RegistreerAntwoord(0, "C");
+        if (@event.IsActionPressed("speler1_d")) RegistreerAntwoord(0, "D");
 
         if (@event.IsActionPressed("A_2")) RegistreerAntwoord(1, "A");
         if (@event.IsActionPressed("B_2")) RegistreerAntwoord(1, "B");
-        if (@event.IsActionPressed("X_2")) RegistreerAntwoord(1, "C");
-        if (@event.IsActionPressed("Y_2")) RegistreerAntwoord(1, "D");
+        if (@event.IsActionPressed("speler2_c")) RegistreerAntwoord(1, "C");
+        if (@event.IsActionPressed("speler2_d")) RegistreerAntwoord(1, "D");
 
         if (@event.IsActionPressed("A_3")) RegistreerAntwoord(2, "A");
         if (@event.IsActionPressed("B_3")) RegistreerAntwoord(2, "B");
-        if (@event.IsActionPressed("X_3")) RegistreerAntwoord(2, "C");
-        if (@event.IsActionPressed("Y_3")) RegistreerAntwoord(2, "D");
+        if (@event.IsActionPressed("speler3_c")) RegistreerAntwoord(2, "C");
+        if (@event.IsActionPressed("speler3_d")) RegistreerAntwoord(2, "D");
 
         if (@event.IsActionPressed("A_4")) RegistreerAntwoord(3, "A");
         if (@event.IsActionPressed("B_4")) RegistreerAntwoord(3, "B");
-        if (@event.IsActionPressed("X_4")) RegistreerAntwoord(3, "C");
-        if (@event.IsActionPressed("Y_4")) RegistreerAntwoord(3, "D");
+        if (@event.IsActionPressed("speler4_c")) RegistreerAntwoord(3, "C");
+        if (@event.IsActionPressed("speler4_d")) RegistreerAntwoord(3, "D");
     }
 }

@@ -95,10 +95,10 @@ public partial class Minigame3 : Node2D
     {
         if (spelActief)
         {
-            CheckPlayerInput("A_1", 0);
-            CheckPlayerInput("A_2", 1);
-            CheckPlayerInput("A_3", 2);
-            CheckPlayerInput("A_4", 3);
+            CheckPlayerInput("button_press_space", 0);
+            CheckPlayerInput("button_press_w", 1);
+            CheckPlayerInput("button_press_e", 2);
+            CheckPlayerInput("button_press_r", 3);
         }
     }
 
@@ -141,7 +141,7 @@ public partial class Minigame3 : Node2D
         {
             winnaarResultaatLabel.Text = "Geen speler heeft gereageerd.";
         }
-        GlobalVariables.Instance.Winner = winnaarIndex+1;
+
         // Wait for a short duration and switch to the main scene
         GetTree().CreateTimer(3f).Connect("timeout", new Callable(this, nameof(ReturnToMainScene)));
     }

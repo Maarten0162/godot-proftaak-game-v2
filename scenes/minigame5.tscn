@@ -1,11 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://dl0q4o4ceaxml"]
+[gd_scene load_steps=2 format=3 uid="uid://dl0q4o4ceaxml"]
 
 [ext_resource type="Script" path="res://scripts/minigame5.cs" id="1_w0rgl"]
-[ext_resource type="Texture2D" uid="uid://cgi4h72ugpmlc" path="res://Minigame2/Minigame5.png" id="2_qlbft"]
-[ext_resource type="Texture2D" uid="uid://5odnubkar2h5" path="res://Minigame2/Player1.png" id="3_le08v"]
-[ext_resource type="Texture2D" uid="uid://bp8fbndqeyihs" path="res://Minigame2/Player2.png" id="4_fhxrb"]
-[ext_resource type="Texture2D" uid="uid://cg0xnkfwcbeh8" path="res://Minigame2/Player3.png" id="5_75n7d"]
-[ext_resource type="Texture2D" uid="uid://f10gph5jvc03" path="res://Minigame2/player4.png" id="6_ptlwo"]
 
 [node name="minigame5" type="Control"]
 layout_mode = 3
@@ -16,132 +11,23 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_w0rgl")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.058
-anchor_top = -0.076
-offset_left = -11.184
-offset_top = -22.752
-offset_right = 1227.0
-offset_bottom = 711.0
-texture = ExtResource("2_qlbft")
-expand_mode = 1
-
 [node name="VraagLabel" type="Label" parent="."]
-modulate = Color(0, 0, 0, 1)
 layout_mode = 0
-offset_left = 306.0
-offset_top = 118.0
-offset_right = 861.0
-offset_bottom = 466.0
+offset_left = 405.0
+offset_top = 81.0
+offset_right = 445.0
+offset_bottom = 104.0
 
 [node name="ScoreLabel" type="Label" parent="."]
-modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = 477.0
-offset_top = 531.0
-offset_right = 534.0
-offset_bottom = 554.0
+offset_left = 135.0
+offset_top = 214.0
+offset_right = 175.0
+offset_bottom = 237.0
 
 [node name="StatusLabel" type="Label" parent="."]
-modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = 256.0
-offset_top = 295.0
-offset_right = 375.0
-offset_bottom = 318.0
+offset_left = 590.0
+offset_top = 165.0
+offset_right = 630.0
+offset_bottom = 188.0
 
 [node name="Timer" type="Timer" parent="."]
-
-[node name="MarginContainer_Player1" type="MarginContainer" parent="."]
-layout_mode = 1
-offset_right = 147.0
-offset_bottom = 141.0
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer_Player1"]
-layout_mode = 2
-texture = ExtResource("3_le08v")
-expand_mode = 1
-
-[node name="StatusLabel" type="Label" parent="MarginContainer_Player1"]
-modulate = Color(1, 0, 0, 1)
-layout_mode = 2
-size_flags_vertical = 8
-
-[node name="ScoreLabel" type="Label" parent="MarginContainer_Player1"]
-modulate = Color(1, 0, 0, 1)
-layout_mode = 2
-
-[node name="MarginContainer_Player2" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -134.0
-offset_bottom = 119.0
-grow_horizontal = 0
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer_Player2"]
-layout_mode = 2
-texture = ExtResource("4_fhxrb")
-expand_mode = 1
-
-[node name="ScoreLabel" type="Label" parent="MarginContainer_Player2"]
-modulate = Color(7.12335e-06, 0.581739, 0.789691, 1)
-layout_mode = 2
-
-[node name="StatusLabel" type="Label" parent="MarginContainer_Player2"]
-modulate = Color(0, 0.564162, 0.866202, 1)
-layout_mode = 2
-size_flags_vertical = 8
-
-[node name="MarginContainer_Player3" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -134.0
-offset_right = 139.0
-grow_vertical = 0
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer_Player3"]
-layout_mode = 2
-texture = ExtResource("5_75n7d")
-expand_mode = 1
-
-[node name="ScoreLabel" type="Label" parent="MarginContainer_Player3"]
-modulate = Color(0.36394, 0.969326, 0.457216, 1)
-layout_mode = 2
-
-[node name="StatusLabel" type="Label" parent="MarginContainer_Player3"]
-modulate = Color(0.274839, 0.975668, 0.499003, 1)
-self_modulate = Color(1, 1, 0, 1)
-layout_mode = 2
-size_flags_vertical = 8
-
-[node name="MarginContainer_Player4" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -138.0
-offset_top = -127.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer_Player4"]
-layout_mode = 2
-texture = ExtResource("6_ptlwo")
-expand_mode = 1
-
-[node name="ScoreLabel" type="Label" parent="MarginContainer_Player4"]
-modulate = Color(1, 1, 0, 1)
-layout_mode = 2
-
-[node name="StatusLabel" type="Label" parent="MarginContainer_Player4"]
-modulate = Color(1, 1, 0, 1)
-layout_mode = 2
-size_flags_vertical = 8
