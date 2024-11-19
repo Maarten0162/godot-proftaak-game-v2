@@ -72,6 +72,10 @@ public partial class Main : Node2D
 	TextureRect dpadIcon2;
 	TextureRect dpadIcon3;
 
+	TextureRect texRectYes;
+
+	TextureRect texRectNo;
+
 
 	[Signal]
 	public delegate void updateplayeruiEventHandler(Player player);
@@ -118,6 +122,10 @@ public partial class Main : Node2D
 
 	public override void _Ready()
 	{
+
+		texRectYes = GetNode<TextureRect>("CanvasLayersshop/WelcomeScreen/TextureRect/yesbutton");
+		texRectNo = GetNode<TextureRect>("CanvasLayersshop/WelcomeScreen/TextureRect/nobutton");
+
 		mainShop = GetNode<Control>("CanvasLayersshop/TextureRectRounded");
 		textShop = GetNode<Control>("CanvasLayersshop/WelcomeScreen");
 
@@ -1133,12 +1141,14 @@ public partial class Main : Node2D
 
 					runLoop2 = false;
 					textShop.Hide();
+					
 
 				}
 				await ToSignal(GetTree().CreateTimer(0), "timeout");
 
 			}
 			bool runLoop3 = true;
+			shopConfirm(ChosenItem, chosenprice, player);
 
 			while (runLoop3 && ChosenItem != "0")
 			{
@@ -1146,6 +1156,8 @@ public partial class Main : Node2D
 				{
 					runloop = false;
 					runLoop3 = false;
+					mainShop.Hide();
+					textShop.Hide();
 					ItemConfirm = ChosenItem;
 					player.Currency -= chosenprice;
 					GD.Print(player.Name + "has chose item " + ItemConfirm);
@@ -1153,6 +1165,8 @@ public partial class Main : Node2D
 				}
 				if (Input.IsActionJustPressed($"A_{WhatPlayer}") || Input.IsActionJustPressed($"no_{WhatPlayer}"))
 				{
+					textShop.Hide();
+					mainShop.Show();
 					runLoop3 = false;
 					GD.Print("choose another item");
 
@@ -2572,18 +2586,18 @@ public partial class Main : Node2D
 					break;
 
 				case "DoubleDice":
-					DescriptionLabel.Text = "2 dice van 0-6.";
+					DescriptionLabel.Text = "2 dice van 0/6.";
 					break;
 
 				case "TripleDice":
-					DescriptionLabel.Text = "3 dice van 0-6.";
+					DescriptionLabel.Text = "3 dice van 0/6.";
 					break;
 
 				case "TwentyDice":
 					DescriptionLabel.Text = "een dice van -20/20.";
 					break;
 				case "TenDice":
-					DescriptionLabel.Text = "een dice van 0-10.";
+					DescriptionLabel.Text = "een dice van 0/10.";
 					break;
 
 				case "DashMushroom":
@@ -2634,26 +2648,43 @@ public partial class Main : Node2D
 	void openShop((string Name, int Price)[] shopItems, Player player)
 	{
 		textShop.Show();
+		texRectNo.Hide();
+		texRectYes.Hide();
 		Timer timer = new Timer();
 
-		// Set timer properties
-		timer.WaitTime = 3.0f; // Timer duration in seconds
-		timer.OneShot = true;  // The timer will stop after one timeout
+		timer.WaitTime = 3.0f;
+		timer.OneShot = true; 
 
-		// Add the timer to the scene
+		
 		AddChild(timer);
 
-		// Connect the "timeout" signal to a callback function
+		
 		timer.Timeout += () => OnTimerTimeout(shopItems, player);
 
-		// Start the timer
 		timer.Start();
 	}
 
-	// Callback function to handle timer's timeout signal
+	
 	private void OnTimerTimeout((string Name, int Price)[] shopItems, Player player)
 	{
 		mainShop.Show();
 		openMainShop(shopItems, player);
 	}
+
+	private void shopConfirm(String ChosenItem, int price, Player player) 
+	{
+		
+
+		Label label = GetNode<Label>("CanvasLayersshop/WelcomeScreen/TextureRect/Label");
+		
+		
+		textShop.Show();
+		texRectYes.Show();
+		texRectNo.Show();
+
+		label.Text = "Are you sure you wanna buy " + ChosenItem + " for £" + price + "?";
+
+	}
+
 }
+ 
