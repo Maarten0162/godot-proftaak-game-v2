@@ -13,7 +13,7 @@ public partial class Loadingscreen : Node2D
     public override void _Ready()
     {
         Random rnd = new Random();
-        int randomgetal = rnd.Next(0, 6);
+        int Randomgetal = rnd.Next(0, 6);
 
         labelMinigame = GetNode<Label>("LabelMinigame");
         uitleg = GetNode<Label>("Uitleg");
@@ -22,26 +22,26 @@ public partial class Loadingscreen : Node2D
         // Start the timer (60 sec)
         timer.Start(60.0f);
 
-        if (RandomGetal = 1)
+        if (Randomgetal == 1)
         {
             // Connect the timer timeout signal to a method
             timer.Connect("timeout", new Callable(this, nameof(OnTimerTimeout)));
             labelMinigame.Text = "Paarden Race";
             uitleg.Text = "In dit spel moet je er voor zorgen dat jouw paart zo ver mogelijk komt. \nWie het verste komt wint.";
         }
-        else if (RandomGetal = 2)
+        else if (Randomgetal == 2)
         {
             timer.Connect("timeout", new Callable(this, nameof(OnTimerTimeout)));
             labelMinigame.Text = "Pesisie test";
             uitleg.Text = "Uitleg van de minigame...";
         }
-        else if (RandomGetal = 3)
+        else if (Randomgetal == 3)
         {
             timer.Connect("timeout", new Callable(this, nameof(OnTimerTimeout)));
             labelMinigame.Text = "Reactie snelheid";
             uitleg.Text = "In dit spel moet je zo snel mogelijk reageren om als eerste thomas shelby neer te schieten. \nWacht op het signaal en schiet vervolgens zo snel mogelijk op de A knop knop om als eerste te schieten. \nDegenen die als eerste reageerd wint. ";
         }
-        else if (randomgetal = 4 && GlobalVariable.Instance.playersalive.Count = 4)
+        else if (Randomgetal == 4 && GlobalVariables.Instance.playersalive.Count == 4)
         {
             timer.Connect("timeout", new Callable(this, nameof(OnTimerTimeout)));
             labelMinigame.Text = "Steen papier schaar";
@@ -53,6 +53,6 @@ public partial class Loadingscreen : Node2D
     {
         labelMinigame.Visible = false;
         uitleg.Visible = false;
-        GlobalVariables.Instance.SwitchToMinigame();
+        // GlobalVariables.Instance.SwitchToMinigame();
     }
 }

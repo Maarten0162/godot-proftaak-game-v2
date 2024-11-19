@@ -1009,7 +1009,7 @@ public partial class Main : Node2D
 		Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{2 + 1}"); // het is + 1 omdat de markers 1 voorop lopen met de spaces tellen dan we in de index hebben staan
 
 		var sprite = markerNode.GetChild<Sprite2D>(0);
-		sprite.Texture = GD.Load<Texture2D>("res://assets/Spaces/RazorCap_Space.png");
+		sprite.Texture = GD.Load<Texture2D>("res://assets/items/RazorCap.png");
 		spacesInfo[2].Name = "RazorCap_Space";
 		GD.Print("razorcap ligt op vak " + rndRazorCapSpace);
 

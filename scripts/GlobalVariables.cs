@@ -51,6 +51,8 @@ public partial class GlobalVariables : Node
             private const string Minigame5ScenePath = "res://scenes/minigame5.tscn";
         private const string MenuScenePath = "res://scenes/Menu.tscn";
         private const string EndscreenPath = "res://scenes/End_Screen.tscn";
+        
+        private const string UitlegPath = "res://scenes/Uitleg.tscn";
 
         private PackedScene mainBoardScene;
         private PackedScene minigame1Scene;
@@ -60,6 +62,7 @@ public partial class GlobalVariables : Node
         private PackedScene minigame5Scene;
         private PackedScene menuScene;
         private PackedScene endscreen;
+        private PackedScene Uitleg;
         public Player player1   { get; set; }
         public Player player2   { get; set; }
         public Player player3   { get; set; }
@@ -83,6 +86,7 @@ public partial class GlobalVariables : Node
                 
                 menuScene = (PackedScene)ResourceLoader.Load(MenuScenePath);
                 endscreen = (PackedScene)ResourceLoader.Load(EndscreenPath);
+                Uitleg = (PackedScene)ResourceLoader.Load(UitlegPath);
                 
 
         }
@@ -91,6 +95,12 @@ public partial class GlobalVariables : Node
             // If we are coming back from a minigame, restore the board state here
             ChangeScene(menuScene);
             RestorePlayerStates();
+        }
+         public void SwitchtoUitleg()
+        {
+            // If we are coming back from a minigame, restore the board state here
+            ChangeScene(Uitleg);
+            
         }
         public void SwitchToMainBoard()
         {
