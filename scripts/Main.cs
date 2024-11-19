@@ -1886,7 +1886,7 @@ public partial class Main : Node2D
 
 	void ChooseMiniGame()
 	{
-		GlobalVariables.Instance.SwitchToMinigame5();
+		GlobalVariables.Instance.SwitchtoLoadingScreen();
 
 	}
 
