@@ -1882,7 +1882,7 @@ public partial class Main : Node2D
 
 	void ChooseMiniGame()
 	{
-		GlobalVariables.Instance.SwitchToMinigame();
+		GlobalVariables.Instance.SwitchToMinigame5();
 
 	}
 

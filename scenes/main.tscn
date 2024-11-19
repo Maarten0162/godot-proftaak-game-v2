@@ -584,7 +584,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D3" type="Marker2D" parent="spaces"]
-position = Vector2(336, 87)
+position = Vector2(343, 90)
 scale = Vector2(0.1, 0.1)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D3"]
@@ -592,7 +592,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D4" type="Marker2D" parent="spaces"]
-position = Vector2(415, 73)
+position = Vector2(430, 68)
 scale = Vector2(0.1, 0.1)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D4"]
@@ -600,7 +600,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D5" type="Marker2D" parent="spaces"]
-position = Vector2(496, 45)
+position = Vector2(509, 48)
 scale = Vector2(0.1, 0.1)
 
 [node name="robSpace" type="Sprite2D" parent="spaces/Marker2D5"]
@@ -608,7 +608,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("19_g0xgm")
 
 [node name="Marker2D6" type="Marker2D" parent="spaces"]
-position = Vector2(583, 50)
+position = Vector2(574, 71)
 scale = Vector2(0.1, 0.1)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D6"]
@@ -616,7 +616,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D7" type="Marker2D" parent="spaces"]
-position = Vector2(689, 99)
+position = Vector2(704, 114)
 scale = Vector2(0.1, 0.1)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D7"]
@@ -624,7 +624,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D8" type="Marker2D" parent="spaces"]
-position = Vector2(776, 104)
+position = Vector2(814, 115)
 scale = Vector2(0.1, 0.1)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D8"]
@@ -632,7 +632,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D9" type="Marker2D" parent="spaces"]
-position = Vector2(901, 101)
+position = Vector2(908, 109)
 scale = Vector2(0.1, 0.1)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D9"]
@@ -657,7 +657,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("17_v2eak")
 
 [node name="Marker2D11" type="Marker2D" parent="spaces"]
-position = Vector2(1002, 205)
+position = Vector2(1004, 214)
 scale = Vector2(0.1, 0.1)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D11"]
@@ -665,7 +665,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D12" type="Marker2D" parent="spaces"]
-position = Vector2(911, 211)
+position = Vector2(907, 219)
 scale = Vector2(0.1, 0.1)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D12"]
@@ -673,7 +673,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D13" type="Marker2D" parent="spaces"]
-position = Vector2(824, 217)
+position = Vector2(822, 223)
 scale = Vector2(0.1, 0.1)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D13"]
@@ -681,7 +681,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D14" type="Marker2D" parent="spaces"]
-position = Vector2(723, 232)
+position = Vector2(722, 241)
 scale = Vector2(0.1, 0.1)
 
 [node name="getRobbedSpace" type="Sprite2D" parent="spaces/Marker2D14"]
@@ -689,7 +689,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("21_5ywyp")
 
 [node name="Marker2D15" type="Marker2D" parent="spaces"]
-position = Vector2(658, 304)
+position = Vector2(652, 312)
 scale = Vector2(0.1, 0.1)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D15"]
@@ -705,7 +705,7 @@ scale = Vector2(0.135, 0.135)
 texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D17" type="Marker2D" parent="spaces"]
-position = Vector2(418, 344)
+position = Vector2(436, 329)
 scale = Vector2(0.1, 0.1)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D17"]
@@ -713,7 +713,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D18" type="Marker2D" parent="spaces"]
-position = Vector2(286, 368)
+position = Vector2(347, 360)
 scale = Vector2(0.1, 0.1)
 
 [node name="knockoutSpace" type="Sprite2D" parent="spaces/Marker2D18"]
@@ -721,7 +721,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("22_hwv6p")
 
 [node name="Marker2D19" type="Marker2D" parent="spaces"]
-position = Vector2(200, 371)
+position = Vector2(270, 365)
 scale = Vector2(0.1, 0.1)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D19"]
@@ -729,7 +729,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D20" type="Marker2D" parent="spaces"]
-position = Vector2(175, 412)
+position = Vector2(185, 370)
 scale = Vector2(0.1, 0.1)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D20"]
@@ -737,7 +737,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D21" type="Marker2D" parent="spaces"]
-position = Vector2(165, 461)
+position = Vector2(167, 452)
 scale = Vector2(0.1, 0.1)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D21"]
@@ -745,11 +745,11 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D22" type="Marker2D" parent="spaces"]
-position = Vector2(168, 546)
+position = Vector2(166, 510)
 scale = Vector2(0.1, 0.1)
 
 [node name="botLeftsc" type="Sprite2D" parent="spaces/Marker2D22"]
-position = Vector2(-430, 80)
+position = Vector2(-440, 430)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("23_1ju3i")
 
@@ -762,7 +762,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("17_v2eak")
 
 [node name="Marker2D23" type="Marker2D" parent="spaces"]
-position = Vector2(277, 520)
+position = Vector2(233, 540)
 scale = Vector2(0.1, 0.1)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D23"]
@@ -770,7 +770,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D24" type="Marker2D" parent="spaces"]
-position = Vector2(365, 525)
+position = Vector2(347, 528)
 scale = Vector2(0.1, 0.1)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D24"]
@@ -778,7 +778,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D25" type="Marker2D" parent="spaces"]
-position = Vector2(466, 554)
+position = Vector2(468, 564)
 scale = Vector2(0.1, 0.1)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D25"]
@@ -787,7 +787,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D26" type="Marker2D" parent="spaces"]
-position = Vector2(547, 532)
+position = Vector2(561, 538)
 scale = Vector2(0.1, 0.1)
 
 [node name="robSpace" type="Sprite2D" parent="spaces/Marker2D26"]
@@ -795,7 +795,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("19_g0xgm")
 
 [node name="Marker2D27" type="Marker2D" parent="spaces"]
-position = Vector2(604, 507)
+position = Vector2(618, 480)
 scale = Vector2(0.1, 0.1)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D27"]
@@ -803,7 +803,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D28" type="Marker2D" parent="spaces"]
-position = Vector2(631, 457)
+position = Vector2(713, 490)
 scale = Vector2(0.1, 0.1)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D28"]
@@ -811,7 +811,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D29" type="Marker2D" parent="spaces"]
-position = Vector2(784, 491)
+position = Vector2(791, 505)
 scale = Vector2(0.1, 0.1)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D29"]
@@ -819,7 +819,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D30" type="Marker2D" parent="spaces"]
-position = Vector2(912, 489)
+position = Vector2(900, 494)
 scale = Vector2(0.1, 0.1)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D30"]
@@ -844,7 +844,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("17_v2eak")
 
 [node name="Marker2D32" type="Marker2D" parent="spaces"]
-position = Vector2(997, 451)
+position = Vector2(980, 427)
 scale = Vector2(0.1, 0.1)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D32"]
@@ -852,7 +852,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D33" type="Marker2D" parent="spaces"]
-position = Vector2(948, 419)
+position = Vector2(895, 419)
 scale = Vector2(0.1, 0.1)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D33"]
@@ -860,7 +860,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("16_a006q")
 
 [node name="Marker2D34" type="Marker2D" parent="spaces"]
-position = Vector2(841, 418)
+position = Vector2(787, 416)
 scale = Vector2(0.1, 0.1)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D34"]
@@ -868,7 +868,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D35" type="Marker2D" parent="spaces"]
-position = Vector2(743, 408)
+position = Vector2(696, 405)
 scale = Vector2(0.1, 0.1)
 
 [node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D35"]
@@ -892,10 +892,11 @@ scale = Vector2(0.135, 0.135)
 texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D38" type="Marker2D" parent="spaces"]
-position = Vector2(462, 280)
+position = Vector2(452, 284)
 scale = Vector2(0.1, 0.1)
 
 [node name="redSpace" type="Sprite2D" parent="spaces/Marker2D38"]
+position = Vector2(0, 10)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("17_vh1sw")
 

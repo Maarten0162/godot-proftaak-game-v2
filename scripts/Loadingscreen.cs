@@ -12,46 +12,47 @@ public partial class Loadingscreen : Node2D
 
     public override void _Ready()
     {
+        Random rnd = new Random();
+        int randomgetal = rnd.Next(0, 6);
+
         labelMinigame = GetNode<Label>("LabelMinigame");
         uitleg = GetNode<Label>("Uitleg");
         timer = GetNode<Timer>("Timer");
 
-        // Set the text for the labels
-        labelMinigame.Text = "Naam van de Minigame";
-        uitleg.Text = "Uitleg van de minigame... In dit spel moet je er voor zorgen dat jouw paart zo ver mogelijk komt. \n Dit doe je door zo vaak mogelijk op de A knop op je controler te klikken.";
-
-        // Connect the timer timeout signal to a method
-        timer.Connect("timeout", new Callable(this, nameof(OnTimerTimeout)));
-
-        // Start the timer (e.g., 3 seconds)
+        // Start the timer (60 sec)
         timer.Start(60.0f);
 
-        /*if (minigame)
+        if (RandomGetal = 1)
         {
-        labelMinigame.Text = "Paarden Race";
-        uitleg.Text = "Uitleg van de minigame... In dit spel moet je er voor zorgen dat jouw paart zo ver mogelijk komt. \n Dit doe je door zo vaak mogelijk op de A knop op je controler te klikken.";
+            // Connect the timer timeout signal to a method
+            timer.Connect("timeout", new Callable(this, nameof(OnTimerTimeout)));
+            labelMinigame.Text = "Paarden Race";
+            uitleg.Text = "In dit spel moet je er voor zorgen dat jouw paart zo ver mogelijk komt. \nWie het verste komt wint.";
         }
-        else if (true)
+        else if (RandomGetal = 2)
         {
-            labelMinigame.Text = "Minigame2";
-        uitleg.Text = "Uitleg van de minigame...";
+            timer.Connect("timeout", new Callable(this, nameof(OnTimerTimeout)));
+            labelMinigame.Text = "Pesisie test";
+            uitleg.Text = "Uitleg van de minigame...";
         }
-        else if (true)
+        else if (RandomGetal = 3)
         {
-            labelMinigame.Text = "Minigame3";
-        uitleg.Text = "Uitleg van de minigame... ";
+            timer.Connect("timeout", new Callable(this, nameof(OnTimerTimeout)));
+            labelMinigame.Text = "Reactie snelheid";
+            uitleg.Text = "In dit spel moet je zo snel mogelijk reageren om als eerste thomas shelby neer te schieten. \nWacht op het signaal en schiet vervolgens zo snel mogelijk op de A knop knop om als eerste te schieten. \nDegenen die als eerste reageerd wint. ";
         }
-        else
+        else if (randomgetal = 4 && GlobalVariable.Instance.playersalive.Count = 4)
         {
-            labelMinigame.Text = "Minigame4";
-        uitleg.Text = "Uitleg van de minigame...";
-        }*/
+            timer.Connect("timeout", new Callable(this, nameof(OnTimerTimeout)));
+            labelMinigame.Text = "Steen papier schaar";
+            uitleg.Text = "Dit is het klassieke steen, papier schaar";
+        }
     }
 
     private void OnTimerTimeout()
     {
         labelMinigame.Visible = false;
         uitleg.Visible = false;
-        GlobalVariables.Instance.SwitchToMainBoard();
+        GlobalVariables.Instance.SwitchToMinigame();
     }
 }

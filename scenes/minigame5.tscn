@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://dl0q4o4ceaxml"]
+
+[ext_resource type="Script" path="res://scripts/minigame5.cs" id="1_w0rgl"]
+
+[node name="minigame5" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w0rgl")
+
+[node name="VraagLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 405.0
+offset_top = 81.0
+offset_right = 445.0
+offset_bottom = 104.0
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_left = 135.0
+offset_top = 214.0
+offset_right = 175.0
+offset_bottom = 237.0
+
+[node name="StatusLabel" type="Label" parent="."]
+offset_left = 590.0
+offset_top = 165.0
+offset_right = 630.0
+offset_bottom = 188.0
+
+[node name="Timer" type="Timer" parent="."]
