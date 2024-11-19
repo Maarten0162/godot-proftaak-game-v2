@@ -59,6 +59,8 @@ public partial class Main : Node2D
 	Control mainShop;
 	Control textShop;
 
+	Panel diceshop;
+
 
 	Panel invSlot1;
 	Panel invSlot2;
@@ -122,6 +124,8 @@ public partial class Main : Node2D
 
 	public override void _Ready()
 	{
+
+		diceshop = GetNode<Panel>("CanvasLayersshop/diceshop");
 
 		texRectYes = GetNode<TextureRect>("CanvasLayersshop/WelcomeScreen/TextureRect/yesbutton");
 		texRectNo = GetNode<TextureRect>("CanvasLayersshop/WelcomeScreen/TextureRect/nobutton");
