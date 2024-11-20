@@ -280,7 +280,7 @@ public partial class Main : Node2D
 			playersalive[GlobalVariables.Instance.Winner].Currency += 30;
 			string winner = playersalive[GlobalVariables.Instance.Winner].Name + "heeft de minigame gewonnen en verdient 30 pond";
 			UpdateSpaceLabel(winner);
-			await WaitForSeconds(2);
+			
 		}
 
 		for (int i = 0; i < Playerlist.Length; i++)
@@ -378,6 +378,7 @@ public partial class Main : Node2D
 							else if (player.HasCap)
 							{
 								RazorCapAttack(player, playersalive[x]);
+								await WaitForSeconds(2);
 								hasattacked = true;
 								ContinueLoop = false;
 							}
@@ -394,6 +395,7 @@ public partial class Main : Node2D
 						else if (player.HasCap)
 						{
 							RazorCapAttack(player, playersalive[x]);
+							await WaitForSeconds(2);
 							hasattacked = true;
 							ContinueLoop = false;
 						}
@@ -413,6 +415,7 @@ public partial class Main : Node2D
 						case "0":
 							hasitemspace = true;
 							UpdateSpaceLabel("sorry je hebt geen item space");
+							await WaitForSeconds(3);
 							break;
 
 					}
@@ -444,6 +447,7 @@ public partial class Main : Node2D
 					await RazorcapPurchase(player);
 				}
 				UpdateSpaceLabel("you dont have enough money");
+				await WaitForSeconds(3);
 			}
 			await ToSignal(GetTree().CreateTimer(0.4), "timeout");
 
@@ -480,6 +484,7 @@ public partial class Main : Node2D
 						else if (player.HasCap)
 						{
 							RazorCapAttack(playersalive[x], player);
+							await WaitForSeconds(2);
 							hasattacked = true;
 							ContinueLoop = false;
 						}
@@ -496,6 +501,7 @@ public partial class Main : Node2D
 					else if (player.HasCap)
 					{
 						RazorCapAttack(playersalive[x], player);
+						await WaitForSeconds(2);
 						hasattacked = true;
 						ContinueLoop = false;
 					}
@@ -515,6 +521,7 @@ public partial class Main : Node2D
 						case "0":
 							hasitemspace = true;
 							UpdateSpaceLabel("sorry je hebt geen item space");
+							await WaitForSeconds(3);
 							break;
 
 					}
@@ -540,6 +547,7 @@ public partial class Main : Node2D
 					await RazorcapPurchase(player);
 				}
 				UpdateSpaceLabel("you dont have enough money");
+				await WaitForSeconds(3);
 			}
 			if (spacesInfo[player.PositionSpace].Name == "bearTrap_Space")
 			{
@@ -659,7 +667,7 @@ public partial class Main : Node2D
 
 		GlobalVariables.Instance.TurnCount++;
 
-
+		await WaitForSeconds(2);
 
 		GD.Print("voor razorcap");
 		if (GlobalVariables.Instance.TurnCount > 0) //dit zorgt ervoor dat de cap gaat spawnen
@@ -1037,6 +1045,7 @@ public partial class Main : Node2D
 		string itemuse = attacker.Name + " heeft " + victim.Name + " aangevallen voor " + attackdamage + " damage";
 		UpdateSpaceLabel(itemuse);
 		Updatehud(victim);
+		
 	}
 	void SpawnRazorCap()
 	{
@@ -2034,7 +2043,7 @@ public partial class Main : Node2D
 
 	void ChooseMiniGame()
 	{
-		int selectedGame = rnd.Next(1, 6);
+		int selectedGame = rnd.Next(1, 5);
 		switch (selectedGame)
 		{
 			case 1:
@@ -2049,9 +2058,7 @@ public partial class Main : Node2D
 			case 4:
 				GlobalVariables.Instance.SwitchToMinigame5();
 				break;
-			case 5:
-				GlobalVariables.Instance.SwitchToMinigame5();
-				break;
+			
 		}
 
 	}
@@ -2737,17 +2744,17 @@ public partial class Main : Node2D
 		else if (whatspace.Contains(" you dont have enough money "))
 		{
 			Spacelabel.Text = "sorry," + whatspace;
-			await WaitForSeconds(3);
+			
 		}
 		else if (whatspace.Contains("sorry je hebt geen item space"))
 		{
 			Spacelabel.Text = whatspace;
-			await WaitForSeconds(3);
+			
 		}
 		else if (whatspace == "heeft de minigame gewonnen en verdient 30 pond")
 		{
 			Spacelabel.Text = whatspace;
-			await WaitForSeconds(3);
+			
 		}		
 		else if (whatspace == "er is geen razorcap op het bord")
 		{
@@ -2764,7 +2771,7 @@ public partial class Main : Node2D
 		else if (whatspace == " aangevallen voor ")
 		{
 			Spacelabel.Text = whatspace;
-			await WaitForSeconds(3);
+		
 		}
 	}
 	private async Task WaitForSeconds(float seconds)
