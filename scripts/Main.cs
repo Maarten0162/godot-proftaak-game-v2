@@ -2584,7 +2584,6 @@ public partial class Main : Node2D
 		if (whatspace == "blueSpace")
 		{
 			Spacelabel.Text = "Je staat op een blauw vakje. je krijgt 15 pond.";
-
 		}
 		else if (whatspace == "redSpace")
 		{
