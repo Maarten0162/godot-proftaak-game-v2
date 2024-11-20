@@ -1031,6 +1031,8 @@ public partial class Main : Node2D
 			playersalive.Remove(victim);
 			victim.Hide();
 		}
+		string itemuse = attacker.Name + " heeft " + victim.Name + " aangevallen voor " + attackdamage + " damage";
+		UpdateSpaceLabel(itemuse);
 		Updatehud(victim);
 	}
 	void SpawnRazorCap()
@@ -1877,6 +1879,7 @@ public partial class Main : Node2D
 		int eyecount1 = rnd.Next(1, 7);
 		int eyecount2 = rnd.Next(1, 7);
 		diceRoll = eyecount1 + eyecount2;
+		Updatehud(player);
 		await StartMovement(player, diceRoll);
 
 	}
@@ -2634,7 +2637,7 @@ public partial class Main : Node2D
 
 	}
 
-	void UpdateSpaceLabel(string whatspace)
+	async void UpdateSpaceLabel(string whatspace)
 	{
 		GD.Print("in updatelabel");
 		if (whatspace == "blueSpace")
@@ -2722,14 +2725,17 @@ public partial class Main : Node2D
 		else if (whatspace.Contains(" you dont have enough money "))
 		{
 			Spacelabel.Text = "sorry," + whatspace;
+			await WaitForSeconds(2);
 		}
 		else if (whatspace.Contains("sorry je hebt geen item space"))
 		{
 			Spacelabel.Text = whatspace;
+			await WaitForSeconds(2);
 		}
 		else if (whatspace == "heeft de minigame gewonnen en verdient 30 pond")
 		{
 			Spacelabel.Text = whatspace;
+			await WaitForSeconds(2);
 		}		
 		else if (whatspace == "er is geen razorcap op het bord")
 		{
@@ -2742,6 +2748,11 @@ public partial class Main : Node2D
 		else if (whatspace == "niemand heeft de cap")
 		{
 			Spacelabel.Text = whatspace;
+		}
+		else if (whatspace == " aangevallen voor ")
+		{
+			Spacelabel.Text = whatspace;
+			await WaitForSeconds(2);
 		}
 	}
 	private async Task WaitForSeconds(float seconds)
