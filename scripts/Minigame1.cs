@@ -20,6 +20,9 @@ public partial class Minigame1 : Node
 	
 	private bool spelActief = false;
     private int RandomKnop;
+
+	private Label Uitleg;
+    private Label Naam;
     private Sprite2D UitlegSprite;
     private Timer TimerUitleg;
 

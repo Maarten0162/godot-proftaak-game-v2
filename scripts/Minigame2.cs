@@ -17,8 +17,8 @@ public partial class Minigame2 : Node2D
     private bool timerVisible = true;
 
     //loadingscreen
-    private bool spelActief = false;
-    private int RandomKnop;
+    private Label Uitleg;
+    private Label Naam;
     private Sprite2D UitlegSprite;
     private Timer TimerUitleg;
 
@@ -26,8 +26,11 @@ public partial class Minigame2 : Node2D
     private Label TimerLabel;
     private Label LabelWinnaar;
     private Timer countdownTimer;
+    
     private Label[] playerLabels = new Label[4];  // Verwijzingen naar de labels van de spelers
     private ColorRect[] playerColorRects = new ColorRect[4];  // Verwijzingen naar de ColorRect's
+
+    
 
     public override void _Ready()
     { playerHasPressedButton = new bool[GlobalVariables.Instance.playersalive.Count];

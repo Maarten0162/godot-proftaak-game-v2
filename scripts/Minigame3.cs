@@ -71,10 +71,10 @@ public partial class Minigame3 : Node2D
         winnaarLabel = GetNode<Label>("WinnaarLabel");
         winnaarResultaatLabel = GetNode<Label>("WinnaarResultaatLabel");
         KnopLabel = GetNode<Label>("KnopLabel");
+    }
 
-        
 
-    private void StartSpel()
+    public void StartSpel()
     {
         spelActief = false;
         Array.Clear(heeftGereageerd, 0, heeftGereageerd.Length);
@@ -88,7 +88,7 @@ public partial class Minigame3 : Node2D
         GetTree().CreateTimer(startTijd).Connect("timeout", new Callable(this, nameof(StartReactieFase)));
     }
 
-    private void StartReactieFase()
+    public void StartReactieFase()
     {
         spelActief = true;
         winnaarLabel.Text = "Schiet nu!";
@@ -98,46 +98,47 @@ public partial class Minigame3 : Node2D
         Randombepalen();
     }
 
-    private void Randombepalen() 
-    { Random rnd = new Random(); 
-    RandomKnop = rnd.Next(1, 5); 
-    GD.Print($"Random gekozen knop: {RandomKnop}"); // Debugging print 
+    public void Randombepalen()
+    {
+        Random rnd = new Random();
+        RandomKnop = rnd.Next(1, 5);
+        GD.Print($"Random gekozen knop: {RandomKnop}"); // Debugging print 
     }
 
     public override void _Process(double delta)
     {
         if (spelActief)
         {
-            if (RandomKnop == 1) 
-            { 
-                KnopLabel.Text = "Druk op A"; 
-                CheckPlayerInput("A_1", 0); 
-                CheckPlayerInput("A_2", 1); 
-                CheckPlayerInput("A_3", 2); 
-                CheckPlayerInput("A_4", 3); 
-            } 
-            else if (RandomKnop == 2) 
-            { 
-                KnopLabel.Text = "Druk op B"; 
-                CheckPlayerInput("B_1", 0); 
-                CheckPlayerInput("B_2", 1); 
-                CheckPlayerInput("B_3", 2); 
-                CheckPlayerInput("B_4", 3); 
-            } 
-            else if (RandomKnop == 3) 
-            { 
-                KnopLabel.Text = "Druk op X"; 
-                CheckPlayerInput("X_1", 0); 
-                CheckPlayerInput("X_2", 1); 
-                CheckPlayerInput("X_3", 2); 
-                CheckPlayerInput("X_4", 3); 
-            } 
-            else 
-            { 
-                KnopLabel.Text = "Druk op Y"; 
-                CheckPlayerInput("Y_1", 0); 
-                CheckPlayerInput("Y_2", 1); 
-                CheckPlayerInput("Y_3", 2); 
+            if (RandomKnop == 1)
+            {
+                KnopLabel.Text = "Druk op A";
+                CheckPlayerInput("A_1", 0);
+                CheckPlayerInput("A_2", 1);
+                CheckPlayerInput("A_3", 2);
+                CheckPlayerInput("A_4", 3);
+            }
+            else if (RandomKnop == 2)
+            {
+                KnopLabel.Text = "Druk op B";
+                CheckPlayerInput("B_1", 0);
+                CheckPlayerInput("B_2", 1);
+                CheckPlayerInput("B_3", 2);
+                CheckPlayerInput("B_4", 3);
+            }
+            else if (RandomKnop == 3)
+            {
+                KnopLabel.Text = "Druk op X";
+                CheckPlayerInput("X_1", 0);
+                CheckPlayerInput("X_2", 1);
+                CheckPlayerInput("X_3", 2);
+                CheckPlayerInput("X_4", 3);
+            }
+            else
+            {
+                KnopLabel.Text = "Druk op Y";
+                CheckPlayerInput("Y_1", 0);
+                CheckPlayerInput("Y_2", 1);
+                CheckPlayerInput("Y_3", 2);
                 CheckPlayerInput("Y_4", 3);
             }
         }
@@ -188,7 +189,7 @@ public partial class Minigame3 : Node2D
     }
 
     private void ReturnToMainScene()
-    {   
+    {
         GlobalVariables.Instance.SwitchToMainBoard();
     }
 
@@ -220,5 +221,5 @@ public partial class Minigame3 : Node2D
             postReactSprites[i].Visible = postReact;
         }
     }
-  
+
 }
