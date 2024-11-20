@@ -21,6 +21,7 @@ public partial class Minigame2 : Node2D
     private Label Naam;
     private Sprite2D UitlegSprite;
     private Timer TimerUitleg;
+    private Sprite2D ASprite;
 
     // UI-elementen
     private Label TimerLabel;
@@ -70,7 +71,9 @@ public partial class Minigame2 : Node2D
         Uitleg = GetNode<Label>("Uitleg");
         UitlegSprite = GetNode<Sprite2D>("UitlegSprite");
         TimerUitleg = GetNode<Timer>("TimerUitleg");
-
+        ASprite = GetNode<Sprite2D>("ASprite");
+        
+        ASprite.Visible = true;
         UitlegSprite.Visible = true;
         TimerUitleg.WaitTime = 20.0f;
         TimerUitleg.OneShot = true;
@@ -82,6 +85,7 @@ public partial class Minigame2 : Node2D
     private void OnTimerTimeout()
     {
         UitlegSprite.Visible = false;
+        ASprite.Visible = false;
         Naam.Text = "";
         Uitleg.Text = "";
         StartCountdown();

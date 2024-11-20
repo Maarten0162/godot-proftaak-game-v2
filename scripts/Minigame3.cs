@@ -17,6 +17,10 @@ public partial class Minigame3 : Node2D
     private Label Naam;
     private List<Sprite2D> preReactSprites = new List<Sprite2D>();
     private List<Sprite2D> postReactSprites = new List<Sprite2D>();
+    private Sprite2D ASprite;
+    private Sprite2D BSprite;
+    private Sprite2D XSprite;
+    private Sprite2D YSprite;
     private int minigameplayeramount;
     private bool[] activePlayers; // Array om actieve spelers bij te houden
 
@@ -71,6 +75,39 @@ public partial class Minigame3 : Node2D
         winnaarLabel = GetNode<Label>("WinnaarLabel");
         winnaarResultaatLabel = GetNode<Label>("WinnaarResultaatLabel");
         KnopLabel = GetNode<Label>("KnopLabel");
+
+        Naam = GetNode<Label>("Naam");
+        Naam.Text = "Boom!";
+        Uitleg = GetNode<Label>("Uitleg");
+        UitlegSprite = GetNode<Sprite2D>("UitlegSprite");
+        TimerUitleg = GetNode<Timer>("TimerUitleg");
+        ASprite = GetNode<Sprite2D>("ASprite");
+        BSprite = GetNode<Sprite2D>("BSprite");
+        XSprite = GetNode<Sprite2D>("XSprite");
+        YSprite = GetNode<Sprite2D>("YSprite");
+        
+        ASprite.Visible = true;
+        BSprite.Visible = true;
+        XSprite.Visible = true;
+        YSprite.Visible = true;
+        UitlegSprite.Visible = true;
+        TimerUitleg.WaitTime = 20.0f;
+        TimerUitleg.OneShot = true;
+        TimerUitleg.Start();
+
+        TimerUitleg.Connect("timeout", new Callable(this, nameof(OnTimerTimeout1)));
+    }
+
+    private void OnTimerTimeout1()
+    {
+        UitlegSprite.Visible = false;
+        ASprite.Visible = false;
+        BSprite.Visible = false;
+        XSprite.Visible = false;
+        YSprite.Visible = false;
+        Naam.Text = "";
+        Uitleg.Text = "";
+        StartSpel();
     }
 
 
