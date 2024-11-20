@@ -24,6 +24,7 @@ public partial class Minigame1 : Node
 	private Label Uitleg;
     private Label Naam;
     private Sprite2D UitlegSprite;
+	private Sprite2D ASprite;
     private Timer TimerUitleg;
 
 
@@ -75,12 +76,14 @@ public partial class Minigame1 : Node
 		UpdateUI();
 
 		Naam = GetNode<Label>("Naam");
-        Naam.Text = "Boom!";
+        Naam.Text = "Paarden Race";
         Uitleg = GetNode<Label>("Uitleg");
+		ASprite = GetNode<Sprite2D>("ASprite");
         UitlegSprite = GetNode<Sprite2D>("UitlegSprite");
         TimerUitleg = GetNode<Timer>("TimerUitleg");
 
         UitlegSprite.Visible = true;
+		ASprite.Visible = true;
         TimerUitleg.WaitTime = 20.0f;
         TimerUitleg.OneShot = true;
         TimerUitleg.Start();
@@ -92,6 +95,7 @@ public partial class Minigame1 : Node
     private void OnTimerTimeout1()
     {
         UitlegSprite.Visible = false;
+		ASprite.Visible = false;
         Naam.Text = "";
         Uitleg.Text = "";
         gameTimer.Start(); // Start de timer
