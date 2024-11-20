@@ -1895,6 +1895,7 @@ public partial class Main : Node2D
 		int eyecount2 = rnd.Next(1, 7);
 		diceRoll = eyecount1 + eyecount2;
 		Updatehud(player);
+		updateDobbelSprite(diceRoll);
 		await StartMovement(player, diceRoll);
 
 	}
@@ -1905,11 +1906,13 @@ public partial class Main : Node2D
 		int eyecount3 = riskydice.diceroll();
 		diceRoll = eyecount1 + eyecount2 + eyecount3;
 		Updatehud(player);
+		updateDobbelSprite(diceRoll);
 		await StartMovement(player, diceRoll);
 	}
 	async Task TwentyDice(Player player) //dice van -20 tot +20
 	{
 		diceRoll = twentydice.diceroll();
+		updateDobbelSprite(diceRoll);
 		Updatehud(player);
 		await StartMovement(player, diceRoll);
 
@@ -1917,6 +1920,7 @@ public partial class Main : Node2D
 	async Task TenDice(Player player) //rolt 1 dice van 0-10
 	{
 		diceRoll = tendice.diceroll();
+		updateDobbelSprite(diceRoll);
 		Updatehud(player);
 		await StartMovement(player, diceRoll);
 	}
