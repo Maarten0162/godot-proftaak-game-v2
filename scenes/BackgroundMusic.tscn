@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://s3ke1pawgmqm"]
 
 [ext_resource type="Script" path="res://scripts/BackgroundMusic.cs" id="1_2cfbb"]
-[ext_resource type="AudioStream" uid="uid://bqvddv0wenbob" path="res://Minigame2/AchtergrondMuziek.Spannend.mp3" id="2_b81y5"]
+[ext_resource type="AudioStream" uid="uid://btfulcrquegij" path="res://Minigame2/GoedeAudioGame.mp3" id="2_4xjar"]
 
 [node name="BackgroundMusic" type="Node2D"]
 script = ExtResource("1_2cfbb")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_b81y5")
+stream = ExtResource("2_4xjar")
 volume_db = 1.0
 autoplay = true
 parameters/looping = false
