@@ -1006,14 +1006,7 @@ public partial class Main : Node2D
 	//misc
 	void updateDobbelSprite(int inputDiceRoll)
 	{
-		for (int i = -3; i <= 9; i++)
-		{
-			if (i == inputDiceRoll)
-			{
-				dobbelSprite.Play($"{inputDiceRoll}");
-			}
-
-		}
+		dobbelSprite.Play($"{inputDiceRoll}");
 	}
 	void KnucklesAttack(Player attacker, Player victim)
 	{
@@ -1361,6 +1354,7 @@ public partial class Main : Node2D
 						break;
 
 					case "Whiskey":
+						resetInvPos(player);
 						player.Inventory[0] = "0";
 						updateInvSprite(player);
 						await selectTrapPositon("Whiskey");
@@ -1380,6 +1374,7 @@ public partial class Main : Node2D
 						}
 						if (canuse)
 						{
+							resetInvPos(player);
 							player.Inventory[0] = "0";
 							updateInvSprite(player);
 							GoldenPipe(player);
@@ -1391,6 +1386,7 @@ public partial class Main : Node2D
 						break;
 
 					case "DoubleDice":
+						resetInvPos(player);
 						player.Inventory[0] = "0";
 						updateInvSprite(player);
 						await DoubleDice(player);
@@ -1399,6 +1395,7 @@ public partial class Main : Node2D
 						return useditem;
 
 					case "TripleDice":
+						resetInvPos(player);
 						player.Inventory[0] = "0";
 						updateInvSprite(player);
 						await TripleDice(player);
@@ -1407,6 +1404,7 @@ public partial class Main : Node2D
 						return useditem;
 
 					case "TwentyDice":
+						resetInvPos(player);
 						player.Inventory[0] = "0";
 						updateInvSprite(player);
 						await TwentyDice(player);
@@ -1415,6 +1413,7 @@ public partial class Main : Node2D
 						return useditem;
 
 					case "TenDice":
+						resetInvPos(player);
 						player.Inventory[0] = "0";
 						updateInvSprite(player);
 						await TenDice(player);
@@ -1423,6 +1422,7 @@ public partial class Main : Node2D
 						return useditem;
 
 					case "DashMushroom":
+						resetInvPos(player);
 						player.Inventory[0] = "0";
 						updateInvSprite(player);
 						DashMushroom(player);
@@ -1431,6 +1431,7 @@ public partial class Main : Node2D
 						return useditem;
 
 					case "TeleportTorndPlayer":
+						resetInvPos(player);
 						player.Inventory[0] = "0";
 						updateInvSprite(player);
 						TeleportTorndPlayer(player);
@@ -1439,6 +1440,7 @@ public partial class Main : Node2D
 						return useditem;
 
 					case "SwitchPlaces":
+						resetInvPos(player);
 						player.Inventory[0] = "0";
 						updateInvSprite(player);
 						SwitchPlaces(player);
@@ -1458,6 +1460,7 @@ public partial class Main : Node2D
 						if (canuse1)
 						{
 							player.Inventory[0] = "0";
+							resetInvPos(player);
 							updateInvSprite(player);
 							StealPlayerCap(player);
 							GD.Print("Used item " + useditem + "; it has vanished from their inventory.");
@@ -1468,6 +1471,7 @@ public partial class Main : Node2D
 						break;
 
 					case "PoisonMushroom":
+						resetInvPos(player);
 						player.Inventory[0] = "0";
 						updateInvSprite(player);
 						PoisonMushroom(player);
@@ -1476,6 +1480,7 @@ public partial class Main : Node2D
 						return useditem;
 
 					case "BearTrap":
+						resetInvPos(player);
 						player.Inventory[0] = "0";
 						updateInvSprite(player);
 						await selectTrapPositon("BearTrap");
@@ -1484,6 +1489,7 @@ public partial class Main : Node2D
 						return useditem;
 
 					case "StealCoins":
+						resetInvPos(player);
 						player.Inventory[0] = "0";
 						updateInvSprite(player);
 						StealCoins(player);
@@ -1492,6 +1498,7 @@ public partial class Main : Node2D
 						return useditem;
 
 					case "BrassKnuckles":
+						resetInvPos(player);
 						player.Inventory[0] = "0";
 						updateInvSprite(player);
 						BrassKnuckles(player);
@@ -1500,6 +1507,7 @@ public partial class Main : Node2D
 						return useditem;
 
 					case "GoldenKnuckles":
+						resetInvPos(player);
 						player.Inventory[0] = "0";
 						updateInvSprite(player);
 						GoldenKnuckles(player);
@@ -1526,6 +1534,7 @@ public partial class Main : Node2D
 						break;
 
 					case "Whiskey":
+						resetInvPos(player);
 						player.Inventory[1] = "0";
 						updateInvSprite(player);
 						await selectTrapPositon("Whiskey");
@@ -1545,6 +1554,7 @@ public partial class Main : Node2D
 						}
 						if (canuse)
 						{
+							resetInvPos(player);
 							player.Inventory[1] = "0";
 							updateInvSprite(player);
 							GoldenPipe(player);
@@ -1556,6 +1566,7 @@ public partial class Main : Node2D
 						break;
 
 					case "DoubleDice":
+						resetInvPos(player);
 						player.Inventory[1] = "0";
 						updateInvSprite(player);
 						await DoubleDice(player);
@@ -1564,6 +1575,7 @@ public partial class Main : Node2D
 						return useditem;
 
 					case "TripleDice":
+						resetInvPos(player);
 						player.Inventory[1] = "0";
 						updateInvSprite(player);
 						await TripleDice(player);
@@ -1572,6 +1584,7 @@ public partial class Main : Node2D
 						return useditem;
 
 					case "TwentyDice":
+						resetInvPos(player);
 						player.Inventory[1] = "0";
 						updateInvSprite(player);
 						await TwentyDice(player);
@@ -1580,6 +1593,7 @@ public partial class Main : Node2D
 						return useditem;
 
 					case "TenDice":
+						resetInvPos(player);
 						player.Inventory[1] = "0";
 						updateInvSprite(player);
 						await TenDice(player);
@@ -1588,6 +1602,7 @@ public partial class Main : Node2D
 						return useditem;
 
 					case "DashMushroom":
+						resetInvPos(player);
 						player.Inventory[1] = "0";
 						updateInvSprite(player);
 						DashMushroom(player);
@@ -1596,6 +1611,7 @@ public partial class Main : Node2D
 						return useditem;
 
 					case "TeleportTorndPlayer":
+						resetInvPos(player);
 						player.Inventory[1] = "0";
 						updateInvSprite(player);
 						TeleportTorndPlayer(player);
@@ -1604,6 +1620,7 @@ public partial class Main : Node2D
 						return useditem;
 
 					case "SwitchPlaces":
+						resetInvPos(player);
 						player.Inventory[1] = "0";
 						updateInvSprite(player);
 						SwitchPlaces(player);
@@ -1622,6 +1639,7 @@ public partial class Main : Node2D
 						}
 						if (canuse1)
 						{
+							resetInvPos(player);
 							player.Inventory[1] = "0";
 							updateInvSprite(player);
 							StealPlayerCap(player);
@@ -1633,6 +1651,7 @@ public partial class Main : Node2D
 						break;
 
 					case "PoisonMushroom":
+						resetInvPos(player);
 						player.Inventory[1] = "0";
 						updateInvSprite(player);
 						PoisonMushroom(player);
@@ -1641,6 +1660,7 @@ public partial class Main : Node2D
 						return useditem;
 
 					case "BearTrap":
+						resetInvPos(player);
 						player.Inventory[1] = "0";
 						updateInvSprite(player);
 						await selectTrapPositon("BearTrap");
@@ -1649,6 +1669,7 @@ public partial class Main : Node2D
 						return useditem;
 
 					case "StealCoins":
+						resetInvPos(player);
 						player.Inventory[1] = "0";
 						updateInvSprite(player);
 						StealCoins(player);
@@ -1657,6 +1678,7 @@ public partial class Main : Node2D
 						return useditem;
 
 					case "BrassKnuckles":
+						resetInvPos(player);
 						player.Inventory[1] = "0";
 						updateInvSprite(player);
 						BrassKnuckles(player);
@@ -1665,6 +1687,7 @@ public partial class Main : Node2D
 						return useditem;
 
 					case "GoldenKnuckles":
+						resetInvPos(player);
 						player.Inventory[1] = "0";
 						updateInvSprite(player);
 						GoldenKnuckles(player);
@@ -1690,6 +1713,7 @@ public partial class Main : Node2D
 
 						break;
 					case "Whiskey":
+						resetInvPos(player);
 						player.Inventory[2] = "0";
 						updateInvSprite(player);
 						await selectTrapPositon("Whiskey");
@@ -1709,6 +1733,7 @@ public partial class Main : Node2D
 						}
 						if (canuse)
 						{
+							resetInvPos(player);
 							player.Inventory[2] = "0";
 							updateInvSprite(player);
 							GoldenPipe(player);
@@ -1720,6 +1745,7 @@ public partial class Main : Node2D
 						break;
 
 					case "DoubleDice":
+						resetInvPos(player);
 						player.Inventory[2] = "0";
 						updateInvSprite(player);
 						await DoubleDice(player);
@@ -1727,6 +1753,7 @@ public partial class Main : Node2D
 						useditem = "dice";
 						return useditem;
 					case "TripleDice":
+						resetInvPos(player);
 						player.Inventory[2] = "0";
 						updateInvSprite(player);
 						await TripleDice(player);
@@ -1734,6 +1761,7 @@ public partial class Main : Node2D
 						useditem = "dice";
 						return useditem;
 					case "TwentyDice":
+						resetInvPos(player);
 						player.Inventory[2] = "0";
 						updateInvSprite(player);
 						await TwentyDice(player);
@@ -1741,6 +1769,7 @@ public partial class Main : Node2D
 						useditem = "dice";
 						return useditem;
 					case "TenDice":
+						resetInvPos(player);
 						player.Inventory[2] = "0";
 						updateInvSprite(player);
 						await TenDice(player);
@@ -1748,6 +1777,7 @@ public partial class Main : Node2D
 						useditem = "dice";
 						return useditem;
 					case "DashMushroom":
+						resetInvPos(player);
 						player.Inventory[2] = "0";
 						updateInvSprite(player);
 						DashMushroom(player);
@@ -1755,6 +1785,7 @@ public partial class Main : Node2D
 						useditem = "nodice";
 						return useditem;
 					case "TeleportTorndPlayer":
+						resetInvPos(player);
 						player.Inventory[2] = "0";
 						updateInvSprite(player);
 						TeleportTorndPlayer(player);
@@ -1762,6 +1793,7 @@ public partial class Main : Node2D
 						useditem = "nodice";
 						return useditem;
 					case "SwitchPlaces":
+						resetInvPos(player);
 						player.Inventory[2] = "0";
 						updateInvSprite(player);
 						SwitchPlaces(player);
@@ -1779,6 +1811,7 @@ public partial class Main : Node2D
 						}
 						if (canuse1)
 						{
+							resetInvPos(player);
 							player.Inventory[2] = "0";
 							updateInvSprite(player);
 							StealPlayerCap(player);
@@ -1789,6 +1822,7 @@ public partial class Main : Node2D
 						UpdateSpaceLabel("niemand heeft de cap");
 						break;
 					case "PoisonMushroom":
+						resetInvPos(player);
 						player.Inventory[2] = "0";
 						updateInvSprite(player);
 						PoisonMushroom(player);
@@ -1796,6 +1830,7 @@ public partial class Main : Node2D
 						useditem = "nodice";
 						return useditem;
 					case "BearTrap":
+						resetInvPos(player);
 						player.Inventory[2] = "0";
 						updateInvSprite(player);
 						await selectTrapPositon("BearTrap");
@@ -1803,6 +1838,7 @@ public partial class Main : Node2D
 						useditem = "nodice";
 						return useditem;
 					case "StealCoins":
+						resetInvPos(player);
 						player.Inventory[2] = "0";
 						updateInvSprite(player);
 						StealCoins(player);
@@ -1810,6 +1846,7 @@ public partial class Main : Node2D
 						useditem = "nodice";
 						return useditem;
 					case "BrassKnuckles":
+						resetInvPos(player);
 						player.Inventory[2] = "0";
 						updateInvSprite(player);
 						BrassKnuckles(player);
@@ -1818,6 +1855,7 @@ public partial class Main : Node2D
 						return useditem;
 
 					case "GoldenKnuckles":
+						resetInvPos(player);
 						player.Inventory[2] = "0";
 						updateInvSprite(player);
 						GoldenKnuckles(player);

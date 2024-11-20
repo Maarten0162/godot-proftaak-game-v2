@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dol6hnh1qws33"
-path="res://.godot/imported/blueSpace.png-2c7d6c1a5e394f8c9b0ee6fc8cd638d3.ctex"
+uid="uid://yocmf0bnlg46"
+path="res://.godot/imported/Dobbel17.png-d06c714b1fbc311e4edd738cd17686ad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Spaces/blueSpace.png"
-dest_files=["res://.godot/imported/blueSpace.png-2c7d6c1a5e394f8c9b0ee6fc8cd638d3.ctex"]
+source_file="res://assets/dice/default-dice/Dobbel17.png"
+dest_files=["res://.godot/imported/Dobbel17.png-d06c714b1fbc311e4edd738cd17686ad.ctex"]
 
 [params]
 

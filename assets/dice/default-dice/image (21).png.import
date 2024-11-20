@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dol6hnh1qws33"
-path="res://.godot/imported/blueSpace.png-2c7d6c1a5e394f8c9b0ee6fc8cd638d3.ctex"
+uid="uid://4kj8oswwj53s"
+path="res://.godot/imported/image (21).png-190bc6cc88f11656a0eced3c530212d3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Spaces/blueSpace.png"
-dest_files=["res://.godot/imported/blueSpace.png-2c7d6c1a5e394f8c9b0ee6fc8cd638d3.ctex"]
+source_file="res://assets/dice/default-dice/image (21).png"
+dest_files=["res://.godot/imported/image (21).png-190bc6cc88f11656a0eced3c530212d3.ctex"]
 
 [params]
 
