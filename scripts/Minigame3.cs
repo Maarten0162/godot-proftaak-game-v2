@@ -12,12 +12,22 @@ public partial class Minigame3 : Node2D
     private Label[] reactieLabels;
     private Label winnaarLabel;
     private Label winnaarResultaatLabel;
+    private Label KnopLabel;
+    private Label Uitleg;
+    private Label Naam;
     private List<Sprite2D> preReactSprites = new List<Sprite2D>();
     private List<Sprite2D> postReactSprites = new List<Sprite2D>();
+    private Sprite2D ASprite;
+    private Sprite2D BSprite;
+    private Sprite2D XSprite;
+    private Sprite2D YSprite;
     private int minigameplayeramount;
     private bool[] activePlayers; // Array om actieve spelers bij te houden
 
     private bool spelActief = false;
+    private int RandomKnop;
+    private Sprite2D UitlegSprite;
+    private Timer TimerUitleg;
 
     public override void _Ready()
     {
@@ -64,12 +74,44 @@ public partial class Minigame3 : Node2D
 
         winnaarLabel = GetNode<Label>("WinnaarLabel");
         winnaarResultaatLabel = GetNode<Label>("WinnaarResultaatLabel");
+        KnopLabel = GetNode<Label>("KnopLabel");
 
-        StartSpel();
-        GD.Print("Aantal spelers:", minigameplayeramount);
+        Naam = GetNode<Label>("Naam");
+        Naam.Text = "Boom!";
+        Uitleg = GetNode<Label>("Uitleg");
+        UitlegSprite = GetNode<Sprite2D>("UitlegSprite");
+        TimerUitleg = GetNode<Timer>("TimerUitleg");
+        ASprite = GetNode<Sprite2D>("ASprite");
+        BSprite = GetNode<Sprite2D>("BSprite");
+        XSprite = GetNode<Sprite2D>("XSprite");
+        YSprite = GetNode<Sprite2D>("YSprite");
+        
+        ASprite.Visible = true;
+        BSprite.Visible = true;
+        XSprite.Visible = true;
+        YSprite.Visible = true;
+        UitlegSprite.Visible = true;
+        TimerUitleg.WaitTime = 20.0f;
+        TimerUitleg.OneShot = true;
+        TimerUitleg.Start();
+
+        TimerUitleg.Connect("timeout", new Callable(this, nameof(OnTimerTimeout1)));
     }
 
-    private void StartSpel()
+    private void OnTimerTimeout1()
+    {
+        UitlegSprite.Visible = false;
+        ASprite.Visible = false;
+        BSprite.Visible = false;
+        XSprite.Visible = false;
+        YSprite.Visible = false;
+        Naam.Text = "";
+        Uitleg.Text = "";
+        StartSpel();
+    }
+
+
+    public void StartSpel()
     {
         spelActief = false;
         Array.Clear(heeftGereageerd, 0, heeftGereageerd.Length);
@@ -83,22 +125,59 @@ public partial class Minigame3 : Node2D
         GetTree().CreateTimer(startTijd).Connect("timeout", new Callable(this, nameof(StartReactieFase)));
     }
 
-    private void StartReactieFase()
+    public void StartReactieFase()
     {
         spelActief = true;
         winnaarLabel.Text = "Schiet nu!";
         startReactieTijd = Time.GetTicksMsec(); // Starttijd van de reactie opslaan
         GD.Print("ReactieFase gestart");
+
+        Randombepalen();
+    }
+
+    public void Randombepalen()
+    {
+        Random rnd = new Random();
+        RandomKnop = rnd.Next(1, 5);
+        GD.Print($"Random gekozen knop: {RandomKnop}"); // Debugging print 
     }
 
     public override void _Process(double delta)
     {
         if (spelActief)
         {
-            CheckPlayerInput("A_1", 0);
-            CheckPlayerInput("A_2", 1);
-            CheckPlayerInput("A_3", 2);
-            CheckPlayerInput("A_4", 3);
+            if (RandomKnop == 1)
+            {
+                KnopLabel.Text = "Druk op A";
+                CheckPlayerInput("A_1", 0);
+                CheckPlayerInput("A_2", 1);
+                CheckPlayerInput("A_3", 2);
+                CheckPlayerInput("A_4", 3);
+            }
+            else if (RandomKnop == 2)
+            {
+                KnopLabel.Text = "Druk op B";
+                CheckPlayerInput("B_1", 0);
+                CheckPlayerInput("B_2", 1);
+                CheckPlayerInput("B_3", 2);
+                CheckPlayerInput("B_4", 3);
+            }
+            else if (RandomKnop == 3)
+            {
+                KnopLabel.Text = "Druk op X";
+                CheckPlayerInput("X_1", 0);
+                CheckPlayerInput("X_2", 1);
+                CheckPlayerInput("X_3", 2);
+                CheckPlayerInput("X_4", 3);
+            }
+            else
+            {
+                KnopLabel.Text = "Druk op Y";
+                CheckPlayerInput("Y_1", 0);
+                CheckPlayerInput("Y_2", 1);
+                CheckPlayerInput("Y_3", 2);
+                CheckPlayerInput("Y_4", 3);
+            }
         }
     }
 
@@ -141,13 +220,13 @@ public partial class Minigame3 : Node2D
         {
             winnaarResultaatLabel.Text = "Geen speler heeft gereageerd.";
         }
-        GlobalVariables.Instance.Winner = winnaarIndex+1;
+
         // Wait for a short duration and switch to the main scene
         GetTree().CreateTimer(3f).Connect("timeout", new Callable(this, nameof(ReturnToMainScene)));
     }
 
     private void ReturnToMainScene()
-    {   
+    {
         GlobalVariables.Instance.SwitchToMainBoard();
     }
 
@@ -179,5 +258,5 @@ public partial class Minigame3 : Node2D
             postReactSprites[i].Visible = postReact;
         }
     }
-  
+
 }

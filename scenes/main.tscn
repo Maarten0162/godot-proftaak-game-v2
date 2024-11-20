@@ -1,71 +1,101 @@
-[gd_scene load_steps=106 format=3 uid="uid://6pipgymx5duu"]
+[gd_scene load_steps=146 format=3 uid="uid://6pipgymx5duu"]
 
 [ext_resource type="Script" path="res://scripts/Main.cs" id="1_xihgb"]
 [ext_resource type="Texture2D" uid="uid://8n3od4yuo4jk" path="res://assets/Boards/board finished.png" id="2_ebqpb"]
 [ext_resource type="Script" path="res://Classes/Player.cs" id="2_etkhv"]
+[ext_resource type="Texture2D" uid="uid://ckve41jxyd3tf" path="res://assets/dice/default-dice/image (10).png" id="4_i46ew"]
 [ext_resource type="Texture2D" uid="uid://insiyhwvq4cl" path="res://assets/dice/default-dice/Dobbel-1.png" id="4_lgpu5"]
 [ext_resource type="Texture2D" uid="uid://tuw1uchf463i" path="res://assets/dice/default-dice/Dobbel1.png" id="4_xrfbe"]
 [ext_resource type="Texture2D" uid="uid://c0ktibn6olxwb" path="res://assets/dice/default-dice/Dobbel-2.png" id="5_4w8of"]
 [ext_resource type="Texture2D" uid="uid://dhju6lhh0hqq6" path="res://assets/dice/default-dice/Dobbel0.png" id="5_8626o"]
+[ext_resource type="Texture2D" uid="uid://8jxpg2biupui" path="res://assets/dice/default-dice/image (11).png" id="5_skd3n"]
 [ext_resource type="Texture2D" uid="uid://btar07wdj6v2c" path="res://assets/dice/default-dice/Dobbel2.png" id="5_uooir"]
 [ext_resource type="Texture2D" uid="uid://c3dqqw4fwmhbs" path="res://assets/dice/default-dice/Dobbel3.png" id="6_05bbv"]
+[ext_resource type="Texture2D" uid="uid://baum7b2qjkabj" path="res://assets/dice/default-dice/image (12).png" id="6_453yl"]
 [ext_resource type="Texture2D" uid="uid://cw3smlpyc4x5b" path="res://assets/dice/default-dice/Dobbel-3.png" id="6_xkuka"]
+[ext_resource type="Texture2D" uid="uid://dbxe36p1shxhp" path="res://assets/dice/default-dice/image (13).png" id="7_q7v5c"]
+[ext_resource type="Texture2D" uid="uid://37dq3emo24h8" path="res://assets/dice/default-dice/image (14).png" id="8_naltl"]
 [ext_resource type="Texture2D" uid="uid://441jvs0aetsm" path="res://assets/dice/default-dice/Dobbel4.png" id="8_wdrea"]
+[ext_resource type="Texture2D" uid="uid://ckqw6a8l6jl8h" path="res://assets/dice/default-dice/image (15).png" id="9_3fd5y"]
 [ext_resource type="Texture2D" uid="uid://dwjrvylf4q4k8" path="res://assets/dice/default-dice/Dobbel5.png" id="9_573kd"]
 [ext_resource type="Texture2D" uid="uid://ntnjriij4xb7" path="res://assets/dice/default-dice/Dobbel6.png" id="10_l64x0"]
+[ext_resource type="Texture2D" uid="uid://b3c60nmoc4keh" path="res://assets/dice/default-dice/image (16).png" id="10_nfu2a"]
+[ext_resource type="Texture2D" uid="uid://boi2tj60p5tig" path="res://assets/dice/default-dice/image (17).png" id="11_xwwxu"]
+[ext_resource type="Texture2D" uid="uid://dxshihh3ysox" path="res://assets/dice/default-dice/image (18).png" id="12_l52r7"]
+[ext_resource type="Texture2D" uid="uid://b21sgujgoaaxm" path="res://assets/dice/default-dice/image (19).png" id="13_q845g"]
 [ext_resource type="Texture2D" uid="uid://dyk8ejepe1vww" path="res://assets/dice/default-dice/Dobbel7.png" id="14_3fmk5"]
 [ext_resource type="Texture2D" uid="uid://ccu36fjro5msm" path="res://assets/dice/default-dice/Dobbel8.png" id="15_cv46h"]
+[ext_resource type="Texture2D" uid="uid://bs3omauyfd2wy" path="res://assets/dice/default-dice/image (20).png" id="15_syfqb"]
 [ext_resource type="Texture2D" uid="uid://dol6hnh1qws33" path="res://assets/Spaces/blueSpace.png" id="16_a006q"]
 [ext_resource type="Texture2D" uid="uid://yu4l0530gi5x" path="res://assets/Spaces/topLeftsc.png" id="16_lbrca"]
 [ext_resource type="Texture2D" uid="uid://d1pifwujewrmq" path="res://assets/dice/default-dice/Dobbel9.png" id="16_xc1rm"]
+[ext_resource type="Texture2D" uid="uid://dcq6kk1hnc26m" path="res://assets/dice/default-dice/image (4).png" id="17_1rd0b"]
 [ext_resource type="Texture2D" uid="uid://nki7dvd54tw4" path="res://assets/Spaces/graySpace.png" id="17_v2eak"]
 [ext_resource type="Texture2D" uid="uid://th5esly73wm0" path="res://assets/Spaces/redSpace.png" id="17_vh1sw"]
+[ext_resource type="Texture2D" uid="uid://p4wn6cecpsd6" path="res://assets/dice/default-dice/image (5).png" id="18_i5l7r"]
+[ext_resource type="Texture2D" uid="uid://ctis8etpwih13" path="res://assets/dice/default-dice/image12345.png" id="19_eg0g6"]
 [ext_resource type="Texture2D" uid="uid://d6fynx1abavh" path="res://assets/Spaces/robSpace.png" id="19_g0xgm"]
+[ext_resource type="Texture2D" uid="uid://dkppbft25yuve" path="res://assets/dice/default-dice/image (6).png" id="19_w5yc2"]
+[ext_resource type="Texture2D" uid="uid://b5pfjbah3w41m" path="res://assets/dice/default-dice/image (7).png" id="20_ms2cl"]
 [ext_resource type="Texture2D" uid="uid://bpgph68doahmu" path="res://assets/Spaces/topRightsc.png" id="20_vxcpt"]
+[ext_resource type="Texture2D" uid="uid://caqhll8oe83q6" path="res://assets/dice/default-dice/image (3).png" id="20_w57w6"]
+[ext_resource type="Texture2D" uid="uid://dajen7r2cov20" path="res://assets/dice/default-dice/image (8).png" id="21_1rx5i"]
 [ext_resource type="Texture2D" uid="uid://ddmdgo1mp0hi5" path="res://assets/Spaces/getRobbedSpace.png" id="21_5ywyp"]
-[ext_resource type="Texture2D" uid="uid://cujsv23d5gvki" path="res://assets/Player_icons/Player1.png" id="21_uwqye"]
+[ext_resource type="Texture2D" uid="uid://b5td3xmyfb5wb" path="res://assets/dice/default-dice/image (2).png" id="21_tvidc"]
+[ext_resource type="Texture2D" uid="uid://caiv888xcdgut" path="res://assets/dice/default-dice/image (1).png" id="22_flydp"]
 [ext_resource type="Texture2D" uid="uid://ik8sy7b7upcs" path="res://assets/Spaces/knockoutSpace.png" id="22_hwv6p"]
-[ext_resource type="Texture2D" uid="uid://bdgy0jd42qaw6" path="res://assets/Player_icons/Player2.png" id="22_njgqf"]
+[ext_resource type="Texture2D" uid="uid://ceo2vewabgcyd" path="res://assets/dice/default-dice/image (9).png" id="22_jmbec"]
 [ext_resource type="Texture2D" uid="uid://ch73axs36y1c8" path="res://assets/Spaces/botLeftsc.png" id="23_1ju3i"]
-[ext_resource type="Texture2D" uid="uid://5bky3fkh32ov" path="res://assets/Player_icons/Player3.png" id="23_uhmr6"]
+[ext_resource type="Texture2D" uid="uid://4kj8oswwj53s" path="res://assets/dice/default-dice/image (21).png" id="23_kmmcv"]
+[ext_resource type="Texture2D" uid="uid://sbhpj51n60ja" path="res://assets/dice/default-dice/Dobbel15.png" id="24_besyv"]
 [ext_resource type="Texture2D" uid="uid://bk8pxxiav8jmt" path="res://assets/Spaces/botRightsc.png" id="24_crmrk"]
-[ext_resource type="Texture2D" uid="uid://cbt3kbt34uvqx" path="res://assets/Player_icons/player4.png" id="24_tkr76"]
 [ext_resource type="PackedScene" uid="uid://brdxy5wjx12xy" path="res://scenes/HorseRace.tscn" id="25_kb01l"]
-[ext_resource type="AudioStream" uid="uid://3w3hotdkdetk" path="res://assets/Muziek/diceeee-99427.mp3" id="27_agmsy"]
+[ext_resource type="Texture2D" uid="uid://1evbmkbpbegv" path="res://assets/dice/default-dice/Dobbel16.png" id="25_vvof7"]
+[ext_resource type="Texture2D" uid="uid://yocmf0bnlg46" path="res://assets/dice/default-dice/Dobbel17.png" id="26_kofsq"]
+[ext_resource type="Texture2D" uid="uid://bhxmqabamghgw" path="res://assets/dice/default-dice/Dobbel18.png" id="27_5q6d6"]
+[ext_resource type="Texture2D" uid="uid://bxvx745q1qx48" path="res://assets/dice/default-dice/Dobbel19.png" id="28_b2ti7"]
 [ext_resource type="Texture2D" uid="uid://c2a7lsqldk6c1" path="res://assets/hud/player1.png" id="28_rmfta"]
 [ext_resource type="Texture2D" uid="uid://dk1tlgvs4ww31" path="res://assets/hud/player2.png" id="29_1sk77"]
 [ext_resource type="Texture2D" uid="uid://clvf85myrmxb" path="res://assets/hud/player3.png" id="30_5aixp"]
+[ext_resource type="Texture2D" uid="uid://bpypkxju6klgq" path="res://assets/dice/default-dice/Dobbel20.png" id="30_cfdbx"]
 [ext_resource type="Texture2D" uid="uid://bxekb623gpxua" path="res://assets/hud/player4.png" id="31_ivek0"]
 [ext_resource type="Script" path="res://addons/addons/TextureRectRounded/TextureRectRounded.gd" id="33_on4yt"]
 [ext_resource type="Texture2D" uid="uid://d0e2uptmo1joj" path="res://assets/hud/whitesquare.png" id="34_hjytp"]
 [ext_resource type="Texture2D" uid="uid://d4kugptu031ei" path="res://assets/items/BrassKnuckles.png" id="35_lqly4"]
 [ext_resource type="Texture2D" uid="uid://biculqyyse5f7" path="res://assets/hud/graycircle.png" id="36_v1oqi"]
-[ext_resource type="Texture2D" uid="uid://c4cbbyp1j8o2t" path="res://assets/hud/d-pad-left.png" id="37_gpl2c"]
-[ext_resource type="Texture2D" uid="uid://ck50ouwxen1kr" path="res://assets/hud/d-pad-up.png" id="38_nua34"]
-[ext_resource type="Texture2D" uid="uid://0lqm0yvplh2f" path="res://assets/hud/d-pad-right.png" id="39_7opyf"]
 [ext_resource type="Texture2D" uid="uid://cp83qax4ki8n4" path="res://assets/items/RazorCap.png" id="40_cxnv8"]
 [ext_resource type="Texture2D" uid="uid://bt8bklpg2pvte" path="res://assets/items/GoldenKnuckles.png" id="41_walex"]
 [ext_resource type="Texture2D" uid="uid://kcyfqxm8lhc5" path="res://assets/hud/RollAdjustment.png" id="42_110l2"]
 [ext_resource type="Texture2D" uid="uid://b6guftkjofoh2" path="res://assets/hud/graysquare.png" id="46_xyh4q"]
 [ext_resource type="Texture2D" uid="uid://bop5w1jgj1xb1" path="res://assets/hud/grayslot.png" id="47_rmdg1"]
 [ext_resource type="Texture2D" uid="uid://bfngjnjv43jx6" path="res://assets/items/BearTrap.png" id="48_d40qk"]
+[ext_resource type="Texture2D" uid="uid://dpcp018yag0ko" path="res://assets/Player1.png" id="49_6xmo7"]
 [ext_resource type="Texture2D" uid="uid://ba4migac8j07i" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/D-Pad/button_xboxone_dpad_light_4.png" id="49_hpi5p"]
 [ext_resource type="Texture2D" uid="uid://b0h6e5ncbuxlg" path="res://assets/hud/shopKeeper.png" id="50_mi2s7"]
+[ext_resource type="Texture2D" uid="uid://meqcks5t4j1q" path="res://assets/Player2.png" id="50_vrwiy"]
 [ext_resource type="Texture2D" uid="uid://77beik8ydmor" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/D-Pad/button_xboxone_dpad_light_1.png" id="51_6dq4m"]
+[ext_resource type="Texture2D" uid="uid://c0ysmcgfrk0hq" path="res://assets/Player3.png" id="51_xjax1"]
 [ext_resource type="Texture2D" uid="uid://d37roews6cau4" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/ABXY/button_xbox_digital_b_1.png" id="52_6nig2"]
 [ext_resource type="Texture2D" uid="uid://capfytlqo0ujd" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/D-Pad/button_xboxone_dpad_light_2.png" id="52_rp0r3"]
+[ext_resource type="Texture2D" uid="uid://cha53i6v5dxbx" path="res://assets/player4.png" id="52_v64ot"]
 [ext_resource type="Texture2D" uid="uid://cx3skduiddtax" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/ABXY/button_xbox_digital_a_1.png" id="53_ioj5k"]
 [ext_resource type="Texture2D" uid="uid://dcoh6hiwapyof" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/D-Pad/button_xboxone_dpad_light_3.png" id="53_r6gal"]
+[ext_resource type="AudioStream" uid="uid://ck5aen5733vdn" path="res://assets/Muziek/dicerollkort.mp3" id="54_1jjuo"]
 [ext_resource type="Texture2D" uid="uid://b3b4t6ywg66vg" path="res://assets/dice/0-3.png" id="56_u1n05"]
 [ext_resource type="Texture2D" uid="uid://coktak147vywq" path="res://assets/dice/1-6.png" id="57_ub2e3"]
 [ext_resource type="Texture2D" uid="uid://br0nkv8flippa" path="res://assets/dice/3-6.png" id="59_8eb0a"]
 [ext_resource type="Texture2D" uid="uid://dyw161a1nqj67" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/ABXY/button_xbox_digital_x_1.png" id="60_ifpiy"]
 [ext_resource type="Texture2D" uid="uid://cwgifh35o50as" path="res://assets/dice/-3-9.png" id="61_8bqih"]
 [ext_resource type="Texture2D" uid="uid://ecf0infi502y" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/ABXY/button_xbox_digital_y_1.png" id="62_808mh"]
+[ext_resource type="Texture2D" uid="uid://xpeqgcs8iq1x" path="res://assets/hud/skipturn.png" id="67_w0578"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7y5x1"]
 atlas = ExtResource("4_lgpu5")
 region = Rect2(0, 0, 172, 172)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bniv2"]
+atlas = ExtResource("4_i46ew")
+region = Rect2(0, 0, 174, 171)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iwlsy"]
 atlas = ExtResource("5_4w8of")
@@ -82,6 +112,42 @@ region = Rect2(0, 0, 173, 174)
 [sub_resource type="AtlasTexture" id="AtlasTexture_awr5e"]
 atlas = ExtResource("4_xrfbe")
 region = Rect2(0, 0, 173, 172)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_67smt"]
+atlas = ExtResource("20_w57w6")
+region = Rect2(0, 0, 175, 173)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cuo4u"]
+atlas = ExtResource("21_tvidc")
+region = Rect2(0, 0, 175, 173)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ralw7"]
+atlas = ExtResource("22_flydp")
+region = Rect2(0, 0, 178, 172)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tmsmk"]
+atlas = ExtResource("23_kmmcv")
+region = Rect2(0, 0, 174, 171)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbbux"]
+atlas = ExtResource("24_besyv")
+region = Rect2(0, 0, 175, 173)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y2p27"]
+atlas = ExtResource("25_vvof7")
+region = Rect2(0, 0, 176, 172)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_da21l"]
+atlas = ExtResource("26_kofsq")
+region = Rect2(0, 0, 176, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7rx6u"]
+atlas = ExtResource("27_5q6d6")
+region = Rect2(0, 0, 174, 172)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d4wcu"]
+atlas = ExtResource("28_b2ti7")
+region = Rect2(0, 0, 174, 170)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2r654"]
 atlas = ExtResource("5_uooir")
@@ -127,6 +193,86 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_bniv2")
+}],
+"loop": true,
+"name": &"-10",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_skd3n")
+}],
+"loop": true,
+"name": &"-11",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_453yl")
+}],
+"loop": true,
+"name": &"-12",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_q7v5c")
+}],
+"loop": true,
+"name": &"-13",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_naltl")
+}],
+"loop": true,
+"name": &"-14",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_3fd5y")
+}],
+"loop": true,
+"name": &"-15",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_nfu2a")
+}],
+"loop": true,
+"name": &"-16",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_xwwxu")
+}],
+"loop": true,
+"name": &"-17",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_l52r7")
+}],
+"loop": true,
+"name": &"-18",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_q845g")
+}],
+"loop": true,
+"name": &"-19",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_iwlsy")
 }],
 "loop": true,
@@ -135,10 +281,66 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("15_syfqb")
+}],
+"loop": true,
+"name": &"-20",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_bod2j")
 }],
 "loop": true,
 "name": &"-3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_1rd0b")
+}],
+"loop": true,
+"name": &"-4",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_i5l7r")
+}],
+"loop": true,
+"name": &"-5",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_w5yc2")
+}],
+"loop": true,
+"name": &"-6",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_ms2cl")
+}],
+"loop": true,
+"name": &"-7",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_1rx5i")
+}],
+"loop": true,
+"name": &"-8",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_jmbec")
+}],
+"loop": true,
+"name": &"-9",
 "speed": 5.0
 }, {
 "frames": [{
@@ -159,10 +361,98 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("19_eg0g6")
+}],
+"loop": true,
+"name": &"10",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_67smt")
+}],
+"loop": true,
+"name": &"11",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cuo4u")
+}],
+"loop": true,
+"name": &"12",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ralw7")
+}],
+"loop": true,
+"name": &"13",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tmsmk")
+}],
+"loop": true,
+"name": &"14",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hbbux")
+}],
+"loop": true,
+"name": &"15",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2p27")
+}],
+"loop": true,
+"name": &"16",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_da21l")
+}],
+"loop": true,
+"name": &"17",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7rx6u")
+}],
+"loop": true,
+"name": &"18",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d4wcu")
+}],
+"loop": true,
+"name": &"19",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_2r654")
 }],
 "loop": true,
 "name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("30_cfdbx")
+}],
+"loop": true,
+"name": &"20",
 "speed": 5.0
 }, {
 "frames": [{
@@ -223,6 +513,15 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dd3ac"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h12ml"]
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+anti_aliasing = false
+
+[sub_resource type="LabelSettings" id="LabelSettings_rc2m0"]
 
 [sub_resource type="FontFile" id="FontFile_84c6n"]
 cache/0/16/0/ascent = 0.0
@@ -391,7 +690,7 @@ font = SubResource("FontFile_84c6n")
 font_size = 38
 font_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_akyl3"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8r2mh"]
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -399,7 +698,7 @@ corner_radius_bottom_left = 20
 corner_detail = 20
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6h8nb"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wbvp7"]
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -407,7 +706,7 @@ corner_radius_bottom_left = 20
 corner_detail = 20
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bod3d"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o8xlt"]
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -417,7 +716,7 @@ anti_aliasing = false
 
 [sub_resource type="LabelSettings" id="LabelSettings_okpyf"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gcx6l"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wgnsj"]
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -425,7 +724,7 @@ corner_radius_bottom_left = 20
 corner_detail = 20
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eantd"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rpvix"]
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -433,7 +732,7 @@ corner_radius_bottom_left = 20
 corner_detail = 20
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dihpq"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ly83p"]
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -441,7 +740,7 @@ corner_radius_bottom_left = 20
 corner_detail = 20
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nnsao"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aqbtg"]
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -449,7 +748,7 @@ corner_radius_bottom_left = 20
 corner_detail = 20
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gqt1j"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fdl3k"]
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -457,7 +756,7 @@ corner_radius_bottom_left = 20
 corner_detail = 20
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_icvai"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hwkuf"]
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -465,7 +764,7 @@ corner_radius_bottom_left = 20
 corner_detail = 20
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kxujc"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xch8d"]
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -473,7 +772,7 @@ corner_radius_bottom_left = 20
 corner_detail = 20
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4pi7l"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6t0xp"]
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -481,7 +780,7 @@ corner_radius_bottom_left = 20
 corner_detail = 20
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cjlju"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mynf1"]
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -489,14 +788,28 @@ corner_radius_bottom_left = 20
 corner_detail = 20
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1flcq"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t0ao8"]
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d608f"]
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d54cb"]
 corner_radius_top_left = 30
 corner_radius_top_right = 30
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fpgm2"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8tvmc"]
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -506,14 +819,14 @@ anti_aliasing = false
 [sub_resource type="LabelSettings" id="LabelSettings_802gb"]
 font_size = 13
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s28nt"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qrfdo"]
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d5uy8"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1yjcf"]
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -522,42 +835,42 @@ anti_aliasing = false
 
 [sub_resource type="LabelSettings" id="LabelSettings_ibnqi"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ea3s"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ruouj"]
 corner_radius_top_left = 30
 corner_radius_top_right = 30
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5s4cu"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_267bj"]
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_57uiu"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ubnmt"]
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_seduo"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bi0lu"]
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kq463"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fawf5"]
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o7a6b"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dqnyb"]
 corner_radius_top_left = 30
 corner_radius_top_right = 30
 corner_radius_bottom_right = 30
@@ -578,10 +891,10 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_ebqpb")
 
 [node name="dobbelSprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(564, 141)
+position = Vector2(564, 143)
 scale = Vector2(0.576429, 0.54454)
 sprite_frames = SubResource("SpriteFrames_3cd7b")
-animation = &"4"
+animation = &"20"
 
 [node name="spaces" type="Node" parent="."]
 
@@ -970,7 +1283,8 @@ scale = Vector2(0.1, 0.1)
 script = ExtResource("2_etkhv")
 
 [node name="Sprite2D" type="Sprite2D" parent="player1"]
-texture = ExtResource("21_uwqye")
+scale = Vector2(2.6, 2.6)
+texture = ExtResource("49_6xmo7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player1"]
 shape = SubResource("RectangleShape2D_dd3ac")
@@ -982,7 +1296,8 @@ scale = Vector2(0.1, 0.1)
 script = ExtResource("2_etkhv")
 
 [node name="Sprite2D" type="Sprite2D" parent="player2"]
-texture = ExtResource("22_njgqf")
+scale = Vector2(2.6, 2.6)
+texture = ExtResource("50_vrwiy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player2"]
 shape = SubResource("RectangleShape2D_dd3ac")
@@ -994,7 +1309,8 @@ scale = Vector2(0.1, 0.1)
 script = ExtResource("2_etkhv")
 
 [node name="Sprite2D" type="Sprite2D" parent="player3"]
-texture = ExtResource("23_uhmr6")
+scale = Vector2(2.6, 2.6)
+texture = ExtResource("51_xjax1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player3"]
 shape = SubResource("RectangleShape2D_dd3ac")
@@ -1006,7 +1322,8 @@ scale = Vector2(0.1, 0.1)
 script = ExtResource("2_etkhv")
 
 [node name="Sprite2D" type="Sprite2D" parent="player4"]
-texture = ExtResource("24_tkr76")
+scale = Vector2(2.6, 2.6)
+texture = ExtResource("52_v64ot")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player4"]
 shape = SubResource("RectangleShape2D_dd3ac")
@@ -1014,7 +1331,7 @@ shape = SubResource("RectangleShape2D_dd3ac")
 [node name="HorseRace" parent="." instance=ExtResource("25_kb01l")]
 
 [node name="Dobbelgeluid" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("27_agmsy")
+stream = ExtResource("54_1jjuo")
 volume_db = 1.955
 
 [node name="Node2D" type="Node2D" parent="."]
@@ -1047,6 +1364,53 @@ offset_right = 1508.9
 offset_bottom = 1091.9
 scale = Vector2(0.01, 0.01)
 texture = ExtResource("35_lqly4")
+
+[node name="backoutButton" type="TextureRect" parent="Node2D/CanvasLayer"]
+visible = false
+z_index = 1
+offset_left = 531.0
+offset_top = 451.0
+offset_right = 697.0
+offset_bottom = 617.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("36_v1oqi")
+
+[node name="TextureRectRounded" type="Panel" parent="Node2D/CanvasLayer/backoutButton"]
+clip_children = 1
+layout_mode = 0
+offset_left = -1.01221
+offset_top = 0.0410156
+offset_right = 98.9878
+offset_bottom = 40.041
+scale = Vector2(4, 4)
+theme_override_styles/panel = SubResource("StyleBoxFlat_h12ml")
+script = ExtResource("33_on4yt")
+radius_bottom_left = 20
+radius_bottom_right = 20
+radius_top_left = 20
+radius_top_right = 20
+texture = ExtResource("47_rmdg1")
+
+[node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/backoutButton"]
+layout_mode = 0
+offset_left = 0.000919342
+offset_top = 13.7038
+offset_right = 480.001
+offset_bottom = 493.704
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("53_r6gal")
+
+[node name="Label" type="Label" parent="Node2D/CanvasLayer/backoutButton"]
+layout_mode = 0
+offset_left = 156.131
+offset_top = 0.0409832
+offset_right = 196.131
+offset_bottom = 23.041
+scale = Vector2(6, 6)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+text = "Exit"
+label_settings = SubResource("LabelSettings_rc2m0")
 
 [node name="player1" type="Node2D" parent="Node2D/CanvasLayer"]
 
@@ -1086,7 +1450,7 @@ offset_top = 1.43885
 offset_right = 104.688
 offset_bottom = 16.4388
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_akyl3")
+theme_override_styles/panel = SubResource("StyleBoxFlat_8r2mh")
 script = ExtResource("33_on4yt")
 corner_detail = 20
 radius_bottom_left = 20
@@ -1108,11 +1472,12 @@ texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player1/Playerhud/slot1/inputBox"]
 layout_mode = 0
-offset_left = 19.5762
-offset_top = 19.5762
-offset_right = 147.576
-offset_bottom = 147.576
-texture = ExtResource("37_gpl2c")
+offset_left = 0.000919342
+offset_top = 9.78835
+offset_right = 480.001
+offset_bottom = 489.788
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("49_hpi5p")
 
 [node name="item1" type="TextureRect" parent="Node2D/CanvasLayer/player1/Playerhud"]
 layout_mode = 0
@@ -1131,7 +1496,7 @@ offset_top = 13.9089
 offset_right = 105.168
 offset_bottom = 28.9089
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_6h8nb")
+theme_override_styles/panel = SubResource("StyleBoxFlat_wbvp7")
 script = ExtResource("33_on4yt")
 corner_detail = 20
 radius_bottom_left = 20
@@ -1153,11 +1518,12 @@ texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player1/Playerhud/slot2/inputBox"]
 layout_mode = 0
-offset_left = 19.5762
-offset_top = 19.5762
-offset_right = 147.576
-offset_bottom = 147.576
-texture = ExtResource("38_nua34")
+offset_left = 9.78736
+offset_top = -0.000312805
+offset_right = 489.787
+offset_bottom = 480.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("51_6dq4m")
 
 [node name="item2" type="TextureRect" parent="Node2D/CanvasLayer/player1/Playerhud"]
 layout_mode = 0
@@ -1176,7 +1542,7 @@ offset_top = 27.3381
 offset_right = 105.168
 offset_bottom = 42.3381
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_bod3d")
+theme_override_styles/panel = SubResource("StyleBoxFlat_o8xlt")
 script = ExtResource("33_on4yt")
 corner_detail = 20
 radius_bottom_left = 20
@@ -1198,11 +1564,12 @@ texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player1/Playerhud/slot3/inputBox"]
 layout_mode = 0
-offset_left = 19.5762
-offset_top = 19.5762
-offset_right = 147.576
-offset_bottom = 147.576
-texture = ExtResource("39_7opyf")
+offset_left = 19.5755
+offset_top = 9.78897
+offset_right = 499.575
+offset_bottom = 489.789
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("52_rp0r3")
 
 [node name="item3" type="TextureRect" parent="Node2D/CanvasLayer/player1/Playerhud"]
 layout_mode = 0
@@ -1265,13 +1632,33 @@ offset_bottom = 1137.69
 scale = Vector2(0.01, 0.01)
 texture = ExtResource("35_lqly4")
 
+[node name="skipturn" type="Control" parent="Node2D/CanvasLayer/player1/Playerhud"]
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+offset_left = 13.9089
+offset_top = -170.743
+offset_right = 53.9088
+offset_bottom = -130.743
+scale = Vector2(0.7, 0.7)
+
+[node name="img" type="TextureRect" parent="Node2D/CanvasLayer/player1/Playerhud/skipturn"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 288.0
+offset_right = 863.0
+offset_bottom = 1088.0
+scale = Vector2(0.01, 0.01)
+texture = ExtResource("67_w0578")
+
 [node name="rolladjust" type="Control" parent="Node2D/CanvasLayer/player1/Playerhud"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 0.460064
-offset_top = -259.752
-offset_right = 40.46
-offset_bottom = -219.752
+offset_left = 24.94
+offset_top = -171.223
+offset_right = 64.94
+offset_bottom = -131.223
+scale = Vector2(0.7, 0.7)
 
 [node name="img" type="TextureRect" parent="Node2D/CanvasLayer/player1/Playerhud/rolladjust"]
 layout_mode = 0
@@ -1329,12 +1716,12 @@ label_settings = SubResource("LabelSettings_1j2pu")
 [node name="slot1" type="Panel" parent="Node2D/CanvasLayer/player2/Playerhud"]
 clip_children = 1
 layout_mode = 0
-offset_left = -12.5453
-offset_top = 2.58994
-offset_right = 2.45474
-offset_bottom = 17.5899
+offset_left = -12.066
+offset_top = 2.878
+offset_right = 2.9338
+offset_bottom = 17.878
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_gcx6l")
+theme_override_styles/panel = SubResource("StyleBoxFlat_wgnsj")
 script = ExtResource("33_on4yt")
 corner_detail = 20
 radius_bottom_left = 20
@@ -1356,17 +1743,18 @@ texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player2/Playerhud/slot1/inputBox"]
 layout_mode = 0
-offset_left = 19.5762
-offset_top = 19.5762
-offset_right = 147.576
-offset_bottom = 147.576
-texture = ExtResource("37_gpl2c")
+offset_left = 0.00689316
+offset_top = 9.78219
+offset_right = 480.007
+offset_bottom = 489.782
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("49_hpi5p")
 
 [node name="item1" type="TextureRect" parent="Node2D/CanvasLayer/player2/Playerhud"]
 layout_mode = 0
-offset_left = -12.0656
+offset_left = -10.6268
 offset_top = 4.31655
-offset_right = 787.934
+offset_right = 789.373
 offset_bottom = 804.317
 scale = Vector2(0.01, 0.01)
 texture = ExtResource("35_lqly4")
@@ -1374,12 +1762,12 @@ texture = ExtResource("35_lqly4")
 [node name="slot2" type="Panel" parent="Node2D/CanvasLayer/player2/Playerhud"]
 clip_children = 1
 layout_mode = 0
-offset_left = -12.0656
-offset_top = 15.06
-offset_right = 2.93436
-offset_bottom = 30.06
+offset_left = -12.0655
+offset_top = 15.3477
+offset_right = 2.93459
+offset_bottom = 30.3477
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_eantd")
+theme_override_styles/panel = SubResource("StyleBoxFlat_rpvix")
 script = ExtResource("33_on4yt")
 corner_detail = 20
 radius_bottom_left = 20
@@ -1401,11 +1789,12 @@ texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player2/Playerhud/slot2/inputBox"]
 layout_mode = 0
-offset_left = 19.5762
-offset_top = 19.5762
-offset_right = 147.576
-offset_bottom = 147.576
-texture = ExtResource("38_nua34")
+offset_left = 9.78736
+offset_top = -0.000312805
+offset_right = 489.787
+offset_bottom = 480.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("51_6dq4m")
 
 [node name="item2" type="TextureRect" parent="Node2D/CanvasLayer/player2/Playerhud"]
 layout_mode = 0
@@ -1419,12 +1808,12 @@ texture = ExtResource("35_lqly4")
 [node name="slot3" type="Panel" parent="Node2D/CanvasLayer/player2/Playerhud"]
 clip_children = 1
 layout_mode = 0
-offset_left = -12.0656
-offset_top = 28.4892
-offset_right = 2.93436
-offset_bottom = 43.4892
+offset_left = -12.0655
+offset_top = 28.7769
+offset_right = 2.93459
+offset_bottom = 43.7769
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_dihpq")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ly83p")
 script = ExtResource("33_on4yt")
 corner_detail = 20
 radius_bottom_left = 20
@@ -1446,18 +1835,19 @@ texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player2/Playerhud/slot3/inputBox"]
 layout_mode = 0
-offset_left = 19.5762
-offset_top = 19.5762
-offset_right = 147.576
-offset_bottom = 147.576
-texture = ExtResource("39_7opyf")
+offset_left = 19.5737
+offset_top = 9.78897
+offset_right = 499.574
+offset_bottom = 489.789
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("52_rp0r3")
 
 [node name="item3" type="TextureRect" parent="Node2D/CanvasLayer/player2/Playerhud"]
 layout_mode = 0
 offset_left = -10.6268
-offset_top = 29.2566
+offset_top = 29.7362
 offset_right = 789.373
-offset_bottom = 829.257
+offset_bottom = 829.737
 scale = Vector2(0.01, 0.01)
 texture = ExtResource("35_lqly4")
 
@@ -1513,13 +1903,33 @@ offset_bottom = 1137.69
 scale = Vector2(0.01, 0.01)
 texture = ExtResource("35_lqly4")
 
+[node name="skipturn" type="Control" parent="Node2D/CanvasLayer/player2/Playerhud"]
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+offset_left = 13.9089
+offset_top = -170.743
+offset_right = 53.9088
+offset_bottom = -130.743
+scale = Vector2(0.7, 0.7)
+
+[node name="img" type="TextureRect" parent="Node2D/CanvasLayer/player2/Playerhud/skipturn"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 288.0
+offset_right = 863.0
+offset_bottom = 1088.0
+scale = Vector2(0.01, 0.01)
+texture = ExtResource("67_w0578")
+
 [node name="rolladjust" type="Control" parent="Node2D/CanvasLayer/player2/Playerhud"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 0.460064
-offset_top = -259.752
-offset_right = 40.46
-offset_bottom = -219.752
+offset_left = 24.94
+offset_top = -171.223
+offset_right = 64.94
+offset_bottom = -131.223
+scale = Vector2(0.7, 0.7)
 
 [node name="img" type="TextureRect" parent="Node2D/CanvasLayer/player2/Playerhud/rolladjust"]
 layout_mode = 0
@@ -1579,11 +1989,11 @@ label_settings = SubResource("LabelSettings_1j2pu")
 clip_children = 1
 layout_mode = 0
 offset_left = 89.6882
-offset_top = 2.58994
+offset_top = 1.43884
 offset_right = 104.688
-offset_bottom = 17.5899
+offset_bottom = 16.4388
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_nnsao")
+theme_override_styles/panel = SubResource("StyleBoxFlat_aqbtg")
 script = ExtResource("33_on4yt")
 corner_detail = 20
 radius_bottom_left = 20
@@ -1605,11 +2015,12 @@ texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player3/Playerhud/slot1/inputBox"]
 layout_mode = 0
-offset_left = 19.5762
-offset_top = 19.5762
-offset_right = 147.576
-offset_bottom = 147.576
-texture = ExtResource("37_gpl2c")
+offset_left = 0.000919342
+offset_top = 13.7038
+offset_right = 480.001
+offset_bottom = 493.704
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("49_hpi5p")
 
 [node name="item1" type="TextureRect" parent="Node2D/CanvasLayer/player3/Playerhud"]
 layout_mode = 0
@@ -1624,11 +2035,11 @@ texture = ExtResource("35_lqly4")
 clip_children = 1
 layout_mode = 0
 offset_left = 90.1679
-offset_top = 15.06
+offset_top = 13.9089
 offset_right = 105.168
-offset_bottom = 30.06
+offset_bottom = 28.9089
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_gqt1j")
+theme_override_styles/panel = SubResource("StyleBoxFlat_fdl3k")
 script = ExtResource("33_on4yt")
 corner_detail = 20
 radius_bottom_left = 20
@@ -1650,30 +2061,22 @@ texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player3/Playerhud/slot2/inputBox"]
 layout_mode = 0
-offset_left = 19.5762
-offset_top = 19.5762
-offset_right = 147.576
-offset_bottom = 147.576
-texture = ExtResource("38_nua34")
-
-[node name="item2" type="TextureRect" parent="Node2D/CanvasLayer/player3/Playerhud"]
-layout_mode = 0
-offset_left = 91.1271
-offset_top = 16.0192
-offset_right = 891.127
-offset_bottom = 816.019
-scale = Vector2(0.01, 0.01)
-texture = ExtResource("35_lqly4")
+offset_left = 9.78736
+offset_top = -0.000312805
+offset_right = 489.787
+offset_bottom = 480.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("51_6dq4m")
 
 [node name="slot3" type="Panel" parent="Node2D/CanvasLayer/player3/Playerhud"]
 clip_children = 1
 layout_mode = 0
 offset_left = 90.1679
-offset_top = 28.4892
+offset_top = 27.3381
 offset_right = 105.168
-offset_bottom = 43.4892
+offset_bottom = 42.3381
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_icvai")
+theme_override_styles/panel = SubResource("StyleBoxFlat_hwkuf")
 script = ExtResource("33_on4yt")
 corner_detail = 20
 radius_bottom_left = 20
@@ -1695,11 +2098,21 @@ texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player3/Playerhud/slot3/inputBox"]
 layout_mode = 0
-offset_left = 19.5762
-offset_top = 19.5762
-offset_right = 147.576
-offset_bottom = 147.576
-texture = ExtResource("39_7opyf")
+offset_left = 19.5756
+offset_top = 13.7044
+offset_right = 499.576
+offset_bottom = 493.704
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("52_rp0r3")
+
+[node name="item2" type="TextureRect" parent="Node2D/CanvasLayer/player3/Playerhud"]
+layout_mode = 0
+offset_left = 91.1271
+offset_top = 16.0192
+offset_right = 891.127
+offset_bottom = 816.019
+scale = Vector2(0.01, 0.01)
+texture = ExtResource("35_lqly4")
 
 [node name="item3" type="TextureRect" parent="Node2D/CanvasLayer/player3/Playerhud"]
 layout_mode = 0
@@ -1762,13 +2175,33 @@ offset_bottom = 1137.69
 scale = Vector2(0.01, 0.01)
 texture = ExtResource("35_lqly4")
 
+[node name="skipturn" type="Control" parent="Node2D/CanvasLayer/player3/Playerhud"]
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+offset_left = 13.9089
+offset_top = -170.743
+offset_right = 53.9088
+offset_bottom = -130.743
+scale = Vector2(0.7, 0.7)
+
+[node name="img" type="TextureRect" parent="Node2D/CanvasLayer/player3/Playerhud/skipturn"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 288.0
+offset_right = 863.0
+offset_bottom = 1088.0
+scale = Vector2(0.01, 0.01)
+texture = ExtResource("67_w0578")
+
 [node name="rolladjust" type="Control" parent="Node2D/CanvasLayer/player3/Playerhud"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 0.460064
-offset_top = -259.752
-offset_right = 40.46
-offset_bottom = -219.752
+offset_left = 24.94
+offset_top = -171.223
+offset_right = 64.94
+offset_bottom = -131.223
+scale = Vector2(0.7, 0.7)
 
 [node name="img" type="TextureRect" parent="Node2D/CanvasLayer/player3/Playerhud/rolladjust"]
 layout_mode = 0
@@ -1827,12 +2260,12 @@ label_settings = SubResource("LabelSettings_1j2pu")
 [node name="slot1" type="Panel" parent="Node2D/CanvasLayer/player4/Playerhud"]
 clip_children = 1
 layout_mode = 0
-offset_left = -12.0656
-offset_top = 2.58994
-offset_right = 2.93436
-offset_bottom = 17.5899
+offset_left = -12.066
+offset_top = 2.878
+offset_right = 2.9338
+offset_bottom = 17.878
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_kxujc")
+theme_override_styles/panel = SubResource("StyleBoxFlat_xch8d")
 script = ExtResource("33_on4yt")
 corner_detail = 20
 radius_bottom_left = 20
@@ -1854,30 +2287,31 @@ texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player4/Playerhud/slot1/inputBox"]
 layout_mode = 0
-offset_left = 19.5762
-offset_top = 19.5762
-offset_right = 147.576
-offset_bottom = 147.576
-texture = ExtResource("37_gpl2c")
+offset_left = 0.00689316
+offset_top = 13.6979
+offset_right = 480.007
+offset_bottom = 493.698
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("49_hpi5p")
 
 [node name="item1" type="TextureRect" parent="Node2D/CanvasLayer/player4/Playerhud"]
 layout_mode = 0
 offset_left = -10.6268
-offset_top = 3.54917
+offset_top = 4.02879
 offset_right = 789.373
-offset_bottom = 803.549
+offset_bottom = 804.029
 scale = Vector2(0.01, 0.01)
 texture = ExtResource("35_lqly4")
 
 [node name="slot2" type="Panel" parent="Node2D/CanvasLayer/player4/Playerhud"]
 clip_children = 1
 layout_mode = 0
-offset_left = -11.586
-offset_top = 15.06
-offset_right = 3.41397
-offset_bottom = 30.06
+offset_left = -12.0655
+offset_top = 15.3478
+offset_right = 2.93459
+offset_bottom = 30.3478
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_4pi7l")
+theme_override_styles/panel = SubResource("StyleBoxFlat_6t0xp")
 script = ExtResource("33_on4yt")
 corner_detail = 20
 radius_bottom_left = 20
@@ -1890,7 +2324,7 @@ texture = ExtResource("34_hjytp")
 visible = false
 z_index = 1
 layout_mode = 0
-offset_left = 2.0555
+offset_left = 2.05548
 offset_top = 17.8143
 offset_right = 168.055
 offset_bottom = 183.814
@@ -1899,11 +2333,12 @@ texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player4/Playerhud/slot2/inputBox"]
 layout_mode = 0
-offset_left = 19.5762
-offset_top = 19.5762
-offset_right = 147.576
-offset_bottom = 147.576
-texture = ExtResource("38_nua34")
+offset_left = 9.78736
+offset_top = -0.000312805
+offset_right = 489.787
+offset_bottom = 480.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("51_6dq4m")
 
 [node name="item2" type="TextureRect" parent="Node2D/CanvasLayer/player4/Playerhud"]
 layout_mode = 0
@@ -1917,12 +2352,12 @@ texture = ExtResource("35_lqly4")
 [node name="slot3" type="Panel" parent="Node2D/CanvasLayer/player4/Playerhud"]
 clip_children = 1
 layout_mode = 0
-offset_left = -11.586
-offset_top = 28.4892
-offset_right = 3.41397
-offset_bottom = 43.4892
+offset_left = -12.0655
+offset_top = 28.777
+offset_right = 2.93459
+offset_bottom = 43.777
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_cjlju")
+theme_override_styles/panel = SubResource("StyleBoxFlat_mynf1")
 script = ExtResource("33_on4yt")
 corner_detail = 20
 radius_bottom_left = 20
@@ -1944,18 +2379,19 @@ texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player4/Playerhud/slot3/inputBox"]
 layout_mode = 0
-offset_left = 19.5762
-offset_top = 19.5762
-offset_right = 147.576
-offset_bottom = 147.576
-texture = ExtResource("39_7opyf")
+offset_left = 19.5737
+offset_top = 13.7044
+offset_right = 499.574
+offset_bottom = 493.704
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("52_rp0r3")
 
 [node name="item3" type="TextureRect" parent="Node2D/CanvasLayer/player4/Playerhud"]
 layout_mode = 0
 offset_left = -10.6268
-offset_top = 28.9688
+offset_top = 29.9281
 offset_right = 789.373
-offset_bottom = 828.969
+offset_bottom = 829.928
 scale = Vector2(0.01, 0.01)
 texture = ExtResource("35_lqly4")
 
@@ -2008,13 +2444,33 @@ offset_bottom = 1137.69
 scale = Vector2(0.01, 0.01)
 texture = ExtResource("35_lqly4")
 
+[node name="skipturn" type="Control" parent="Node2D/CanvasLayer/player4/Playerhud"]
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+offset_left = 13.9089
+offset_top = -170.743
+offset_right = 53.9088
+offset_bottom = -130.743
+scale = Vector2(0.7, 0.7)
+
+[node name="img" type="TextureRect" parent="Node2D/CanvasLayer/player4/Playerhud/skipturn"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 288.0
+offset_right = 863.0
+offset_bottom = 1088.0
+scale = Vector2(0.01, 0.01)
+texture = ExtResource("67_w0578")
+
 [node name="rolladjust" type="Control" parent="Node2D/CanvasLayer/player4/Playerhud"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 0.460064
-offset_top = -259.752
-offset_right = 40.46
-offset_bottom = -219.752
+offset_left = 24.94
+offset_top = -171.223
+offset_right = 64.94
+offset_bottom = -131.223
+scale = Vector2(0.7, 0.7)
 
 [node name="img" type="TextureRect" parent="Node2D/CanvasLayer/player4/Playerhud/rolladjust"]
 layout_mode = 0
@@ -2054,6 +2510,57 @@ theme_override_constants/outline_size = 6
 text = "SpelerX is aan de beurt, kies een item om te gebruiken"
 horizontal_alignment = 1
 
+[node name="Control" type="Control" parent="Node2D/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="noButton" type="Panel" parent="Node2D/CanvasLayer/Control"]
+clip_children = 1
+z_index = 1
+layout_mode = 0
+offset_left = 617.0
+offset_top = 326.0
+offset_right = 657.0
+offset_bottom = 366.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_t0ao8")
+script = ExtResource("33_on4yt")
+texture = ExtResource("52_6nig2")
+
+[node name="Label" type="Label" parent="Node2D/CanvasLayer/Control/noButton"]
+z_index = 1
+layout_mode = 0
+offset_left = 46.0
+offset_top = 8.0
+offset_right = 86.0
+offset_bottom = 31.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+text = "No"
+
+[node name="yesButton" type="Panel" parent="Node2D/CanvasLayer/Control"]
+clip_children = 1
+layout_mode = 0
+offset_left = 483.0
+offset_top = 326.0
+offset_right = 523.0
+offset_bottom = 366.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_d608f")
+script = ExtResource("33_on4yt")
+texture = ExtResource("53_ioj5k")
+
+[node name="Label2" type="Label" parent="Node2D/CanvasLayer/Control/yesButton"]
+z_index = 1
+layout_mode = 0
+offset_left = 46.0
+offset_top = 8.0
+offset_right = 86.0
+offset_bottom = 31.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+text = "Yes "
+
 [node name="CanvasLayersshop" type="CanvasLayer" parent="."]
 
 [node name="TextureRectRounded" type="Panel" parent="CanvasLayersshop"]
@@ -2070,7 +2577,7 @@ offset_right = 324.5
 offset_bottom = 175.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_1flcq")
+theme_override_styles/panel = SubResource("StyleBoxFlat_d54cb")
 script = ExtResource("33_on4yt")
 radius_bottom_left = 30
 radius_bottom_right = 30
@@ -2086,7 +2593,7 @@ offset_left = 36.0
 offset_top = 51.0
 offset_right = 154.0
 offset_bottom = 169.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_fpgm2")
+theme_override_styles/panel = SubResource("StyleBoxFlat_8tvmc")
 script = ExtResource("33_on4yt")
 texture = ExtResource("47_rmdg1")
 
@@ -2149,9 +2656,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -47.5
+offset_left = -78.5
 offset_top = 92.0
-offset_right = 47.5
+offset_right = 71.5
 offset_bottom = 173.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -2170,7 +2677,7 @@ offset_left = 208.5
 offset_top = 51.0
 offset_right = 326.5
 offset_bottom = 169.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_s28nt")
+theme_override_styles/panel = SubResource("StyleBoxFlat_qrfdo")
 script = ExtResource("33_on4yt")
 texture = ExtResource("47_rmdg1")
 
@@ -2223,9 +2730,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -47.5
+offset_left = -71.5
 offset_top = 92.0
-offset_right = 47.5
+offset_right = 78.5
 offset_bottom = 173.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -2255,7 +2762,7 @@ offset_left = 377.5
 offset_top = 51.0
 offset_right = 495.5
 offset_bottom = 169.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_d5uy8")
+theme_override_styles/panel = SubResource("StyleBoxFlat_1yjcf")
 script = ExtResource("33_on4yt")
 texture = ExtResource("47_rmdg1")
 
@@ -2308,9 +2815,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -47.5
+offset_left = -67.0
 offset_top = 92.0
-offset_right = 47.5
+offset_right = 83.0
 offset_bottom = 173.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -2378,7 +2885,7 @@ offset_right = 269.0
 offset_bottom = 125.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_5ea3s")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ruouj")
 script = ExtResource("33_on4yt")
 radius_bottom_left = 30
 radius_bottom_right = 30
@@ -2395,7 +2902,7 @@ offset_top = 83.0
 offset_right = 239.5
 offset_bottom = 201.0
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_5s4cu")
+theme_override_styles/panel = SubResource("StyleBoxFlat_267bj")
 script = ExtResource("33_on4yt")
 texture = ExtResource("47_rmdg1")
 
@@ -2481,7 +2988,7 @@ offset_top = 82.0
 offset_right = 359.0
 offset_bottom = 200.0
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_57uiu")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ubnmt")
 script = ExtResource("33_on4yt")
 texture = ExtResource("47_rmdg1")
 
@@ -2568,7 +3075,7 @@ offset_top = 83.0
 offset_right = 481.0
 offset_bottom = 201.0
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_seduo")
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi0lu")
 script = ExtResource("33_on4yt")
 texture = ExtResource("47_rmdg1")
 
@@ -2656,7 +3163,7 @@ offset_top = 83.0
 offset_right = 601.0
 offset_bottom = 201.0
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_kq463")
+theme_override_styles/panel = SubResource("StyleBoxFlat_fawf5")
 script = ExtResource("33_on4yt")
 texture = ExtResource("47_rmdg1")
 
@@ -2758,7 +3265,7 @@ offset_right = 324.5
 offset_bottom = 175.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_o7a6b")
+theme_override_styles/panel = SubResource("StyleBoxFlat_dqnyb")
 script = ExtResource("33_on4yt")
 radius_bottom_left = 30
 radius_bottom_right = 30
@@ -2785,51 +3292,49 @@ offset_bottom = 885.0
 scale = Vector2(14, 14)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 0
-text = "Naamloze karacter:   Welcome to my shop. Come take a look what we have in store."
+text = "Naamloze karakter:   Welcome to my shop. Come take a look what we have in store."
 label_settings = SubResource("LabelSettings_od6xc")
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="yesbutton" type="TextureRect" parent="CanvasLayersshop/WelcomeScreen/TextureRect"]
+[node name="nobutton" type="TextureRect" parent="CanvasLayersshop/WelcomeScreen/TextureRect"]
 layout_mode = 0
-offset_left = 1260.0
-offset_top = 1730.0
-offset_right = 1740.0
-offset_bottom = 2210.0
+offset_left = 3370.0
+offset_top = 1670.0
+offset_right = 3850.0
+offset_bottom = 2150.0
 texture = ExtResource("52_6nig2")
 
-[node name="Label" type="Label" parent="CanvasLayersshop/WelcomeScreen/TextureRect/yesbutton"]
+[node name="Label2" type="Label" parent="CanvasLayersshop/WelcomeScreen/TextureRect/nobutton"]
 layout_mode = 0
-offset_left = 590.0
+offset_left = 600.0
 offset_top = 110.0
-offset_right = 630.0
-offset_bottom = 133.0
-scale = Vector2(12, 12)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-text = "Yes"
-
-[node name="nobutton" type="TextureRect" parent="CanvasLayersshop/WelcomeScreen/TextureRect"]
-z_index = 1
-layout_mode = 0
-offset_left = 3660.0
-offset_top = 1710.0
-offset_right = 4140.0
-offset_bottom = 2190.0
-texture = ExtResource("53_ioj5k")
-
-[node name="Label" type="Label" parent="CanvasLayersshop/WelcomeScreen/TextureRect/nobutton"]
-layout_mode = 0
-offset_left = 590.0
-offset_top = 110.0
-offset_right = 630.0
+offset_right = 640.0
 offset_bottom = 133.0
 scale = Vector2(12, 12)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 text = "No"
 
-[node name="Node" type="Node" parent="CanvasLayersshop"]
+[node name="yesbutton" type="TextureRect" parent="CanvasLayersshop/WelcomeScreen/TextureRect"]
+z_index = 1
+layout_mode = 0
+offset_left = 1520.0
+offset_top = 1670.0
+offset_right = 2000.0
+offset_bottom = 2150.0
+texture = ExtResource("53_ioj5k")
+
+[node name="Label2" type="Label" parent="CanvasLayersshop/WelcomeScreen/TextureRect/yesbutton"]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 110.0
+offset_right = 640.0
+offset_bottom = 133.0
+scale = Vector2(12, 12)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+text = "Yes"
 
 [node name="CanvasLayerspaces" type="CanvasLayer" parent="."]
 

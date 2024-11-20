@@ -18,6 +18,14 @@ public partial class Minigame1 : Node
 	private int readyPlayers = 0; // Count of ready players
 	private int minigameplayeramount; // Number of players in the game
 	
+	private bool spelActief = false;
+    private int RandomKnop;
+
+	private Label Uitleg;
+    private Label Naam;
+    private Sprite2D UitlegSprite;
+	private Sprite2D ASprite;
+    private Timer TimerUitleg;
 
 
 	public override void _Ready()
@@ -63,11 +71,35 @@ public partial class Minigame1 : Node
 
 
 		LoadHighscore();
-		gameTimer.Start(); // Start de timer
+		
 
 		UpdateUI();
 
-	}
+		Naam = GetNode<Label>("Naam");
+        Naam.Text = "Paarden Race";
+        Uitleg = GetNode<Label>("Uitleg");
+		ASprite = GetNode<Sprite2D>("ASprite");
+        UitlegSprite = GetNode<Sprite2D>("UitlegSprite");
+        TimerUitleg = GetNode<Timer>("TimerUitleg");
+
+        UitlegSprite.Visible = true;
+		ASprite.Visible = true;
+        TimerUitleg.WaitTime = 20.0f;
+        TimerUitleg.OneShot = true;
+        TimerUitleg.Start();
+
+        TimerUitleg.Connect("timeout", new Callable(this, nameof(OnTimerTimeout1)));
+        GD.Print("Aantal spelers:", minigameplayeramount);
+    }
+
+    private void OnTimerTimeout1()
+    {
+        UitlegSprite.Visible = false;
+		ASprite.Visible = false;
+        Naam.Text = "";
+        Uitleg.Text = "";
+        gameTimer.Start(); // Start de timer
+    }
 
 	public override void _Process(double delta)
 	{

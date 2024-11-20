@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://ck50mouvua0dg"]
+[gd_scene load_steps=10 format=3 uid="uid://ck50mouvua0dg"]
 
 [ext_resource type="Script" path="res://scripts/Minigame3.cs" id="1_nn6t3"]
 [ext_resource type="Texture2D" uid="uid://08e4gvva1xuu" path="res://Minigame3/achtergrond.jpeg" id="2_kjeyj"]
 [ext_resource type="Texture2D" uid="uid://dk4jqakc717oj" path="res://Minigame3/Geweer.webp" id="3_q17yp"]
 [ext_resource type="Texture2D" uid="uid://bvg2a63o85ypj" path="res://Minigame3/BANG.webp" id="4_5jyg5"]
+[ext_resource type="Texture2D" uid="uid://dn1wgggu0wnt3" path="res://assets/Boards/rename background.png" id="5_rgevo"]
+[ext_resource type="Texture2D" uid="uid://cx3skduiddtax" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/ABXY/button_xbox_digital_a_1.png" id="6_pwc2e"]
+[ext_resource type="Texture2D" uid="uid://d37roews6cau4" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/ABXY/button_xbox_digital_b_1.png" id="7_n32wo"]
+[ext_resource type="Texture2D" uid="uid://dyw161a1nqj67" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/ABXY/button_xbox_digital_x_1.png" id="8_ats1y"]
+[ext_resource type="Texture2D" uid="uid://ecf0infi502y" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/ABXY/button_xbox_digital_y_1.png" id="9_1x52m"]
 
 [node name="Minigame3" type="Node2D"]
 script = ExtResource("1_nn6t3")
@@ -85,6 +90,12 @@ offset_top = 333.0
 offset_right = 958.0
 offset_bottom = 380.0
 
+[node name="KnopLabel" type="Label" parent="."]
+offset_left = 454.0
+offset_top = 53.0
+offset_right = 671.0
+offset_bottom = 140.0
+
 [node name="WinnaarLabel" type="Label" parent="."]
 offset_left = 492.0
 offset_top = 216.0
@@ -102,3 +113,49 @@ offset_bottom = 412.0
 [node name="DelayTimer" type="Timer" parent="."]
 
 [node name="ReactieTimer" type="Timer" parent="."]
+
+[node name="TimerUitleg" type="Timer" parent="."]
+
+[node name="UitlegSprite" type="Sprite2D" parent="."]
+position = Vector2(577.662, 326.371)
+scale = Vector2(0.726673, 0.72362)
+texture = ExtResource("5_rgevo")
+
+[node name="Naam" type="Label" parent="."]
+offset_left = 19.0
+offset_top = 122.0
+offset_right = 361.0
+offset_bottom = 256.0
+horizontal_alignment = 1
+
+[node name="Uitleg" type="Label" parent="."]
+offset_left = 40.0
+offset_top = 297.0
+offset_right = 398.0
+offset_bottom = 564.0
+text = "In dit spel moet je zo snel mogelijk reageren 
+om als eerste Thomas Shelby neer te schieten. 
+Wacht op het signaal en schiet vervolgens 
+zo snel mogelijk op de A knop 
+om als eerste te schieten. 
+Degene die als eerste reageert wint.\""
+
+[node name="ASprite" type="Sprite2D" parent="."]
+position = Vector2(80, 515)
+scale = Vector2(0.151042, 0.151042)
+texture = ExtResource("6_pwc2e")
+
+[node name="BSprite" type="Sprite2D" parent="."]
+position = Vector2(166, 515)
+scale = Vector2(0.151042, 0.151042)
+texture = ExtResource("7_n32wo")
+
+[node name="XSprite" type="Sprite2D" parent="."]
+position = Vector2(245.25, 515.25)
+scale = Vector2(0.151042, 0.151042)
+texture = ExtResource("8_ats1y")
+
+[node name="YSprite" type="Sprite2D" parent="."]
+position = Vector2(331.25, 515.25)
+scale = Vector2(0.151042, 0.151042)
+texture = ExtResource("9_1x52m")

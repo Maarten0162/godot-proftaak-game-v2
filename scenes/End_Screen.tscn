@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7omwxkecfvp2"]
+[gd_scene load_steps=3 format=3 uid="uid://c81x8eeiu28xw"]
 
 [ext_resource type="Script" path="res://scripts/End_Screen.cs" id="1_y7pht"]
 [ext_resource type="Texture2D" uid="uid://clw2xmws5hdbi" path="res://assets/Boards/endscreen.png" id="2_qioyj"]
@@ -16,3 +16,4 @@ offset_left = 558.0
 offset_top = 176.0
 offset_right = 598.0
 offset_bottom = 199.0
+text = "\"De winnaar van de game is: Speler1 !!!"
