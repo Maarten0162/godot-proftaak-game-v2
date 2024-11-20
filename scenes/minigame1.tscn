@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://bmb2c2ykwbwl3"]
+[gd_scene load_steps=7 format=3 uid="uid://bmb2c2ykwbwl3"]
 
 [ext_resource type="Script" path="res://scripts/Minigame1.cs" id="1_i3b7e"]
 [ext_resource type="Texture2D" uid="uid://b205jypegaywx" path="res://Minigame1/asvalt.png" id="1_ur60m"]
-[ext_resource type="Texture2D" uid="uid://dvac4bpt2rneg" path="res://Minigame1/Paard.png" id="2_10ftx"]
+[ext_resource type="Texture2D" uid="uid://b7kepvuxlylj4" path="res://Minigame1/PaardPlayer1.png" id="3_kxtpk"]
+[ext_resource type="Texture2D" uid="uid://m56lu1m657wt" path="res://Minigame1/PaardPlayer2.png" id="4_hjx06"]
+[ext_resource type="Texture2D" uid="uid://dpvg0w0af48n3" path="res://Minigame1/PaardPlayer3.png" id="5_1k0q4"]
+[ext_resource type="Texture2D" uid="uid://c7unb81qxu7rp" path="res://Minigame1/PaardPlayer4.png" id="6_tiiy2"]
 
 [node name="Minigame1" type="Node2D"]
 script = ExtResource("1_i3b7e")
@@ -13,28 +16,24 @@ scale = Vector2(0.600586, 0.716797)
 texture = ExtResource("1_ur60m")
 
 [node name="Horse1" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(95, 82)
 scale = Vector2(0.289583, 0.241803)
-texture = ExtResource("2_10ftx")
+texture = ExtResource("3_kxtpk")
 
 [node name="Horse2" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(107, 238)
 scale = Vector2(0.289583, 0.241803)
-texture = ExtResource("2_10ftx")
+texture = ExtResource("4_hjx06")
 
 [node name="Horse3" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(105, 405)
 scale = Vector2(0.289583, 0.241803)
-texture = ExtResource("2_10ftx")
+texture = ExtResource("5_1k0q4")
 
 [node name="Horse4" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(105, 565)
 scale = Vector2(0.289583, 0.241803)
-texture = ExtResource("2_10ftx")
+texture = ExtResource("6_tiiy2")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0

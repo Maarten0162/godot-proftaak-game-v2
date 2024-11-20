@@ -207,10 +207,10 @@ public partial class Main : Node2D
 
 		if (PlayerAmount == 2)
 		{
-			Vector2 player1start = spacesInfo[0].Space.Position;
+			Vector2 player1start = spacesInfo[5].Space.Position;
 			player1 = GetNode<Player>("player1");
 			player1.Position = player1start;
-			player1.PositionSpace = 0;
+			player1.PositionSpace = 5;
 			Vector2 player2start = spacesInfo[9].Space.Position;
 			player2 = GetNode<Player>("player2");
 			player2.Position = player2start;
@@ -1076,7 +1076,7 @@ public partial class Main : Node2D
 
 		while (runloop)
 		{
-			int rnditem = rnd.Next(0, 14);
+			int rnditem = rnd.Next(0, 12);
 			if (!randomList.Contains(rnditem))
 			{
 				randomList.Add(rnditem);
@@ -1103,8 +1103,10 @@ public partial class Main : Node2D
 		bool runloop = true;
 		int chosenprice = 0;
 		string ItemConfirm = "X";
+		string itemName = "0";
 		while (runloop)
 		{
+			
 			bool runLoop2 = true;
 			string ChosenItem = "0";
 			while (runLoop2)
@@ -1148,15 +1150,83 @@ public partial class Main : Node2D
 
 					runLoop2 = false;
 					textShop.Hide();
+					mainShop.Hide();
 					
 
 				}
 				await ToSignal(GetTree().CreateTimer(0), "timeout");
+			
+				switch (ChosenItem)
+				{
+					case "0":
+						itemName = "0";
+						break;
 
+					case "Whiskey":
+						itemName = "Whiskey";
+						break;
+
+					case "GoldenPipe":
+						itemName = "Carriage";
+						break;
+
+					case "DoubleDice":
+						itemName = "Double Dice";
+						break;
+
+					case "TripleDice":
+						itemName = "Triple Dice";
+						break;
+
+					case "TwentyDice":
+						itemName = "Twenty Dice";
+						break;
+
+					case "TenDice":
+							itemName = "Ten Dice";
+						break;
+
+					case "DashMushroom":
+							itemName = "Speed Boots";
+						break;
+
+					case "TeleportTorndPlayer":
+							itemName = "TP To Random Player";
+						break;
+
+					case "SwitchPlaces":
+							itemName = "Switch Places";
+						break;
+
+					case "StealPlayerCap":
+							itemName = "Steal Player Cap";
+						break;
+
+					case "PoisonMushroom":
+							itemName = "Ball and Chain";
+						break;
+
+					case "BearTrap":
+							itemName = "Bear Trap";
+						break;
+
+					case "StealCoins":
+							itemName = "Steal Coins";
+						break;
+
+					case "BrassKnuckles":
+							itemName = "Knuckles";
+						break;
+
+					case "GoldenKnuckles":
+							itemName = "Golden Knuckles";
+						break;
+				}
+				
 			}
 			bool runLoop3 = true;
-			if (ChosenItem == "0") {
-				shopConfirm(ChosenItem, chosenprice, player);
+			if (itemName != "0") {
+				shopConfirm(itemName, chosenprice, player);
 			}
 			
 
@@ -1239,7 +1309,6 @@ public partial class Main : Node2D
 			if (Input.IsActionJustPressed($"D-Pad-left_{WhatPlayer}"))
 			{
 				turnLabel.Hide();
-				resetInvPos(player);
 				itemId = player.Inventory[0];
 				switch (itemId)
 				{
@@ -1395,11 +1464,14 @@ public partial class Main : Node2D
 						return useditem;
 				}
 				updateInvSprite(player);
+				if (itemId != "0") {
+					resetInvPos(player);
+					turnLabel.Hide();
+				}
 			}
 			if (Input.IsActionJustPressed($"D-Pad-up_{WhatPlayer}"))
 			{
 				turnLabel.Hide();
-				resetInvPos(player);
 				itemId = player.Inventory[1];
 				switch (itemId)
 				{
@@ -1555,11 +1627,13 @@ public partial class Main : Node2D
 						return useditem;
 				}
 				updateInvSprite(player);
+				if (itemId != "0") {
+					resetInvPos(player);
+					turnLabel.Hide();
+				}
 			}
 			if (Input.IsActionJustPressed($"D-Pad-right_{WhatPlayer}"))
 			{
-				turnLabel.Hide();
-				resetInvPos(player);
 				itemId = player.Inventory[2];
 				switch (itemId)
 				{
@@ -1702,6 +1776,11 @@ public partial class Main : Node2D
 						GD.Print("Used item " + useditem + "  it has vanished from their inventory.");
 						useditem = "nodice";
 						return useditem;
+				}
+				updateInvSprite(player);
+				if (itemId != "0") {
+					resetInvPos(player);
+					turnLabel.Hide();
 				}
 			}
 			if (Input.IsActionJustPressed($"D-Pad-down_{WhatPlayer}"))
@@ -2279,7 +2358,7 @@ public partial class Main : Node2D
 
 	}
 
-	//inventory
+	//	tory
 	// ("Whiskey", 20), ("GoldenPipe", 20), ("DoubleDice", 10), ("TripleDice", 13), ("TwentyDice", 20), ("TenDice", 8), 
 	// ("DashMushroom", 5), ("TeleportTorndPlayer", 15), ("SwitchPlaces", 15), ("StealPlayerCap", 40), 
 	// ("PoisonMushroom", 5), ("StealCoins", 30), ("BrassKnuckles", 20), ("GoldenKnuckles", 50), 
@@ -2610,66 +2689,80 @@ public partial class Main : Node2D
 
 				case "Whiskey":
 					GD.Print("Whiskey");
+					titleLabel.Text = "Whiskey";
 					DescriptionLabel.Text = "gooi dit item op een vak en zie een speler al zijn geld wegdrinken.";
 					break;
 
 				case "GoldenPipe":
+					titleLabel.Text = "Carriage";
 					DescriptionLabel.Text = "gebruik deze koets om naar de razorcap te racen.";
 					break;
 
 				case "DoubleDice":
+					titleLabel.Text = "Double Dice";
 					DescriptionLabel.Text = "2 dice van 0/6.";
 					break;
 
 				case "TripleDice":
+					titleLabel.Text = "Triple Dice";
 					DescriptionLabel.Text = "3 dice van 0/6.";
 					break;
 
 				case "TwentyDice":
+					titleLabel.Text = "Twenty Dice";
 					DescriptionLabel.Text = "een dice van -20/20.";
 					break;
 				case "TenDice":
+					titleLabel.Text = "Ten Dice";
 					DescriptionLabel.Text = "een dice van 0/10.";
 					break;
 
 				case "DashMushroom":
+					titleLabel.Text = "Speed Boots";
 					DescriptionLabel.Text = "gebruik deze schoenen om bij je volgende dobbel +5 te krijgen.";
 					break;
 
 				case "TeleportTorndPlayer":
+					titleLabel.Text = "TP To Random Player";
 					DescriptionLabel.Text = "gebruik dit item om naar een willekeurige speler te transporteren.";
 					break;
 
 				case "SwitchPlaces":
+					titleLabel.Text = "Switch Places";
 					DescriptionLabel.Text = "gebruik dit item om met een willekeurige speler van plek te ruilen.";
 					break;
 
 				case "StealPlayerCap":
+					titleLabel.Text = "Steal Player Cap";
 					DescriptionLabel.Text = "gebruik dit item om de razorcap van een speler af te pakken.";
 					break;
 
 				case "PoisonMushroom":
+					titleLabel.Text = "Ball and Chain";
 					DescriptionLabel.Text = "gebruik dit item om bij een willekeurige speler -5 van zijn volgende dobbel te halen.";
 					break;
 
 				case "StealCoins":
+					titleLabel.Text = "Steal Coins";
 					DescriptionLabel.Text = "steel ponden van een willekeurige speler";
 					break;
 
 				case "BrassKnuckles":
+					titleLabel.Text = "Knuckles";
 					DescriptionLabel.Text = "dit item kan je gebruiken om een persoon waar je langsloopt te damagen, na 1 keer gaat hij kapot.";
 					break;
 
 				case "GoldenKnuckles":
+					titleLabel.Text = "Golden Knuckles";
 					DescriptionLabel.Text = "dit item kan je gebruiken om een persoon waar je langsloopt te damagen, hij gaat de hele game mee.";
 					break;
 
 				case "BearTrap":
+					titleLabel.Text = "Bear Trap";
 					DescriptionLabel.Text = "gooi dit item op een vak om een berenval te plaatsen die een speler vastklemt.";
 					break;
 			}
 			itemTex.Texture = GD.Load<Texture2D>($"res://assets/items/{currentItem.Name}.png");
-			titleLabel.Text = currentItem.Name.ToString();
 			PriceLabel.Text = "£ " + currentItem.Price.ToString();
 			GD.Print("loaded item texture: " + itemTex);
 			GD.Print($"Item: {currentItem.Name}, Price: {currentItem.Price}");

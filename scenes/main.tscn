@@ -1,4 +1,4 @@
-[gd_scene load_steps=106 format=3 uid="uid://6pipgymx5duu"]
+[gd_scene load_steps=103 format=3 uid="uid://6pipgymx5duu"]
 
 [ext_resource type="Script" path="res://scripts/Main.cs" id="1_xihgb"]
 [ext_resource type="Texture2D" uid="uid://8n3od4yuo4jk" path="res://assets/Boards/board finished.png" id="2_ebqpb"]
@@ -40,9 +40,6 @@
 [ext_resource type="Texture2D" uid="uid://d0e2uptmo1joj" path="res://assets/hud/whitesquare.png" id="34_hjytp"]
 [ext_resource type="Texture2D" uid="uid://d4kugptu031ei" path="res://assets/items/BrassKnuckles.png" id="35_lqly4"]
 [ext_resource type="Texture2D" uid="uid://biculqyyse5f7" path="res://assets/hud/graycircle.png" id="36_v1oqi"]
-[ext_resource type="Texture2D" uid="uid://c4cbbyp1j8o2t" path="res://assets/hud/d-pad-left.png" id="37_gpl2c"]
-[ext_resource type="Texture2D" uid="uid://ck50ouwxen1kr" path="res://assets/hud/d-pad-up.png" id="38_nua34"]
-[ext_resource type="Texture2D" uid="uid://0lqm0yvplh2f" path="res://assets/hud/d-pad-right.png" id="39_7opyf"]
 [ext_resource type="Texture2D" uid="uid://cp83qax4ki8n4" path="res://assets/items/RazorCap.png" id="40_cxnv8"]
 [ext_resource type="Texture2D" uid="uid://bt8bklpg2pvte" path="res://assets/items/GoldenKnuckles.png" id="41_walex"]
 [ext_resource type="Texture2D" uid="uid://kcyfqxm8lhc5" path="res://assets/hud/RollAdjustment.png" id="42_110l2"]
@@ -391,7 +388,7 @@ font = SubResource("FontFile_84c6n")
 font_size = 38
 font_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_akyl3"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u7nr6"]
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -399,7 +396,7 @@ corner_radius_bottom_left = 20
 corner_detail = 20
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6h8nb"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u3i3p"]
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -407,7 +404,7 @@ corner_radius_bottom_left = 20
 corner_detail = 20
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bod3d"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gj0h3"]
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -417,7 +414,7 @@ anti_aliasing = false
 
 [sub_resource type="LabelSettings" id="LabelSettings_okpyf"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gcx6l"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pbsr2"]
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -425,7 +422,7 @@ corner_radius_bottom_left = 20
 corner_detail = 20
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eantd"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s6mll"]
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -433,7 +430,7 @@ corner_radius_bottom_left = 20
 corner_detail = 20
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dihpq"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slkyu"]
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -441,7 +438,7 @@ corner_radius_bottom_left = 20
 corner_detail = 20
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nnsao"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dspvh"]
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -449,7 +446,7 @@ corner_radius_bottom_left = 20
 corner_detail = 20
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gqt1j"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_updxj"]
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -457,7 +454,7 @@ corner_radius_bottom_left = 20
 corner_detail = 20
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_icvai"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yyqnc"]
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -465,7 +462,7 @@ corner_radius_bottom_left = 20
 corner_detail = 20
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kxujc"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rawnu"]
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -473,7 +470,7 @@ corner_radius_bottom_left = 20
 corner_detail = 20
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4pi7l"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_htx10"]
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -481,7 +478,7 @@ corner_radius_bottom_left = 20
 corner_detail = 20
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cjlju"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7esjt"]
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -489,14 +486,14 @@ corner_radius_bottom_left = 20
 corner_detail = 20
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1flcq"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_18fu4"]
 corner_radius_top_left = 30
 corner_radius_top_right = 30
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fpgm2"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ubsf"]
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -506,14 +503,14 @@ anti_aliasing = false
 [sub_resource type="LabelSettings" id="LabelSettings_802gb"]
 font_size = 13
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s28nt"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i4sul"]
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d5uy8"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jgyrj"]
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -522,42 +519,42 @@ anti_aliasing = false
 
 [sub_resource type="LabelSettings" id="LabelSettings_ibnqi"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ea3s"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mra4p"]
 corner_radius_top_left = 30
 corner_radius_top_right = 30
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5s4cu"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bacuw"]
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_57uiu"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2gis0"]
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_seduo"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1fa88"]
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kq463"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jr03"]
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o7a6b"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tuevw"]
 corner_radius_top_left = 30
 corner_radius_top_right = 30
 corner_radius_bottom_right = 30
@@ -1086,7 +1083,7 @@ offset_top = 1.43885
 offset_right = 104.688
 offset_bottom = 16.4388
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_akyl3")
+theme_override_styles/panel = SubResource("StyleBoxFlat_u7nr6")
 script = ExtResource("33_on4yt")
 corner_detail = 20
 radius_bottom_left = 20
@@ -1107,12 +1104,12 @@ scale = Vector2(0.07, 0.07)
 texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player1/Playerhud/slot1/inputBox"]
-layout_mode = 0
-offset_left = 19.5762
-offset_top = 19.5762
-offset_right = 147.576
-offset_bottom = 147.576
-texture = ExtResource("37_gpl2c")
+offset_left = 9.78901
+offset_top = 0.000266075
+offset_right = 489.789
+offset_bottom = 480.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("51_6dq4m")
 
 [node name="item1" type="TextureRect" parent="Node2D/CanvasLayer/player1/Playerhud"]
 layout_mode = 0
@@ -1131,7 +1128,7 @@ offset_top = 13.9089
 offset_right = 105.168
 offset_bottom = 28.9089
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_6h8nb")
+theme_override_styles/panel = SubResource("StyleBoxFlat_u3i3p")
 script = ExtResource("33_on4yt")
 corner_detail = 20
 radius_bottom_left = 20
@@ -1153,11 +1150,12 @@ texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player1/Playerhud/slot2/inputBox"]
 layout_mode = 0
-offset_left = 19.5762
-offset_top = 19.5762
-offset_right = 147.576
-offset_bottom = 147.576
-texture = ExtResource("38_nua34")
+offset_left = 9.78736
+offset_top = -0.000312805
+offset_right = 489.787
+offset_bottom = 480.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("51_6dq4m")
 
 [node name="item2" type="TextureRect" parent="Node2D/CanvasLayer/player1/Playerhud"]
 layout_mode = 0
@@ -1176,7 +1174,7 @@ offset_top = 27.3381
 offset_right = 105.168
 offset_bottom = 42.3381
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_bod3d")
+theme_override_styles/panel = SubResource("StyleBoxFlat_gj0h3")
 script = ExtResource("33_on4yt")
 corner_detail = 20
 radius_bottom_left = 20
@@ -1197,12 +1195,12 @@ scale = Vector2(0.07, 0.07)
 texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player1/Playerhud/slot3/inputBox"]
-layout_mode = 0
-offset_left = 19.5762
-offset_top = 19.5762
-offset_right = 147.576
-offset_bottom = 147.576
-texture = ExtResource("39_7opyf")
+offset_left = -0.000724792
+offset_top = 9.78897
+offset_right = 479.999
+offset_bottom = 489.789
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("49_hpi5p")
 
 [node name="item3" type="TextureRect" parent="Node2D/CanvasLayer/player1/Playerhud"]
 layout_mode = 0
@@ -1328,13 +1326,12 @@ label_settings = SubResource("LabelSettings_1j2pu")
 
 [node name="slot1" type="Panel" parent="Node2D/CanvasLayer/player2/Playerhud"]
 clip_children = 1
-layout_mode = 0
-offset_left = -12.5453
-offset_top = 2.58994
-offset_right = 2.45474
-offset_bottom = 17.5899
+offset_left = -12.066
+offset_top = 2.878
+offset_right = 2.9338
+offset_bottom = 17.878
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_gcx6l")
+theme_override_styles/panel = SubResource("StyleBoxFlat_pbsr2")
 script = ExtResource("33_on4yt")
 corner_detail = 20
 radius_bottom_left = 20
@@ -1355,31 +1352,30 @@ scale = Vector2(0.07, 0.07)
 texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player2/Playerhud/slot1/inputBox"]
-layout_mode = 0
-offset_left = 19.5762
-offset_top = 19.5762
-offset_right = 147.576
-offset_bottom = 147.576
-texture = ExtResource("37_gpl2c")
+offset_left = 9.78901
+offset_top = 0.000266075
+offset_right = 489.789
+offset_bottom = 480.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("51_6dq4m")
 
 [node name="item1" type="TextureRect" parent="Node2D/CanvasLayer/player2/Playerhud"]
 layout_mode = 0
-offset_left = -12.0656
+offset_left = -10.6268
 offset_top = 4.31655
-offset_right = 787.934
+offset_right = 789.373
 offset_bottom = 804.317
 scale = Vector2(0.01, 0.01)
 texture = ExtResource("35_lqly4")
 
 [node name="slot2" type="Panel" parent="Node2D/CanvasLayer/player2/Playerhud"]
 clip_children = 1
-layout_mode = 0
-offset_left = -12.0656
-offset_top = 15.06
-offset_right = 2.93436
-offset_bottom = 30.06
+offset_left = -12.0655
+offset_top = 15.3477
+offset_right = 2.93459
+offset_bottom = 30.3477
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_eantd")
+theme_override_styles/panel = SubResource("StyleBoxFlat_s6mll")
 script = ExtResource("33_on4yt")
 corner_detail = 20
 radius_bottom_left = 20
@@ -1401,11 +1397,12 @@ texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player2/Playerhud/slot2/inputBox"]
 layout_mode = 0
-offset_left = 19.5762
-offset_top = 19.5762
-offset_right = 147.576
-offset_bottom = 147.576
-texture = ExtResource("38_nua34")
+offset_left = 9.78736
+offset_top = -0.000312805
+offset_right = 489.787
+offset_bottom = 480.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("51_6dq4m")
 
 [node name="item2" type="TextureRect" parent="Node2D/CanvasLayer/player2/Playerhud"]
 layout_mode = 0
@@ -1418,13 +1415,12 @@ texture = ExtResource("35_lqly4")
 
 [node name="slot3" type="Panel" parent="Node2D/CanvasLayer/player2/Playerhud"]
 clip_children = 1
-layout_mode = 0
-offset_left = -12.0656
-offset_top = 28.4892
-offset_right = 2.93436
-offset_bottom = 43.4892
+offset_left = -12.0655
+offset_top = 28.7769
+offset_right = 2.93459
+offset_bottom = 43.7769
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_dihpq")
+theme_override_styles/panel = SubResource("StyleBoxFlat_slkyu")
 script = ExtResource("33_on4yt")
 corner_detail = 20
 radius_bottom_left = 20
@@ -1445,19 +1441,19 @@ scale = Vector2(0.07, 0.07)
 texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player2/Playerhud/slot3/inputBox"]
-layout_mode = 0
-offset_left = 19.5762
-offset_top = 19.5762
-offset_right = 147.576
-offset_bottom = 147.576
-texture = ExtResource("39_7opyf")
+offset_left = -0.000724792
+offset_top = 9.78897
+offset_right = 479.999
+offset_bottom = 489.789
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("49_hpi5p")
 
 [node name="item3" type="TextureRect" parent="Node2D/CanvasLayer/player2/Playerhud"]
 layout_mode = 0
 offset_left = -10.6268
-offset_top = 29.2566
+offset_top = 29.7362
 offset_right = 789.373
-offset_bottom = 829.257
+offset_bottom = 829.737
 scale = Vector2(0.01, 0.01)
 texture = ExtResource("35_lqly4")
 
@@ -1577,13 +1573,12 @@ label_settings = SubResource("LabelSettings_1j2pu")
 
 [node name="slot1" type="Panel" parent="Node2D/CanvasLayer/player3/Playerhud"]
 clip_children = 1
-layout_mode = 0
 offset_left = 89.6882
-offset_top = 2.58994
+offset_top = 1.43884
 offset_right = 104.688
-offset_bottom = 17.5899
+offset_bottom = 16.4388
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_nnsao")
+theme_override_styles/panel = SubResource("StyleBoxFlat_dspvh")
 script = ExtResource("33_on4yt")
 corner_detail = 20
 radius_bottom_left = 20
@@ -1604,12 +1599,12 @@ scale = Vector2(0.07, 0.07)
 texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player3/Playerhud/slot1/inputBox"]
-layout_mode = 0
-offset_left = 19.5762
-offset_top = 19.5762
-offset_right = 147.576
-offset_bottom = 147.576
-texture = ExtResource("37_gpl2c")
+offset_left = 9.78901
+offset_top = 0.000266075
+offset_right = 489.789
+offset_bottom = 480.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("51_6dq4m")
 
 [node name="item1" type="TextureRect" parent="Node2D/CanvasLayer/player3/Playerhud"]
 layout_mode = 0
@@ -1622,13 +1617,12 @@ texture = ExtResource("35_lqly4")
 
 [node name="slot2" type="Panel" parent="Node2D/CanvasLayer/player3/Playerhud"]
 clip_children = 1
-layout_mode = 0
 offset_left = 90.1679
-offset_top = 15.06
+offset_top = 13.9089
 offset_right = 105.168
-offset_bottom = 30.06
+offset_bottom = 28.9089
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_gqt1j")
+theme_override_styles/panel = SubResource("StyleBoxFlat_updxj")
 script = ExtResource("33_on4yt")
 corner_detail = 20
 radius_bottom_left = 20
@@ -1650,30 +1644,21 @@ texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player3/Playerhud/slot2/inputBox"]
 layout_mode = 0
-offset_left = 19.5762
-offset_top = 19.5762
-offset_right = 147.576
-offset_bottom = 147.576
-texture = ExtResource("38_nua34")
-
-[node name="item2" type="TextureRect" parent="Node2D/CanvasLayer/player3/Playerhud"]
-layout_mode = 0
-offset_left = 91.1271
-offset_top = 16.0192
-offset_right = 891.127
-offset_bottom = 816.019
-scale = Vector2(0.01, 0.01)
-texture = ExtResource("35_lqly4")
+offset_left = 9.78736
+offset_top = -0.000312805
+offset_right = 489.787
+offset_bottom = 480.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("51_6dq4m")
 
 [node name="slot3" type="Panel" parent="Node2D/CanvasLayer/player3/Playerhud"]
 clip_children = 1
-layout_mode = 0
 offset_left = 90.1679
-offset_top = 28.4892
+offset_top = 27.3381
 offset_right = 105.168
-offset_bottom = 43.4892
+offset_bottom = 42.3381
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_icvai")
+theme_override_styles/panel = SubResource("StyleBoxFlat_yyqnc")
 script = ExtResource("33_on4yt")
 corner_detail = 20
 radius_bottom_left = 20
@@ -1694,12 +1679,21 @@ scale = Vector2(0.07, 0.07)
 texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player3/Playerhud/slot3/inputBox"]
+offset_left = -0.000724792
+offset_top = 9.78897
+offset_right = 479.999
+offset_bottom = 489.789
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("49_hpi5p")
+
+[node name="item2" type="TextureRect" parent="Node2D/CanvasLayer/player3/Playerhud"]
 layout_mode = 0
-offset_left = 19.5762
-offset_top = 19.5762
-offset_right = 147.576
-offset_bottom = 147.576
-texture = ExtResource("39_7opyf")
+offset_left = 91.1271
+offset_top = 16.0192
+offset_right = 891.127
+offset_bottom = 816.019
+scale = Vector2(0.01, 0.01)
+texture = ExtResource("35_lqly4")
 
 [node name="item3" type="TextureRect" parent="Node2D/CanvasLayer/player3/Playerhud"]
 layout_mode = 0
@@ -1826,13 +1820,12 @@ label_settings = SubResource("LabelSettings_1j2pu")
 
 [node name="slot1" type="Panel" parent="Node2D/CanvasLayer/player4/Playerhud"]
 clip_children = 1
-layout_mode = 0
-offset_left = -12.0656
-offset_top = 2.58994
-offset_right = 2.93436
-offset_bottom = 17.5899
+offset_left = -12.066
+offset_top = 2.878
+offset_right = 2.9338
+offset_bottom = 17.878
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_kxujc")
+theme_override_styles/panel = SubResource("StyleBoxFlat_rawnu")
 script = ExtResource("33_on4yt")
 corner_detail = 20
 radius_bottom_left = 20
@@ -1853,31 +1846,30 @@ scale = Vector2(0.07, 0.07)
 texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player4/Playerhud/slot1/inputBox"]
-layout_mode = 0
-offset_left = 19.5762
-offset_top = 19.5762
-offset_right = 147.576
-offset_bottom = 147.576
-texture = ExtResource("37_gpl2c")
+offset_left = 9.78901
+offset_top = 0.000266075
+offset_right = 489.789
+offset_bottom = 480.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("51_6dq4m")
 
 [node name="item1" type="TextureRect" parent="Node2D/CanvasLayer/player4/Playerhud"]
 layout_mode = 0
 offset_left = -10.6268
-offset_top = 3.54917
+offset_top = 4.02879
 offset_right = 789.373
-offset_bottom = 803.549
+offset_bottom = 804.029
 scale = Vector2(0.01, 0.01)
 texture = ExtResource("35_lqly4")
 
 [node name="slot2" type="Panel" parent="Node2D/CanvasLayer/player4/Playerhud"]
 clip_children = 1
-layout_mode = 0
-offset_left = -11.586
-offset_top = 15.06
-offset_right = 3.41397
-offset_bottom = 30.06
+offset_left = -12.0655
+offset_top = 15.3478
+offset_right = 2.93459
+offset_bottom = 30.3478
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_4pi7l")
+theme_override_styles/panel = SubResource("StyleBoxFlat_htx10")
 script = ExtResource("33_on4yt")
 corner_detail = 20
 radius_bottom_left = 20
@@ -1890,7 +1882,7 @@ texture = ExtResource("34_hjytp")
 visible = false
 z_index = 1
 layout_mode = 0
-offset_left = 2.0555
+offset_left = 2.05548
 offset_top = 17.8143
 offset_right = 168.055
 offset_bottom = 183.814
@@ -1899,11 +1891,12 @@ texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player4/Playerhud/slot2/inputBox"]
 layout_mode = 0
-offset_left = 19.5762
-offset_top = 19.5762
-offset_right = 147.576
-offset_bottom = 147.576
-texture = ExtResource("38_nua34")
+offset_left = 9.78736
+offset_top = -0.000312805
+offset_right = 489.787
+offset_bottom = 480.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("51_6dq4m")
 
 [node name="item2" type="TextureRect" parent="Node2D/CanvasLayer/player4/Playerhud"]
 layout_mode = 0
@@ -1916,13 +1909,12 @@ texture = ExtResource("35_lqly4")
 
 [node name="slot3" type="Panel" parent="Node2D/CanvasLayer/player4/Playerhud"]
 clip_children = 1
-layout_mode = 0
-offset_left = -11.586
-offset_top = 28.4892
-offset_right = 3.41397
-offset_bottom = 43.4892
+offset_left = -12.0655
+offset_top = 28.777
+offset_right = 2.93459
+offset_bottom = 43.777
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_cjlju")
+theme_override_styles/panel = SubResource("StyleBoxFlat_7esjt")
 script = ExtResource("33_on4yt")
 corner_detail = 20
 radius_bottom_left = 20
@@ -1943,19 +1935,19 @@ scale = Vector2(0.07, 0.07)
 texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player4/Playerhud/slot3/inputBox"]
-layout_mode = 0
-offset_left = 19.5762
-offset_top = 19.5762
-offset_right = 147.576
-offset_bottom = 147.576
-texture = ExtResource("39_7opyf")
+offset_left = -0.000724792
+offset_top = 9.78897
+offset_right = 479.999
+offset_bottom = 489.789
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("49_hpi5p")
 
 [node name="item3" type="TextureRect" parent="Node2D/CanvasLayer/player4/Playerhud"]
 layout_mode = 0
 offset_left = -10.6268
-offset_top = 28.9688
+offset_top = 29.9281
 offset_right = 789.373
-offset_bottom = 828.969
+offset_bottom = 829.928
 scale = Vector2(0.01, 0.01)
 texture = ExtResource("35_lqly4")
 
@@ -2057,7 +2049,6 @@ horizontal_alignment = 1
 [node name="CanvasLayersshop" type="CanvasLayer" parent="."]
 
 [node name="TextureRectRounded" type="Panel" parent="CanvasLayersshop"]
-visible = false
 clip_children = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2070,7 +2061,7 @@ offset_right = 324.5
 offset_bottom = 175.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_1flcq")
+theme_override_styles/panel = SubResource("StyleBoxFlat_18fu4")
 script = ExtResource("33_on4yt")
 radius_bottom_left = 30
 radius_bottom_right = 30
@@ -2086,7 +2077,7 @@ offset_left = 36.0
 offset_top = 51.0
 offset_right = 154.0
 offset_bottom = 169.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_fpgm2")
+theme_override_styles/panel = SubResource("StyleBoxFlat_8ubsf")
 script = ExtResource("33_on4yt")
 texture = ExtResource("47_rmdg1")
 
@@ -2170,7 +2161,7 @@ offset_left = 208.5
 offset_top = 51.0
 offset_right = 326.5
 offset_bottom = 169.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_s28nt")
+theme_override_styles/panel = SubResource("StyleBoxFlat_i4sul")
 script = ExtResource("33_on4yt")
 texture = ExtResource("47_rmdg1")
 
@@ -2255,7 +2246,7 @@ offset_left = 377.5
 offset_top = 51.0
 offset_right = 495.5
 offset_bottom = 169.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_d5uy8")
+theme_override_styles/panel = SubResource("StyleBoxFlat_jgyrj")
 script = ExtResource("33_on4yt")
 texture = ExtResource("47_rmdg1")
 
@@ -2378,7 +2369,7 @@ offset_right = 269.0
 offset_bottom = 125.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_5ea3s")
+theme_override_styles/panel = SubResource("StyleBoxFlat_mra4p")
 script = ExtResource("33_on4yt")
 radius_bottom_left = 30
 radius_bottom_right = 30
@@ -2395,7 +2386,7 @@ offset_top = 83.0
 offset_right = 239.5
 offset_bottom = 201.0
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_5s4cu")
+theme_override_styles/panel = SubResource("StyleBoxFlat_bacuw")
 script = ExtResource("33_on4yt")
 texture = ExtResource("47_rmdg1")
 
@@ -2481,7 +2472,7 @@ offset_top = 82.0
 offset_right = 359.0
 offset_bottom = 200.0
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_57uiu")
+theme_override_styles/panel = SubResource("StyleBoxFlat_2gis0")
 script = ExtResource("33_on4yt")
 texture = ExtResource("47_rmdg1")
 
@@ -2568,7 +2559,7 @@ offset_top = 83.0
 offset_right = 481.0
 offset_bottom = 201.0
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_seduo")
+theme_override_styles/panel = SubResource("StyleBoxFlat_1fa88")
 script = ExtResource("33_on4yt")
 texture = ExtResource("47_rmdg1")
 
@@ -2656,7 +2647,7 @@ offset_top = 83.0
 offset_right = 601.0
 offset_bottom = 201.0
 scale = Vector2(0.7, 0.7)
-theme_override_styles/panel = SubResource("StyleBoxFlat_kq463")
+theme_override_styles/panel = SubResource("StyleBoxFlat_1jr03")
 script = ExtResource("33_on4yt")
 texture = ExtResource("47_rmdg1")
 
@@ -2758,7 +2749,7 @@ offset_right = 324.5
 offset_bottom = 175.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_o7a6b")
+theme_override_styles/panel = SubResource("StyleBoxFlat_tuevw")
 script = ExtResource("33_on4yt")
 radius_bottom_left = 30
 radius_bottom_right = 30
