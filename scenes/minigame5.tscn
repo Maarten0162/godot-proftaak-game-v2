@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dl0q4o4ceaxml"]
+[gd_scene load_steps=8 format=3 uid="uid://dl0q4o4ceaxml"]
 
 [ext_resource type="Script" path="res://scripts/minigame5.cs" id="1_w0rgl"]
 [ext_resource type="Texture2D" uid="uid://cgi4h72ugpmlc" path="res://Minigame2/Minigame5.png" id="2_qlbft"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bp8fbndqeyihs" path="res://Minigame2/Player2.png" id="4_fhxrb"]
 [ext_resource type="Texture2D" uid="uid://cg0xnkfwcbeh8" path="res://Minigame2/Player3.png" id="5_75n7d"]
 [ext_resource type="Texture2D" uid="uid://f10gph5jvc03" path="res://Minigame2/player4.png" id="6_ptlwo"]
+[ext_resource type="Texture2D" uid="uid://dn1wgggu0wnt3" path="res://assets/Boards/rename background.png" id="7_5m1h1"]
 
 [node name="minigame5" type="Control"]
 layout_mode = 3
@@ -145,3 +146,31 @@ layout_mode = 2
 modulate = Color(1, 1, 0, 1)
 layout_mode = 2
 size_flags_vertical = 8
+
+[node name="TimerUitleg" type="Timer" parent="."]
+
+[node name="UitlegSprite" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(0.72, 0.72)
+texture = ExtResource("7_5m1h1")
+
+[node name="Naam" type="Label" parent="."]
+offset_left = 81.0
+offset_top = 138.0
+offset_right = 291.0
+offset_bottom = 272.0
+horizontal_alignment = 1
+
+[node name="Uitleg" type="Label" parent="."]
+offset_left = 53.0
+offset_top = 310.0
+offset_right = 359.0
+offset_bottom = 577.0
+text = "Test je kennis over Peaky Blinders in deze 
+uitdagende quiz! 
+Spelers beantwoorden vragen over de serie.  
+Van iconische personages tot spannende 
+gebeurtenissen en legendarische quotes.
+Laat zien hoe goed je de Shelbys 
+kent en bewijs dat je het 
+brein van de Peaky Blinders bent!"

@@ -49,6 +49,11 @@ public partial class minigame5 : Control
     private Label vraagLabel;
     private List<Label> spelerStatusLabels;
     private List<Label> spelerScoreLabels;
+    private Label Uitleg;
+    private Label Naam;
+    private Sprite2D UitlegSprite;
+    private Timer TimerUitleg;
+
 
     public override void _Ready()
     {
@@ -88,9 +93,28 @@ public partial class minigame5 : Control
             antwoorden.Add("");
         }
        
-
-        KiesVolgendeVraag();
         UpdateSpelerUI();
+
+        Naam = GetNode<Label>("Naam");
+        Naam.Text = "Quizz";
+        Uitleg = GetNode<Label>("Uitleg");
+        UitlegSprite = GetNode<Sprite2D>("UitlegSprite");
+        TimerUitleg = GetNode<Timer>("TimerUitleg");
+
+        UitlegSprite.Visible = true;
+        TimerUitleg.WaitTime = 20.0f;
+        TimerUitleg.OneShot = true;
+        TimerUitleg.Start();
+
+        TimerUitleg.Connect("timeout", new Callable(this, nameof(OnTimerTimeout1)));
+    }
+
+    private void OnTimerTimeout1()
+    {
+        UitlegSprite.Visible = false;
+        Naam.Text = "";
+        Uitleg.Text = "";
+        KiesVolgendeVraag();
     }
 
     private void KiesVolgendeVraag()

@@ -16,6 +16,12 @@ public partial class Minigame2 : Node2D
     private int countdownSeconds = 1;
     private bool timerVisible = true;
 
+    //loadingscreen
+    private bool spelActief = false;
+    private int RandomKnop;
+    private Sprite2D UitlegSprite;
+    private Timer TimerUitleg;
+
     // UI-elementen
     private Label TimerLabel;
     private Label LabelWinnaar;
@@ -55,6 +61,26 @@ public partial class Minigame2 : Node2D
         countdownTimer.Timeout += OnCountdownTimeout;
         AddChild(countdownTimer); //gaat dus van 0 naar 1, naar 2, naar 3. daarna zie je hem niet meer.
 
+        
+        Naam = GetNode<Label>("Naam");
+        Naam.Text = "Boom!";
+        Uitleg = GetNode<Label>("Uitleg");
+        UitlegSprite = GetNode<Sprite2D>("UitlegSprite");
+        TimerUitleg = GetNode<Timer>("TimerUitleg");
+
+        UitlegSprite.Visible = true;
+        TimerUitleg.WaitTime = 20.0f;
+        TimerUitleg.OneShot = true;
+        TimerUitleg.Start();
+
+        TimerUitleg.Connect("timeout", new Callable(this, nameof(OnTimerTimeout)));
+    }
+
+    private void OnTimerTimeout()
+    {
+        UitlegSprite.Visible = false;
+        Naam.Text = "";
+        Uitleg.Text = "";
         StartCountdown();
     }
 

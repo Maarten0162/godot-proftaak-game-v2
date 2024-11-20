@@ -13,6 +13,8 @@ public partial class Minigame3 : Node2D
     private Label winnaarLabel;
     private Label winnaarResultaatLabel;
     private Label KnopLabel;
+    private Label Uitleg;
+    private Label Naam;
     private List<Sprite2D> preReactSprites = new List<Sprite2D>();
     private List<Sprite2D> postReactSprites = new List<Sprite2D>();
     private int minigameplayeramount;
@@ -20,11 +22,13 @@ public partial class Minigame3 : Node2D
 
     private bool spelActief = false;
     private int RandomKnop;
+    private Sprite2D UitlegSprite;
+    private Timer TimerUitleg;
 
     public override void _Ready()
     {
         minigameplayeramount = 0;
-        activePlayers = new bool[GlobalVariables.Instance.playersalive.Count]; // Initialiseer de actieve spelers array
+        activePlayers = new bool[4]; // Initialiseer de actieve spelers array
 
         if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player1"))
         {
@@ -68,9 +72,7 @@ public partial class Minigame3 : Node2D
         winnaarResultaatLabel = GetNode<Label>("WinnaarResultaatLabel");
         KnopLabel = GetNode<Label>("KnopLabel");
 
-        StartSpel();
-        GD.Print("Aantal spelers:", minigameplayeramount);
-    }
+        
 
     private void StartSpel()
     {
@@ -203,7 +205,7 @@ public partial class Minigame3 : Node2D
                 winnaarIndex = i;
             }
         }
-        GlobalVariables.Instance.Winner = winnaarIndex;
+
         return winnaarIndex;
     }
 

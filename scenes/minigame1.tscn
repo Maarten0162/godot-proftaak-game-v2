@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bmb2c2ykwbwl3"]
+[gd_scene load_steps=8 format=3 uid="uid://bmb2c2ykwbwl3"]
 
 [ext_resource type="Script" path="res://scripts/Minigame1.cs" id="1_i3b7e"]
 [ext_resource type="Texture2D" uid="uid://b205jypegaywx" path="res://Minigame1/asvalt.png" id="1_ur60m"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://m56lu1m657wt" path="res://Minigame1/PaardPlayer2.png" id="4_hjx06"]
 [ext_resource type="Texture2D" uid="uid://dpvg0w0af48n3" path="res://Minigame1/PaardPlayer3.png" id="5_1k0q4"]
 [ext_resource type="Texture2D" uid="uid://c7unb81qxu7rp" path="res://Minigame1/PaardPlayer4.png" id="6_tiiy2"]
+[ext_resource type="Texture2D" uid="uid://dn1wgggu0wnt3" path="res://assets/Boards/rename background.png" id="7_f6osi"]
 
 [node name="Minigame1" type="Node2D"]
 script = ExtResource("1_i3b7e")
@@ -71,8 +72,30 @@ offset_top = 7.0
 offset_right = 611.0
 offset_bottom = 49.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="TimerUitleg" type="Timer" parent="."]
 
-[node name="Label" type="Label" parent="Sprite2D"]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="UitlegSprite" type="Sprite2D" parent="."]
+position = Vector2(581, 326.371)
+scale = Vector2(0.72375, 0.725842)
+texture = ExtResource("7_f6osi")
+
+[node name="Naam" type="Label" parent="."]
+offset_left = 52.0
+offset_top = 85.0
+offset_right = 439.0
+offset_bottom = 219.0
+horizontal_alignment = 1
+
+[node name="Uitleg" type="Label" parent="."]
+offset_left = 44.0
+offset_top = 271.0
+offset_right = 351.0
+offset_bottom = 564.0
+text = "Stap in de wereld van de Peaky 
+Blinders en beleef de spanning 
+van een paardenrace! 
+Race tegen andere spelers 
+en laat zien wie het snelst is.
+
+Bereid je voor op een intense race. 
+Wie galoppeert naar de overwinning?"

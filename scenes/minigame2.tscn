@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://3uphtyoyckq2"]
+[gd_scene load_steps=8 format=3 uid="uid://b2du4p5m6ve7a"]
 
 [ext_resource type="Script" path="res://scripts/Minigame2.cs" id="1_ojfqb"]
 [ext_resource type="Texture2D" uid="uid://bm6iudyb75q1o" path="res://Minigame2/Designer.jpg" id="2_f7b00"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bp8fbndqeyihs" path="res://Minigame2/Player2.png" id="4_qh17d"]
 [ext_resource type="Texture2D" uid="uid://cg0xnkfwcbeh8" path="res://Minigame2/Player3.png" id="5_ein6v"]
 [ext_resource type="Texture2D" uid="uid://f10gph5jvc03" path="res://Minigame2/player4.png" id="6_wm807"]
+[ext_resource type="Texture2D" uid="uid://dn1wgggu0wnt3" path="res://assets/Boards/rename background.png" id="7_ecm4e"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_ojfqb")
@@ -26,13 +27,6 @@ offset_right = 1368.0
 offset_bottom = 729.0
 texture = ExtResource("2_f7b00")
 expand_mode = 1
-
-[node name="Panel" type="Panel" parent="GameUI"]
-layout_mode = 0
-offset_left = 504.0
-offset_top = 306.0
-offset_right = 544.0
-offset_bottom = 346.0
 
 [node name="TimerLabel" type="Label" parent="GameUI"]
 modulate = Color(1, 1, 0, 1)
@@ -172,3 +166,33 @@ offset_top = 586.0
 offset_right = 1117.0
 offset_bottom = 642.0
 text = "speler 4"
+
+[node name="TimerUitleg" type="Timer" parent="."]
+
+[node name="UitlegSprite" type="Sprite2D" parent="."]
+position = Vector2(574.5, 327)
+scale = Vector2(0.723125, 0.735556)
+texture = ExtResource("7_ecm4e")
+
+[node name="Naam" type="Label" parent="."]
+offset_left = 55.0
+offset_top = 100.0
+offset_right = 389.0
+offset_bottom = 220.0
+horizontal_alignment = 1
+
+[node name="Uitleg" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 281.0
+offset_right = 421.0
+offset_bottom = 588.0
+text = "Een spannend minigame waarbij 
+spelers hun gevoel voor tijd testen! 
+De timer begint zichtbaar, 
+maar verdwijnt na 2 seconden. 
+Daarna moeten spelers de klok 
+in hun hoofd volgen en op tijd drukken 
+om zo dicht mogelijk bij 
+10 seconden te stoppen. 
+
+Wie het beste timet, wint!"
