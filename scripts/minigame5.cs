@@ -182,7 +182,8 @@ public partial class minigame5 : Control
                 winnaars.Add(i + 1);
             }
         }
-
+            GlobalVariables.Instance.Winner = 0; //HIER MOET EEN WINAAR NOG KOMEN IDK WAT DIT IS
+            GlobalVariables.Instance.SwitchToMainBoard();
         vraagLabel.Text = $"Winnaar(s): Speler {string.Join(", Speler ", winnaars)}";
     }
     public override void _Input(InputEvent @event)
