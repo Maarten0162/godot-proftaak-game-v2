@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=3 uid="uid://6pipgymx5duu"]
+[gd_scene load_steps=105 format=3 uid="uid://6pipgymx5duu"]
 
 [ext_resource type="Script" path="res://scripts/Main.cs" id="1_xihgb"]
 [ext_resource type="Texture2D" uid="uid://8n3od4yuo4jk" path="res://assets/Boards/board finished.png" id="2_ebqpb"]
@@ -220,6 +220,15 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dd3ac"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_md50q"]
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+anti_aliasing = false
+
+[sub_resource type="LabelSettings" id="LabelSettings_rc2m0"]
 
 [sub_resource type="FontFile" id="FontFile_84c6n"]
 cache/0/16/0/ascent = 0.0
@@ -1044,6 +1053,52 @@ offset_right = 1508.9
 offset_bottom = 1091.9
 scale = Vector2(0.01, 0.01)
 texture = ExtResource("35_lqly4")
+
+[node name="backoutButton" type="TextureRect" parent="Node2D/CanvasLayer"]
+visible = false
+z_index = 1
+offset_left = 531.0
+offset_top = 451.0
+offset_right = 697.0
+offset_bottom = 617.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("36_v1oqi")
+
+[node name="TextureRectRounded" type="Panel" parent="Node2D/CanvasLayer/backoutButton"]
+clip_children = 1
+layout_mode = 0
+offset_left = -1.01221
+offset_top = 0.0410156
+offset_right = 98.9878
+offset_bottom = 40.041
+scale = Vector2(4, 4)
+theme_override_styles/panel = SubResource("StyleBoxFlat_md50q")
+script = ExtResource("33_on4yt")
+radius_bottom_left = 20
+radius_bottom_right = 20
+radius_top_left = 20
+radius_top_right = 20
+texture = ExtResource("47_rmdg1")
+
+[node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/backoutButton"]
+offset_left = 0.000919342
+offset_top = 13.7038
+offset_right = 480.001
+offset_bottom = 493.704
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("53_r6gal")
+
+[node name="Label" type="Label" parent="Node2D/CanvasLayer/backoutButton"]
+layout_mode = 0
+offset_left = 156.131
+offset_top = 0.0409832
+offset_right = 196.131
+offset_bottom = 23.041
+scale = Vector2(6, 6)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+text = "Exit"
+label_settings = SubResource("LabelSettings_rc2m0")
 
 [node name="player1" type="Node2D" parent="Node2D/CanvasLayer"]
 
@@ -2781,46 +2836,44 @@ label_settings = SubResource("LabelSettings_od6xc")
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="yesbutton" type="TextureRect" parent="CanvasLayersshop/WelcomeScreen/TextureRect"]
+[node name="nobutton" type="TextureRect" parent="CanvasLayersshop/WelcomeScreen/TextureRect"]
 layout_mode = 0
-offset_left = 1260.0
-offset_top = 1730.0
-offset_right = 1740.0
-offset_bottom = 2210.0
+offset_left = 3370.0
+offset_top = 1670.0
+offset_right = 3850.0
+offset_bottom = 2150.0
 texture = ExtResource("52_6nig2")
 
-[node name="Label" type="Label" parent="CanvasLayersshop/WelcomeScreen/TextureRect/yesbutton"]
+[node name="Label2" type="Label" parent="CanvasLayersshop/WelcomeScreen/TextureRect/nobutton"]
 layout_mode = 0
-offset_left = 590.0
+offset_left = 600.0
 offset_top = 110.0
-offset_right = 630.0
-offset_bottom = 133.0
-scale = Vector2(12, 12)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-text = "Yes"
-
-[node name="nobutton" type="TextureRect" parent="CanvasLayersshop/WelcomeScreen/TextureRect"]
-z_index = 1
-layout_mode = 0
-offset_left = 3660.0
-offset_top = 1710.0
-offset_right = 4140.0
-offset_bottom = 2190.0
-texture = ExtResource("53_ioj5k")
-
-[node name="Label" type="Label" parent="CanvasLayersshop/WelcomeScreen/TextureRect/nobutton"]
-layout_mode = 0
-offset_left = 590.0
-offset_top = 110.0
-offset_right = 630.0
+offset_right = 640.0
 offset_bottom = 133.0
 scale = Vector2(12, 12)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 text = "No"
 
-[node name="Node" type="Node" parent="CanvasLayersshop"]
+[node name="yesbutton" type="TextureRect" parent="CanvasLayersshop/WelcomeScreen/TextureRect"]
+z_index = 1
+layout_mode = 0
+offset_left = 1520.0
+offset_top = 1670.0
+offset_right = 2000.0
+offset_bottom = 2150.0
+texture = ExtResource("53_ioj5k")
+
+[node name="Label2" type="Label" parent="CanvasLayersshop/WelcomeScreen/TextureRect/yesbutton"]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 110.0
+offset_right = 640.0
+offset_bottom = 133.0
+scale = Vector2(12, 12)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+text = "Yes"
 
 [node name="CanvasLayerspaces" type="CanvasLayer" parent="."]
 

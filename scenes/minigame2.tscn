@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b2du4p5m6ve7a"]
+[gd_scene load_steps=7 format=3 uid="uid://3uphtyoyckq2"]
 
 [ext_resource type="Script" path="res://scripts/Minigame2.cs" id="1_ojfqb"]
 [ext_resource type="Texture2D" uid="uid://bm6iudyb75q1o" path="res://Minigame2/Designer.jpg" id="2_f7b00"]
@@ -26,6 +26,13 @@ offset_right = 1368.0
 offset_bottom = 729.0
 texture = ExtResource("2_f7b00")
 expand_mode = 1
+
+[node name="Panel" type="Panel" parent="GameUI"]
+layout_mode = 0
+offset_left = 504.0
+offset_top = 306.0
+offset_right = 544.0
+offset_bottom = 346.0
 
 [node name="TimerLabel" type="Label" parent="GameUI"]
 modulate = Color(1, 1, 0, 1)

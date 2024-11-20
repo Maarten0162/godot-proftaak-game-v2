@@ -2290,6 +2290,7 @@ public partial class Main : Node2D
 	{
 		GD.Print("run updateInvPos");
 
+		Control backoutbutton = GetNode<Control>($"Node2D/CanvasLayer/backoutButton");
 
 		dpadIcon1 = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/slot1/inputBox");
 		dpadIcon2 = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/slot2/inputBox");
@@ -2315,7 +2316,7 @@ public partial class Main : Node2D
 
 
 
-
+		backoutbutton.Show();
 		label.Show();
 
 		dpadIcon1.Show();
@@ -2344,6 +2345,10 @@ public partial class Main : Node2D
 	}
 	void resetInvPos(Player player)
 	{
+			
+		Control backoutbutton = GetNode<Control>($"Node2D/CanvasLayer/backoutButton");
+
+
 		invSprite1 = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/item1");
 		invSprite2 = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/item2");
 		invSprite3 = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/item3");
@@ -2401,6 +2406,7 @@ public partial class Main : Node2D
 			invSlot2.Position = invSprite2Play4Pos;
 			invSlot3.Position = invSprite3Play4Pos;
 		}
+		backoutbutton.Hide();
 
 		invSprite1.Scale = new Vector2(0.01f, 0.01f);
 		invSprite2.Scale = new Vector2(0.01f, 0.01f);
