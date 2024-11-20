@@ -49,7 +49,3 @@ metadata/_edit_lock_ = true
 position = Vector2(12, 25)
 scale = Vector2(0.6, 0.6)
 metadata/_edit_lock_ = true
-
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(-182, -119)
-scale = Vector2(0.162415, -0.854832)
