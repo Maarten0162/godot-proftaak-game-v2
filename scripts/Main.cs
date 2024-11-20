@@ -804,7 +804,7 @@ public partial class Main : Node2D
 			}
 
 
-
+			updateDobbelSprite(0);
 			GD.Print("before timer");
 			await WaitForSeconds(2);
 			GD.Print("after timer");
