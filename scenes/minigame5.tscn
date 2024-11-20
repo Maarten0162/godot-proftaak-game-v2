@@ -159,6 +159,7 @@ scale = Vector2(0.72, 0.72)
 texture = ExtResource("7_5m1h1")
 
 [node name="Naam" type="Label" parent="."]
+layout_mode = 0
 offset_left = 81.0
 offset_top = 138.0
 offset_right = 291.0
@@ -166,6 +167,7 @@ offset_bottom = 272.0
 horizontal_alignment = 1
 
 [node name="Uitleg" type="Label" parent="."]
+layout_mode = 0
 offset_left = 53.0
 offset_top = 310.0
 offset_right = 359.0
