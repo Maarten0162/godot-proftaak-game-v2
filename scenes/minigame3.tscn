@@ -85,6 +85,12 @@ offset_top = 333.0
 offset_right = 958.0
 offset_bottom = 380.0
 
+[node name="KnopLabel" type="Label" parent="."]
+offset_left = 454.0
+offset_top = 53.0
+offset_right = 671.0
+offset_bottom = 140.0
+
 [node name="WinnaarLabel" type="Label" parent="."]
 offset_left = 492.0
 offset_top = 216.0

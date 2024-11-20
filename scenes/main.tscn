@@ -578,7 +578,7 @@ texture = ExtResource("2_ebqpb")
 position = Vector2(564, 141)
 scale = Vector2(0.576429, 0.54454)
 sprite_frames = SubResource("SpriteFrames_3cd7b")
-animation = &"4"
+animation = &"9"
 
 [node name="spaces" type="Node" parent="."]
 
@@ -1104,12 +1104,12 @@ scale = Vector2(0.07, 0.07)
 texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player1/Playerhud/slot1/inputBox"]
-offset_left = 9.78901
-offset_top = 0.000266075
-offset_right = 489.789
-offset_bottom = 480.0
+offset_left = 0.000919342
+offset_top = 9.78835
+offset_right = 480.001
+offset_bottom = 489.788
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("51_6dq4m")
+texture = ExtResource("49_hpi5p")
 
 [node name="item1" type="TextureRect" parent="Node2D/CanvasLayer/player1/Playerhud"]
 layout_mode = 0
@@ -1195,12 +1195,12 @@ scale = Vector2(0.07, 0.07)
 texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player1/Playerhud/slot3/inputBox"]
-offset_left = -0.000724792
+offset_left = 19.5755
 offset_top = 9.78897
-offset_right = 479.999
+offset_right = 499.575
 offset_bottom = 489.789
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("49_hpi5p")
+texture = ExtResource("52_rp0r3")
 
 [node name="item3" type="TextureRect" parent="Node2D/CanvasLayer/player1/Playerhud"]
 layout_mode = 0
@@ -1352,12 +1352,12 @@ scale = Vector2(0.07, 0.07)
 texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player2/Playerhud/slot1/inputBox"]
-offset_left = 9.78901
-offset_top = 0.000266075
-offset_right = 489.789
-offset_bottom = 480.0
+offset_left = 0.00689316
+offset_top = 9.78219
+offset_right = 480.007
+offset_bottom = 489.782
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("51_6dq4m")
+texture = ExtResource("49_hpi5p")
 
 [node name="item1" type="TextureRect" parent="Node2D/CanvasLayer/player2/Playerhud"]
 layout_mode = 0
@@ -1441,12 +1441,12 @@ scale = Vector2(0.07, 0.07)
 texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player2/Playerhud/slot3/inputBox"]
-offset_left = -0.000724792
+offset_left = 19.5737
 offset_top = 9.78897
-offset_right = 479.999
+offset_right = 499.574
 offset_bottom = 489.789
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("49_hpi5p")
+texture = ExtResource("52_rp0r3")
 
 [node name="item3" type="TextureRect" parent="Node2D/CanvasLayer/player2/Playerhud"]
 layout_mode = 0
@@ -1599,12 +1599,12 @@ scale = Vector2(0.07, 0.07)
 texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player3/Playerhud/slot1/inputBox"]
-offset_left = 9.78901
-offset_top = 0.000266075
-offset_right = 489.789
-offset_bottom = 480.0
+offset_left = 0.000919342
+offset_top = 13.7038
+offset_right = 480.001
+offset_bottom = 493.704
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("51_6dq4m")
+texture = ExtResource("49_hpi5p")
 
 [node name="item1" type="TextureRect" parent="Node2D/CanvasLayer/player3/Playerhud"]
 layout_mode = 0
@@ -1679,12 +1679,12 @@ scale = Vector2(0.07, 0.07)
 texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player3/Playerhud/slot3/inputBox"]
-offset_left = -0.000724792
-offset_top = 9.78897
-offset_right = 479.999
-offset_bottom = 489.789
+offset_left = 19.5756
+offset_top = 13.7044
+offset_right = 499.576
+offset_bottom = 493.704
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("49_hpi5p")
+texture = ExtResource("52_rp0r3")
 
 [node name="item2" type="TextureRect" parent="Node2D/CanvasLayer/player3/Playerhud"]
 layout_mode = 0
@@ -1846,12 +1846,12 @@ scale = Vector2(0.07, 0.07)
 texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player4/Playerhud/slot1/inputBox"]
-offset_left = 9.78901
-offset_top = 0.000266075
-offset_right = 489.789
-offset_bottom = 480.0
+offset_left = 0.00689316
+offset_top = 13.6979
+offset_right = 480.007
+offset_bottom = 493.698
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("51_6dq4m")
+texture = ExtResource("49_hpi5p")
 
 [node name="item1" type="TextureRect" parent="Node2D/CanvasLayer/player4/Playerhud"]
 layout_mode = 0
@@ -1935,12 +1935,12 @@ scale = Vector2(0.07, 0.07)
 texture = ExtResource("36_v1oqi")
 
 [node name="dpadIcon" type="TextureRect" parent="Node2D/CanvasLayer/player4/Playerhud/slot3/inputBox"]
-offset_left = -0.000724792
-offset_top = 9.78897
-offset_right = 479.999
-offset_bottom = 489.789
+offset_left = 19.5737
+offset_top = 13.7044
+offset_right = 499.574
+offset_bottom = 493.704
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("49_hpi5p")
+texture = ExtResource("52_rp0r3")
 
 [node name="item3" type="TextureRect" parent="Node2D/CanvasLayer/player4/Playerhud"]
 layout_mode = 0
@@ -2049,6 +2049,7 @@ horizontal_alignment = 1
 [node name="CanvasLayersshop" type="CanvasLayer" parent="."]
 
 [node name="TextureRectRounded" type="Panel" parent="CanvasLayersshop"]
+visible = false
 clip_children = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2736,7 +2737,6 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("50_mi2s7")
 
 [node name="WelcomeScreen" type="Panel" parent="CanvasLayersshop"]
-visible = false
 clip_children = 1
 anchors_preset = 8
 anchor_left = 0.5
