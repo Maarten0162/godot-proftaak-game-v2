@@ -124,7 +124,7 @@ public partial class Main : Node2D
 	Vector2 Slot3OldPos;
 
 
-	public override void _Ready()
+	public override async void _Ready()
 	{
 
 		textShopLabel = GetNode<Label>("CanvasLayersshop/WelcomeScreen/TextureRect/Label");
@@ -280,6 +280,7 @@ public partial class Main : Node2D
 			playersalive[GlobalVariables.Instance.Winner].Currency += 30;
 			string winner = playersalive[GlobalVariables.Instance.Winner].Name + "heeft de minigame gewonnen en verdient 30 pond";
 			UpdateSpaceLabel(winner);
+			await WaitForSeconds(2);
 		}
 
 		for (int i = 0; i < Playerlist.Length; i++)
@@ -411,6 +412,7 @@ public partial class Main : Node2D
 					{
 						case "0":
 							hasitemspace = true;
+							UpdateSpaceLabel("sorry je hebt geen item space");
 							break;
 
 					}
@@ -421,7 +423,7 @@ public partial class Main : Node2D
 
 					await ShopAsk(player);
 				}
-				UpdateSpaceLabel("sorry je hebt geen item space");
+				
 			}
 			if (ContinueLoop)
 			{
@@ -512,6 +514,7 @@ public partial class Main : Node2D
 					{
 						case "0":
 							hasitemspace = true;
+							UpdateSpaceLabel("sorry je hebt geen item space");
 							break;
 
 					}
@@ -521,7 +524,7 @@ public partial class Main : Node2D
 					UpdateSpaceLabel("Shop");
 					await ShopAsk(player);
 				}
-				UpdateSpaceLabel("sorry je hebt geen item space");
+				
 			}
 			if (ContinueLoop)
 			{
@@ -759,7 +762,7 @@ public partial class Main : Node2D
 				invSlot3.Scale = new Vector2(0.7f, 0.7f);
 
 
-
+				await WaitForSeconds(5/10);
 
 				if (useditem != "dice")
 				{
@@ -800,7 +803,7 @@ public partial class Main : Node2D
 			Spacelabel.Text = "";
 		}
 		async Task<int> AwaitButtonPress(Player player)
-		{
+		{	
 			diceshop.Show();
 			waitingforbuttonpress = true;
 			turnLabel.Hide();
@@ -1141,7 +1144,7 @@ public partial class Main : Node2D
 			while (runLoop2)
 			{
 				if (Input.IsActionJustPressed($"D-Pad-left_{WhatPlayer}"))
-				{
+				{	GD.Print("pressed left");
 					if (player.Currency >= Shopinv[0].Price)
 					{
 						mainShop.Hide();
@@ -1152,7 +1155,7 @@ public partial class Main : Node2D
 					}
 				}
 				if (Input.IsActionJustPressed($"D-Pad-up_{WhatPlayer}"))
-				{
+				{GD.Print("pressed up");
 					if (player.Currency >= Shopinv[1].Price)
 					{
 						mainShop.Hide();
@@ -1163,7 +1166,7 @@ public partial class Main : Node2D
 					}
 				}
 				if (Input.IsActionJustPressed($"D-Pad-right_{WhatPlayer}"))
-				{
+				{GD.Print("pressed right");
 					if (player.Currency >= Shopinv[2].Price)
 					{
 						ChosenItem = Shopinv[2].Name;
@@ -1320,7 +1323,7 @@ public partial class Main : Node2D
 				return useditem;
 
 			}
-			else if (Input.IsActionJustPressed($"no_{WhatPlayer}"))
+			else if (Input.IsActionJustPressed($"B_{WhatPlayer}"))
 			{
 				GD.Print("said no");
 
@@ -1495,6 +1498,7 @@ public partial class Main : Node2D
 						useditem = "nodice";
 						return useditem;
 				}
+				GD.Print(itemId);
 				updateInvSprite(player);
 				if (itemId != "0")
 				{
@@ -1659,6 +1663,7 @@ public partial class Main : Node2D
 						useditem = "nodice";
 						return useditem;
 				}
+				GD.Print(itemId);
 				updateInvSprite(player);
 				if (itemId != "0")
 				{
@@ -1811,6 +1816,7 @@ public partial class Main : Node2D
 						useditem = "nodice";
 						return useditem;
 				}
+				GD.Print(itemId);
 				updateInvSprite(player);
 				if (itemId != "0")
 				{
@@ -2731,17 +2737,17 @@ public partial class Main : Node2D
 		else if (whatspace.Contains(" you dont have enough money "))
 		{
 			Spacelabel.Text = "sorry," + whatspace;
-			await WaitForSeconds(2);
+			await WaitForSeconds(3);
 		}
 		else if (whatspace.Contains("sorry je hebt geen item space"))
 		{
 			Spacelabel.Text = whatspace;
-			await WaitForSeconds(2);
+			await WaitForSeconds(3);
 		}
 		else if (whatspace == "heeft de minigame gewonnen en verdient 30 pond")
 		{
 			Spacelabel.Text = whatspace;
-			await WaitForSeconds(2);
+			await WaitForSeconds(3);
 		}		
 		else if (whatspace == "er is geen razorcap op het bord")
 		{
@@ -2758,7 +2764,7 @@ public partial class Main : Node2D
 		else if (whatspace == " aangevallen voor ")
 		{
 			Spacelabel.Text = whatspace;
-			await WaitForSeconds(2);
+			await WaitForSeconds(3);
 		}
 	}
 	private async Task WaitForSeconds(float seconds)
