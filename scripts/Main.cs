@@ -36,6 +36,8 @@ public partial class Main : Node2D
 	TextureRect invSprite3;
 
 	Label turnLabel;
+	Label rolladjustLabel;
+	TextureRect skipturnIcon;
 
 	Vector2 invSprite1Play1Pos;
 	Vector2 invSprite2Play1Pos;
@@ -58,6 +60,8 @@ public partial class Main : Node2D
 
 	Control mainShop;
 	Control textShop;
+
+	Control yesnoButton;
 
 	Panel diceshop;
 
@@ -126,7 +130,7 @@ public partial class Main : Node2D
 
 	public override async void _Ready()
 	{
-
+		yesnoButton = GetNode<Control>("Node2D/CanvasLayer/Control");
 		textShopLabel = GetNode<Label>("CanvasLayersshop/WelcomeScreen/TextureRect/Label");
 
 		diceshop = GetNode<Panel>("CanvasLayersshop/DiceShop");
@@ -211,14 +215,14 @@ public partial class Main : Node2D
 
 		if (PlayerAmount == 2)
 		{
-			Vector2 player1start = spacesInfo[5].Space.Position;
+			Vector2 player1start = spacesInfo[0].Space.Position;
 			player1 = GetNode<Player>("player1");
 			player1.Position = player1start;
-			player1.PositionSpace = 5;
-			Vector2 player2start = spacesInfo[4].Space.Position;
+			player1.PositionSpace = 0;
+			Vector2 player2start = spacesInfo[9].Space.Position;
 			player2 = GetNode<Player>("player2");
 			player2.Position = player2start;
-			player2.PositionSpace = 4;
+			player2.PositionSpace = 9;
 
 			Playerlist = new Player[2] { player1, player2 };
 			playersalive = new List<Player> { player1, player2 };
@@ -414,8 +418,6 @@ public partial class Main : Node2D
 					{
 						case "0":
 							hasitemspace = true;
-							UpdateSpaceLabel("sorry je hebt geen item space");
-							await WaitForSeconds(3);
 							break;
 
 					}
@@ -423,8 +425,14 @@ public partial class Main : Node2D
 				if (hasitemspace)
 				{
 
-
+					yesnoButton.Show();
 					await ShopAsk(player);
+					yesnoButton.Hide();
+				}
+				if (hasitemspace == false)
+				{ 
+					UpdateSpaceLabel("sorry je hebt geen item space");
+					await WaitForSeconds(2);
 				}
 				
 			}
@@ -443,8 +451,9 @@ public partial class Main : Node2D
 			{
 				if (player.Currency >= 50)
 				{
-
+					yesnoButton.Show();
 					await RazorcapPurchase(player);
+					yesnoButton.Hide();
 				}
 				UpdateSpaceLabel("you dont have enough money");
 				await WaitForSeconds(3);
@@ -520,8 +529,6 @@ public partial class Main : Node2D
 					{
 						case "0":
 							hasitemspace = true;
-							UpdateSpaceLabel("sorry je hebt geen item space");
-							await WaitForSeconds(3);
 							break;
 
 					}
@@ -530,6 +537,11 @@ public partial class Main : Node2D
 				{
 					UpdateSpaceLabel("Shop");
 					await ShopAsk(player);
+				}
+				if (hasitemspace == false)
+				{ 
+					UpdateSpaceLabel("sorry je hebt geen item space");
+					await WaitForSeconds(2);
 				}
 				
 			}
@@ -757,8 +769,9 @@ public partial class Main : Node2D
 			if (player.SkipTurn == false) // dit checkt of de speler zen beurt moet overslaan
 			{
 				//choose wich dice, hiervoor hebben we de shop mechanic + een shop menu nodig
+				yesnoButton.Show();
 				string useditem = await ChooseUseItem(player);
-
+				
 
 
 				invSprite1.Scale = new Vector2(0.01f, 0.01f);
@@ -777,6 +790,7 @@ public partial class Main : Node2D
 					diceRoll = await AwaitButtonPress(player);
 					diceshop.Hide();
 					diceRoll += player.RollAdjustment;
+					await WaitForSeconds(5/10);
 					await StartMovement(player, diceRoll);
 				}
 
@@ -1300,7 +1314,7 @@ public partial class Main : Node2D
 				runloop4 = false;
 			}
 		}
-		textShopLabel.Text = "Naamloze karacter:   Welcome to my shop. Come take a look what we have in store.";
+		textShopLabel.Text = "Naamloze karakter:   Welcome to my shop. Come take a look what we have in store.";
 
 
 
@@ -1318,6 +1332,7 @@ public partial class Main : Node2D
 		{
 			if (Input.IsActionJustPressed($"A_{WhatPlayer}"))
 			{
+				yesnoButton.Hide();
 				updateInvPos(player);
 				GD.Print("said yes");
 				useditem = await ChooseItem(player);
@@ -1327,8 +1342,8 @@ public partial class Main : Node2D
 			}
 			else if (Input.IsActionJustPressed($"B_{WhatPlayer}"))
 			{
+				yesnoButton.Hide();
 				GD.Print("said no");
-
 				return "nouseditem";
 			}
 			await ToSignal(GetTree().CreateTimer(0), "timeout");
@@ -2274,7 +2289,9 @@ public partial class Main : Node2D
 
 		Label currency = GetNode<Label>($"Node2D/CanvasLayer/{player.Name}/Playerhud/Currency{player.Name}");
 		Label health = GetNode<Label>($"Node2D/CanvasLayer/{player.Name}/Playerhud/Health{player.Name}");
-		Label rolladjustLabel = GetNode<Label>($"Node2D/CanvasLayer/{player.Name}/Playerhud/rolladjust/Label");
+
+		rolladjustLabel = GetNode<Label>($"Node2D/CanvasLayer/{player.Name}/Playerhud/rolladjust/Label");
+		skipturnIcon = GetNode<TextureRect>($"Node2D/CanvasLayer/{player.Name}/Playerhud/skipturn/img");
 
 		currency.Text = player.Currency.ToString();
 		health.Text = player.Health.ToString();
@@ -2323,6 +2340,14 @@ public partial class Main : Node2D
 		if (player.RollAdjustment == 0)
 		{
 			rolladjustLabel.Hide();
+		}
+		if (player.SkipTurn == true)
+		{
+			skipturnIcon.Show();
+		}
+		if (player.SkipTurn == false)
+		{
+			skipturnIcon.Hide();
 		}
 		else if (player.RollAdjustment > 0)
 		{

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b2du4p5m6ve7a"]
+[gd_scene load_steps=9 format=3 uid="uid://3uphtyoyckq2"]
 
 [ext_resource type="Script" path="res://scripts/Minigame2.cs" id="1_ojfqb"]
 [ext_resource type="Texture2D" uid="uid://bm6iudyb75q1o" path="res://Minigame2/Designer.jpg" id="2_f7b00"]
@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dn1wgggu0wnt3" path="res://assets/Boards/rename background.png" id="7_ecm4e"]
 [ext_resource type="Texture2D" uid="uid://cx3skduiddtax" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/ABXY/button_xbox_digital_a_1.png" id="8_ymkpj"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D2" type="Node2D"]
 script = ExtResource("1_ojfqb")
 
 [node name="GameUI" type="Control" parent="."]
@@ -190,7 +190,7 @@ offset_bottom = 588.0
 text = "Een spannend minigame waarbij 
 spelers hun gevoel voor tijd testen! 
 De timer begint zichtbaar, 
-maar verdwijnt na 2 seconden. 
+maar verdwijnt na 3 seconden. 
 Daarna moeten spelers de klok 
 in hun hoofd volgen en op tijd drukken 
 om zo dicht mogelijk bij 

@@ -6,30 +6,49 @@ using System.Threading;
 
 public partial class Menu : Node2D
 {
-	Button start = new Button();
-	Button ktwee = new Button();
-	Button kdrie = new Button();
-	Button kvier = new Button();
+	Button start;
+	Button ktwee;
+	Button kdrie;
+	Button kvier;
+
+
 	
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
-	{	GlobalVariables.Instance.playeramount = 0;
-		AddChild(start);
-		AddChild(ktwee);
-		AddChild(kdrie);
-		AddChild(kvier);	
+	{	GlobalVariables.Instance.playeramount = 0;	
+	
 
-		start.Position = new Godot.Vector2(-75, 2);
-		ktwee.Position = new Godot.Vector2(-80, -70);
-		kdrie.Position = new Godot.Vector2(-35, -70);
-		kvier.Position = new Godot.Vector2(10, -70);
+		
 
 
-		start.Text = "Start Game!";		
-		ktwee.Text = "2";
-		kdrie.Text = "3";
-		kvier.Text = "4";
+		start = GetNode<Button>("Node2D/Button5");
+		ktwee = GetNode<Button>("Node2D/Button2");
+		kdrie = GetNode<Button>("Node2D/Button3");
+		kvier = GetNode<Button>("Node2D/Button4");
+
+
+		start.Text = "Select aantal spelers";
+
+
+		ktwee.Size = new Godot.Vector2(31, 31);
+		ktwee.Scale = new Godot.Vector2(1.5f, 1.5f);
+		ktwee.Position = new Godot.Vector2(-113f, -15.5f);
+
+		kdrie.Size = new Godot.Vector2(31, 31);
+		kdrie.Scale = new Godot.Vector2(1.5f, 1.5f);
+		kdrie.Position = new Godot.Vector2(-15.5f, -15.5f);
+
+		kvier.Size = new Godot.Vector2(31, 31);
+		kvier.Scale = new Godot.Vector2(1.5f, 1.5f);
+		kvier.Position = new Godot.Vector2(82f, -15.5f);
+
+		start.Size = new Godot.Vector2(100, 31);
+		start.Scale = new Godot.Vector2(1, 1f);
+		start.Position  = new Godot.Vector2(-70f, 136f);
+
+		
+	
 
 		start.ZIndex = 3;
 		ktwee.ZIndex = 3;
@@ -46,6 +65,7 @@ public partial class Menu : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		
 		if(Input.IsActionJustPressed("D-Pad-left_1"))
 		{
 			twee();
@@ -81,24 +101,18 @@ public partial class Menu : Node2D
 	}
 	private void twee()
 	{
-		ktwee.Position = new Godot.Vector2(-80000, -70000);
-		kdrie.Position = new Godot.Vector2(-350000, -70000);
-		kvier.Position = new Godot.Vector2(100000, -70000);
 		GlobalVariables.Instance.playeramount = 2;
+		start.Text = "Start Spel met " + GlobalVariables.Instance.playeramount + " spelers";
 		
 	}
 	private void drie()
 	{
-		ktwee.Position = new Godot.Vector2(-80000, -70000);
-		kdrie.Position = new Godot.Vector2(-350000, -70000);
-		kvier.Position = new Godot.Vector2(100000, -70000);
 		GlobalVariables.Instance.playeramount = 3;
+		start.Text = "Start Spel met " + GlobalVariables.Instance.playeramount + " spelers";
 	}
 	private void vier()
-	{
-		ktwee.Position = new Godot.Vector2(-80000, -70000);
-		kdrie.Position = new Godot.Vector2(-350000, -70000);
-		kvier.Position = new Godot.Vector2(100000, -70000);
+	{	
 		GlobalVariables.Instance.playeramount = 4;
+		start.Text = "Start Spel met " + GlobalVariables.Instance.playeramount + " spelers";
 	}
 }

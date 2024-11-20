@@ -50,10 +50,10 @@ texture = ExtResource("2_uid2u")
 metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="TextureRect" parent="Node2D/Control/Label/Mainmenu"]
-offset_left = -223.333
-offset_top = -143.333
-offset_right = -183.333
-offset_bottom = -103.333
+offset_left = -226.667
+offset_top = -156.667
+offset_right = 253.333
+offset_bottom = 323.333
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_4o6bs")
 
@@ -66,18 +66,18 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_koerb")
 
 [node name="TextureRect3" type="TextureRect" parent="Node2D/Control/Label/Mainmenu"]
-offset_left = 131.667
-offset_top = -150.0
-offset_right = 611.667
-offset_bottom = 330.0
+offset_left = 115.0
+offset_top = -160.0
+offset_right = 595.0
+offset_bottom = 320.0
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("5_7hdui")
 
 [node name="TextureRect4" type="TextureRect" parent="Node2D/Control/Label/Mainmenu"]
-offset_left = -43.3333
-offset_top = 75.0
-offset_right = 436.667
-offset_bottom = 555.0
+offset_left = -51.6666
+offset_top = 76.6667
+offset_right = 428.334
+offset_bottom = 556.667
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("6_ghm87")
 
@@ -85,3 +85,63 @@ texture = ExtResource("6_ghm87")
 position = Vector2(12, 25)
 scale = Vector2(0.6, 0.6)
 metadata/_edit_lock_ = true
+
+[node name="Button2" type="Button" parent="Node2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -113.0
+offset_top = -15.5
+offset_right = -82.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+text = "2"
+
+[node name="Button3" type="Button" parent="Node2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.5
+offset_top = -15.5
+offset_right = 15.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+text = "3"
+
+[node name="Button4" type="Button" parent="Node2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 82.0
+offset_top = -15.5
+offset_right = 113.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+text = "4
+"
+
+[node name="Button5" type="Button" parent="Node2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = 139.0
+offset_right = 124.0
+offset_bottom = 170.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start Game!"
