@@ -274,6 +274,7 @@ public partial class Main : Node2D
 		{
 			RestoreAllStates();
 			playersalive[GlobalVariables.Instance.Winner].Currency += 30;
+			UpdateSpaceLabel("winner");
 		}
 
 		for (int i = 0; i < Playerlist.Length; i++)
@@ -511,7 +512,7 @@ public partial class Main : Node2D
 				}
 				if (hasitemspace)
 				{
-					UpdateSpaceLabel("Shop", player);
+					UpdateSpaceLabel("Shop");
 					await ShopAsk(player);
 				}
 			}
@@ -546,13 +547,13 @@ public partial class Main : Node2D
 		if (typeOfSpace == "blueSpace")
 		{
 			BlueSpace(player);
-			UpdateSpaceLabel("blueSpace", player);
+			UpdateSpaceLabel("blueSpace");
 
 		}
 		else if (typeOfSpace == "redSpace")
 		{
 			RedSpace(player);
-			UpdateSpaceLabel("redSpace", player);
+			UpdateSpaceLabel("redSpace");
 		}
 		else if (typeOfSpace.Contains("sc"))
 		{
@@ -561,23 +562,23 @@ public partial class Main : Node2D
 			{
 				if (typeOfSpace.Contains("Left"))
 				{
-					UpdateSpaceLabel("TopLeftShortcut", player);
+					UpdateSpaceLabel("TopLeftShortcut");
 					TopLeftshortcut(player);
 				}
-				else { TopRightshortcut(player); UpdateSpaceLabel("TopRightShortcut", player); }
+				else { TopRightshortcut(player); UpdateSpaceLabel("TopRightShortcut"); }
 			}
 			else if (typeOfSpace.Contains("Left"))
 			{
 
 				BottomLeftShortcut(player);
-				UpdateSpaceLabel("BottomLeftShortcut", player);
+				UpdateSpaceLabel("BottomLeftShortcut");
 			}
-			else { BottomRightShortcut(player); UpdateSpaceLabel("TopRightShortcut", player); }
+			else { BottomRightShortcut(player); UpdateSpaceLabel("TopRightShortcut"); }
 		}
 		else if (typeOfSpace == "getRobbedSpace")
 		{
 			int robbedAmount = Robbery(player);
-			UpdateSpaceLabel("Robbery", player);
+			UpdateSpaceLabel("Robbery");
 			if (robbedAmount > player.Currency)
 			{
 				GD.Print("They took every penny you had!");
@@ -588,19 +589,19 @@ public partial class Main : Node2D
 		else if (typeOfSpace == "knockoutSpace")
 		{
 			SkipNextTurn(player);
-			UpdateSpaceLabel("KnockoutSpace", player);
+			UpdateSpaceLabel("KnockoutSpace");
 			GD.Print("You just got knocked out! you have to skip a turn");
 		}
 		else if (typeOfSpace == "robSpace")
 		{
 			int robbedAmount = RobSomeone(player);
-			UpdateSpaceLabel("robSpace", player);
+			UpdateSpaceLabel("robSpace");
 			GD.Print("You just robbed someone! you gained " + robbedAmount + " Pounds!");
 		}
 		else if (typeOfSpace == "Whiskey_Space")
 		{
 			Whiskey(player);
-			UpdateSpaceLabel("Whiskey_Space", player);
+			UpdateSpaceLabel("Whiskey_Space");
 			spacesInfo[player.PositionSpace].Name = spacesInfo[player.PositionSpace].OriginalName;
 			Node2D markerNode = GetNode<Node2D>($"spaces/Marker2D{player.PositionSpace + 1}");
 			var sprite = markerNode.GetChild<Sprite2D>(0);
@@ -938,7 +939,7 @@ public partial class Main : Node2D
 	async Task RazorcapPurchase(Player player)
 	{	
 		bool waitingforbuttonpressRazorcap = true;
-		UpdateSpaceLabel("RazorCappurchase", player);
+		UpdateSpaceLabel("RazorCappurchase");
 		while (waitingforbuttonpressRazorcap)
 		{
 			if (Input.IsActionJustPressed($"yes_{WhatPlayer}"))
@@ -961,7 +962,7 @@ public partial class Main : Node2D
 			await ToSignal(GetTree().CreateTimer(0), "timeout");
 
 		}
-		UpdateSpaceLabel("clear", player);
+		UpdateSpaceLabel("clear");
 
 	}
 
@@ -1044,14 +1045,14 @@ public partial class Main : Node2D
 		bool RunLoop = true;
 		if (player.Currency > 0)
 		{
-			UpdateSpaceLabel("Shop", player);
+			UpdateSpaceLabel("Shop");
 			GD.Print("do you want to shop for items here? Left bumper for YES, right bumper for NO");
 			while (RunLoop)
 			{
 				if (Input.IsActionJustPressed($"yes_{WhatPlayer}")) //yes i want to shop
 				{
 					GD.Print("Okay, come on in");
-					UpdateSpaceLabel("clear", player);
+					UpdateSpaceLabel("clear");
 					await GenerateShopInv(player);
 
 					RunLoop = false;
@@ -1807,7 +1808,7 @@ public partial class Main : Node2D
 	}
 	void Beartrap(Player player) // dit is de space
 	{
-		UpdateSpaceLabel("BearTrap", player);
+		UpdateSpaceLabel("BearTrap");
 		GD.Print("you stepped into a beartrap, you take damage and next turn cant walk well");
 		player.Health -= 40;
 		player.RollAdjustment += -5;
@@ -1971,7 +1972,7 @@ public partial class Main : Node2D
 	}
 
 	void ChooseMiniGame()
-	{		int selectedGame = rnd.Next(1,4);
+	{		int selectedGame = rnd.Next(1,6);
 		switch (selectedGame)
         {
             case 1:
@@ -1984,7 +1985,7 @@ public partial class Main : Node2D
                 GlobalVariables.Instance.SwitchToMinigame3();
                 break;
             case 4:
-                GlobalVariables.Instance.SwitchToMinigame4();
+                GlobalVariables.Instance.SwitchToMinigame5();
                 break;
             case 5:
                 GlobalVariables.Instance.SwitchToMinigame5();
@@ -2578,7 +2579,7 @@ public partial class Main : Node2D
 
 	}
 
-	void UpdateSpaceLabel(string whatspace, Player player)
+	void UpdateSpaceLabel(string whatspace)
 	{
 		GD.Print("in updatelabel");
 		if (whatspace == "blueSpace")
@@ -2607,7 +2608,7 @@ public partial class Main : Node2D
 		}
 		else if (whatspace == "Robbery")
 		{
-			Spacelabel.Text = "je bent beroofd! je verliest " + lostcurrency + " en ze doen 10 damage!";
+			Spacelabel.Text = "je bent beroofd! je verliest " + lostcurrency + " en neemt 10 damage!";
 		}
 		else if (whatspace == "KnockoutSpace")
 		{

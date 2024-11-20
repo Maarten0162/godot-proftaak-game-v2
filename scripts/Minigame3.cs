@@ -24,7 +24,7 @@ public partial class Minigame3 : Node2D
     public override void _Ready()
     {
         minigameplayeramount = 0;
-        activePlayers = new bool[4]; // Initialiseer de actieve spelers array
+        activePlayers = new bool[GlobalVariables.Instance.playersalive.Count]; // Initialiseer de actieve spelers array
 
         if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player1"))
         {
@@ -203,7 +203,7 @@ public partial class Minigame3 : Node2D
                 winnaarIndex = i;
             }
         }
-
+        GlobalVariables.Instance.Winner = winnaarIndex;
         return winnaarIndex;
     }
 

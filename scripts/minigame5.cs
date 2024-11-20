@@ -45,7 +45,8 @@ public partial class minigame5 : Control
     public override void _Ready()
     {
         vraagLabel = GetNode<Label>("VraagLabel");
-
+        heeftGeantwoord = new List<bool>();
+        antwoorden = new List<string>();
         // Verwijzingen naar spelerstatus- en scorelabels
         spelerStatusLabels = new List<Label>();
         spelerScoreLabels = new List<Label>();
@@ -53,25 +54,32 @@ public partial class minigame5 : Control
         {
             spelerStatusLabels.Add(GetNode<Label>("MarginContainer_Player1/StatusLabel"));
             spelerScoreLabels.Add(GetNode<Label>("MarginContainer_Player1/ScoreLabel"));
+            heeftGeantwoord.Add(false);
+            antwoorden.Add("");
 
         }
         if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player2"))
         {
             spelerStatusLabels.Add(GetNode<Label>("MarginContainer_Player2/StatusLabel"));
             spelerScoreLabels.Add(GetNode<Label>("MarginContainer_Player2/ScoreLabel"));
+            heeftGeantwoord.Add(false);
+            antwoorden.Add("");
         }
         if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player3"))
         {
             spelerStatusLabels.Add(GetNode<Label>("MarginContainer_Player3/StatusLabel"));
             spelerScoreLabels.Add(GetNode<Label>("MarginContainer_Player3/ScoreLabel"));
+            heeftGeantwoord.Add(false);
+            antwoorden.Add("");
         }
         if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player4"))
         {
             spelerStatusLabels.Add(GetNode<Label>("MarginContainer_Player4/StatusLabel"));
             spelerScoreLabels.Add(GetNode<Label>("MarginContainer_Player4/ScoreLabel"));
+            heeftGeantwoord.Add(false);
+            antwoorden.Add("");
         }
-        heeftGeantwoord = new List<bool>();
-        antwoorden = new List<string>();
+       
 
         KiesVolgendeVraag();
         UpdateSpelerUI();
@@ -182,7 +190,12 @@ public partial class minigame5 : Control
                 winnaars.Add(i + 1);
             }
         }
-            GlobalVariables.Instance.Winner = 0; //HIER MOET EEN WINAAR NOG KOMEN IDK WAT DIT IS
+            for( int i = 0; i < GlobalVariables.Instance.playersalive.Count; i++){
+                if(scores[i] == hoogsteScore){
+                    GlobalVariables.Instance.Winner = i;
+                }
+            }
+            //HIER MOET EEN WINAAR NOG KOMEN IDK WAT DIT IS
             GlobalVariables.Instance.SwitchToMainBoard();
         vraagLabel.Text = $"Winnaar(s): Speler {string.Join(", Speler ", winnaars)}";
     }
