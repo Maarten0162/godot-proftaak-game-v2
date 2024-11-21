@@ -282,7 +282,7 @@ public partial class Main : Node2D
 		{
 			RestoreAllStates();
 			playersalive[GlobalVariables.Instance.Winner].Currency += 30;
-			string winner = playersalive[GlobalVariables.Instance.Winner].Name + "heeft de minigame gewonnen en verdient 30 pond";
+			string winner = playersalive[GlobalVariables.Instance.Winner].Name + " heeft de minigame gewonnen en verdient 30 pond";
 			UpdateSpaceLabel(winner);
 			
 		}
@@ -555,8 +555,9 @@ public partial class Main : Node2D
 			{
 				if (player.Currency >= 60)
 				{
-
+					yesnoButton.Show();
 					await RazorcapPurchase(player);
+					yesnoButton.Hide();
 				}
 				UpdateSpaceLabel("you dont have enough money");
 				await WaitForSeconds(3);
@@ -2045,11 +2046,13 @@ public partial class Main : Node2D
 					playersalive[i].HasCap = false;
 					player.HasCap = true;
 					victim = playersalive[i].Name;
+					Updatehud(playersalive[i]);
 					runloop = false;
 				}
 			}
 		}
 		Updatehud(player);
+		
 		string itemuse = player.Name + "used his goons to steal te cap from: " + victim;
 		UpdateSpaceLabel(itemuse);
 	}
@@ -2773,7 +2776,7 @@ public partial class Main : Node2D
 		}
 		else if (whatspace == "RazorCappurchase")
 		{
-			Spacelabel.Text = "je hebt de optie om een razorcap te kopen voor 60 pond. kies linker bumper voor ja en rechterbumper voor nee.";
+			Spacelabel.Text = "je hebt de optie om een razorcap te kopen voor 60 pond.";
 		}
 		else if (whatspace == "Shop")
 		{
@@ -3017,7 +3020,7 @@ public partial class Main : Node2D
 		texRectYes.Show();
 		texRectNo.Show();
 
-		textShopLabel.Text = "Are you sure you wanna buy " + ChosenItem + " for £" + price + "?";
+		textShopLabel.Text = "Weet je zeker dat je " + ChosenItem + " voor £" + price + " wilt kopen?";
 
 	}
 
