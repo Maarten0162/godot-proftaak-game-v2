@@ -196,7 +196,7 @@ public partial class Minigame2 : Node2D
             {
                 closestTimeDiff = timeDiff;
                 closestPlayer = players[i];
-                GlobalVariables.Instance.Winner = i;
+                GlobalVariables.Instance.Winner = i -1;
             }
         }
 
