@@ -75,7 +75,7 @@ public partial class Minigame2 : Node2D
         
         ASprite.Visible = true;
         UitlegSprite.Visible = true;
-        TimerUitleg.WaitTime = 20.0f;
+        TimerUitleg.WaitTime = 10.0f;
         TimerUitleg.OneShot = true;
         TimerUitleg.Start();
 

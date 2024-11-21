@@ -117,6 +117,7 @@ offset_bottom = 412.0
 [node name="TimerUitleg" type="Timer" parent="."]
 
 [node name="UitlegSprite" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(577.662, 326.371)
 scale = Vector2(0.726673, 0.72362)
 texture = ExtResource("5_rgevo")
@@ -159,3 +160,11 @@ texture = ExtResource("8_ats1y")
 position = Vector2(331.25, 515.25)
 scale = Vector2(0.151042, 0.151042)
 texture = ExtResource("9_1x52m")
+
+[node name="InputButton" type="TextureRect" parent="."]
+offset_left = 581.0
+offset_top = 46.0
+offset_right = 1061.0
+offset_bottom = 526.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_pwc2e")

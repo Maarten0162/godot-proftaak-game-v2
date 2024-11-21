@@ -644,7 +644,7 @@ public partial class Main : Node2D
 
 	//TURNS
 	async Task Turn()
-	{
+	{	await WaitForSeconds(1);
 		for (int i = 0; i < playersalive.Count; i++)
 		{
 			if (playersalive[i].Health == 0)
@@ -679,7 +679,7 @@ public partial class Main : Node2D
 
 		GlobalVariables.Instance.TurnCount++;
 
-		await WaitForSeconds(2);
+		
 
 		GD.Print("voor razorcap");
 		if (GlobalVariables.Instance.TurnCount > 0) //dit zorgt ervoor dat de cap gaat spawnen
