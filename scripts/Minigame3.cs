@@ -1,7 +1,9 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 public partial class Minigame3 : Node2D
 {
@@ -30,8 +32,9 @@ public partial class Minigame3 : Node2D
     private Sprite2D UitlegSprite;
     private Timer TimerUitleg;
 
-    public override void _Ready()
-    {   inputbutton = GetNode<TextureRect>("InputButton");
+    public override async void _Ready()
+    {
+        inputbutton = GetNode<TextureRect>("InputButton");
         minigameplayeramount = 0;
         activePlayers = new bool[4]; // Initialiseer de actieve spelers array
 
@@ -86,7 +89,7 @@ public partial class Minigame3 : Node2D
         BSprite = GetNode<Sprite2D>("BSprite");
         XSprite = GetNode<Sprite2D>("XSprite");
         YSprite = GetNode<Sprite2D>("YSprite");
-        
+
         ASprite.Visible = true;
         BSprite.Visible = true;
         XSprite.Visible = true;
@@ -95,7 +98,7 @@ public partial class Minigame3 : Node2D
         TimerUitleg.WaitTime = 10.0f;
         TimerUitleg.OneShot = true;
         TimerUitleg.Start();
-
+        await WaitForSeconds(10);
         TimerUitleg.Connect("timeout", new Callable(this, nameof(OnTimerTimeout1)));
     }
 
@@ -151,6 +154,7 @@ public partial class Minigame3 : Node2D
             {
                 KnopLabel.Text = "Druk op ";
                 inputbutton.Texture = GD.Load<Texture2D>("res://assets/hud/XBOX BUTTONS/Digital Buttons/ABXY/button_xbox_digital_a_1.png");
+                inputbutton.Show();
                 CheckPlayerInput("A_1", 0);
                 CheckPlayerInput("A_2", 1);
                 CheckPlayerInput("A_3", 2);
@@ -160,6 +164,7 @@ public partial class Minigame3 : Node2D
             {
                 KnopLabel.Text = "Druk op ";
                 inputbutton.Texture = GD.Load<Texture2D>("res://assets/hud/XBOX BUTTONS/Digital Buttons/ABXY/button_xbox_digital_b_1.png");
+                inputbutton.Show();
                 CheckPlayerInput("B_1", 0);
                 CheckPlayerInput("B_2", 1);
                 CheckPlayerInput("B_3", 2);
@@ -169,6 +174,7 @@ public partial class Minigame3 : Node2D
             {
                 KnopLabel.Text = "Druk op ";
                 inputbutton.Texture = GD.Load<Texture2D>("res://assets/hud/XBOX BUTTONS/Digital Buttons/ABXY/button_xbox_digital_x_1.png");
+                inputbutton.Show();
                 CheckPlayerInput("X_1", 0);
                 CheckPlayerInput("X_2", 1);
                 CheckPlayerInput("X_3", 2);
@@ -178,6 +184,7 @@ public partial class Minigame3 : Node2D
             {
                 KnopLabel.Text = "Druk op ";
                 inputbutton.Texture = GD.Load<Texture2D>("res://assets/hud/XBOX BUTTONS/Digital Buttons/ABXY/button_xbox_digital_y_1.png");
+                inputbutton.Show();
                 CheckPlayerInput("Y_1", 0);
                 CheckPlayerInput("Y_2", 1);
                 CheckPlayerInput("Y_3", 2);
@@ -263,5 +270,10 @@ public partial class Minigame3 : Node2D
             postReactSprites[i].Visible = postReact;
         }
     }
-
+    private async Task WaitForSeconds(float seconds)
+    {
+        await ToSignal(GetTree().CreateTimer(seconds), "timeout");
+    }
 }
+
+

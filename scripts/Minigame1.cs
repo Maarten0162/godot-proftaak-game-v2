@@ -2,6 +2,8 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 public partial class Minigame1 : Node
@@ -28,7 +30,7 @@ public partial class Minigame1 : Node
     private Timer TimerUitleg;
 
 
-	public override void _Ready()
+	public override async void _Ready()
 	{
 		
 		minigameplayeramount = 0;
@@ -87,7 +89,7 @@ public partial class Minigame1 : Node
         TimerUitleg.WaitTime = 10.0f;
         TimerUitleg.OneShot = true;
         TimerUitleg.Start();
-
+		await WaitForSeconds(10);
         TimerUitleg.Connect("timeout", new Callable(this, nameof(OnTimerTimeout1)));
         GD.Print("Aantal spelers:", minigameplayeramount);
     }
@@ -236,4 +238,5 @@ private async Task WaitForSeconds(float seconds)
 	{
 		await ToSignal(GetTree().CreateTimer(seconds), "timeout");
 	}}
+	
 

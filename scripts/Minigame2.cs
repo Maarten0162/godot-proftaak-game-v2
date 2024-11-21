@@ -33,7 +33,7 @@ public partial class Minigame2 : Node2D
 
     
 
-    public override void _Ready()
+    public override async void _Ready()
     { playerHasPressedButton = new bool[GlobalVariables.Instance.playersalive.Count];
         
         // Verwijzingen naar UI-elementen
@@ -78,7 +78,7 @@ public partial class Minigame2 : Node2D
         TimerUitleg.WaitTime = 10.0f;
         TimerUitleg.OneShot = true;
         TimerUitleg.Start();
-
+        await WaitForSeconds(10);
         TimerUitleg.Connect("timeout", new Callable(this, nameof(OnTimerTimeout)));
     }
 

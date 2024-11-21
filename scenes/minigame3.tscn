@@ -162,6 +162,7 @@ scale = Vector2(0.151042, 0.151042)
 texture = ExtResource("9_1x52m")
 
 [node name="InputButton" type="TextureRect" parent="."]
+visible = false
 offset_left = 581.0
 offset_top = 46.0
 offset_right = 1061.0

@@ -645,6 +645,7 @@ public partial class Main : Node2D
 	//TURNS
 	async Task Turn()
 	{	await WaitForSeconds(1);
+	UpdateSpaceLabel("clear");
 		for (int i = 0; i < playersalive.Count; i++)
 		{
 			if (playersalive[i].Health == 0)
@@ -2021,7 +2022,7 @@ public partial class Main : Node2D
 				playersalive[rndplayer].Position = originalposition;
 				playersalive[rndplayer].PositionSpace = originalpositionspace;
 				runloop = false;
-				string itemuse = player.Name + "ruilt plek met " + playersalive[rndplayer].Name;
+				string itemuse = player.Name + " ruilt plek met " + playersalive[rndplayer].Name;
 				UpdateSpaceLabel(itemuse);
 			}
 		}
@@ -2812,7 +2813,7 @@ public partial class Main : Node2D
 		}
 		else if (whatspace.Contains("you dont have enough money"))
 		{
-			Spacelabel.Text = "sorry," + whatspace;
+			Spacelabel.Text = "sorry, " + whatspace;
 			
 		}
 		else if (whatspace.Contains("sorry je hebt geen item space"))
