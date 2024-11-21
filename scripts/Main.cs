@@ -455,7 +455,7 @@ public partial class Main : Node2D
 					await RazorcapPurchase(player);
 					yesnoButton.Hide();
 				}
-				UpdateSpaceLabel("you dont have enough money");
+				else UpdateSpaceLabel("you dont have enough money");
 				await WaitForSeconds(3);
 			}
 			await ToSignal(GetTree().CreateTimer(0.4), "timeout");
@@ -559,7 +559,7 @@ public partial class Main : Node2D
 					await RazorcapPurchase(player);
 					yesnoButton.Hide();
 				}
-				UpdateSpaceLabel("you dont have enough money");
+				else UpdateSpaceLabel("you dont have enough money");
 				await WaitForSeconds(3);
 			}
 			if (spacesInfo[player.PositionSpace].Name == "bearTrap_Space")
