@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://3uphtyoyckq2"]
+[gd_scene load_steps=9 format=3 uid="uid://b2du4p5m6ve7a"]
 
 [ext_resource type="Script" path="res://scripts/Minigame2.cs" id="1_ojfqb"]
 [ext_resource type="Texture2D" uid="uid://bm6iudyb75q1o" path="res://Minigame2/Designer.jpg" id="2_f7b00"]
@@ -31,6 +31,7 @@ expand_mode = 1
 
 [node name="TimerLabel" type="Label" parent="GameUI"]
 modulate = Color(1, 1, 0, 1)
+z_index = 1
 layout_mode = 0
 offset_left = 517.0
 offset_top = 315.0
@@ -171,6 +172,7 @@ text = "speler 4"
 [node name="TimerUitleg" type="Timer" parent="."]
 
 [node name="UitlegSprite" type="Sprite2D" parent="."]
+z_index = 2
 position = Vector2(574.5, 327)
 scale = Vector2(0.723125, 0.735556)
 texture = ExtResource("7_ecm4e")
@@ -183,6 +185,7 @@ offset_bottom = 220.0
 horizontal_alignment = 1
 
 [node name="Uitleg" type="Label" parent="."]
+z_index = 2
 offset_left = 24.0
 offset_top = 281.0
 offset_right = 421.0
@@ -199,6 +202,13 @@ om zo dicht mogelijk bij
 Wie het beste timet, wint!"
 
 [node name="ASprite" type="Sprite2D" parent="."]
+z_index = 2
 position = Vector2(117, 588)
 scale = Vector2(0.151042, 0.151042)
 texture = ExtResource("8_ymkpj")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 501.0
+offset_top = 310.0
+offset_right = 541.0
+offset_bottom = 350.0

@@ -731,6 +731,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_8606b")
+}],
+"loop": true,
+"name": &"0000",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("5_uooir")
 }, {
 "duration": 1.0,
@@ -1632,7 +1640,7 @@ texture = ExtResource("2_ebqpb")
 position = Vector2(564, 143)
 scale = Vector2(0.576429, 0.54454)
 sprite_frames = SubResource("SpriteFrames_3cd7b")
-animation = &"20"
+animation = &"0000"
 
 [node name="spaces" type="Node" parent="."]
 

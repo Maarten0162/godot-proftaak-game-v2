@@ -824,7 +824,7 @@ public partial class Main : Node2D
 			
 			GD.Print("before timer");
 			await WaitForSeconds(2);
-			updateDobbelSprite(0);
+			updateDobbelSprite(0000);
 			GD.Print("after timer");
 			Spacelabel.Text = "";
 		}
@@ -844,6 +844,7 @@ public partial class Main : Node2D
 					
 					diceRoll = basicdice.diceroll();
 					player.Currency -= basicdice.Price;
+					diceshop.Hide();
 					updateDobbelSprite(diceRoll);
 					await WaitForSeconds(1.25f);
 					waitingforbuttonpress = false;
@@ -858,6 +859,7 @@ public partial class Main : Node2D
 					}
 					else diceRoll = betterdice.diceroll();
 					player.Currency -= betterdice.Price;
+					diceshop.Hide();
 					updateDobbelSprite(diceRoll);
 					await WaitForSeconds(1.25f);
 					waitingforbuttonpress = false;
@@ -873,6 +875,7 @@ public partial class Main : Node2D
 					}
 					diceRoll = riskydice.diceroll();
 					player.Currency -= riskydice.Price;
+					diceshop.Hide();
 					updateDobbelSprite(diceRoll);
 					await WaitForSeconds(1.25f);
 					waitingforbuttonpress = false;
@@ -888,6 +891,7 @@ public partial class Main : Node2D
 					}
 					diceRoll = turbodice.diceroll();
 					player.Currency -= turbodice.Price;
+					diceshop.Hide();
 					updateDobbelSprite(diceRoll);
 					waitingforbuttonpress = false;
 					return diceRoll;
@@ -2006,7 +2010,7 @@ public partial class Main : Node2D
 				player.Position = playersalive[rndplayer].Position;
 				player.PositionSpace = playersalive[rndplayer].PositionSpace;
 				runloop = false;
-				string spelers = player.Name + "teleported to" + playersalive[rndplayer].Name;
+				string spelers = player.Name + " teleported to " + playersalive[rndplayer].Name;
 				UpdateSpaceLabel(spelers);
 			}
 		}
