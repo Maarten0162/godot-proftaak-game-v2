@@ -70,8 +70,20 @@ public partial class Minigame1 : Node
 
 		gameTimer = GetNode<Timer>("Timer");
 		gameTimer.Connect("timeout", new Callable(this, nameof(OnTimerTimeout)));
+		Uitleg = GetNode<Label>("Uitleg");
+		ASprite = GetNode<Sprite2D>("ASprite");
+        UitlegSprite = GetNode<Sprite2D>("UitlegSprite");
+        TimerUitleg = GetNode<Timer>("TimerUitleg");
 
-		await uitleg();
+        UitlegSprite.Visible = true;
+		ASprite.Visible = true;
+        TimerUitleg.WaitTime = 10.0f;
+        TimerUitleg.OneShot = true;
+        TimerUitleg.Start();		
+        TimerUitleg.Connect("timeout", new Callable(this, nameof(OnTimerTimeout1)));
+        GD.Print("Aantal spelers:", minigameplayeramount);
+		
+	
 		LoadHighscore();
 		
 
@@ -90,21 +102,7 @@ public partial class Minigame1 : Node
         Uitleg.Text = "";
         gameTimer.Start(); // Start de timer
     }
-	async Task uitleg(){
-
-		Uitleg = GetNode<Label>("Uitleg");
-		ASprite = GetNode<Sprite2D>("ASprite");
-        UitlegSprite = GetNode<Sprite2D>("UitlegSprite");
-        TimerUitleg = GetNode<Timer>("TimerUitleg");
-
-        UitlegSprite.Visible = true;
-		ASprite.Visible = true;
-        TimerUitleg.WaitTime = 10.0f;
-        TimerUitleg.OneShot = true;
-        TimerUitleg.Start();		
-        TimerUitleg.Connect("timeout", new Callable(this, nameof(OnTimerTimeout1)));
-        GD.Print("Aantal spelers:", minigameplayeramount);
-	}
+	
 
 	public override void _Process(double delta)
 	{

@@ -1786,9 +1786,9 @@ texture = ExtResource("16_a006q")
 position = Vector2(553.35, 325.35)
 scale = Vector2(0.135, 0.135)
 
-[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D16"]
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D16"]
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("16_a006q")
+texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D17" type="Marker2D" parent="spaces"]
 position = Vector2(436, 329)
@@ -1973,9 +1973,9 @@ texture = ExtResource("16_a006q")
 position = Vector2(553.35, 325.35)
 scale = Vector2(0.135, 0.135)
 
-[node name="blueSpace" type="Sprite2D" parent="spaces/Marker2D37"]
-scale = Vector2(0.135, 0.135)
-texture = ExtResource("16_a006q")
+[node name="redSpace" type="Sprite2D" parent="spaces/Marker2D37"]
+scale = Vector2(0.13, 0.13)
+texture = ExtResource("17_vh1sw")
 
 [node name="Marker2D38" type="Marker2D" parent="spaces"]
 position = Vector2(452, 284)
@@ -2232,7 +2232,6 @@ offset_top = 2.39808
 offset_right = 891.127
 offset_bottom = 802.398
 scale = Vector2(0.01, 0.01)
-texture = ExtResource("35_lqly4")
 
 [node name="slot2" type="Panel" parent="Node2D/CanvasLayer/player1/Playerhud"]
 clip_children = 1
@@ -2278,7 +2277,6 @@ offset_top = 14.8681
 offset_right = 891.127
 offset_bottom = 814.868
 scale = Vector2(0.01, 0.01)
-texture = ExtResource("35_lqly4")
 
 [node name="slot3" type="Panel" parent="Node2D/CanvasLayer/player1/Playerhud"]
 clip_children = 1
@@ -2324,7 +2322,6 @@ offset_top = 27.8177
 offset_right = 891.127
 offset_bottom = 827.818
 scale = Vector2(0.01, 0.01)
-texture = ExtResource("35_lqly4")
 
 [node name="razorCap" type="Control" parent="Node2D/CanvasLayer/player1/Playerhud"]
 layout_mode = 3
@@ -2503,7 +2500,6 @@ offset_top = 4.31655
 offset_right = 789.373
 offset_bottom = 804.317
 scale = Vector2(0.01, 0.01)
-texture = ExtResource("35_lqly4")
 
 [node name="slot2" type="Panel" parent="Node2D/CanvasLayer/player2/Playerhud"]
 clip_children = 1
@@ -2549,7 +2545,6 @@ offset_top = 15.8273
 offset_right = 789.373
 offset_bottom = 815.827
 scale = Vector2(0.01, 0.01)
-texture = ExtResource("35_lqly4")
 
 [node name="slot3" type="Panel" parent="Node2D/CanvasLayer/player2/Playerhud"]
 clip_children = 1
@@ -2595,7 +2590,6 @@ offset_top = 29.7362
 offset_right = 789.373
 offset_bottom = 829.737
 scale = Vector2(0.01, 0.01)
-texture = ExtResource("35_lqly4")
 
 [node name="razorCap" type="Control" parent="Node2D/CanvasLayer/player2/Playerhud"]
 layout_mode = 3
@@ -2775,7 +2769,6 @@ offset_top = 3.54917
 offset_right = 891.127
 offset_bottom = 803.549
 scale = Vector2(0.01, 0.01)
-texture = ExtResource("35_lqly4")
 
 [node name="slot2" type="Panel" parent="Node2D/CanvasLayer/player3/Playerhud"]
 clip_children = 1
@@ -2858,7 +2851,6 @@ offset_top = 16.0192
 offset_right = 891.127
 offset_bottom = 816.019
 scale = Vector2(0.01, 0.01)
-texture = ExtResource("35_lqly4")
 
 [node name="item3" type="TextureRect" parent="Node2D/CanvasLayer/player3/Playerhud"]
 layout_mode = 0
@@ -2867,7 +2859,6 @@ offset_top = 28.9688
 offset_right = 891.127
 offset_bottom = 828.969
 scale = Vector2(0.01, 0.01)
-texture = ExtResource("35_lqly4")
 
 [node name="razorCap" type="Control" parent="Node2D/CanvasLayer/player3/Playerhud"]
 layout_mode = 3
@@ -3047,7 +3038,6 @@ offset_top = 4.02879
 offset_right = 789.373
 offset_bottom = 804.029
 scale = Vector2(0.01, 0.01)
-texture = ExtResource("35_lqly4")
 
 [node name="slot2" type="Panel" parent="Node2D/CanvasLayer/player4/Playerhud"]
 clip_children = 1
@@ -3093,7 +3083,6 @@ offset_top = 16.0192
 offset_right = 789.373
 offset_bottom = 816.019
 scale = Vector2(0.01, 0.01)
-texture = ExtResource("35_lqly4")
 
 [node name="slot3" type="Panel" parent="Node2D/CanvasLayer/player4/Playerhud"]
 clip_children = 1
@@ -3139,7 +3128,6 @@ offset_top = 29.9281
 offset_right = 789.373
 offset_bottom = 829.928
 scale = Vector2(0.01, 0.01)
-texture = ExtResource("35_lqly4")
 
 [node name="razorCap" type="Control" parent="Node2D/CanvasLayer/player4/Playerhud"]
 anchors_preset = 0
@@ -3256,6 +3244,7 @@ theme_override_constants/outline_size = 6
 horizontal_alignment = 1
 
 [node name="Control" type="Control" parent="Node2D/CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

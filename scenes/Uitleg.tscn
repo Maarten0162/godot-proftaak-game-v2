@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://dn1wgggu0wnt3" path="res://assets/Boards/rename background.png" id="2_iucqa"]
 
 [node name="Uitleg" type="Node2D"]
+position = Vector2(-108, -1)
+scale = Vector2(1.1, 1.1)
 script = ExtResource("1_tcvhv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

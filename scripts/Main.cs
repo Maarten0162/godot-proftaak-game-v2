@@ -645,7 +645,7 @@ public partial class Main : Node2D
 
 	//TURNS
 	async Task Turn()
-	{	await WaitForSeconds(1);
+	{	await WaitForSeconds(1.5f);
 	UpdateSpaceLabel("clear");
 		for (int i = 0; i < playersalive.Count; i++)
 		{
@@ -1136,7 +1136,7 @@ public partial class Main : Node2D
 
 		while (runloop)
 		{
-			int rnditem = rnd.Next(0, 12);
+			int rnditem = rnd.Next(0, 13);
 			if (!randomList.Contains(rnditem))
 			{
 				randomList.Add(rnditem);
