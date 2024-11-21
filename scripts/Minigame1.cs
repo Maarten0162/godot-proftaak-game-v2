@@ -30,7 +30,7 @@ public partial class Minigame1 : Node
     private Timer TimerUitleg;
 
 
-	public override void _Ready()
+	public override async void _Ready()
 	{
 		
 		minigameplayeramount = 0;
@@ -71,7 +71,7 @@ public partial class Minigame1 : Node
 		gameTimer = GetNode<Timer>("Timer");
 		gameTimer.Connect("timeout", new Callable(this, nameof(OnTimerTimeout)));
 
-
+		await uitleg();
 		LoadHighscore();
 		
 
@@ -79,7 +79,20 @@ public partial class Minigame1 : Node
 
 		Naam = GetNode<Label>("Naam");
         Naam.Text = "Paarden Race";
-        Uitleg = GetNode<Label>("Uitleg");
+       
+    }
+
+    private void OnTimerTimeout1()
+    {
+        UitlegSprite.Visible = false;
+		ASprite.Visible = false;
+        Naam.Text = "";
+        Uitleg.Text = "";
+        gameTimer.Start(); // Start de timer
+    }
+	async Task uitleg(){
+
+		Uitleg = GetNode<Label>("Uitleg");
 		ASprite = GetNode<Sprite2D>("ASprite");
         UitlegSprite = GetNode<Sprite2D>("UitlegSprite");
         TimerUitleg = GetNode<Timer>("TimerUitleg");
@@ -91,16 +104,7 @@ public partial class Minigame1 : Node
         TimerUitleg.Start();		
         TimerUitleg.Connect("timeout", new Callable(this, nameof(OnTimerTimeout1)));
         GD.Print("Aantal spelers:", minigameplayeramount);
-    }
-
-    private void OnTimerTimeout1()
-    {
-        UitlegSprite.Visible = false;
-		ASprite.Visible = false;
-        Naam.Text = "";
-        Uitleg.Text = "";
-        gameTimer.Start(); // Start de timer
-    }
+	}
 
 	public override void _Process(double delta)
 	{

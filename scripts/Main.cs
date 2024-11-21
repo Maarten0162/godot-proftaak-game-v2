@@ -319,7 +319,7 @@ public partial class Main : Node2D
 
 
 		dobbelSprite = GetNode<AnimatedSprite2D>("dobbelSprite");
-		dobbelSprite.Play("0000");
+		dobbelSprite.Play("1234");
 
 		buttonmin1 = new Button();
 		buttonmin2 = new Button();
@@ -602,9 +602,9 @@ public partial class Main : Node2D
 			{
 
 				BottomLeftShortcut(player);
-				UpdateSpaceLabel("BottomLeftShortcut");
+				UpdateSpaceLabel("BotLeftShortcut");
 			}
-			else { BottomRightShortcut(player); UpdateSpaceLabel("TopRightShortcut"); }
+			else { BottomRightShortcut(player); UpdateSpaceLabel("BotRightShortcut"); }
 		}
 		else if (typeOfSpace == "getRobbedSpace")
 		{
@@ -785,7 +785,7 @@ public partial class Main : Node2D
 				invSlot3.Scale = new Vector2(0.7f, 0.7f);
 
 
-				await WaitForSeconds(5/10);
+				await WaitForSeconds(1);
 
 				if (useditem != "dice")
 				{
@@ -824,7 +824,7 @@ public partial class Main : Node2D
 			
 			GD.Print("before timer");
 			await WaitForSeconds(2);
-			updateDobbelSprite(0000);
+			updateDobbelSprite(1234);
 			GD.Print("after timer");
 			Spacelabel.Text = "";
 		}
@@ -893,6 +893,7 @@ public partial class Main : Node2D
 					player.Currency -= turbodice.Price;
 					diceshop.Hide();
 					updateDobbelSprite(diceRoll);
+					await WaitForSeconds(1.25f);
 					waitingforbuttonpress = false;
 					return diceRoll;
 
