@@ -88,8 +88,7 @@ public partial class Minigame1 : Node
 		ASprite.Visible = true;
         TimerUitleg.WaitTime = 10.0f;
         TimerUitleg.OneShot = true;
-        TimerUitleg.Start();
-		await WaitForSeconds(10);
+        TimerUitleg.Start();		
         TimerUitleg.Connect("timeout", new Callable(this, nameof(OnTimerTimeout1)));
         GD.Print("Aantal spelers:", minigameplayeramount);
     }

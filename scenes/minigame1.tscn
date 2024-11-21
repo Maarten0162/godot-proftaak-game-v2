@@ -18,21 +18,25 @@ scale = Vector2(0.600586, 0.716797)
 texture = ExtResource("1_ur60m")
 
 [node name="Horse1" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(95, 82)
 scale = Vector2(0.289583, 0.241803)
 texture = ExtResource("3_kxtpk")
 
 [node name="Horse2" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(107, 238)
 scale = Vector2(0.289583, 0.241803)
 texture = ExtResource("4_hjx06")
 
 [node name="Horse3" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(105, 405)
 scale = Vector2(0.289583, 0.241803)
 texture = ExtResource("5_1k0q4")
 
 [node name="Horse4" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(105, 565)
 scale = Vector2(0.289583, 0.241803)
 texture = ExtResource("6_tiiy2")
