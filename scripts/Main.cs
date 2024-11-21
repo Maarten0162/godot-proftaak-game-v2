@@ -128,7 +128,7 @@ public partial class Main : Node2D
 	Vector2 Slot3OldPos;
 
 
-	public override async void _Ready()
+	public override void _Ready()
 	{
 		yesnoButton = GetNode<Control>("Node2D/CanvasLayer/Control");
 		textShopLabel = GetNode<Label>("CanvasLayersshop/WelcomeScreen/TextureRect/Label");

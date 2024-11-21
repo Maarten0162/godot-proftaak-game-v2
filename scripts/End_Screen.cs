@@ -21,7 +21,7 @@ public partial class End_Screen : Node
 		}
 
 		winnerlabel = GetNode<Label>("WinnerLabel");
-		winnerlabel.Text = "The winner of the game is: " + winner + "!!!";
+		winnerlabel.Text = "De winnaar is: " + winner + "!!!";
 	}}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
