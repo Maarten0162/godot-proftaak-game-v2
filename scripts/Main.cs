@@ -715,7 +715,7 @@ public partial class Main : Node2D
 		GD.Print("voor savestates");
 		SaveAllStates();
 		GD.Print("na savestates");
-		if (playersalive.Count == 1 || GlobalVariables.Instance.TurnCount == 15)
+		if (playersalive.Count == 1 || GlobalVariables.Instance.TurnCount == 30)
 		{
 			GD.Print("in endgame");
 			EndGame();
@@ -815,12 +815,14 @@ public partial class Main : Node2D
 			{
 				player.SkipTurn = false;// dit zorgt ervoor dat next turn deze speler wel dingen mag doen
 				GD.Print(player.Name + " Had to skip his turn!");
+				Updatehud(player);
 			}
 
 
-			updateDobbelSprite(0);
+			
 			GD.Print("before timer");
 			await WaitForSeconds(2);
+			updateDobbelSprite(0);
 			GD.Print("after timer");
 			Spacelabel.Text = "";
 		}
@@ -837,10 +839,7 @@ public partial class Main : Node2D
 
 				if (Input.IsActionJustPressed($"A_{WhatPlayer}"))
 				{
-					if (player.Currency < basicdice.Price)
-					{
-						break;
-					}
+					
 					diceRoll = basicdice.diceroll();
 					player.Currency -= basicdice.Price;
 					updateDobbelSprite(diceRoll);
@@ -851,9 +850,10 @@ public partial class Main : Node2D
 				{
 					if (player.Currency < betterdice.Price)
 					{
-						break;
+						diceRoll = basicdice.diceroll();
+						UpdateSpaceLabel("Geen geld, gebruikt gratis dice");
 					}
-					diceRoll = betterdice.diceroll();
+					else diceRoll = betterdice.diceroll();
 					player.Currency -= betterdice.Price;
 					updateDobbelSprite(diceRoll);
 					waitingforbuttonpress = false;
@@ -864,7 +864,8 @@ public partial class Main : Node2D
 				{
 					if (player.Currency < riskydice.Price)
 					{
-						break;
+						diceRoll = basicdice.diceroll();
+						UpdateSpaceLabel("Geen geld, gebruikt gratis dice");
 					}
 					diceRoll = riskydice.diceroll();
 					player.Currency -= riskydice.Price;
@@ -877,7 +878,8 @@ public partial class Main : Node2D
 				{
 					if (player.Currency < turbodice.Price)
 					{
-						break;
+						diceRoll = basicdice.diceroll();
+						UpdateSpaceLabel("Geen geld, gebruikt gratis dice");
 					}
 					diceRoll = turbodice.diceroll();
 					player.Currency -= turbodice.Price;
@@ -2804,11 +2806,11 @@ public partial class Main : Node2D
 		{
 			Spacelabel.Text = whatspace;
 		}
-		else if (whatspace.Contains(" van speler "))
+		else if (whatspace.Contains("van speler"))
 		{
 			Spacelabel.Text = whatspace;
 		}
-		else if (whatspace.Contains(" you dont have enough money "))
+		else if (whatspace.Contains("you dont have enough money"))
 		{
 			Spacelabel.Text = "sorry," + whatspace;
 			
@@ -2818,7 +2820,7 @@ public partial class Main : Node2D
 			Spacelabel.Text = whatspace;
 			
 		}
-		else if (whatspace == "heeft de minigame gewonnen en verdient 30 pond")
+		else if (whatspace.Contains("heeft de minigame gewonnen en verdient 30 pond"))
 		{
 			Spacelabel.Text = whatspace;
 			
@@ -2827,7 +2829,7 @@ public partial class Main : Node2D
 		{
 			Spacelabel.Text = whatspace; 
 		}
-		else if (whatspace == "used his goons to steal te cap from:")
+		else if (whatspace.Contains("used his goons to steal te cap from:"))
 		{
 			Spacelabel.Text = whatspace;
 		}
@@ -2835,7 +2837,12 @@ public partial class Main : Node2D
 		{
 			Spacelabel.Text = whatspace;
 		}
-		else if (whatspace == " aangevallen voor ")
+		else if (whatspace.Contains(" aangevallen voor "))
+		{
+			Spacelabel.Text = whatspace;
+		
+		}
+		else if (whatspace == "Geen geld, gebruikt gratis dice")
 		{
 			Spacelabel.Text = whatspace;
 		

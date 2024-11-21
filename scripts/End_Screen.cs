@@ -16,7 +16,8 @@ public partial class End_Screen : Node
 
 		}
 		for(int i = 0; i <  GlobalVariables.Instance.playersalive.Count; i++)
-		{if(GlobalVariables.Instance.playersalive[i].Health == mosthealth){
+		{
+			if(GlobalVariables.Instance.playersalive[i].Health == mosthealth){
 			winner = GlobalVariables.Instance.playersalive[i].Name;
 		}
 

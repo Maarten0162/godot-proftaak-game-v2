@@ -34,8 +34,11 @@ public partial class minigame5 : Control
         new Vraag { VraagText = "Welk product produceerd Alfie Solomons in zijn fabriek", Antwoorden = new List<string> { "Tabak", "Cocaïne", "Bar Krukken", "Rum" }, CorrectAntwoord = "Y" },
         new Vraag { VraagText = "Wie maakt de muziek van Peaky Blinders?", Antwoorden = new List<string> { "Nick Cave", "Hans Zimmer", "John Powell", "John Williams" }, CorrectAntwoord = "A" },
         new Vraag { VraagText = "Wat is het oficiele naam voor het bedrijf van de Peaky Blinders?", Antwoorden = new List<string> { "Peaky Blinders", "Shelby Company Limited", "The Garisson Pub", "Order of the Peaky Blinders" }, CorrectAntwoord = "B" },
-        new Vraag { VraagText = "Wat is de naam van het leger dat door Tommy Shelby wordt opgericht in seizoen 4?", Antwoorden = new List<string> { "The Red Brigade", "The Black Hand", "The Peaky Army", "The Birmingham Battalion" }, CorrectAntwoord = "X" }
-    };
+        new Vraag { VraagText = "Wat is de naam van het leger dat door Tommy Shelby wordt opgericht in seizoen 4?", Antwoorden = new List<string> { "The Red Brigade", "The Black Hand", "The Peaky Army", "The Birmingham Battalion" }, CorrectAntwoord = "X" },
+        new Vraag { VraagText = "Wat zijn Peaky Blinders?", Antwoorden = new List<string> { "Legedens", "Sukkels", "Gangsters", "Criminelen" }, CorrectAntwoord = "Y" },
+        new Vraag { VraagText = "Hoe duur is de razorcap in de game?", Antwoorden = new List<string> { "40 pond", "50 pond", "60 pond", "70 pond" }, CorrectAntwoord = "X" },
+        new Vraag { VraagText = "Welk kledingstuk heeft de naam Peaky Blinders?", Antwoorden = new List<string> { "De jas", "De schoenen", "De cap", "Het horloge" }, CorrectAntwoord = "X" },
+        new Vraag { VraagText = "Wat is de naam van de eerste zoon van Thomas Shelby", Antwoorden = new List<string> { "Erasmus Shelby", "Arthuro Shelby", "Elliot Shelby", "John Shelby" }, CorrectAntwoord = "A" }};
 
     private Vraag huidigeVraag;
     private int huidigeVraagIndex = -1;
@@ -96,7 +99,7 @@ public partial class minigame5 : Control
             heeftGeantwoord.Add(false);
             antwoorden.Add("");
         }
-       
+
         UpdateSpelerUI();
 
         Naam = GetNode<Label>("Naam");
@@ -108,7 +111,7 @@ public partial class minigame5 : Control
         BSprite = GetNode<Sprite2D>("BSprite");
         XSprite = GetNode<Sprite2D>("XSprite");
         YSprite = GetNode<Sprite2D>("YSprite");
-        
+
         ASprite.Visible = true;
         BSprite.Visible = true;
         XSprite.Visible = true;
@@ -134,11 +137,13 @@ public partial class minigame5 : Control
     }
 
     private void KiesVolgendeVraag()
-    {   for(int i = 0; i < GlobalVariables.Instance.playersalive.Count; i++){
-        heeftGeantwoord[i] = false;
-    }   
-     aantalGeantwoord = 0;
-    
+    {
+        for (int i = 0; i < GlobalVariables.Instance.playersalive.Count; i++)
+        {
+            heeftGeantwoord[i] = false;
+        }
+        aantalGeantwoord = 0;
+
         if (huidigeVraagIndex >= 3)
         {
             BepaalWinnaar();
@@ -151,8 +156,8 @@ public partial class minigame5 : Control
         huidigeVraag = vragen[randomVraagIndex];
         vragen.RemoveAt(randomVraagIndex);
 
-        
-       
+
+
         snelsteSpeler = -1;
 
         ToonVraag();
@@ -238,13 +243,15 @@ public partial class minigame5 : Control
                 winnaars.Add(i + 1);
             }
         }
-            for( int i = 0; i < GlobalVariables.Instance.playersalive.Count; i++){
-                if(scores[i] == hoogsteScore){
-                    GlobalVariables.Instance.Winner = i;
-                }
+        for (int i = 0; i < GlobalVariables.Instance.playersalive.Count; i++)
+        {
+            if (scores[i] == hoogsteScore)
+            {
+                GlobalVariables.Instance.Winner = i;
             }
-            //HIER MOET EEN WINAAR NOG KOMEN IDK WAT DIT IS
-            GlobalVariables.Instance.SwitchToMainBoard();
+        }
+        //HIER MOET EEN WINAAR NOG KOMEN IDK WAT DIT IS
+        GlobalVariables.Instance.SwitchToMainBoard();
         vraagLabel.Text = $"Winnaar(s): Speler {string.Join(", Speler ", winnaars)}";
     }
     public override void _Input(InputEvent @event)
