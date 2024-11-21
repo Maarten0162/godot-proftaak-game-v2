@@ -67,7 +67,7 @@ public partial class Minigame2 : Node2D
 
         
         Naam = GetNode<Label>("Naam");
-        Naam.Text = "Boom!";
+        Naam.Text = "Perfect Timing";
         Uitleg = GetNode<Label>("Uitleg");
         UitlegSprite = GetNode<Sprite2D>("UitlegSprite");
         TimerUitleg = GetNode<Timer>("TimerUitleg");

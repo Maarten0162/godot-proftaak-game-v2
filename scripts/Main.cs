@@ -449,7 +449,7 @@ public partial class Main : Node2D
 			}
 			if (spacesInfo[player.PositionSpace].Name == "RazorCap_Space" && i != diceRoll)
 			{
-				if (player.Currency >= 50)
+				if (player.Currency >= 60)
 				{
 					yesnoButton.Show();
 					await RazorcapPurchase(player);
@@ -553,7 +553,7 @@ public partial class Main : Node2D
 			}
 			if (spacesInfo[player.PositionSpace].Name == "RazorCap_Space" && i != diceRoll)
 			{
-				if (player.Currency >= 50)
+				if (player.Currency >= 60)
 				{
 
 					await RazorcapPurchase(player);

@@ -103,7 +103,7 @@ public partial class minigame5 : Control
         UpdateSpelerUI();
 
         Naam = GetNode<Label>("Naam");
-        Naam.Text = "Quizz";
+        Naam.Text = "Quiz";
         Uitleg = GetNode<Label>("Uitleg");
         UitlegSprite = GetNode<Sprite2D>("UitlegSprite");
         TimerUitleg = GetNode<Timer>("TimerUitleg");
