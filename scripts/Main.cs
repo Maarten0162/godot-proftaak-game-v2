@@ -2097,6 +2097,7 @@ public partial class Main : Node2D
 			{
 				int stolenamount = rnd.Next(0, playersalive[rndplayer].Currency / 2);
 				player.Currency += stolenamount;
+				playersalive[rndplayer].Currency -= stolenamount;
 				runloop = false;
 				string itemuse = player.Name + "steelt " + stolenamount + " van speler " + playersalive[rndplayer].Name;
 				UpdateSpaceLabel(itemuse);
