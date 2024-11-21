@@ -32,7 +32,7 @@ public partial class Minigame3 : Node2D
     private Sprite2D UitlegSprite;
     private Timer TimerUitleg;
 
-    public override async void _Ready()
+    public override void _Ready()
     {
         inputbutton = GetNode<TextureRect>("InputButton");
         minigameplayeramount = 0;

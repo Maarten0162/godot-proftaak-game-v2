@@ -33,7 +33,7 @@ public partial class Minigame2 : Node2D
 
     
 
-    public override async void _Ready()
+    public override void _Ready()
     { playerHasPressedButton = new bool[GlobalVariables.Instance.playersalive.Count];
         
         // Verwijzingen naar UI-elementen

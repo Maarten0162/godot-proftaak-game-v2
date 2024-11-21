@@ -30,7 +30,7 @@ public partial class Minigame1 : Node
     private Timer TimerUitleg;
 
 
-	public override async void _Ready()
+	public override void _Ready()
 	{
 		
 		minigameplayeramount = 0;
