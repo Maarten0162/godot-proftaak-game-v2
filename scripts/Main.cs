@@ -845,6 +845,7 @@ public partial class Main : Node2D
 					diceRoll = basicdice.diceroll();
 					player.Currency -= basicdice.Price;
 					updateDobbelSprite(diceRoll);
+					await WaitForSeconds(1.25f);
 					waitingforbuttonpress = false;
 					return diceRoll;
 				}
@@ -858,6 +859,7 @@ public partial class Main : Node2D
 					else diceRoll = betterdice.diceroll();
 					player.Currency -= betterdice.Price;
 					updateDobbelSprite(diceRoll);
+					await WaitForSeconds(1.25f);
 					waitingforbuttonpress = false;
 					return diceRoll;
 
@@ -872,6 +874,7 @@ public partial class Main : Node2D
 					diceRoll = riskydice.diceroll();
 					player.Currency -= riskydice.Price;
 					updateDobbelSprite(diceRoll);
+					await WaitForSeconds(1.25f);
 					waitingforbuttonpress = false;
 					return diceRoll;
 
@@ -1953,6 +1956,7 @@ public partial class Main : Node2D
 		diceRoll = eyecount1 + eyecount2;
 		Updatehud(player);
 		updateDobbelSprite(diceRoll);
+		await WaitForSeconds(1.25f);
 		await StartMovement(player, diceRoll);
 
 	}
@@ -1964,12 +1968,14 @@ public partial class Main : Node2D
 		diceRoll = eyecount1 + eyecount2 + eyecount3;
 		Updatehud(player);
 		updateDobbelSprite(diceRoll);
+		await WaitForSeconds(1.25f);
 		await StartMovement(player, diceRoll);
 	}
 	async Task TwentyDice(Player player) //dice van -20 tot +20
 	{
 		diceRoll = twentydice.diceroll();
 		updateDobbelSprite(diceRoll);
+		await WaitForSeconds(1.25f);
 		Updatehud(player);
 		await StartMovement(player, diceRoll);
 
@@ -1978,6 +1984,7 @@ public partial class Main : Node2D
 	{
 		diceRoll = tendice.diceroll();
 		updateDobbelSprite(diceRoll);
+		await WaitForSeconds(1.25f);
 		Updatehud(player);
 		await StartMovement(player, diceRoll);
 	}
