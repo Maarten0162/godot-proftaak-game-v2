@@ -319,7 +319,7 @@ public partial class Main : Node2D
 
 
 		dobbelSprite = GetNode<AnimatedSprite2D>("dobbelSprite");
-		dobbelSprite.Play("0");
+		dobbelSprite.Play("0000");
 
 		buttonmin1 = new Button();
 		buttonmin2 = new Button();
