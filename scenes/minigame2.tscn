@@ -178,6 +178,7 @@ scale = Vector2(0.723125, 0.735556)
 texture = ExtResource("7_ecm4e")
 
 [node name="Naam" type="Label" parent="."]
+z_index = 2
 offset_left = 55.0
 offset_top = 100.0
 offset_right = 389.0
@@ -190,7 +191,7 @@ offset_left = 24.0
 offset_top = 281.0
 offset_right = 421.0
 offset_bottom = 588.0
-text = "Een spannend minigame waarbij 
+text = "Een spannende minigame waarbij 
 spelers hun gevoel voor tijd testen! 
 De timer begint zichtbaar, 
 maar verdwijnt na 3 seconden. 
@@ -208,7 +209,7 @@ scale = Vector2(0.151042, 0.151042)
 texture = ExtResource("8_ymkpj")
 
 [node name="Panel" type="Panel" parent="."]
-offset_left = 501.0
-offset_top = 310.0
-offset_right = 541.0
-offset_bottom = 350.0
+offset_left = 499.0
+offset_top = 307.0
+offset_right = 539.0
+offset_bottom = 347.0

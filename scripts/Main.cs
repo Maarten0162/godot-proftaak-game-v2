@@ -158,9 +158,7 @@ public partial class Main : Node2D
 		invSprite2Play4Pos = GetNode<TextureRect>($"Node2D/CanvasLayer/player4/Playerhud/item2").Position;
 		invSprite3Play4Pos = GetNode<TextureRect>($"Node2D/CanvasLayer/player4/Playerhud/item3").Position;
 
-		turnLabel = GetNode<Label>("Node2D/CanvasLayer/Label");
-
-		turnLabel.Text = "Speler1 is aan de beurt, kies een item om te gebruiken";
+		turnLabel = GetNode<Label>("Node2D/CanvasLayer/Label");		
 
 
 		//zet players invisble worden visible in Updatehud()
@@ -536,7 +534,9 @@ public partial class Main : Node2D
 				if (hasitemspace)
 				{
 					UpdateSpaceLabel("Shop");
+					yesnoButton.Show();
 					await ShopAsk(player);
+					yesnoButton.Hide();
 				}
 				if (hasitemspace == false)
 				{ 
@@ -717,13 +717,13 @@ public partial class Main : Node2D
 		GD.Print("voor savestates");
 		SaveAllStates();
 		GD.Print("na savestates");
-		if (playersalive.Count == 1 || GlobalVariables.Instance.TurnCount == 30)
+		if (playersalive.Count == 1)
 		{
 			GD.Print("in endgame");
 			EndGame();
 		}
 		GD.Print("naar chooseminigame");
-		await WaitForSeconds(3);
+		await WaitForSeconds(2);
 		ChooseMiniGame();
 
 		GD.Print("na chooseminigame");
