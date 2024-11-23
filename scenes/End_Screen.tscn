@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7omwxkecfvp2"]
+
+[ext_resource type="Script" path="res://scripts/End_Screen.cs" id="1_y7pht"]
+[ext_resource type="Texture2D" uid="uid://clw2xmws5hdbi" path="res://assets/Boards/endscreen.png" id="2_qioyj"]
+
+[node name="EndScreen" type="Node2D"]
+script = ExtResource("1_y7pht")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(575, 321.5)
+scale = Vector2(0.797222, 0.671875)
+texture = ExtResource("2_qioyj")
+
+[node name="WinnerLabel" type="Label" parent="."]
+offset_left = 558.0
+offset_top = 176.0
+offset_right = 598.0
+offset_bottom = 199.0
+text = "\"De winnaar van de game is: Speler1 !!!"

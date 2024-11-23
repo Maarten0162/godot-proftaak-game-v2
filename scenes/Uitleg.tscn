@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqngkq1wu6rpd"]
+
+[ext_resource type="Script" path="res://scripts/Uitleg.cs" id="1_tcvhv"]
+[ext_resource type="Texture2D" uid="uid://dn1wgggu0wnt3" path="res://assets/Boards/rename background.png" id="2_iucqa"]
+
+[node name="Uitleg" type="Node2D"]
+position = Vector2(-108, -1)
+scale = Vector2(1.1, 1.1)
+script = ExtResource("1_tcvhv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(577, 322)
+scale = Vector2(0.7175, 0.717778)
+texture = ExtResource("2_iucqa")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 138.0
+offset_top = 122.0
+offset_right = 422.0
+offset_bottom = 583.0
+text = "Welkom bij Peaky Party.
+Het doel van dit spel is om de laatse speler in leven te zijn. je kan je medespelers aanvallen met items die je in de winkels kan kopen en een razorcap die op een willekeurige locatie op de map tevoorschijn komt. gebruik de cap om je medespelers aan te vallen als je langs ze komt."
+horizontal_alignment = 1
+autowrap_mode = 2

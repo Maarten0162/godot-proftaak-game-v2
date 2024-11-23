@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b2du4p5m6ve7a"]
+[gd_scene load_steps=9 format=3 uid="uid://b2du4p5m6ve7a"]
 
 [ext_resource type="Script" path="res://scripts/Minigame2.cs" id="1_ojfqb"]
 [ext_resource type="Texture2D" uid="uid://bm6iudyb75q1o" path="res://Minigame2/Designer.jpg" id="2_f7b00"]
@@ -6,8 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://bp8fbndqeyihs" path="res://Minigame2/Player2.png" id="4_qh17d"]
 [ext_resource type="Texture2D" uid="uid://cg0xnkfwcbeh8" path="res://Minigame2/Player3.png" id="5_ein6v"]
 [ext_resource type="Texture2D" uid="uid://f10gph5jvc03" path="res://Minigame2/player4.png" id="6_wm807"]
+[ext_resource type="Texture2D" uid="uid://dn1wgggu0wnt3" path="res://assets/Boards/rename background.png" id="7_ecm4e"]
+[ext_resource type="Texture2D" uid="uid://cx3skduiddtax" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/ABXY/button_xbox_digital_a_1.png" id="8_ymkpj"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D2" type="Node2D"]
 script = ExtResource("1_ojfqb")
 
 [node name="GameUI" type="Control" parent="."]
@@ -29,6 +31,7 @@ expand_mode = 1
 
 [node name="TimerLabel" type="Label" parent="GameUI"]
 modulate = Color(1, 1, 0, 1)
+z_index = 1
 layout_mode = 0
 offset_left = 517.0
 offset_top = 315.0
@@ -165,3 +168,48 @@ offset_top = 586.0
 offset_right = 1117.0
 offset_bottom = 642.0
 text = "speler 4"
+
+[node name="TimerUitleg" type="Timer" parent="."]
+
+[node name="UitlegSprite" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(574.5, 327)
+scale = Vector2(0.723125, 0.735556)
+texture = ExtResource("7_ecm4e")
+
+[node name="Naam" type="Label" parent="."]
+z_index = 2
+offset_left = 55.0
+offset_top = 100.0
+offset_right = 389.0
+offset_bottom = 220.0
+horizontal_alignment = 1
+
+[node name="Uitleg" type="Label" parent="."]
+z_index = 2
+offset_left = 24.0
+offset_top = 281.0
+offset_right = 421.0
+offset_bottom = 588.0
+text = "Een spannende minigame waarbij 
+spelers hun gevoel voor tijd testen! 
+De timer begint zichtbaar, 
+maar verdwijnt na 3 seconden. 
+Daarna moeten spelers de klok 
+in hun hoofd volgen en op tijd drukken 
+om zo dicht mogelijk bij 
+10 seconden te stoppen. 
+
+Wie het beste timet, wint!"
+
+[node name="ASprite" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(117, 588)
+scale = Vector2(0.151042, 0.151042)
+texture = ExtResource("8_ymkpj")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 499.0
+offset_top = 307.0
+offset_right = 539.0
+offset_bottom = 347.0

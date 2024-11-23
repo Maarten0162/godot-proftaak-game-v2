@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://bmb2c2ykwbwl3"]
+[gd_scene load_steps=9 format=3 uid="uid://bmb2c2ykwbwl3"]
 
 [ext_resource type="Script" path="res://scripts/Minigame1.cs" id="1_i3b7e"]
 [ext_resource type="Texture2D" uid="uid://b205jypegaywx" path="res://Minigame1/asvalt.png" id="1_ur60m"]
-[ext_resource type="Texture2D" uid="uid://dvac4bpt2rneg" path="res://Minigame1/Paard.png" id="2_10ftx"]
+[ext_resource type="Texture2D" uid="uid://b7kepvuxlylj4" path="res://Minigame1/PaardPlayer1.png" id="3_kxtpk"]
+[ext_resource type="Texture2D" uid="uid://m56lu1m657wt" path="res://Minigame1/PaardPlayer2.png" id="4_hjx06"]
+[ext_resource type="Texture2D" uid="uid://dpvg0w0af48n3" path="res://Minigame1/PaardPlayer3.png" id="5_1k0q4"]
+[ext_resource type="Texture2D" uid="uid://c7unb81qxu7rp" path="res://Minigame1/PaardPlayer4.png" id="6_tiiy2"]
+[ext_resource type="Texture2D" uid="uid://dn1wgggu0wnt3" path="res://assets/Boards/rename background.png" id="7_f6osi"]
+[ext_resource type="Texture2D" uid="uid://cx3skduiddtax" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/ABXY/button_xbox_digital_a_1.png" id="8_06d1p"]
 
 [node name="Minigame1" type="Node2D"]
 script = ExtResource("1_i3b7e")
@@ -16,27 +21,30 @@ texture = ExtResource("1_ur60m")
 visible = false
 position = Vector2(95, 82)
 scale = Vector2(0.289583, 0.241803)
-texture = ExtResource("2_10ftx")
+texture = ExtResource("3_kxtpk")
 
 [node name="Horse2" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(107, 238)
 scale = Vector2(0.289583, 0.241803)
-texture = ExtResource("2_10ftx")
+texture = ExtResource("4_hjx06")
 
 [node name="Horse3" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(105, 405)
 scale = Vector2(0.289583, 0.241803)
-texture = ExtResource("2_10ftx")
+texture = ExtResource("5_1k0q4")
 
 [node name="Horse4" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(105, 565)
 scale = Vector2(0.289583, 0.241803)
-texture = ExtResource("2_10ftx")
+texture = ExtResource("6_tiiy2")
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="Timer2" type="Timer" parent="."]
 wait_time = 10.0
 
 [node name="Label1" type="Label" parent="."]
@@ -68,3 +76,36 @@ offset_left = 473.0
 offset_top = 7.0
 offset_right = 611.0
 offset_bottom = 49.0
+
+[node name="TimerUitleg" type="Timer" parent="."]
+
+[node name="UitlegSprite" type="Sprite2D" parent="."]
+position = Vector2(580, 328)
+scale = Vector2(0.8, 0.802)
+texture = ExtResource("7_f6osi")
+
+[node name="Naam" type="Label" parent="."]
+offset_left = 52.0
+offset_top = 85.0
+offset_right = 439.0
+offset_bottom = 219.0
+horizontal_alignment = 1
+
+[node name="Uitleg" type="Label" parent="."]
+offset_left = 44.0
+offset_top = 271.0
+offset_right = 351.0
+offset_bottom = 564.0
+text = "Stap in de wereld van de Peaky 
+Blinders en beleef de spanning 
+van een paardenrace! 
+Race tegen andere spelers 
+en laat zien wie het snelst is.
+
+Bereid je voor op een intense race. 
+Wie galoppeert naar de overwinning?"
+
+[node name="ASprite" type="Sprite2D" parent="."]
+position = Vector2(174, 532)
+scale = Vector2(0.151042, 0.151042)
+texture = ExtResource("8_06d1p")

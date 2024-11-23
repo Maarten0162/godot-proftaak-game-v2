@@ -1,0 +1,202 @@
+[gd_scene load_steps=12 format=3 uid="uid://dl0q4o4ceaxml"]
+
+[ext_resource type="Script" path="res://scripts/minigame5.cs" id="1_w0rgl"]
+[ext_resource type="Texture2D" uid="uid://cgi4h72ugpmlc" path="res://Minigame2/Minigame5.png" id="2_qlbft"]
+[ext_resource type="Texture2D" uid="uid://5odnubkar2h5" path="res://Minigame2/Player1.png" id="3_le08v"]
+[ext_resource type="Texture2D" uid="uid://bp8fbndqeyihs" path="res://Minigame2/Player2.png" id="4_fhxrb"]
+[ext_resource type="Texture2D" uid="uid://cg0xnkfwcbeh8" path="res://Minigame2/Player3.png" id="5_75n7d"]
+[ext_resource type="Texture2D" uid="uid://f10gph5jvc03" path="res://Minigame2/player4.png" id="6_ptlwo"]
+[ext_resource type="Texture2D" uid="uid://dn1wgggu0wnt3" path="res://assets/Boards/rename background.png" id="7_5m1h1"]
+[ext_resource type="Texture2D" uid="uid://cx3skduiddtax" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/ABXY/button_xbox_digital_a_1.png" id="8_qkmmw"]
+[ext_resource type="Texture2D" uid="uid://d37roews6cau4" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/ABXY/button_xbox_digital_b_1.png" id="9_xrbb7"]
+[ext_resource type="Texture2D" uid="uid://dyw161a1nqj67" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/ABXY/button_xbox_digital_x_1.png" id="10_s8ufi"]
+[ext_resource type="Texture2D" uid="uid://ecf0infi502y" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/ABXY/button_xbox_digital_y_1.png" id="11_ajto4"]
+
+[node name="minigame5" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w0rgl")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.058
+anchor_top = -0.076
+offset_left = -11.184
+offset_top = -22.752
+offset_right = 1227.0
+offset_bottom = 711.0
+texture = ExtResource("2_qlbft")
+expand_mode = 1
+
+[node name="VraagLabel" type="Label" parent="."]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 306.0
+offset_top = 118.0
+offset_right = 861.0
+offset_bottom = 466.0
+
+[node name="ScoreLabel" type="Label" parent="."]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 477.0
+offset_top = 531.0
+offset_right = 534.0
+offset_bottom = 554.0
+
+[node name="StatusLabel" type="Label" parent="."]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 256.0
+offset_top = 295.0
+offset_right = 375.0
+offset_bottom = 318.0
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="MarginContainer_Player1" type="MarginContainer" parent="."]
+layout_mode = 1
+offset_right = 147.0
+offset_bottom = 141.0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer_Player1"]
+layout_mode = 2
+texture = ExtResource("3_le08v")
+expand_mode = 1
+
+[node name="StatusLabel" type="Label" parent="MarginContainer_Player1"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="ScoreLabel" type="Label" parent="MarginContainer_Player1"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+
+[node name="MarginContainer_Player2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -134.0
+offset_bottom = 119.0
+grow_horizontal = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer_Player2"]
+layout_mode = 2
+texture = ExtResource("4_fhxrb")
+expand_mode = 1
+
+[node name="ScoreLabel" type="Label" parent="MarginContainer_Player2"]
+modulate = Color(7.12335e-06, 0.581739, 0.789691, 1)
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="MarginContainer_Player2"]
+modulate = Color(0, 0.564162, 0.866202, 1)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="MarginContainer_Player3" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -134.0
+offset_right = 139.0
+grow_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer_Player3"]
+layout_mode = 2
+texture = ExtResource("5_75n7d")
+expand_mode = 1
+
+[node name="ScoreLabel" type="Label" parent="MarginContainer_Player3"]
+modulate = Color(0.36394, 0.969326, 0.457216, 1)
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="MarginContainer_Player3"]
+modulate = Color(0.274839, 0.975668, 0.499003, 1)
+self_modulate = Color(1, 1, 0, 1)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="MarginContainer_Player4" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -138.0
+offset_top = -127.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer_Player4"]
+layout_mode = 2
+texture = ExtResource("6_ptlwo")
+expand_mode = 1
+
+[node name="ScoreLabel" type="Label" parent="MarginContainer_Player4"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="MarginContainer_Player4"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="TimerUitleg" type="Timer" parent="."]
+
+[node name="UitlegSprite" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(0.72, 0.72)
+texture = ExtResource("7_5m1h1")
+
+[node name="Naam" type="Label" parent="."]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 138.0
+offset_right = 291.0
+offset_bottom = 272.0
+horizontal_alignment = 1
+
+[node name="Uitleg" type="Label" parent="."]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 310.0
+offset_right = 359.0
+offset_bottom = 577.0
+text = "Test je kennis over Peaky Blinders in deze 
+uitdagende quiz! 
+Spelers beantwoorden vragen over de serie.  
+Van iconische personages tot spannende 
+gebeurtenissen en legendarische quotes.
+Laat zien hoe goed je de Shelbys 
+kent en bewijs dat je het 
+brein van de Peaky Blinders bent!"
+
+[node name="ASprite" type="Sprite2D" parent="."]
+position = Vector2(83.25, 563.25)
+scale = Vector2(0.151042, 0.151042)
+texture = ExtResource("8_qkmmw")
+
+[node name="BSprite" type="Sprite2D" parent="."]
+position = Vector2(169.25, 563.25)
+scale = Vector2(0.151042, 0.151042)
+texture = ExtResource("9_xrbb7")
+
+[node name="XSprite" type="Sprite2D" parent="."]
+position = Vector2(248.5, 563.5)
+scale = Vector2(0.151042, 0.151042)
+texture = ExtResource("10_s8ufi")
+
+[node name="YSprite" type="Sprite2D" parent="."]
+position = Vector2(334.5, 563.5)
+scale = Vector2(0.151042, 0.151042)
+texture = ExtResource("11_ajto4")

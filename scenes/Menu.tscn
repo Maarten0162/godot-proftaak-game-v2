@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bccaf5slk3m13"]
+[gd_scene load_steps=7 format=3 uid="uid://bccaf5slk3m13"]
 
 [ext_resource type="Script" path="res://scripts/Menu.cs" id="1_33m5s"]
 [ext_resource type="Texture2D" uid="uid://cms4oijr70fnt" path="res://assets/mainmenu1.png" id="2_uid2u"]
+[ext_resource type="Texture2D" uid="uid://ba4migac8j07i" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/D-Pad/button_xboxone_dpad_light_4.png" id="3_4o6bs"]
+[ext_resource type="Texture2D" uid="uid://77beik8ydmor" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/D-Pad/button_xboxone_dpad_light_1.png" id="4_koerb"]
+[ext_resource type="Texture2D" uid="uid://capfytlqo0ujd" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/D-Pad/button_xboxone_dpad_light_2.png" id="5_7hdui"]
+[ext_resource type="Texture2D" uid="uid://dcoh6hiwapyof" path="res://assets/hud/XBOX BUTTONS/Digital Buttons/D-Pad/button_xboxone_dpad_light_3.png" id="6_ghm87"]
 
 [node name="Menu" type="Node2D"]
 position = Vector2(564, 299)
@@ -45,11 +49,99 @@ scale = Vector2(0.6, 0.6)
 texture = ExtResource("2_uid2u")
 metadata/_edit_lock_ = true
 
+[node name="TextureRect" type="TextureRect" parent="Node2D/Control/Label/Mainmenu"]
+offset_left = -226.667
+offset_top = -156.667
+offset_right = 253.333
+offset_bottom = 323.333
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_4o6bs")
+
+[node name="TextureRect2" type="TextureRect" parent="Node2D/Control/Label/Mainmenu"]
+offset_left = -55.0
+offset_top = -166.667
+offset_right = 425.0
+offset_bottom = 313.333
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_koerb")
+
+[node name="TextureRect3" type="TextureRect" parent="Node2D/Control/Label/Mainmenu"]
+offset_left = 115.0
+offset_top = -160.0
+offset_right = 595.0
+offset_bottom = 320.0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("5_7hdui")
+
+[node name="TextureRect4" type="TextureRect" parent="Node2D/Control/Label/Mainmenu"]
+offset_left = -51.6666
+offset_top = 76.6667
+offset_right = 428.334
+offset_bottom = 556.667
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("6_ghm87")
+
 [node name="Camera2D" type="Camera2D" parent="Node2D"]
 position = Vector2(12, 25)
 scale = Vector2(0.6, 0.6)
 metadata/_edit_lock_ = true
 
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(-182, -119)
-scale = Vector2(0.162415, -0.854832)
+[node name="Button2" type="Button" parent="Node2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -113.0
+offset_top = -15.5
+offset_right = -82.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+text = "2"
+
+[node name="Button3" type="Button" parent="Node2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.5
+offset_top = -15.5
+offset_right = 15.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+text = "3"
+
+[node name="Button4" type="Button" parent="Node2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 82.0
+offset_top = -15.5
+offset_right = 113.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+text = "4
+"
+
+[node name="Button5" type="Button" parent="Node2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = 139.0
+offset_right = 124.0
+offset_bottom = 170.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start Game!"

@@ -2,6 +2,8 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 public partial class Minigame1 : Node
@@ -18,15 +20,24 @@ public partial class Minigame1 : Node
 	private int readyPlayers = 0; // Count of ready players
 	private int minigameplayeramount; // Number of players in the game
 	
+	private bool spelActief = false;
+    private int RandomKnop;
+
+	private Label Uitleg;
+    private Label Naam;
+    private Sprite2D UitlegSprite;
+	private Sprite2D ASprite;
+    private Timer TimerUitleg;
 
 
-	public override void _Ready()
+	public override async void _Ready()
 	{
 		
 		minigameplayeramount = 0;
 		horseSprites = new List<Sprite2D>();
+		GD.Print("in minigame 1");
 		if (GlobalVariables.Instance.playersalive.Any(player => player.Name == "player1"))
-		{
+		{	GD.Print("verder");
 			horseSprites.Add(GetNode<Sprite2D>("Horse1"));
 			GetNode<Sprite2D>("Horse1").Show();
 			// scoreLabels[0] = GetNode<Label>("Label1");
@@ -59,18 +70,43 @@ public partial class Minigame1 : Node
 
 		gameTimer = GetNode<Timer>("Timer");
 		gameTimer.Connect("timeout", new Callable(this, nameof(OnTimerTimeout)));
+		Uitleg = GetNode<Label>("Uitleg");
+		ASprite = GetNode<Sprite2D>("ASprite");
+        UitlegSprite = GetNode<Sprite2D>("UitlegSprite");
+        TimerUitleg = GetNode<Timer>("TimerUitleg");
 
-
+        UitlegSprite.Visible = true;
+		ASprite.Visible = true;
+        TimerUitleg.WaitTime = 10.0f;
+        TimerUitleg.OneShot = true;
+        TimerUitleg.Start();		
+        TimerUitleg.Connect("timeout", new Callable(this, nameof(OnTimerTimeout1)));
+        GD.Print("Aantal spelers:", minigameplayeramount);
+		
+	
 		LoadHighscore();
-		gameTimer.Start(); // Start de timer
+		
 
 		UpdateUI();
 
-	}
+		Naam = GetNode<Label>("Naam");
+        Naam.Text = "Paarden Race";
+       
+    }
+
+    private void OnTimerTimeout1()
+    {
+        UitlegSprite.Visible = false;
+		ASprite.Visible = false;
+        Naam.Text = "";
+        Uitleg.Text = "";
+        gameTimer.Start(); // Start de timer
+    }
+	
 
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionJustPressed("A_1"))
+		if (Input.IsActionJustPressed("A_1") || Input.IsActionJustPressed("1"))
 		{
 			OnKeyPressed(0);
 		}
@@ -155,9 +191,14 @@ public partial class Minigame1 : Node
 		isGameActive = false;
 		GD.Print("Tijd is om!"); // Debug bericht om te zien dat de timer is afgelopen
 		CheckWinner();
-		GlobalVariables.Instance.SwitchToMainBoard();
+		GetTree().CreateTimer(3f).Connect("timeout", new Callable(this, nameof(ReturnToMainScene)));
 	}
-	private void CheckWinner()
+
+	private void ReturnToMainScene()
+    {
+        GlobalVariables.Instance.SwitchToMainBoard();
+    }
+	private async void CheckWinner()
 	{
 		GD.Print("checkwinner");
 
@@ -183,15 +224,20 @@ for (int i = 0; i < minigameplayeramount; i++)
     {
         // Print player information (e.g., their name, score, etc.)
         GD.Print($"Player {i} has the highest score: {scores[i]}");
-
+	
+		await WaitForSeconds(3);
         // Assign the player with the highest score as the winner
-        GlobalVariables.Instance.Winner = GlobalVariables.Instance.playersalive[i];
-
-        
+        GlobalVariables.Instance.Winner = i;   
 
         
         break;
     }
+	
 }
-}}
+}
+private async Task WaitForSeconds(float seconds)
+	{
+		await ToSignal(GetTree().CreateTimer(seconds), "timeout");
+	}}
+	
 
