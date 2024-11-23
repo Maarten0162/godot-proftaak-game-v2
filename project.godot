@@ -14,6 +14,7 @@ config/name="proftaak-game"
 run/main_scene="res://scenes/GameStart.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://icon.svg"
+config/windows_native_icon="res://peaky-party-256.ico"
 
 [autoload]
 
