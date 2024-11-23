@@ -2368,18 +2368,13 @@ public partial class Main : Node2D
 		{
 			skipturnIcon.Hide();
 		}
-		else if (player.RollAdjustment > 0)
+		if (player.RollAdjustment > 0)
 		{
 			rolladjustLabel.Text = "+" + player.RollAdjustment.ToString();
 		}
 		else if (player.RollAdjustment < 0)
 		{
 			rolladjustLabel.Text = player.RollAdjustment.ToString();
-		}
-
-		for (int i = 0; i < 4; i++)
-		{
-
 		}
 
 
