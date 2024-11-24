@@ -952,7 +952,7 @@ public partial class Main : Node2D
 	//EVENTSPACES
 	void BlueSpace(Player player)
 	{
-		player.Currency += 15;
+		player.Currency += 20;
 	}
 	void RedSpace(Player player)
 	{
@@ -2742,7 +2742,7 @@ public partial class Main : Node2D
 		GD.Print("in updatelabel");
 		if (whatspace == "blueSpace")
 		{
-			Spacelabel.Text = "Je staat op een blauw vakje. je krijgt 15 pond.";
+			Spacelabel.Text = "Je staat op een blauw vakje. je krijgt 20 pond.";
 
 		}
 		else if (whatspace == "redSpace")
